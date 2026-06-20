@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大阪京都宇治親子慢旅小冊子</title>
+  <style>
+    :root {
+      --ink: #191815;
+      --muted: #675f56;
+      --paper: #fbf6ec;
+      --paper-2: #fffaf1;
+      --night: #101b24;
+      --indigo: #243f63;
+      --verm: #c3422f;
+      --gold: #d8a33c;
+      --jade: #2b705f;
+      --sakura: #d98591;
+      --line: rgba(25, 24, 21, 0.14);
+      --shadow: 0 20px 56px rgba(28, 29, 26, 0.14);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(251, 246, 236, 0.34), rgba(251, 246, 236, 1) 780px),
+        var(--paper);
+      font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif TC", Georgia, serif;
+      line-height: 1.65;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page { overflow: hidden; }
+
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: grid;
+      align-items: end;
+      color: white;
+      isolation: isolate;
+      background: var(--night);
+    }
+
+    .hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(12, 18, 24, 0.86), rgba(12, 18, 24, 0.34) 58%, rgba(12, 18, 24, 0.18)),
+        linear-gradient(0deg, rgba(12, 18, 24, 0.9), rgba(12, 18, 24, 0.05) 52%);
+    }
+
+    .wrap {
+      width: min(1160px, calc(100% - 42px));
+      margin: 0 auto;
+    }
+
+    .hero-content {
+      width: min(1160px, calc(100% - 42px));
+      margin: 0 auto;
+      padding: 112px 0 76px;
+    }
+
+    .eyebrow,
+    .kicker {
+      font: 900 0.78rem/1.2 "Avenir Next", "Gill Sans", sans-serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255, 255, 255, 0.84);
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      letter-spacing: 0;
+      text-wrap: pretty;
+    }
+
+    h1 {
+      max-width: 830px;
+      font-size: clamp(2.7rem, 8vw, 7rem);
+      line-height: 0.96;
+      font-weight: 900;
+    }
+
+    .hero-lede {
+      max-width: 740px;
+      margin: 26px 0 0;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: clamp(1.04rem, 2.2vw, 1.42rem);
+    }
+
+    .hero-deck {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin-top: 44px;
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero-deck div {
+      min-height: 100px;
+      padding: 18px;
+      background: rgba(16, 27, 36, 0.42);
+    }
+
+    .hero-deck b {
+      display: block;
+      color: white;
+      font: 900 1.02rem/1.2 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .hero-deck span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.92rem;
+    }
+
+    section {
+      width: min(1160px, calc(100% - 42px));
+      margin: 0 auto;
+      padding: 78px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(280px, 0.42fr);
+      gap: 42px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .kicker {
+      color: var(--verm);
+    }
+
+    h2 {
+      margin-top: 8px;
+      font-size: clamp(2rem, 4.4vw, 4.15rem);
+      line-height: 1.03;
+    }
+
+    .section-head p,
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .verdict {
+      display: grid;
+      grid-template-columns: 0.68fr 1.32fr;
+      gap: 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .verdict .stamp {
+      display: grid;
+      place-items: center;
+      padding: 36px;
+      color: white;
+      background: var(--jade);
+      text-align: center;
+      font: 900 2rem/1.12 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .stamp span {
+      display: block;
+      margin-top: 12px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.96rem;
+    }
+
+    .verdict-copy {
+      padding: 32px 36px;
+    }
+
+    .verdict-copy h3 {
+      font-size: 1.85rem;
+      margin-bottom: 10px;
+    }
+
+    .verdict-copy p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .tag {
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      background: var(--paper);
+      font: 900 0.82rem/1 "Avenir Next", "Gill Sans", sans-serif;
+    }
+
+    .map-layout {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .kansai-map {
+      position: relative;
+      min-height: 620px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 22% 72%, rgba(36, 63, 99, 0.16) 0 14%, transparent 15%),
+        radial-gradient(circle at 72% 38%, rgba(195, 66, 47, 0.13) 0 18%, transparent 19%),
+        linear-gradient(145deg, #fffaf1, #edf5ef);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .kansai-map svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .kansai-map path {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .kansai-map .rail {
+      stroke: var(--indigo);
+      stroke-width: 7;
+    }
+
+    .kansai-map .local {
+      stroke: var(--verm);
+      stroke-width: 5;
+      stroke-dasharray: 10 10;
+    }
+
+    .kansai-map .car {
+      stroke: var(--jade);
+      stroke-width: 4;
+      stroke-dasharray: 4 10;
+    }
+
+    .pin {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      min-width: 84px;
+      padding: 9px 12px;
+      border: 1px solid rgba(25, 24, 21, 0.16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 26px rgba(28, 29, 26, 0.12);
+      text-align: center;
+      font: 900 0.85rem/1 "Avenir Next", "Noto Serif TC", sans-serif;
+      white-space: nowrap;
+    }
+
+    .pin small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font: 800 0.66rem/1 "Avenir Next", sans-serif;
+    }
+
+    .p-kix { left: 18%; top: 78%; }
+    .p-namba { left: 36%; top: 56%; }
+    .p-umeda { left: 40%; top: 43%; }
+    .p-usj { left: 24%; top: 48%; }
+    .p-aqua { left: 25%; top: 62%; }
+    .p-kyoto { left: 74%; top: 32%; }
+    .p-gion { left: 79%; top: 40%; }
+    .p-kiyomizu { left: 83%; top: 48%; }
+    .p-fushimi { left: 70%; top: 55%; }
+    .p-uji { left: 72%; top: 67%; }
+
+    .time-chip {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      padding: 6px 9px;
+      border-radius: 999px;
+      color: white;
+      background: var(--night);
+      box-shadow: 0 8px 20px rgba(28, 29, 26, 0.16);
+      font: 900 0.68rem/1 "Avenir Next", "Gill Sans", sans-serif;
+      white-space: nowrap;
+    }
+
+    .t-kix { left: 27%; top: 68%; }
+    .t-usj { left: 28%; top: 41%; }
+    .t-kyoto { left: 56%; top: 24%; }
+    .t-uji { left: 70%; top: 61%; }
+    .t-osaka-uji { left: 52%; top: 57%; background: var(--jade); }
+
+    .map-note {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      bottom: 24px;
+      padding: 16px 18px;
+      border-top: 1px solid var(--line);
+      background: rgba(255, 250, 241, 0.78);
+      backdrop-filter: blur(12px);
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .fact-stack {
+      display: grid;
+      gap: 15px;
+      align-content: start;
+    }
+
+    .fact {
+      padding: 22px;
+      border-left: 5px solid var(--indigo);
+      background: white;
+      box-shadow: 0 12px 34px rgba(28, 29, 26, 0.08);
+    }
+
+    .fact:nth-child(2) { border-color: var(--verm); }
+    .fact:nth-child(3) { border-color: var(--gold); }
+    .fact:nth-child(4) { border-color: var(--jade); }
+
+    .fact strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font: 900 1rem/1.22 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .fact p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .itinerary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .day-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-2);
+      box-shadow: 0 16px 40px rgba(28, 29, 26, 0.1);
+      overflow: hidden;
+    }
+
+    .day-card header {
+      padding: 22px;
+      color: white;
+      background: var(--night);
+    }
+
+    .day-card:nth-child(2) header { background: var(--verm); }
+    .day-card:nth-child(3) header { background: var(--indigo); }
+    .day-card:nth-child(4) header { background: var(--jade); }
+    .day-card:nth-child(5) header { background: #7b5731; }
+    .day-card:nth-child(6) header { color: var(--ink); background: var(--gold); }
+
+    .day-card .label {
+      display: block;
+      margin-bottom: 10px;
+      font: 900 0.74rem/1 "Avenir Next", sans-serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.78;
+    }
+
+    .day-card h3 {
+      font-size: 1.36rem;
+      line-height: 1.18;
+    }
+
+    .day-card ol {
+      flex: 1;
+      margin: 0;
+      padding: 18px 22px 12px;
+      list-style: none;
+    }
+
+    .day-card li {
+      display: grid;
+      grid-template-columns: 68px 1fr;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(25, 24, 21, 0.08);
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .day-card li:last-child { border-bottom: 0; }
+
+    .day-card b {
+      color: var(--verm);
+      font: 900 0.76rem/1.2 "Avenir Next", sans-serif;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .guide-card {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: 0 14px 36px rgba(28, 29, 26, 0.08);
+    }
+
+    .guide-card .mark {
+      display: inline-block;
+      margin-bottom: 14px;
+      color: var(--verm);
+      font: 900 0.74rem/1 "Avenir Next", sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .guide-card h3 {
+      font-size: 1.34rem;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .guide-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .band {
+      width: 100%;
+      margin: 28px 0;
+      color: white;
+      background: var(--night);
+    }
+
+    .band-inner {
+      width: min(1160px, calc(100% - 42px));
+      margin: 0 auto;
+      padding: 70px 0;
+      display: grid;
+      grid-template-columns: 0.84fr 1.16fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .band .kicker { color: #f0c16b; }
+    .band h2 { color: white; }
+    .band p { color: rgba(255, 255, 255, 0.78); }
+
+    .kyoto-flow {
+      display: grid;
+      gap: 12px;
+    }
+
+    .flow-row {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .flow-time {
+      display: grid;
+      place-items: center;
+      color: var(--night);
+      background: #f0c16b;
+      font: 900 0.85rem/1 "Avenir Next", sans-serif;
+    }
+
+    .flow-copy {
+      padding: 16px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.17);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .flow-copy strong {
+      display: block;
+      margin-bottom: 4px;
+      color: white;
+      font: 900 1rem/1.22 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .flow-copy span {
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 0.92rem;
+    }
+
+    .uji-panel {
+      display: grid;
+      grid-template-columns: 0.96fr 1.04fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .uji-map {
+      position: relative;
+      min-height: 520px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 72% 28%, rgba(43, 112, 95, 0.14) 0 16%, transparent 17%),
+        linear-gradient(145deg, #fffaf1, #eff6ef);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .uji-map svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .uji-map path {
+      fill: none;
+      stroke: var(--jade);
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 12 10;
+    }
+
+    .uji-stop {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      display: grid;
+      place-items: center;
+      min-width: 92px;
+      padding: 9px 12px;
+      border: 1px solid rgba(25, 24, 21, 0.15);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 26px rgba(28, 29, 26, 0.12);
+      text-align: center;
+      white-space: nowrap;
+      font: 900 0.82rem/1 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .uji-stop small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font: 800 0.64rem/1 "Avenir Next", sans-serif;
+    }
+
+    .u-kyoto { left: 18%; top: 22%; }
+    .u-uji-station { left: 42%; top: 42%; }
+    .u-byodoin { left: 62%; top: 50%; }
+    .u-river { left: 74%; top: 66%; }
+    .u-omotesando { left: 56%; top: 72%; }
+
+    .uji-time {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: white;
+      background: var(--verm);
+      font: 900 0.68rem/1 "Avenir Next", sans-serif;
+      white-space: nowrap;
+    }
+
+    .ut-1 { left: 30%; top: 32%; }
+    .ut-2 { left: 52%; top: 47%; }
+    .ut-3 { left: 70%; top: 58%; }
+    .ut-4 { left: 66%; top: 74%; background: var(--gold); color: var(--ink); }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .list-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: 0 14px 38px rgba(28, 29, 26, 0.08);
+      overflow: hidden;
+    }
+
+    .list-panel header {
+      padding: 22px 24px;
+      color: white;
+      background: var(--jade);
+    }
+
+    .list-panel:nth-child(2) header {
+      color: var(--ink);
+      background: var(--gold);
+    }
+
+    .list-panel h3 {
+      font-size: 1.45rem;
+      line-height: 1.18;
+    }
+
+    .list-panel ul {
+      margin: 0;
+      padding: 22px 24px 24px 42px;
+      color: var(--muted);
+    }
+
+    .list-panel li + li { margin-top: 12px; }
+
+    .transport-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .transport-card {
+      padding: 24px;
+      border-top: 5px solid var(--indigo);
+      background: white;
+      box-shadow: 0 14px 36px rgba(28, 29, 26, 0.08);
+    }
+
+    .transport-card:nth-child(2) { border-color: var(--verm); }
+    .transport-card:nth-child(3) { border-color: var(--jade); }
+
+    .transport-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .transport-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .shopping-lane {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .lane-map {
+      position: relative;
+      min-height: 460px;
+      padding: 28px;
+      border-radius: var(--radius);
+      color: white;
+      background: var(--indigo);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .lane-map::before {
+      content: "";
+      position: absolute;
+      left: 52px;
+      top: 48px;
+      bottom: 48px;
+      width: 4px;
+      background: linear-gradient(var(--gold), var(--verm), #f4d5aa);
+    }
+
+    .lane-stop {
+      position: relative;
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 14px;
+      z-index: 1;
+      padding: 17px 0;
+    }
+
+    .lane-stop b {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      color: var(--ink);
+      border-radius: 50%;
+      background: #f4d5aa;
+      font: 900 0.76rem/1 "Avenir Next", sans-serif;
+    }
+
+    .lane-stop strong {
+      display: block;
+      color: white;
+      font: 900 1.05rem/1.2 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .lane-stop span {
+      display: block;
+      margin-top: 5px;
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 0.92rem;
+    }
+
+    .shopping-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .shop-card {
+      padding: 22px;
+      border-left: 5px solid var(--verm);
+      background: white;
+      box-shadow: 0 12px 32px rgba(28, 29, 26, 0.08);
+    }
+
+    .shop-card:nth-child(2) { border-color: var(--gold); }
+    .shop-card:nth-child(3) { border-color: var(--jade); }
+    .shop-card:nth-child(4) { border-color: var(--indigo); }
+
+    .shop-card h3 {
+      font-size: 1.22rem;
+      margin-bottom: 8px;
+    }
+
+    .shop-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .sources {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .sources a {
+      display: block;
+      min-height: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--ink);
+      text-decoration: none;
+      font: 900 0.9rem/1.34 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .sources a:hover {
+      color: var(--verm);
+      border-color: rgba(195, 66, 47, 0.42);
+    }
+
+    @media (max-width: 960px) {
+      .hero-deck,
+      .section-head,
+      .verdict,
+      .map-layout,
+      .band-inner,
+      .two-col,
+      .shopping-lane,
+      .uji-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-deck {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .itinerary,
+      .cards-grid,
+      .transport-grid,
+      .sources {
+        grid-template-columns: 1fr;
+      }
+
+      .shopping-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero-content,
+      section,
+      .band-inner {
+        width: min(100% - 28px, 1160px);
+      }
+
+      .hero {
+        min-height: 86vh;
+      }
+
+      .hero-content {
+        padding: 96px 0 42px;
+      }
+
+      .hero-deck {
+        grid-template-columns: 1fr;
+        margin-top: 30px;
+      }
+
+      section {
+        padding: 54px 0;
+      }
+
+      .kansai-map {
+        min-height: 620px;
+      }
+
+      .pin {
+        min-width: 70px;
+        padding: 8px 9px;
+        font-size: 0.72rem;
+      }
+
+      .p-kyoto { left: 73%; top: 28%; }
+      .p-gion { left: 78%; top: 38%; }
+      .p-kiyomizu { left: 80%; top: 49%; }
+      .p-fushimi { left: 67%; top: 57%; }
+      .p-uji { left: 68%; top: 68%; }
+
+      .time-chip {
+        font-size: 0.62rem;
+      }
+
+      .day-card li {
+        grid-template-columns: 62px 1fr;
+      }
+
+      .flow-row {
+        grid-template-columns: 74px 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <img src="assets/osaka-kyoto-family-evening.png" alt="大阪京都親子旅行主視覺，包含大阪夜景、京都街景、電車與一家四口旅行氛圍">
+      <div class="hero-content">
+        <div class="eyebrow">Kansai Family Slow Trip</div>
+        <h1>大阪京都宇治親子慢旅小冊子</h1>
+        <p class="hero-lede">同樣兩位大人、一位 15 歲女生、一位 12 歲男生。每天 11 點起床、中午出門，以大阪住宿不換飯店為主，白天玩一個主題，晚上購物吃飯；新增宇治抹茶與平等院半日。</p>
+        <div class="hero-deck" aria-label="旅行設定">
+          <div><b>建議天數</b><span>6 天 5 夜最舒服，5 天 4 夜可壓縮</span></div>
+          <div><b>交通策略</b><span>電車為主，京都與疲累時用計程車補強</span></div>
+          <div><b>青少年亮點</b><span>USJ、海遊館、道頓堀、宇治抹茶、梅田夜景</span></div>
+          <div><b>飲食策略</b><span>大阪京都素食比北海道好處理，但仍要確認高湯</span></div>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Guide Verdict</div>
+          <h2>導遊先講結論</h2>
+        </div>
+        <p>如果你們會 11 點起床，中午才出門，關西就不要排清晨寺廟巡禮。最漂亮、最穩的玩法是大阪固定住宿，京都做午後到晚上的精華一日。</p>
+      </div>
+      <div class="verdict">
+        <div class="stamp">
+          首選
+          <span>大阪 5 晚不換飯店</span>
+        </div>
+        <div class="verdict-copy">
+          <h3>6 天 5 夜：大阪基地 + 京都東山 + 宇治抹茶</h3>
+          <p>住難波、心齋橋或梅田。每天中午出門，下午只做一個主題，晚上逛街吃飯。Day 4 做京都東山，Day 5 做宇治半日再回梅田購物，讓古都和抹茶都進來但不硬塞。</p>
+          <div class="tags">
+            <span class="tag">不換飯店</span>
+            <span class="tag">購物很多</span>
+            <span class="tag">素食較穩</span>
+            <span class="tag">青少年不無聊</span>
+            <span class="tag">新增宇治</span>
+            <span class="tag">京都不硬塞</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Kansai Map</div>
+          <h2>先看懂大阪京都宇治地圖</h2>
+        </div>
+        <p>關西不是北海道那種開車大移動。大阪市區、USJ、海遊館、京都、宇治都能用電車串起來。地圖上標的是排程用時間感，實際仍以當天 Google Maps 或 NAVITIME 為準。</p>
+      </div>
+      <div class="map-layout">
+        <div class="kansai-map" aria-label="大阪京都旅行地圖">
+          <svg viewBox="0 0 920 660" role="img" aria-label="關西機場、大阪難波梅田、USJ、海遊館、京都與宇治主要景點概念路線">
+            <path class="rail" d="M165 515 C212 440 280 365 335 315 C378 276 415 245 448 222"></path>
+            <path class="rail" d="M335 315 C280 292 225 285 175 305"></path>
+            <path class="local" d="M448 222 C520 178 605 142 710 120"></path>
+            <path class="local" d="M710 120 C744 158 768 196 778 245"></path>
+            <path class="local" d="M778 245 C790 278 800 306 812 330"></path>
+            <path class="local" d="M710 120 C690 206 676 273 660 360"></path>
+            <path class="local" d="M710 120 C708 218 700 340 675 438"></path>
+            <path class="car" d="M335 315 C420 365 540 390 660 360"></path>
+            <path class="car" d="M335 315 C465 368 565 410 675 438"></path>
+          </svg>
+          <div class="pin p-kix">KIX<small>關西機場</small></div>
+          <div class="pin p-namba">難波<small>Namba</small></div>
+          <div class="pin p-umeda">梅田<small>Umeda</small></div>
+          <div class="pin p-usj">USJ<small>主題樂園</small></div>
+          <div class="pin p-aqua">海遊館<small>Kaiyukan</small></div>
+          <div class="pin p-kyoto">京都站<small>Kyoto</small></div>
+          <div class="pin p-gion">祇園<small>Gion</small></div>
+          <div class="pin p-kiyomizu">清水寺<small>Kiyomizu</small></div>
+          <div class="pin p-fushimi">伏見稻荷<small>Fushimi</small></div>
+          <div class="pin p-uji">宇治<small>Uji</small></div>
+          <div class="time-chip t-kix">KIX→難波 34-39m</div>
+          <div class="time-chip t-usj">難波→USJ 25-35m</div>
+          <div class="time-chip t-kyoto">大阪→京都 30-50m</div>
+          <div class="time-chip t-uji">京都→宇治 20-30m</div>
+          <div class="time-chip t-osaka-uji">大阪→宇治 45-60m</div>
+          <div class="map-note">概念地圖：藍線為機場/大阪移動，紅線為京都與宇治電車動線，綠線代表跨城市開車會遇到的低效率。時間是排程估算，含轉乘會波動。</div>
+        </div>
+        <div class="fact-stack">
+          <article class="fact">
+            <strong>KIX 到大阪</strong>
+            <p>住難波最順，南海 Rapi:t 到難波約 34 到 39 分。住梅田則搭 JR 或先到難波再轉地鐵。</p>
+          </article>
+          <article class="fact">
+            <strong>大阪到京都</strong>
+            <p>梅田方向可搭 JR 或阪急，難波方向可先到淀屋橋搭京阪。京都市內用計程車補強，家庭四人很划算。</p>
+          </article>
+          <article class="fact">
+            <strong>大阪到宇治</strong>
+            <p>從大阪到宇治約 45 到 60 分，常見走法是大阪/京都站轉 JR 奈良線，或京阪系統轉宇治線。宇治站到平等院表參道可步行。</p>
+          </article>
+          <article class="fact">
+            <strong>為什麼不開車</strong>
+            <p>大阪京都市區停車、單行道、觀光區人潮都不友善。除非去美山、天橋立、琵琶湖郊區，否則電車比較像專業導遊會安排的選擇。</p>
+          </article>
+          <article class="fact">
+            <strong>住宿位置</strong>
+            <p>喜歡夜生活與購物選難波/心齋橋；喜歡百貨和交通選梅田。房型優先看公寓式飯店或 family room。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Six Days Plan</div>
+          <h2>6 天 5 夜午後出門行程</h2>
+        </div>
+        <p>每天 11 點起床，12 點到 13 點出門。只有 USJ 那天建議稍早，否則就用 Express Pass 把時間買回來。</p>
+      </div>
+      <div class="itinerary">
+        <article class="day-card">
+          <header><span class="label">Day 1</span><h3>KIX 到大阪，先把夜晚打開</h3></header>
+          <ol>
+            <li><b>午後</b><span>抵達 KIX，搭南海到難波或 JR 到梅田</span></li>
+            <li><b>傍晚</b><span>飯店放行李，簡單休息</span></li>
+            <li><b>晚上</b><span>道頓堀、心齋橋、藥妝與晚餐</span></li>
+          </ol>
+        </article>
+        <article class="day-card">
+          <header><span class="label">Day 2</span><h3>USJ 主題樂園日</h3></header>
+          <ol>
+            <li><b>上午</b><span>這天建議 10:30 前出門，或買 Express Pass</span></li>
+            <li><b>下午</b><span>Super Nintendo World、Harry Potter、Minion</span></li>
+            <li><b>晚上</b><span>玩到閉園，回難波或梅田吃宵夜</span></li>
+          </ol>
+        </article>
+        <article class="day-card">
+          <header><span class="label">Day 3</span><h3>海遊館或阿倍野，晚上難波</h3></header>
+          <ol>
+            <li><b>中午</b><span>睡飽後出門，先午餐</span></li>
+            <li><b>下午</b><span>海遊館 + Tempozan，或阿倍野 Harukas</span></li>
+            <li><b>晚上</b><span>黑門市場周邊、道頓堀、難波 Parks</span></li>
+          </ol>
+        </article>
+        <article class="day-card">
+          <header><span class="label">Day 4</span><h3>京都午後一日</h3></header>
+          <ol>
+            <li><b>12:00</b><span>大阪出發到京都</span></li>
+            <li><b>下午</b><span>清水寺、二年坂三年坂、八坂神社</span></li>
+            <li><b>晚上</b><span>祇園、河原町、京都晚餐後回大阪</span></li>
+          </ol>
+        </article>
+        <article class="day-card">
+          <header><span class="label">Day 5</span><h3>宇治抹茶半日 + 梅田夜購</h3></header>
+          <ol>
+            <li><b>12:00</b><span>大阪出發，JR 或京阪系統前往宇治</span></li>
+            <li><b>下午</b><span>平等院、宇治橋、表參道抹茶甜點</span></li>
+            <li><b>晚上</b><span>回大阪梅田，阪急、LUCUA、Yodobashi</span></li>
+          </ol>
+        </article>
+        <article class="day-card">
+          <header><span class="label">Day 6</span><h3>退房、補買、回台灣</h3></header>
+          <ol>
+            <li><b>中午</b><span>退房寄放行李</span></li>
+            <li><b>下午</b><span>難波或機場免稅補買</span></li>
+            <li><b>晚上</b><span>KIX 回台灣</span></li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Attractions</div>
+          <h2>景點介紹與特色</h2>
+        </div>
+        <p>這裡不是百科全書，而是導遊會怎麼跟家庭客人介紹：哪裡值得去、特色是什麼、適合停多久、不要怎麼排。</p>
+      </div>
+      <div class="cards-grid">
+        <article class="guide-card">
+          <span class="mark">Universal Studios Japan</span>
+          <h3>USJ</h3>
+          <p>青少年主菜。Super Nintendo World、Harry Potter、Minion、刺激型設施和拍照氛圍都強。暑假人潮高，若中午才到，Express Pass 幾乎是把體驗買回來。</p>
+        </article>
+        <article class="guide-card">
+          <span class="mark">Dotonbori & Shinsaibashi</span>
+          <h3>道頓堀、心齋橋</h3>
+          <p>大阪夜晚的代表：霓虹、招牌、美食、藥妝、潮流小物。最適合你們家的作息，晚上越有氣氛，逛完直接回飯店。</p>
+        </article>
+        <article class="guide-card">
+          <span class="mark">Umeda</span>
+          <h3>梅田</h3>
+          <p>百貨與電器最強。阪急、阪神、LUCUA、Grand Front、Yodobashi 都在同一區。大人買品質，青少年看電器、動漫、生活雜貨。</p>
+        </article>
+        <article class="guide-card">
+          <span class="mark">Kaiyukan</span>
+          <h3>海遊館</h3>
+          <p>午後出門很適合，室內、冷氣、節奏慢。水族館展示完整，旁邊 Tempozan 可逛街吃點心。遇到雨天也能當主行程。</p>
+        </article>
+        <article class="guide-card">
+          <span class="mark">Kiyomizu & Higashiyama</span>
+          <h3>清水寺、二年坂三年坂</h3>
+          <p>京都感最濃的一段。清水舞台、石板街、和風店鋪、甜點都集中。缺點是人多，所以中午後到不追求空景，改追求黃昏氛圍。</p>
+        </article>
+        <article class="guide-card">
+          <span class="mark">Gion & Kawaramachi</span>
+          <h3>祇園、河原町</h3>
+          <p>把京都一日遊收得漂亮的地方。祇園看街景與八坂神社，河原町吃晚餐、買和菓子與雜貨，最後搭電車回大阪。</p>
+        </article>
+        <article class="guide-card">
+          <span class="mark">Uji</span>
+          <h3>宇治</h3>
+          <p>京都南邊的抹茶與世界遺產小城。平等院、宇治川、宇治橋、表參道茶鋪集中，午後半日剛好，不需要住一晚。</p>
+        </article>
+        <article class="guide-card">
+          <span class="mark">Byodoin</span>
+          <h3>平等院</h3>
+          <p>宇治代表景點，鳳凰堂也是 10 日圓硬幣圖案。庭園、博物館、鳳凰堂外觀都很有辨識度；若想進鳳凰堂內部，要現場依名額與時段安排。</p>
+        </article>
+        <article class="guide-card">
+          <span class="mark">Uji Tea Street</span>
+          <h3>平等院表參道與抹茶甜點</h3>
+          <p>宇治的快樂核心：抹茶霜淇淋、茶蕎麥、抹茶巴菲、焙茶甜點、茶葉伴手禮。青少年通常比逛寺廟更有感。</p>
+        </article>
+      </div>
+    </section>
+
+    <div class="band">
+      <div class="band-inner">
+        <div>
+          <div class="kicker">Kyoto One Day</div>
+          <h2>京都一日遊，做午後精華版</h2>
+          <p>每天 11 點起床的家庭，不要排伏見稻荷、清水寺、金閣寺、嵐山同一天。那不是旅行，是體能測驗。這版只抓京都味最濃、最順路的一條線。</p>
+        </div>
+        <div class="kyoto-flow" aria-label="京都一日遊時間表">
+          <div class="flow-row"><div class="flow-time">12:00</div><div class="flow-copy"><strong>大阪出發</strong><span>難波可走京阪路線，梅田可走 JR 或阪急。先吃點東西再移動。</span></div></div>
+          <div class="flow-row"><div class="flow-time">14:00</div><div class="flow-copy"><strong>清水寺</strong><span>主殿與清水舞台，停留 60 到 75 分鐘，不追求全寺走透。</span></div></div>
+          <div class="flow-row"><div class="flow-time">15:30</div><div class="flow-copy"><strong>二年坂三年坂</strong><span>散步、拍照、甜點、京都小物。這段最像小冊子的封面場景。</span></div></div>
+          <div class="flow-row"><div class="flow-time">17:00</div><div class="flow-copy"><strong>八坂神社、祇園</strong><span>黃昏光線漂亮，走短線即可。累了就直接計程車到河原町。</span></div></div>
+          <div class="flow-row"><div class="flow-time">18:30</div><div class="flow-copy"><strong>河原町晚餐</strong><span>素食、湯豆腐、和食、甜點都比寺廟周邊好安排。20:30 左右回大阪。</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Uji Half Day</div>
+          <h2>宇治半日，地圖與站點流程</h2>
+        </div>
+        <p>宇治不要排成整天。它最適合 Day 5 中午從大阪出發，下午走平等院與宇治川，傍晚吃抹茶甜點，晚上回梅田購物。</p>
+      </div>
+      <div class="uji-panel">
+        <div class="uji-map" aria-label="宇治半日站點流程地圖">
+          <svg viewBox="0 0 760 520" role="img" aria-label="京都站、宇治站、平等院、宇治川、平等院表參道流程圖">
+            <path d="M130 115 C230 165 285 210 330 260 C392 332 466 370 574 392"></path>
+            <path d="M330 260 C420 238 493 255 570 320"></path>
+          </svg>
+          <div class="uji-stop u-kyoto">京都站<small>Kyoto</small></div>
+          <div class="uji-stop u-uji-station">宇治站<small>JR / Keihan</small></div>
+          <div class="uji-stop u-byodoin">平等院<small>Byodoin</small></div>
+          <div class="uji-stop u-river">宇治川<small>River</small></div>
+          <div class="uji-stop u-omotesando">表參道<small>Tea Street</small></div>
+          <div class="uji-time ut-1">京都→宇治 20-30m</div>
+          <div class="uji-time ut-2">步行 10-15m</div>
+          <div class="uji-time ut-3">散步 20-30m</div>
+          <div class="uji-time ut-4">甜點 45-60m</div>
+        </div>
+        <div class="fact-stack">
+          <article class="fact">
+            <strong>推薦走法</strong>
+            <p>大阪 12:00 出發，約 13:00-13:20 抵達宇治。先平等院，再宇治川與宇治橋，最後平等院表參道吃抹茶甜點。</p>
+          </article>
+          <article class="fact">
+            <strong>交通方式</strong>
+            <p>梅田/大阪站出發可走 JR 到京都再轉奈良線；難波/心齋橋可往淀屋橋搭京阪，再轉宇治線。總移動多抓 45-60 分。</p>
+          </article>
+          <article class="fact">
+            <strong>為什麼適合你們</strong>
+            <p>宇治比京都東山更小更好走，抹茶甜點與茶伴手禮對青少年和大人都友善，也不需要早起。</p>
+          </article>
+          <article class="fact">
+            <strong>素食提醒</strong>
+            <p>抹茶甜點不等於素食正餐；茶蕎麥、湯品仍可能有魚介高湯。嚴格素食正餐建議放大阪或京都市區 vegan 餐廳。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Food Guide</div>
+          <h2>美食建議與特色</h2>
+        </div>
+        <p>大阪是吃熱鬧，京都是吃質感。素食者要記得：日本很多看似素的料理仍可能有鰹魚高湯，要主動確認。</p>
+      </div>
+      <div class="two-col">
+        <article class="list-panel">
+          <header><h3>大阪必吃</h3></header>
+          <ul>
+            <li><strong>章魚燒、御好燒、串炸：</strong>大阪街頭代表，非素食者可以放道頓堀或新世界。素食者要注意麵糊、高湯與醬料。</li>
+            <li><strong>拉麵與沾麵：</strong>難波、梅田選擇很多，但素食者不能只看蔬菜配料，要問湯底。</li>
+            <li><strong>甜點與咖啡：</strong>心齋橋、堀江、梅田都有好店，適合青少年睡醒後第一餐。</li>
+            <li><strong>百貨地下食品街：</strong>家庭很實用，各買各的。素食者可找飯糰、沙拉、麵包、甜點，但仍要看成分。</li>
+          </ul>
+        </article>
+        <article class="list-panel">
+          <header><h3>京都必吃與素食</h3></header>
+          <ul>
+            <li><strong>湯豆腐、湯葉：</strong>京都特色，對素食者相對友善，但仍需確認是否使用魚介高湯。</li>
+            <li><strong>精進料理：</strong>最適合素食者的一餐，建議提前訂位，午餐或早晚餐都可。</li>
+            <li><strong>抹茶甜點、和菓子：</strong>清水寺、祇園、河原町、京都站都好買好吃。</li>
+            <li><strong>素食推薦方向：</strong>京都可查 Vegan Ramen UZU、mumokuteki cafe、Choice 等 vegan/vegetarian 店；大阪可查 Paprika Shokudo Vegan。請以官網營業日與訂位為準。</li>
+            <li><strong>點餐用語：</strong>no meat, no fish, no seafood, no bonito flakes, no dashi。嚴格素食者建議直接找 vegan 餐廳，不要只靠「看起來是蔬菜」。</li>
+          </ul>
+        </article>
+        <article class="list-panel">
+          <header><h3>宇治餐飲特色</h3></header>
+          <ul>
+            <li><strong>中村藤吉本店：</strong>宇治茶名店，適合抹茶甜點、茶飲、伴手禮；熱門時段可能排隊，建議當作下午茶，不要當唯一正餐。</li>
+            <li><strong>伊藤久右衛門：</strong>宇治抹茶甜點與茶伴手禮選擇多，平等院周邊也很順路。</li>
+            <li><strong>通圓茶屋：</strong>宇治橋旁老茶屋，適合想體驗宇治茶歷史感的人。</li>
+            <li><strong>茶蕎麥提醒：</strong>麵看似素，但沾醬常有鰹魚/魚介高湯。素食者要問清楚，或把正式素食正餐放回大阪/京都市區。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Shopping Lane</div>
+          <h2>購物行程怎麼排才漂亮</h2>
+        </div>
+        <p>你們家一定要購物，所以不要把購物塞成「有空再說」。大阪購物是主菜之一，應該排進每天晚上。</p>
+      </div>
+      <div class="shopping-lane">
+        <div class="lane-map" aria-label="大阪購物軸線">
+          <div class="lane-stop"><b>01</b><div><strong>難波</strong><span>道頓堀、Namba Parks、Bic Camera、藥妝與餐廳最集中。</span></div></div>
+          <div class="lane-stop"><b>02</b><div><strong>心齋橋</strong><span>商店街、服飾、球鞋、Don Quijote，青少年接受度高。</span></div></div>
+          <div class="lane-stop"><b>03</b><div><strong>梅田</strong><span>阪急、阪神、LUCUA、Grand Front、Yodobashi，百貨級購物主場。</span></div></div>
+          <div class="lane-stop"><b>04</b><div><strong>KIX 機場</strong><span>最後補買伴手禮與免稅品，不要壓線。</span></div></div>
+        </div>
+        <div class="shopping-cards">
+          <article class="shop-card"><h3>必買伴手禮</h3><p>大阪限定零食、抹茶點心、京都和菓子、黑七味、八橋、百貨地下甜點、機場免稅品。</p></article>
+          <article class="shop-card"><h3>藥妝策略</h3><p>心齋橋與難波先比價，最後不要在機場臨時買全套。退稅排隊也要算時間。</p></article>
+          <article class="shop-card"><h3>青少年好逛</h3><p>球鞋、扭蛋、動漫周邊、電器、文具、零食、主題樂園商品。USJ 商品可當專門預算。</p></article>
+          <article class="shop-card"><h3>行李管理</h3><p>住大阪不換飯店很有利，買完每天回飯店整理。最後一天再把易碎與冷藏品放機場買。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Transport</div>
+          <h2>電車、計程車、開車怎麼選</h2>
+        </div>
+        <p>這趟的專業答案是電車為主。開車不是不能，而是會把城市旅行變成找停車位旅行。</p>
+      </div>
+      <div class="transport-grid">
+        <article class="transport-card">
+          <h3>KIX 到大阪</h3>
+          <p>難波住宿：南海 Rapi:t 約 34 到 39 分。梅田住宿：JR 或南海轉地鐵。若行李很多，可考慮機場巴士或計程車，但成本高。</p>
+        </article>
+        <article class="transport-card">
+          <h3>大阪到京都</h3>
+          <p>梅田出發用 JR、阪急都順；難波/心齋橋可到淀屋橋搭京阪往祇園、清水寺方向。京都市內短段計程車很值得。</p>
+        </article>
+        <article class="transport-card">
+          <h3>大阪到宇治</h3>
+          <p>梅田/大阪站可走 JR 到京都再轉奈良線；難波/心齋橋可走京阪系統轉宇治線。抓 45-60 分較保守，宇治站到平等院表參道約步行 10-15 分。</p>
+        </article>
+        <article class="transport-card">
+          <h3>如果開車</h3>
+          <p>日本靠左、右駕，停車多為付費停車場。京都東山、祇園、清水寺周邊不適合開車找位。開車只建議郊區日使用。</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Short Version</div>
+          <h2>5 天 4 夜壓縮版</h2>
+        </div>
+        <p>如果只能 5 天 4 夜，仍建議住大阪不換飯店。京都東山與宇治都想放進來，就把海遊館或純購物日縮短。</p>
+      </div>
+      <div class="cards-grid">
+        <article class="guide-card"><span class="mark">Day 1</span><h3>KIX → 大阪 → 道頓堀</h3><p>抵達後不排景點，只做入住、晚餐、心齋橋與藥妝。</p></article>
+        <article class="guide-card"><span class="mark">Day 2</span><h3>USJ</h3><p>這天盡量早一點。若仍中午到，買 Express Pass，重點玩任天堂與哈利波特區。</p></article>
+        <article class="guide-card"><span class="mark">Day 3</span><h3>京都午後一日</h3><p>清水寺、二年坂三年坂、祇園、河原町。不要排嵐山與金閣寺。</p></article>
+        <article class="guide-card"><span class="mark">Day 4</span><h3>宇治 + 梅田購物</h3><p>中午出發宇治，下午平等院與抹茶甜點，晚上回梅田百貨與地下街。</p></article>
+        <article class="guide-card"><span class="mark">Day 5</span><h3>退房 → KIX</h3><p>機場補買伴手禮，留足報到、安檢與免稅時間。</p></article>
+        <article class="guide-card"><span class="mark">Hotel</span><h3>住宿方向</h3><p>大阪選難波、心齋橋、梅田。優先 apartment hotel、family room、四人房或連通房。</p></article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">References</div>
+          <h2>行前確認資料來源</h2>
+        </div>
+        <p>航班、交通、USJ 票券、餐廳菜單與營業時間會變動。出發前務必用官方網站再確認一次。</p>
+      </div>
+      <div class="sources">
+        <a href="https://www.kansai-airport.or.jp/en/access/train">Kansai Airport Train Access</a>
+        <a href="https://www.jr-odekake.net/global/en/travel/shopping/access/train.html">JR West Airport Access</a>
+        <a href="https://www.howto-osaka.com/en/rapit/">Nankai Rapi:t</a>
+        <a href="https://www.usj.co.jp/web/en/us">Universal Studios Japan</a>
+        <a href="https://www.kaiyukan.com/language/eng/">Osaka Aquarium Kaiyukan</a>
+        <a href="https://osaka-info.jp/en/">Osaka Official Tourism</a>
+        <a href="https://kyoto.travel/en/">Kyoto Official Travel Guide</a>
+        <a href="https://www.japan.travel/en/spot/2017/">JNTO Uji Guide</a>
+        <a href="https://www.japan.travel/en/spot/685">JNTO Byodoin Temple</a>
+        <a href="https://www.byodoin.or.jp/en/">Byodoin Official</a>
+        <a href="https://tokichi.jp/en">Nakamura Tokichi Official</a>
+        <a href="https://vegan-uzu.com/pages/uzu-kyoto-en">Vegan Ramen UZU Kyoto</a>
+        <a href="https://www.japan.travel/en/plan/restaurant-guide-vegetarian/">JNTO Vegetarian Guide</a>
+        <a href="https://www.npa.go.jp/english/bureau/traffic/document/r8_followtherules_en01.pdf">Japan Police Driving Rules</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

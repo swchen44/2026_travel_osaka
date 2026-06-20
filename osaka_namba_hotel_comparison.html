@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>南大阪（難波・心斎橋）飯店比較表 2026 · 4大人2房</title>
+<style>
+  :root {
+    --gold:     #C9A84C;
+    --deep-red: #7B1F1F;
+    --cream:    #FBF7F0;
+    --ink:      #1A1A2E;
+    --green:    #2E7D32;
+    --red:      #C62828;
+    --amber:    #E65100;
+    --blue:     #0D47A1;
+    --gray:     #757575;
+    --light:    #F5F5F5;
+    --border:   #E0E0E0;
+    --teal:     #00695C;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Noto Sans TC','Microsoft JhengHei',sans-serif; background:#EAF2F0; color:#2C2C2C; font-size:14px; line-height:1.6; }
+
+  header {
+    background: linear-gradient(135deg,#003D35 0%,#00695C 50%,#00897B 100%);
+    color:white; padding:32px 24px 28px; text-align:center;
+  }
+  header h1 { font-size:1.6rem; font-weight:700; margin-bottom:6px; }
+  header p  { font-size:0.85rem; opacity:0.75; letter-spacing:0.05em; }
+  .legend { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-top:16px; }
+  .legend-item { display:flex; align-items:center; gap:6px; font-size:0.78rem; opacity:0.9; }
+  .dot { width:10px;height:10px;border-radius:50%;display:inline-block; }
+
+  .wrap { max-width:1400px; margin:0 auto; padding:20px; }
+
+  /* ── note box ── */
+  .note-box {
+    background:#E0F2F1; border-left:4px solid #00897B;
+    border-radius:4px; padding:12px 16px; margin-bottom:20px;
+    font-size:0.82rem; color:#004D40;
+  }
+  .note-box strong { color:#00695C; }
+
+  /* ── main scroll table ── */
+  .table-wrap { overflow-x:auto; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,.12); }
+  table { border-collapse:collapse; width:100%; min-width:1100px; background:white; }
+
+  /* header rows */
+  thead tr:first-child th { background:#003D35; color:white; font-size:0.72rem; letter-spacing:0.08em; padding:10px 12px; text-align:center; }
+  thead tr:nth-child(2) th { background:#00695C; color:#E0F2F1; font-size:0.8rem; padding:12px 10px; text-align:center; border-right:1px solid rgba(255,255,255,.1); }
+
+  /* row label column */
+  td:first-child, th:first-child {
+    position:sticky; left:0; z-index:2;
+    background:#F0FAF8; font-weight:600; color:#003D35;
+    font-size:0.78rem; padding:10px 12px;
+    border-right:2px solid #A5D6CE;
+    min-width:128px;
+  }
+  thead tr:first-child th:first-child, thead tr:nth-child(2) th:first-child {
+    background:#003D35; color:rgba(255,255,255,.7);
+  }
+
+  /* cells */
+  td { padding:9px 10px; text-align:center; border-bottom:1px solid #EEEEEE; border-right:1px solid #F0F0F0; font-size:0.8rem; vertical-align:middle; }
+  tr:hover td { background:#F0FAF8; }
+
+  /* alternate column shading */
+  td:nth-child(even) { background:rgba(0,0,0,.015); }
+  tr:hover td:nth-child(even) { background:#E0F5F0; }
+
+  /* section rows */
+  tr.section-row td { background:#E0F2F1; color:#004D40; font-weight:700; font-size:0.72rem; letter-spacing:0.1em; text-align:left; padding:6px 12px; border-bottom:2px solid #A5D6CE; }
+  tr.section-row td:first-child { background:#B2DFDB; }
+
+  /* highlights */
+  .ok    { color:var(--green); font-weight:700; }
+  .ng    { color:var(--red);   font-weight:700; }
+  .semi  { color:var(--amber); font-weight:700; }
+  .note  { color:var(--gray);  font-size:0.72rem; }
+
+  /* badges */
+  .badge { display:inline-block; border-radius:4px; padding:2px 7px; font-size:0.68rem; font-weight:700; margin:2px; white-space:nowrap; }
+  .badge-green  { background:#E8F5E9; color:#1B5E20; }
+  .badge-red    { background:#FFEBEE; color:#B71C1C; }
+  .badge-amber  { background:#FFF3E0; color:#BF360C; }
+  .badge-blue   { background:#E3F2FD; color:#0D47A1; }
+  .badge-purple { background:#F3E5F5; color:#4A148C; }
+  .badge-gold   { background:#FFF8E1; color:#795548; }
+  .badge-gray   { background:#F5F5F5; color:#424242; }
+  .badge-teal   { background:#E0F2F1; color:#004D40; }
+
+  /* highlight column (best pick) */
+  td.highlight { background:#E8F5E9 !important; }
+  tr:hover td.highlight { background:#C8E6C9 !important; }
+
+  /* top pick column */
+  td.toppick { background:#FFFDE7 !important; }
+  tr:hover td.toppick { background:#FFF9C4 !important; }
+
+  /* group tags */
+  .group-accor  { color:#00695C; font-weight:700; }
+  .group-okura  { color:#0D47A1; font-weight:700; }
+  .group-fraser { color:#6A1B9A; font-weight:700; }
+  .group-apa    { color:#BF360C; font-weight:700; }
+  .group-mimaru { color:#1B5E20; font-weight:700; }
+  .group-ind    { color:#5D4037; font-weight:700; }
+
+  /* score stars */
+  .stars { color:#F9A825; font-size:0.9rem; letter-spacing:1px; }
+
+  /* footnotes */
+  .footnotes { margin-top:24px; font-size:0.75rem; color:#666; line-height:2; }
+  .footnotes li { margin-left:16px; }
+
+  /* recommendation boxes */
+  .rec-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-top:24px; }
+  .rec-card { background:white; border-radius:10px; padding:18px; box-shadow:0 2px 12px rgba(0,0,0,.08); border-top:4px solid var(--teal); }
+  .rec-card.gold { border-top-color: var(--gold); }
+  .rec-card.blue { border-top-color: #1565C0; }
+  .rec-card.amber { border-top-color: var(--amber); }
+  .rec-card h3 { font-size:0.9rem; margin-bottom:8px; color:#003D35; }
+  .rec-card p { font-size:0.8rem; color:#555; line-height:1.7; }
+  .rec-card .tag { display:inline-block; background:#E0F2F1; color:#00695C; border-radius:4px; padding:2px 8px; font-size:0.7rem; margin-bottom:8px; font-weight:600; }
+  .rec-card.gold .tag { background:#FFF8E1; color:#795548; }
+  .rec-card.blue .tag { background:#E3F2FD; color:#0D47A1; }
+  .rec-card.amber .tag { background:#FFF3E0; color:#BF360C; }
+
+  /* section title */
+  .section-title { font-size:1rem; font-weight:700; color:#003D35; margin:28px 0 10px; border-left:4px solid #00897B; padding-left:10px; }
+
+  /* footer */
+  footer { text-align:center; padding:24px; color:#999; font-size:0.72rem; margin-top:32px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏨 南大阪（難波・心斎橋）飯店比較表 2026</h1>
+  <p>入住條件：4大人 · 2房 · 2026/7/13–18 · 5晚 · 以難波為旅遊基地 · 重視高樓景觀 + 早午餐到14:00 + 素食地下美食</p>
+  <div class="legend">
+    <div class="legend-item"><span class="dot" style="background:#2E7D32"></span>✅ 確認符合</div>
+    <div class="legend-item"><span class="dot" style="background:#E65100"></span>△ 部分符合／需確認</div>
+    <div class="legend-item"><span class="dot" style="background:#C62828"></span>❌ 不符合／無</div>
+    <div class="legend-item"><span class="dot" style="background:#C9A84C"></span>⭐ 此項目最佳</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="note-box">
+  🗺️ <strong>南大阪旅遊基地說明：</strong>6 間飯店均位於 <strong>難波（Namba）・心斎橋（Shinsaibashi）</strong>一帶，步行可達道頓堀・黑門市場・戎橋。
+  南海難波站提供 KIX 關西機場直達服務（30分 / ¥1,110），是本旅程機場交通的關鍵優勢。
+  飯店分布：難波核心3間（①②③）、JR難波旁1間（④）、心斎橋2間（⑤⑥）。
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+  <tr>
+    <th>比較項目</th>
+    <th><span class="group-accor">① Accor</span><br>大阪南海瑞士酒店</th>
+    <th><span class="group-ind">② 獨立品牌</span><br>大阪皇家經典酒店</th>
+    <th><span class="group-fraser">③ Fraser</span><br>Fraser Residence<br>Nankai Osaka</th>
+    <th><span class="group-apa">④ APA</span><br>APA HOTEL&amp;RESORT<br>NAMBA EKIMAE TOWER</th>
+    <th><span class="group-mimaru">⑤ MIMARU</span><br>MIMARU OSAKA<br>SHINSAIBASHI EAST</th>
+    <th><span class="group-okura">⑥ Okura Nikko</span><br>大阪日航酒店</th>
+  </tr>
+  <tr>
+    <th>區域 / 品牌</th>
+    <th>難波 · Swissôtel</th>
+    <th>難波 · 設計精品酒店</th>
+    <th>難波 · 公寓式飯店</th>
+    <th>JR難波 · 大型渡假塔</th>
+    <th>心斎橋 · 公寓式飯店</th>
+    <th>心斎橋 · 奧可木尼克</th>
+  </tr>
+</thead>
+<tbody>
+
+<!-- ─── SECTION: 基本資訊 ─── -->
+<tr class="section-row"><td colspan="7">📋 基本資訊</td></tr>
+
+<tr>
+  <td>地址 / 最近車站</td>
+  <td>難波中1-60<br><span class="badge badge-green">南海難波 3F直結</span></td>
+  <td>難波中2-2-43<br><span class="badge badge-teal">御堂筋線直結</span></td>
+  <td>浪速区難波中1-17-11<br><span class="badge badge-teal">南海難波 徒步2分</span></td>
+  <td>浪速区湊町1-2-13<br><span class="badge badge-blue">JR難波 東口 1分</span></td>
+  <td>中央区東心斎橋1-7-9<br><span class="badge badge-gray">長堀橋 3分 / 心斎橋 6分</span></td>
+  <td>中央区西心斎橋1-3-3<br><span class="badge badge-teal">地鐵心斎橋 8號出口直結</span></td>
+</tr>
+
+<tr>
+  <td>品牌集團</td>
+  <td><span class="badge badge-teal">Accor / Swissôtel</span></td>
+  <td><span class="badge badge-gold">獨立精品 · 隈研吾設計</span></td>
+  <td><span class="badge badge-purple">Fraser Hospitality</span></td>
+  <td><span class="badge badge-amber">APA Hotels &amp; Resorts</span></td>
+  <td><span class="badge badge-green">MIMARU / 大和ハウス</span></td>
+  <td><span class="badge badge-blue">Okura Nikko Hotels</span></td>
+</tr>
+
+<tr>
+  <td>總層數 / 室數</td>
+  <td class="highlight">36F / 546室</td>
+  <td>19F / 150室</td>
+  <td>不詳（公寓式）</td>
+  <td class="highlight">40F+ / 2055室</td>
+  <td>低層公寓式</td>
+  <td>30F</td>
+</tr>
+
+<tr>
+  <td>飯店類型</td>
+  <td>⭐ 國際五星都市飯店</td>
+  <td>設計精品酒店</td>
+  <td>服務式公寓</td>
+  <td>大型商務渡假塔</td>
+  <td>公寓式飯店</td>
+  <td>四星都市商務飯店</td>
+</tr>
+
+<!-- ─── SECTION: 4人住房方案 ─── -->
+<tr class="section-row"><td colspan="7">👨‍👩‍👧‍👦 4人住房方案（同一間 or 連通房）</td></tr>
+
+<tr>
+  <td>同室4人方案</td>
+  <td class="highlight">
+    <span class="ok">✅</span><br>
+    <strong>Grand Room</strong><br>
+    <span class="note">家庭房・2間浴室<br>可訂4大人</span>
+  </td>
+  <td>
+    <span class="semi">△</span><br>
+    <strong>Royal Suite 78㎡</strong><br>
+    <span class="note">4人or 6人版本<br>Premium Twin 30㎡ 僅2人</span>
+  </td>
+  <td>
+    <span class="ok">✅</span><br>
+    <strong>2-Bedroom Apt.</strong><br>
+    <span class="note">2臥室2浴室<br>最多5大人+1加床</span>
+  </td>
+  <td>
+    <span class="ok">✅</span><br>
+    <strong>連通4床房 28㎡</strong><br>
+    <span class="note">或 Suite 35㎡ 2床</span>
+  </td>
+  <td>
+    <span class="ok">✅</span><br>
+    <strong>Family Apt. 38㎡</strong><br>
+    <span class="note">4大人 or 5大人<br>2臥室款58㎡ 7大人可</span>
+  </td>
+  <td>
+    <span class="ok">✅</span><br>
+    <strong>デラックスファミリー</strong><br>
+    <span class="note">50㎡・10F<br>2→4床（加床）</span>
+  </td>
+</tr>
+
+<tr>
+  <td>2房方案（連通房 / 相鄰）</td>
+  <td>
+    <span class="ok">✅</span><br>
+    <span class="badge badge-green">Swiss Select Twin × 2</span><br>
+    <span class="note">✉️ 飯店已確認可申請<br>⚠️ 數量有限・不保證<br>先網路訂房後回信備註</span>
+  </td>
+  <td>
+    <span class="ng">❌</span><br>
+    <span class="note">無連通房<br>可請求相鄰</span>
+  </td>
+  <td>
+    <span class="ng">❌</span><br>
+    <span class="note">明確無連通房<br>可請求相鄰</span>
+  </td>
+  <td>
+    <span class="ok">✅✅</span><br>
+    <span class="badge badge-green">連通Twin 22㎡</span><br>
+    <span class="badge badge-green">連通4床房 28㎡</span>
+  </td>
+  <td>
+    <span class="ok">✅</span><br>
+    <span class="note">58㎡ 2臥室套房<br>= 兩個獨立臥室<br>含2洗手台2衛浴</span>
+  </td>
+  <td>
+    <span class="ng">❌</span><br>
+    <span class="note">無連通房<br>可請求相鄰房間</span>
+  </td>
+</tr>
+
+<tr>
+  <td>房間坪數</td>
+  <td class="highlight">
+    Grand Room <span class="ok">大坪數</span><br>
+    Junior Suite 40㎡<br>
+    Imperial Suite 181㎡
+  </td>
+  <td>
+    Suite <span class="ok">78㎡</span><br>
+    Premium Twin 30㎡<br>
+    Standard 32㎡
+  </td>
+  <td>
+    2-Bedroom Apt.<br>
+    <span class="note">2臥2浴<br>（確切㎡未公開）</span>
+  </td>
+  <td>
+    Suite 35㎡<br>
+    連通4床 28㎡<br>
+    <span class="ng">Standard 11㎡（小）</span>
+  </td>
+  <td>
+    Family Apt. <span class="ok">38㎡</span><br>
+    2臥室款 <span class="ok">58㎡</span>
+  </td>
+  <td>
+    Family Room <span class="ok">50㎡</span><br>
+    Premium 42㎡+<br>
+    Exec Suite 75㎡
+  </td>
+</tr>
+
+<!-- ─── SECTION: 高樓層景觀 ─── -->
+<tr class="section-row"><td colspan="7">🌆 高樓層景觀（晨間景色）</td></tr>
+
+<tr>
+  <td>最高客房樓層</td>
+  <td class="highlight"><span class="ok">⭐ 34F以上</span><br><span class="note">Executive Lounge 32-34F<br>Imperial Suite 34F</span></td>
+  <td><span class="semi">18-19F</span><br><span class="note">Premium Twin 18F<br>全館最高19F</span></td>
+  <td><span class="semi">△ 不明</span><br><span class="note">Executive=高樓<br>Deluxe=低樓（4F以上）</span></td>
+  <td class="toppick"><span class="ok">✅ 40F+</span><br><span class="note">但連通房無景觀（No View）<br>Suite可能有景觀</span></td>
+  <td><span class="ng">❌</span><br><span class="note">低層公寓式<br>無景觀概念</span></td>
+  <td><span class="ok">28-30F</span><br><span class="note">Nikko Premium Floor<br>大阪市景・御堂筋夜景</span></td>
+</tr>
+
+<tr>
+  <td>景觀評分</td>
+  <td class="highlight">
+    <span class="stars">★★★★★</span><br>
+    <span class="note">難波全景・KIX方向遠眺<br>Table36從36F俯瞰全城</span>
+  </td>
+  <td>
+    <span class="stars">★★☆☆☆</span><br>
+    <span class="note">低樓，市街景為主<br>無特殊高樓景觀</span>
+  </td>
+  <td>
+    <span class="stars">★★☆☆☆</span><br>
+    <span class="note">具體樓層不明<br>公寓式，景觀非主打</span>
+  </td>
+  <td>
+    <span class="stars">★★★☆☆</span><br>
+    <span class="note">高樓但連通房無景觀<br>40F SKY DINING景觀佳</span>
+  </td>
+  <td>
+    <span class="stars">★☆☆☆☆</span><br>
+    <span class="note">公寓式，無景觀訴求</span>
+  </td>
+  <td>
+    <span class="stars">★★★★☆</span><br>
+    <span class="note">28-30F御堂筋銀杏景觀<br>城市夜景一流</span>
+  </td>
+</tr>
+
+<!-- ─── SECTION: 早午餐 ─── -->
+<tr class="section-row"><td colspan="7">🍳 早午餐（是否提供至下午 14:00）</td></tr>
+
+<tr>
+  <td>飯店內早餐設施</td>
+  <td>
+    <span class="semi">△</span><br>
+    <strong>Table36</strong>（36F 早餐buffet）<br>
+    <span class="note">Suite客免費<br>時間待確認是否至14:00</span>
+  </td>
+  <td>
+    <span class="semi">△</span><br>
+    <strong>早餐buffet</strong>（高評價）<br>
+    <span class="note">時間待確認是否至14:00<br>多位評論者稱讚早餐</span>
+  </td>
+  <td>
+    <span class="semi">△</span><br>
+    <strong>Namba Ribbon</strong>（早午晚）<br>
+    <span class="note">提供早・午・晚餐<br>具體早餐結束時間未確認</span>
+  </td>
+  <td class="highlight">
+    <span class="ok">✅✅</span><br>
+    <strong>17CLUB（2F）</strong><br>
+    <span class="badge badge-green">6:30am–2:00pm ✅</span><br>
+    <span class="note">80道菜 日西buffet<br>完美符合「午後2點」需求！</span>
+  </td>
+  <td>
+    <span class="ng">❌</span><br>
+    <span class="note">無餐廳<br>需自炊或外出</span>
+  </td>
+  <td>
+    <span class="semi">△</span><br>
+    <strong>Serena</strong>（café restaurant）<br>
+    <span class="note">早餐時間未確認是否至14:00<br>另有高端餐廳6間+</span>
+  </td>
+</tr>
+
+<tr>
+  <td>早午餐（到14:00）評分</td>
+  <td>
+    <span class="semi">需確認</span><br>
+    <span class="note">36F高空景觀早餐<br>體驗極佳但時間未確認</span>
+  </td>
+  <td>
+    <span class="semi">需確認</span><br>
+    <span class="note">早餐品質評價高<br>但時間未確認</span>
+  </td>
+  <td>
+    <span class="semi">需確認</span><br>
+    <span class="note">有早餐服務<br>公寓也可自炊</span>
+  </td>
+  <td class="highlight">
+    <span class="ok">⭐ 最佳</span><br>
+    <span class="note">明確至14:00<br>不需另找餐廳</span>
+  </td>
+  <td>
+    <span class="ng">❌ 無餐廳</span><br>
+    <span class="note">公寓有廚房可自煮<br>但無早午餐供應</span>
+  </td>
+  <td>
+    <span class="semi">需確認</span><br>
+    <span class="note">可能有brunch選項<br>建議致電確認</span>
+  </td>
+</tr>
+
+<!-- ─── SECTION: 素食採購 ─── -->
+<tr class="section-row"><td colspan="7">🥦 素食採購（百貨地下美食・超市便利）</td></tr>
+
+<tr>
+  <td>鄰近百貨地下</td>
+  <td class="highlight">
+    <span class="ok">⭐ 最佳</span><br>
+    <span class="badge badge-green">高島屋大阪 直連</span><br>
+    <span class="note">B1-B2 デパ地下<br>素食便當・精品食材</span>
+  </td>
+  <td>
+    <span class="ok">✅</span><br>
+    <span class="badge badge-teal">御堂筋線直結</span><br>
+    <span class="note">→ 難波高島屋 or<br>心斎橋大丸 均可達</span>
+  </td>
+  <td>
+    <span class="ok">✅</span><br>
+    <span class="badge badge-teal">Namba SkyO 對面</span><br>
+    <span class="note">Ikari超市（高品質）<br>難波高島屋步行5分</span>
+  </td>
+  <td>
+    <span class="semi">△</span><br>
+    <span class="note">4F Seven-Eleven（24h）<br>難波高島屋步行約10分<br>百貨地下非緊鄰</span>
+  </td>
+  <td>
+    <span class="ok">✅</span><br>
+    <span class="note">心斎橋大丸 步行圈<br>心斎橋Shopping Street 150m</span>
+  </td>
+  <td>
+    <span class="ok">✅</span><br>
+    <span class="badge badge-blue">大丸心斎橋 直結（地鐵）</span><br>
+    <span class="note">心斎橋站直結→<br>大丸心斎橋 デパ地下</span>
+  </td>
+</tr>
+
+<tr>
+  <td>黑門市場距離</td>
+  <td><span class="note">步行約12分</span></td>
+  <td><span class="note">步行約8分</span></td>
+  <td><span class="note">步行約10分</span></td>
+  <td><span class="note">步行約8分</span></td>
+  <td><span class="note">步行約15分</span></td>
+  <td><span class="note">步行約20分</span></td>
+</tr>
+
+<!-- ─── SECTION: 交通 ─── -->
+<tr class="section-row"><td colspan="7">🚊 交通（機場 · 市區移動）</td></tr>
+
+<tr>
+  <td>KIX 關西機場</td>
+  <td class="highlight">
+    <span class="ok">⭐ 最佳</span><br>
+    <span class="badge badge-green">南海 難波直結</span><br>
+    <span class="note">30分 / ¥1,110<br>ラピート特急也停此站</span>
+  </td>
+  <td>
+    <span class="ok">✅</span><br>
+    <span class="note">御堂筋線→難波→南海<br>（多走5-10分轉車）</span>
+  </td>
+  <td>
+    <span class="ok">✅</span><br>
+    <span class="note">南海難波站 徒步2分<br>≈ 等同直結</span>
+  </td>
+  <td>
+    <span class="semi">△</span><br>
+    <span class="note">JR難波→難波→<br>南海難波（需換乘）<br>或バス/タクシー</span>
+  </td>
+  <td>
+    <span class="semi">△</span><br>
+    <span class="note">地鐵→難波→南海<br>（換乘約20分）</span>
+  </td>
+  <td>
+    <span class="semi">△</span><br>
+    <span class="note">地鐵心斎橋→難波→南海<br>（換乘約20分）</span>
+  </td>
+</tr>
+
+<tr>
+  <td>市區交通便利度</td>
+  <td>
+    <span class="ok">✅✅</span><br>
+    <span class="note">地鐵難波（御堂筋・千日前・四つ橋）<br>南海・近鐵・阪神・阪急可達</span>
+  </td>
+  <td>
+    <span class="ok">✅✅</span><br>
+    <span class="note">御堂筋線直結<br>（梅田↔天王寺直通）</span>
+  </td>
+  <td>
+    <span class="ok">✅✅</span><br>
+    <span class="note">難波各線 步行圈<br>道頓堀・ミナミ徒步</span>
+  </td>
+  <td>
+    <span class="ok">✅</span><br>
+    <span class="note">JR難波・地鐵難波<br>道頓堀徒步圈</span>
+  </td>
+  <td>
+    <span class="ok">✅</span><br>
+    <span class="note">地鐵長堀橋・心斎橋<br>道頓堀徒步圈</span>
+  </td>
+  <td>
+    <span class="ok">✅✅</span><br>
+    <span class="note">御堂筋線心斎橋直結<br>（梅田↔天王寺直通）</span>
+  </td>
+</tr>
+
+<tr>
+  <td>步行到道頓堀</td>
+  <td><span class="ok">✅ 徒步5分</span></td>
+  <td><span class="ok">✅ 徒步8分</span></td>
+  <td><span class="ok">✅ 徒步10分</span></td>
+  <td><span class="ok">✅ 徒步8分</span></td>
+  <td><span class="ok">✅ 徒步8分</span></td>
+  <td><span class="semi">△ 徒步15分</span></td>
+</tr>
+
+<!-- ─── SECTION: 設施 ─── -->
+<tr class="section-row"><td colspan="7">🏊 特色設施</td></tr>
+
+<tr>
+  <td>SPA / 健身 / 泳池</td>
+  <td class="highlight">
+    <span class="ok">⭐ 最佳</span><br>
+    <span class="badge badge-green">Pürovel Spa</span><br>
+    <span class="note">室內泳池＋桑拿＋健身房<br>Grand Room以上客人免費</span>
+  </td>
+  <td>
+    <span class="ng">❌</span><br>
+    <span class="note">無SPA / 泳池</span>
+  </td>
+  <td>
+    <span class="ng">❌</span><br>
+    <span class="note">有健身房<br>無SPA・無泳池</span>
+  </td>
+  <td>
+    <span class="ok">✅✅</span><br>
+    <span class="badge badge-amber">40F 屋頂泳池</span>（夏季）<br>
+    <span class="badge badge-teal">大浴場＋桑拿</span>（全客免費）<br>
+    <span class="note">健身房・美容沙龍</span>
+  </td>
+  <td>
+    <span class="ng">❌</span><br>
+    <span class="note">無SPA・無泳池</span>
+  </td>
+  <td>
+    <span class="semi">△</span><br>
+    <span class="note">無SPA・無泳池<br>（大丸心斎橋有外部設施）</span>
+  </td>
+</tr>
+
+<tr>
+  <td>行政酒廊 / 貴賓服務</td>
+  <td class="highlight">
+    <span class="ok">✅</span><br>
+    <span class="badge badge-teal">Swiss Executive Lounge</span><br>
+    <span class="note">32–34F<br>Executive房型以上含</span>
+  </td>
+  <td>
+    <span class="ng">❌</span><br>
+    <span class="note">無行政酒廊</span>
+  </td>
+  <td>
+    <span class="ng">❌</span><br>
+    <span class="note">無行政酒廊</span>
+  </td>
+  <td>
+    <span class="ng">❌</span><br>
+    <span class="note">無行政酒廊</span>
+  </td>
+  <td>
+    <span class="ng">❌</span><br>
+    <span class="note">無行政酒廊</span>
+  </td>
+  <td>
+    <span class="ok">✅</span><br>
+    <span class="badge badge-blue">ニッコーラウンジ</span><br>
+    <span class="note">Nikko Premium 28-30F 限定<br>Bose音響＋Nespresso含</span>
+  </td>
+</tr>
+
+<tr>
+  <td>廚房 / 洗衣設備</td>
+  <td>
+    <span class="ng">❌</span><br>
+    <span class="note">無廚房<br>（標準飯店）</span>
+  </td>
+  <td>
+    <span class="ng">❌</span><br>
+    <span class="note">無廚房<br>（標準飯店）</span>
+  </td>
+  <td class="highlight">
+    <span class="ok">⭐ 最佳</span><br>
+    <span class="badge badge-green">全室含廚房</span><br>
+    <span class="badge badge-green">洗衣機+烘乾機（室內）</span><br>
+    <span class="note">IH爐・微波・冰箱・餐具</span>
+  </td>
+  <td>
+    <span class="semi">△</span><br>
+    <span class="note">無廚房<br>投幣洗衣（公用）<br>7-Eleven 4F（24h）</span>
+  </td>
+  <td>
+    <span class="ok">✅</span><br>
+    <span class="badge badge-green">全室含廚房</span><br>
+    <span class="note">IH爐・微波・冰箱・餐具<br>投幣洗衣（公用）</span>
+  </td>
+  <td>
+    <span class="ng">❌</span><br>
+    <span class="note">無廚房<br>（標準飯店）</span>
+  </td>
+</tr>
+
+<tr>
+  <td>餐廳陣容</td>
+  <td>
+    <strong>Table36</strong>（36F 景觀餐廳）<br>
+    <strong>Bar36</strong>（36F）<br>
+    <span class="note">其他餐廳待確認</span>
+  </td>
+  <td>
+    <span class="note">飯店內餐廳<br>（早餐buffet高評）</span>
+  </td>
+  <td>
+    <strong>Namba Ribbon</strong><br>
+    <span class="note">早・午・晚餐</span>
+  </td>
+  <td class="toppick">
+    <strong>17CLUB</strong>（2F 到14:00）<br>
+    <strong>SKY DINING</strong>（40F）<br>
+    <strong>BACCANO</strong>（1F Café-Bar）<br>
+    <strong>BAR 17CLUB</strong>（2F）
+  </td>
+  <td>
+    <span class="ng">無餐廳</span><br>
+    <span class="note">自炊或外出</span>
+  </td>
+  <td class="toppick">
+    <strong>Serena</strong>（café）<br>
+    <strong>弁慶</strong>（日本料理）<br>
+    <strong>桃李</strong>（中國料理）<br>
+    <strong>レ・セレブリテ</strong>（法式）<br>
+    <strong>銀杏</strong>（鐵板燒）<br>
+    <strong>夜間飛行</strong>（BAR）
+  </td>
+</tr>
+
+<!-- ─── SECTION: 評價 ─── -->
+<tr class="section-row"><td colspan="7">⭐ 外部評價 / 口碑</td></tr>
+
+<tr>
+  <td>TripAdvisor 評分</td>
+  <td class="highlight">
+    <span class="ok">⭐ 南大阪 高端首選</span><br>
+    <span class="stars">★★★★★</span><br>
+    <span class="note">5/5（Traveller's Choice）</span>
+  </td>
+  <td>
+    <span class="stars">★★★★☆</span><br>
+    <span class="note">4/5 · TripAdvisor 難波 #2<br>759件評論 · 2024年高評</span>
+  </td>
+  <td>
+    <span class="stars">★★★★☆</span><br>
+    <span class="note">9.3/10（Trip.com）<br>多次複住、強力推薦</span>
+  </td>
+  <td>
+    <span class="stars">★★★☆☆</span><br>
+    <span class="note">3/5（TripAdvisor #235/466）<br>新飯店（2024開業）</span>
+  </td>
+  <td>
+    <span class="stars">★★★★☆</span><br>
+    <span class="note">MIMARU品牌好評<br>家族客族群高分</span>
+  </td>
+  <td>
+    <span class="stars">★★★★★</span><br>
+    <span class="note">TripAdvisor Traveller's Choice 2024<br>Okura Nikko 品牌保證</span>
+  </td>
+</tr>
+
+<tr>
+  <td>主要優點（評論重點）</td>
+  <td>
+    <span class="badge badge-green">五星級服務</span>
+    <span class="badge badge-teal">KIX直達便利</span>
+    <span class="badge badge-gold">高島屋直連</span>
+    <span class="badge badge-purple">SPA設施</span>
+  </td>
+  <td>
+    <span class="badge badge-gold">隈研吾建築</span>
+    <span class="badge badge-blue">早餐好評</span>
+    <span class="badge badge-teal">鬧中取靜</span>
+    <span class="badge badge-green">設計感十足</span>
+  </td>
+  <td>
+    <span class="badge badge-green">超好位置</span>
+    <span class="badge badge-blue">公寓寬敞</span>
+    <span class="badge badge-teal">廚房洗衣</span>
+    <span class="badge badge-purple">服務親切</span>
+  </td>
+  <td>
+    <span class="badge badge-amber">早餐到14:00✅</span>
+    <span class="badge badge-green">連通房✅</span>
+    <span class="badge badge-blue">屋頂泳池</span>
+    <span class="badge badge-teal">大浴場免費</span>
+  </td>
+  <td>
+    <span class="badge badge-green">4-7人大房</span>
+    <span class="badge badge-blue">廚房完整</span>
+    <span class="badge badge-teal">心斎橋150m</span>
+    <span class="badge badge-gold">自由度高</span>
+  </td>
+  <td>
+    <span class="badge badge-blue">6間餐廳</span>
+    <span class="badge badge-teal">心斎橋直結</span>
+    <span class="badge badge-gold">服務一流</span>
+    <span class="badge badge-green">高樓景觀</span>
+  </td>
+</tr>
+
+<tr>
+  <td>主要缺點</td>
+  <td>
+    <span class="badge badge-red">早餐時間未確認</span>
+    <span class="badge badge-amber">4人同室需訂Grand Room</span>
+  </td>
+  <td>
+    <span class="badge badge-red">無連通房</span>
+    <span class="badge badge-amber">建築低矮（19F）</span>
+    <span class="badge badge-red">4人套房僅Royal Suite</span>
+  </td>
+  <td>
+    <span class="badge badge-red">無連通房</span>
+    <span class="badge badge-amber">2床房供應有限</span>
+    <span class="badge badge-gray">早餐時間未確認</span>
+  </td>
+  <td>
+    <span class="badge badge-red">連通房無景觀</span>
+    <span class="badge badge-amber">評價中等（3/5）</span>
+    <span class="badge badge-gray">房間偏小（28㎡/4人）</span>
+  </td>
+  <td>
+    <span class="badge badge-red">無餐廳</span>
+    <span class="badge badge-red">無景觀</span>
+    <span class="badge badge-amber">位置稍偏心斎橋</span>
+  </td>
+  <td>
+    <span class="badge badge-red">無連通房</span>
+    <span class="badge badge-amber">家庭房僅10F（非高層）</span>
+    <span class="badge badge-gray">早餐時間未確認</span>
+  </td>
+</tr>
+
+<!-- ─── SECTION: 綜合評分 ─── -->
+<tr class="section-row"><td colspan="7">🏆 綜合適合度評分（4大人・2房・難波基地）</td></tr>
+
+<tr>
+  <td>4人同住方便度</td>
+  <td class="highlight"><span class="stars">★★★★★</span><br><span class="note">Grand Room 完美符合</span></td>
+  <td><span class="stars">★★★☆☆</span><br><span class="note">需訂套房（Royal Suite）</span></td>
+  <td><span class="stars">★★★★☆</span><br><span class="note">2臥套房 寬敞舒適</span></td>
+  <td><span class="stars">★★★☆☆</span><br><span class="note">連通4床但空間小</span></td>
+  <td><span class="stars">★★★★★</span><br><span class="note">58㎡ 2臥室款最寬敞</span></td>
+  <td><span class="stars">★★★★☆</span><br><span class="note">50㎡家庭房佳</span></td>
+</tr>
+
+<tr>
+  <td>早午餐到14:00</td>
+  <td><span class="stars">★★★☆☆</span><br><span class="note">需確認時間</span></td>
+  <td><span class="stars">★★★☆☆</span><br><span class="note">需確認時間</span></td>
+  <td><span class="stars">★★★☆☆</span><br><span class="note">需確認時間</span></td>
+  <td class="highlight"><span class="stars">★★★★★</span><br><span class="note">⭐ 明確至14:00</span></td>
+  <td><span class="stars">★☆☆☆☆</span><br><span class="note">無餐廳</span></td>
+  <td><span class="stars">★★★☆☆</span><br><span class="note">需確認時間</span></td>
+</tr>
+
+<tr>
+  <td>高樓景觀</td>
+  <td class="highlight"><span class="stars">★★★★★</span><br><span class="note">36F最高景</span></td>
+  <td><span class="stars">★★☆☆☆</span><br><span class="note">19F較低</span></td>
+  <td><span class="stars">★★☆☆☆</span><br><span class="note">不確定</span></td>
+  <td><span class="stars">★★★☆☆</span><br><span class="note">連通房無景觀</span></td>
+  <td><span class="stars">★☆☆☆☆</span><br><span class="note">無景觀</span></td>
+  <td><span class="stars">★★★★☆</span><br><span class="note">28-30F優質景觀</span></td>
+</tr>
+
+<tr>
+  <td>素食採購</td>
+  <td class="highlight"><span class="stars">★★★★★</span><br><span class="note">高島屋直連</span></td>
+  <td><span class="stars">★★★★☆</span><br><span class="note">地鐵直連百貨</span></td>
+  <td><span class="stars">★★★★☆</span><br><span class="note">Ikari超市對面</span></td>
+  <td><span class="stars">★★★☆☆</span><br><span class="note">7-Eleven 24h在館內</span></td>
+  <td><span class="stars">★★★★☆</span><br><span class="note">心斎橋步行圈</span></td>
+  <td><span class="stars">★★★★☆</span><br><span class="note">大丸地下直結</span></td>
+</tr>
+
+<tr>
+  <td>KIX機場交通</td>
+  <td class="highlight"><span class="stars">★★★★★</span><br><span class="note">南海直結 30分</span></td>
+  <td><span class="stars">★★★★☆</span><br><span class="note">換車1次</span></td>
+  <td><span class="stars">★★★★★</span><br><span class="note">徒步2分→南海</span></td>
+  <td><span class="stars">★★★☆☆</span><br><span class="note">需換乘</span></td>
+  <td><span class="stars">★★★☆☆</span><br><span class="note">需換乘</span></td>
+  <td><span class="stars">★★★☆☆</span><br><span class="note">需換乘</span></td>
+</tr>
+
+<tr>
+  <td>🏆 整體推薦度</td>
+  <td class="highlight"><span class="stars">★★★★★</span><br><span class="badge badge-gold">⭐ 頂級首選</span></td>
+  <td><span class="stars">★★★☆☆</span><br><span class="badge badge-teal">設計體驗首選</span></td>
+  <td><span class="stars">★★★★☆</span><br><span class="badge badge-purple">家庭公寓首選</span></td>
+  <td><span class="stars">★★★☆☆</span><br><span class="badge badge-amber">早餐需求唯一解</span></td>
+  <td><span class="stars">★★★☆☆</span><br><span class="badge badge-green">超大房型首選</span></td>
+  <td><span class="stars">★★★★☆</span><br><span class="badge badge-blue">餐廳景觀平衡</span></td>
+</tr>
+
+</tbody>
+</table>
+</div><!-- /table-wrap -->
+
+<!-- ─── Price Comparison Section ─── -->
+<p class="section-title">💰 4人住房費用比較（7/13–18 · 5晚）</p>
+
+<div class="note-box">
+  🔍 <strong>搜尋條件：</strong>2026/7/13–18（5晚）・4人（2大人+15歲+11歲）・最佳4人方案。價格以 <strong>TWD</strong> 計，含稅（⑥日航含早餐×4人，其餘不含早餐）。<br>
+  <span class="ok">✅ 已確認</span> = 直接從訂房網站即時取得（2026/6/19）；<span style="color:#E65100;">⚠️ 待查詢</span> = 尚未取得即時報價。<br>
+  📊 <strong>排序：</strong>依「每人每晚」由低至高。⑥日航實際含早餐，扣除早餐（~TWD 490/人）後約TWD 2,240/人/晚。
+</div>
+
+<div class="table-wrap" style="margin-bottom:24px;">
+<table style="min-width:750px;">
+<thead>
+  <tr>
+    <th style="text-align:left;min-width:140px;">飯店</th>
+    <th style="text-align:left;min-width:180px;">推薦4人方案</th>
+    <th>合計面積</th>
+    <th>每人面積</th>
+    <th>每晚<br>（TWD）</th>
+    <th>5晚合計<br>（TWD）</th>
+    <th>每人每晚<br>（TWD）</th>
+    <th>資料來源</th>
+  </tr>
+</thead>
+<tbody>
+  <!-- ① APA: 930/人/晚 -->
+  <tr style="background:#E8F5E9;">
+    <td style="text-align:left;font-weight:600;"><span class="group-apa">④ APA</span><br><span class="note">NAMBA TOWER</span></td>
+    <td style="text-align:left;">連通4床 [2Bed-2Bed]<br><span class="note">4張單人床 · 2室共28㎡</span></td>
+    <td>28㎡</td>
+    <td style="color:var(--red);font-weight:700;">7㎡</td>
+    <td><strong>3,718</strong></td>
+    <td><strong>18,590</strong></td>
+    <td style="background:#C8E6C9;font-size:1rem;font-weight:700;color:#1B5E20;">930 🥇</td>
+    <td><span class="badge badge-green">✅ Hotels.com</span></td>
+  </tr>
+  <!-- ② Dormy Inn: 1,496/人/晚 -->
+  <tr>
+    <td style="text-align:left;font-weight:600;"><span style="color:#00695C;">⑦ Dormy Inn</span><br><span class="note">PREMIUM ANNEX</span></td>
+    <td style="text-align:left;">2間雙人房 各16㎡<br><span class="note">各1張大床 · 分2室 · 天然温泉</span></td>
+    <td>32㎡</td>
+    <td>8㎡</td>
+    <td><strong>5,982</strong></td>
+    <td><strong>29,908</strong></td>
+    <td style="font-weight:700;">1,496</td>
+    <td><span class="badge badge-green">✅ Booking.com</span></td>
+  </tr>
+  <!-- ③ Fraser: 2,432/人/晚 -->
+  <tr>
+    <td style="text-align:left;font-weight:600;"><span class="group-fraser">③ Fraser</span><br><span class="note">Residence Nankai</span></td>
+    <td style="text-align:left;">行政一臥室公寓雙床間 × 1間<br><span class="note">40㎡ · 2張單人床 · 廚房 · 洗衣機 · 4人同室</span></td>
+    <td>40㎡</td>
+    <td>10㎡</td>
+    <td><strong>9,728</strong></td>
+    <td><strong>48,638</strong></td>
+    <td style="font-weight:700;">2,432</td>
+    <td><span class="badge badge-green">✅ Booking.com</span></td>
+  </tr>
+  <!-- ④ Nikko: 2,730/人/晚（含早餐；扣餐實約2,240） -->
+  <tr>
+    <td style="text-align:left;font-weight:600;"><span class="group-okura">⑥ Nikko</span><br><span class="note">Hotel Nikko Osaka</span></td>
+    <td style="text-align:left;">2張雙人床 × 1間（42㎡）<br><span class="note">4人同室 · 市景 · <strong style="color:var(--green);">含早餐</strong></span></td>
+    <td>42㎡</td>
+    <td>10.5㎡</td>
+    <td><strong>10,919</strong><br><span class="note">不退款 / 12,314含取消</span></td>
+    <td><strong>54,595</strong><br><span class="note">含早餐×4人×5天</span></td>
+    <td style="font-weight:700;">2,730 🍳<br><span class="note" style="font-size:0.68rem;">含早餐；扣餐實約2,240</span></td>
+    <td><span class="badge badge-green">✅ Booking.com</span></td>
+  </tr>
+  <!-- ⑤ Swissôtel: ~2,704–2,896/人/晚 -->
+  <tr>
+    <td style="text-align:left;font-weight:600;"><span class="group-accor">① Swissôtel</span><br><span class="note">南海瑞士酒店</span></td>
+    <td style="text-align:left;">Swiss Select Twin × 2間<br><span class="note">五星 · 高樓海景 · KIX直通列車</span></td>
+    <td>~56㎡</td>
+    <td>~14㎡</td>
+    <td>~10,816–11,584<br><span class="note">USD $169–181/間/晚×2</span></td>
+    <td>~54,080–57,920</td>
+    <td style="font-weight:700;">~2,704–2,896</td>
+    <td><span class="badge badge-amber">✅ Expedia/USD</span></td>
+  </tr>
+  <!-- ⑥ MIMARU: ~3,550/人/晚 -->
+  <tr>
+    <td style="text-align:left;font-weight:600;"><span class="group-mimaru">⑤ MIMARU</span><br><span class="note">Shinsaibashi East</span></td>
+    <td style="text-align:left;">2-BR Japanese Apt. 58㎡<br><span class="note">2臥室2衛浴 · 廚房 · 4人同室</span></td>
+    <td>58㎡</td>
+    <td style="color:var(--green);font-weight:700;">14.5㎡</td>
+    <td>~14,200</td>
+    <td>~71,000</td>
+    <td style="font-weight:700;">~3,550</td>
+    <td><span class="badge badge-amber">⚠️ Expedia/USD</span></td>
+  </tr>
+  <!-- ⑦ Royal Classic: 11,771/人/晚（奢華） -->
+  <tr>
+    <td style="text-align:left;font-weight:600;"><span class="group-ind">② Royal Classic</span><br><span class="note">隈研吾設計</span></td>
+    <td style="text-align:left;">豪華四人套房 × 1間<br><span class="note">78㎡ · 4人同室 · 極致奢華</span></td>
+    <td>78㎡</td>
+    <td style="color:var(--green);font-weight:700;">19.5㎡</td>
+    <td><strong>47,086</strong></td>
+    <td><strong>235,428</strong></td>
+    <td style="color:var(--red);font-weight:700;">11,771 💰</td>
+    <td><span class="badge badge-green">✅ Booking.com</span></td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<!-- ─── APA Room Size Note ─── -->
+<div class="note-box" style="background:#FFF8E1;border-color:#F9A825;">
+  <strong>💡 APA 房型面積說明：</strong>「連通4床」是2間獨立客房（各14㎡）透過中間門連通，共28㎡・4張單人床。
+  Hotels.com 標示「2張標準雙人床」容易誤解，實際是<strong>每間1張雙人床</strong>（2室各11㎡）的[1Bed-1Bed]連通22㎡，或<strong>每間2張單人床</strong>（2室各14㎡）的[2Bed-2Bed]連通28㎡。
+  14㎡放2張單人床確實偏小，但符合APA精緻商務飯店一貫風格。
+</div>
+
+<!-- ─── Recommendation Cards ─── -->
+<p class="section-title">📌 依需求情境推薦</p>
+
+<div class="rec-grid">
+
+  <div class="rec-card gold">
+    <div class="tag">⭐ 旅行體驗最完整</div>
+    <h3>① 大阪南海瑞士酒店</h3>
+    <p>五星品牌 + 36F高樓景觀 + 高島屋直連 + 南海KIX直達。Grand Room同住4人含2浴室，Pürovel SPA（泳池+桑拿）Grand Room客免費。<strong>✉️ 連通房已確認：Swiss Select Twin × 2 可申請，數量有限不保證，需先網路訂房後回信備註請求。</strong> 仍需確認 Table36 早餐結束時間。</p>
+  </div>
+
+  <div class="rec-card">
+    <div class="tag">✅ 早午餐唯一確認到14:00</div>
+    <h3>④ APA HOTEL&amp;RESORT NAMBA EKIMAE TOWER</h3>
+    <p>明確提供6:30am–2:00pm自助早餐（17CLUB），完美解決早午餐問題。有連通房（Connecting Fourth Room 4床）但無景觀，房間偏小。40F屋頂泳池（夏季）+ 大浴場免費，設施豐富。適合以餐食體驗為優先的家庭。</p>
+  </div>
+
+  <div class="rec-card blue">
+    <div class="tag">🏆 景觀＋餐廳最均衡</div>
+    <h3>⑥ 大阪日航酒店</h3>
+    <p>Nikko Premium Floor（28-30F）景觀一流，含ニッコーラウンジ＋Bose音響＋Nespresso。Deluxe Family Room（50㎡/10F）可容4人。6間餐廳陣容南大阪最豐富，心斎橋直結生活機能佳。Traveller's Choice 2024品質保證。</p>
+  </div>
+
+  <div class="rec-card amber">
+    <div class="tag">🏠 最適合長住型家庭</div>
+    <h3>③ Fraser Residence Nankai Osaka</h3>
+    <p>公寓式2臥室套房（2浴室），附完整廚房＋室內洗衣烘乾機，南海難波步行2分，Ikari超市對面。在同等地段提供最高的生活自由度，適合想自炊、自行安排早餐的家庭。唯無連通房，2床套房有限，需早預訂。</p>
+  </div>
+
+  <div class="rec-card">
+    <div class="tag">👪 單房可住最多人</div>
+    <h3>⑤ MIMARU OSAKA SHINSAIBASHI EAST</h3>
+    <p>Superior 2-Bedroom Japanese Apartment（58㎡）可住7大人，含2衛浴2洗手台，完整廚房。最適合預算考量下同住4人的家庭。心斎橋商店街150m，道頓堀步行圈。唯無餐廳、無景觀，需自行安排餐食。</p>
+  </div>
+
+  <div class="rec-card">
+    <div class="tag">🎨 設計體驗優先</div>
+    <h3>② 大阪皇家經典酒店</h3>
+    <p>隈研吾設計、御堂筋線直結、TripAdvisor難波#2。Royal Suite（78㎡）可住4人。早餐口碑極佳（多評論者稱讚）。唯樓高僅19F、無連通房、客室數少（150室），需注意提早訂房。適合重視設計感和文化體驗的旅客。</p>
+  </div>
+
+  <div class="rec-card" style="border-top-color:#00695C;">
+    <div class="tag" style="background:#E0F2F1;color:#004D40;">♨️ 最佳性價比 + 溫泉</div>
+    <h3>⑦ Dormy Inn PREMIUM 難波 ANNEX（天然温泉 朝霧の湯）</h3>
+    <p>每人每晚僅 <strong>TWD 1,496</strong>（2間各16㎡，不含早餐）。主打天然溫泉「朝霧の湯」全客免費、每晚宵夜拉麵免費。距長堀橋站500m（心斎橋徒步10分），Lawson超市在1樓直通。早餐另付約TWD 490/人（高評價）。台灣旅客評價極佳（8.6/10 · 795則評語）。</p>
+  </div>
+
+</div><!-- /rec-grid -->
+
+<!-- ─── Footnotes ─── -->
+<p class="section-title">📝 補充說明 &amp; 建議確認事項</p>
+<ul class="footnotes">
+  <li>① 大阪南海瑞士酒店：✉️ 連通房回覆確認——Swiss Select Twin × 2 可申請（另有4種連通組合），數量有限・非保證，先在官網訂房後回信給 Clark Lois Tajon (reservation.osaka@swissotel.com) 備註請求。仍需確認 Table36 早餐實際結束時間（是否可訂至14:00）。</li>
+  <li>② ホテルロイヤルクラシック大阪：官網多次逾時無法存取，Royal Suite 78㎡ 4人房的實際可訂性建議致電確認（官網：hotel-royalclassic.jp）。</li>
+  <li>③ Fraser Residence：2-Bedroom Executive（高樓）房型供給有限（長住客常使用），7月旺季需盡早預訂。</li>
+  <li>④ APA NAMBA TOWER：Connecting Fourth Room（28㎡/4床）雖可住4人但空間偏小，若重視舒適度建議加訂相鄰標準房。早餐17CLUB 6:30–14:00為本次需求的唯一明確符合方案。</li>
+  <li>⑤ MIMARU SHINSAIBASHI EAST：無附餐服務，住客需自炊或外食解決早餐。心斎橋商店街提供豐富外食選擇。</li>
+  <li>⑥ ホテル日航大阪：Nikko Premium Floor（28-30F）最高景觀需升級到Premium房型；Deluxe Family Room（50㎡）位於10F，景觀較有限。建議確認 Serena 早餐的實際供應時間。</li>
+  <li>📌 南海難波站 → 關西空港：南海空港急行（所要約30分 / ¥1,110）。ラピート特急（所要約35分 / ¥1,490）。若訂①③號飯店，機場交通最為便利。</li>
+  <li>⑦ Dormy Inn PREMIUM 難波 ANNEX：長堀橋站500m，天然溫泉・宵夜拉麵・Lawson 1F直通。每人每晚最低 TWD 1,496（2間×16㎡，不含早餐）；加早餐約TWD 490/人/晚。無連通房，建議email詢問是否可安排同樓層。</li>
+  <li>📌 所有資料均以2026年6月公開資訊為準，實際房型定價與早餐時間請向各飯店確認。</li>
+</ul>
+
+</div><!-- /wrap -->
+
+<footer>
+  南大阪（難波・心斎橋）飯店比較表 2026 · 4大人2房 · 資料整理：2026/06/19<br>
+  ① Swissôtel Nankai &nbsp;|&nbsp; ② Hotel Royal Classic Osaka &nbsp;|&nbsp; ③ Fraser Residence Nankai &nbsp;|&nbsp;
+  ④ APA NAMBA EKIMAE TOWER &nbsp;|&nbsp; ⑤ MIMARU Shinsaibashi East &nbsp;|&nbsp; ⑥ Hotel Nikko Osaka &nbsp;|&nbsp; ⑦ Dormy Inn PREMIUM Namba ANNEX
+</footer>
+
+</body>
+</html>

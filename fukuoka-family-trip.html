@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>福岡親子自由行旅遊手冊</title>
+  <style>
+    :root {
+      --ink: #17211f;
+      --soft: #5f6b66;
+      --paper: #fbf7ef;
+      --cream: #fffaf1;
+      --teal: #176b67;
+      --sea: #2689a7;
+      --coral: #d35f45;
+      --gold: #d5a137;
+      --leaf: #3f7b4d;
+      --night: #102025;
+      --line: rgba(23, 33, 31, 0.14);
+      --shadow: 0 20px 56px rgba(22, 39, 38, 0.14);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(251, 247, 239, 0.15), rgba(251, 247, 239, 1) 760px),
+        var(--paper);
+      font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif TC", Georgia, serif;
+      line-height: 1.66;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    .page { overflow: hidden; }
+
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: grid;
+      align-items: end;
+      isolation: isolate;
+      color: white;
+      background: var(--night);
+    }
+
+    .hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(7, 20, 22, 0.88), rgba(7, 20, 22, 0.36) 58%, rgba(7, 20, 22, 0.12)),
+        linear-gradient(0deg, rgba(7, 20, 22, 0.88), rgba(7, 20, 22, 0.04) 52%);
+    }
+
+    .hero-content,
+    section,
+    .band-inner {
+      width: min(1180px, calc(100% - 42px));
+      margin: 0 auto;
+    }
+
+    .hero-content { padding: 112px 0 76px; }
+
+    .eyebrow,
+    .kicker {
+      font: 900 0.78rem/1.2 "Avenir Next", "Gill Sans", sans-serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      color: rgba(255, 255, 255, 0.84);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    h1, h2, h3 { margin: 0; letter-spacing: 0; text-wrap: pretty; }
+
+    h1 {
+      max-width: 850px;
+      font-size: clamp(2.8rem, 8vw, 7rem);
+      line-height: 0.96;
+      font-weight: 900;
+    }
+
+    .hero-lede {
+      max-width: 760px;
+      margin: 26px 0 0;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: clamp(1.04rem, 2.2vw, 1.42rem);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin-top: 44px;
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero-grid div {
+      min-height: 102px;
+      padding: 18px;
+      background: rgba(16, 32, 37, 0.42);
+    }
+
+    .hero-grid b {
+      display: block;
+      color: white;
+      font: 900 1.02rem/1.2 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .hero-grid span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.92rem;
+    }
+
+    section { padding: 78px 0; }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.76fr) minmax(280px, 0.44fr);
+      gap: 42px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .kicker { color: var(--coral); }
+
+    h2 {
+      margin-top: 8px;
+      font-size: clamp(2rem, 4.4vw, 4.1rem);
+      line-height: 1.03;
+    }
+
+    .section-head p,
+    .lead {
+      margin: 0;
+      color: var(--soft);
+      font-size: 1.02rem;
+    }
+
+    .recommend {
+      display: grid;
+      grid-template-columns: 0.64fr 1.36fr;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .recommend .stamp {
+      display: grid;
+      place-items: center;
+      padding: 36px;
+      color: white;
+      background: var(--teal);
+      text-align: center;
+      font: 900 1.9rem/1.12 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .stamp span {
+      display: block;
+      margin-top: 12px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.96rem;
+    }
+
+    .recommend-copy { padding: 32px 36px; }
+    .recommend-copy h3 { font-size: 1.85rem; margin-bottom: 10px; }
+    .recommend-copy p { margin: 0; color: var(--soft); }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .tag {
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      background: var(--paper);
+      font: 900 0.82rem/1 "Avenir Next", sans-serif;
+    }
+
+    .map-layout {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .fukuoka-map {
+      position: relative;
+      min-height: 640px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 28% 40%, rgba(38, 137, 167, 0.15) 0 16%, transparent 17%),
+        radial-gradient(circle at 70% 72%, rgba(211, 95, 69, 0.13) 0 15%, transparent 16%),
+        linear-gradient(145deg, #fffaf1, #eaf4ee);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .fukuoka-map svg,
+    .day-map svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .fukuoka-map path,
+    .day-map path {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .fukuoka-map .subway { stroke: var(--sea); stroke-width: 8; }
+    .fukuoka-map .rail { stroke: var(--teal); stroke-width: 6; stroke-dasharray: 12 10; }
+    .fukuoka-map .tour { stroke: var(--coral); stroke-width: 5; stroke-dasharray: 6 12; }
+
+    .pin {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      min-width: 84px;
+      padding: 9px 12px;
+      border: 1px solid rgba(23, 33, 31, 0.15);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 26px rgba(22, 39, 38, 0.12);
+      text-align: center;
+      white-space: nowrap;
+      font: 900 0.83rem/1 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .pin small {
+      display: block;
+      margin-top: 4px;
+      color: var(--soft);
+      font: 800 0.65rem/1 "Avenir Next", sans-serif;
+    }
+
+    .p-airport { left: 58%; top: 76%; }
+    .p-hakata { left: 52%; top: 63%; }
+    .p-tenjin { left: 42%; top: 54%; }
+    .p-ohori { left: 31%; top: 48%; }
+    .p-tower { left: 18%; top: 40%; }
+    .p-dazaifu { left: 74%; top: 84%; }
+    .p-itoshima { left: 12%; top: 58%; }
+    .p-yanagawa { left: 72%; top: 96%; }
+    .p-huis { left: 18%; top: 88%; }
+
+    .map-note {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      bottom: 24px;
+      padding: 16px 18px;
+      border-top: 1px solid var(--line);
+      background: rgba(255, 250, 241, 0.78);
+      backdrop-filter: blur(12px);
+      color: var(--soft);
+      font-size: 0.94rem;
+    }
+
+    .fact-stack {
+      display: grid;
+      gap: 15px;
+      align-content: start;
+    }
+
+    .fact {
+      padding: 22px;
+      border-left: 5px solid var(--teal);
+      background: white;
+      box-shadow: 0 12px 34px rgba(22, 39, 38, 0.08);
+    }
+
+    .fact:nth-child(2) { border-color: var(--sea); }
+    .fact:nth-child(3) { border-color: var(--gold); }
+    .fact:nth-child(4) { border-color: var(--coral); }
+
+    .fact strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font: 900 1rem/1.22 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .fact p {
+      margin: 0;
+      color: var(--soft);
+      font-size: 0.96rem;
+    }
+
+    .days {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .day-card {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--cream);
+      box-shadow: 0 16px 42px rgba(22, 39, 38, 0.1);
+      overflow: hidden;
+    }
+
+    .day-card header {
+      padding: 22px;
+      color: white;
+      background: var(--night);
+    }
+
+    .day-card:nth-child(2) header { background: var(--coral); }
+    .day-card:nth-child(3) header { background: var(--teal); }
+    .day-card:nth-child(4) header { background: var(--sea); }
+    .day-card:nth-child(5) header { background: #6e5430; }
+    .day-card:nth-child(6) header { color: var(--ink); background: var(--gold); }
+
+    .day-card .label {
+      display: block;
+      margin-bottom: 10px;
+      font: 900 0.74rem/1 "Avenir Next", sans-serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.78;
+    }
+
+    .day-card h3 { font-size: 1.32rem; line-height: 1.18; }
+
+    .day-card ol {
+      flex: 1;
+      margin: 0;
+      padding: 18px 22px 12px;
+      list-style: none;
+    }
+
+    .day-card li {
+      display: grid;
+      grid-template-columns: 68px 1fr;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(23, 33, 31, 0.08);
+      color: var(--soft);
+      font-size: 0.93rem;
+    }
+
+    .day-card li:last-child { border-bottom: 0; }
+    .day-card b { color: var(--coral); font: 900 0.76rem/1.2 "Avenir Next", sans-serif; }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .flow-card {
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      min-height: 360px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: 0 16px 42px rgba(22, 39, 38, 0.09);
+      overflow: hidden;
+    }
+
+    .day-map {
+      position: relative;
+      min-height: 360px;
+      background: linear-gradient(145deg, #fef8ee, #e8f3ee);
+    }
+
+    .day-map path { stroke: var(--teal); stroke-width: 5; stroke-dasharray: 10 9; }
+    .day-map .alt { stroke: var(--coral); stroke-width: 4; }
+
+    .dot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      background: var(--teal);
+      border: 3px solid white;
+      box-shadow: 0 8px 20px rgba(22, 39, 38, 0.18);
+      font: 900 0.78rem/1 "Avenir Next", sans-serif;
+    }
+
+    .flow-copy { padding: 24px; }
+    .flow-copy h3 { font-size: 1.38rem; margin-bottom: 10px; }
+    .flow-copy p { margin: 0 0 14px; color: var(--soft); font-size: 0.96rem; }
+
+    .steps {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 10px;
+      padding: 10px 0;
+      border-top: 1px solid rgba(23, 33, 31, 0.1);
+      color: var(--soft);
+      font-size: 0.92rem;
+    }
+
+    .step b {
+      color: var(--coral);
+      font: 900 0.75rem/1.2 "Avenir Next", sans-serif;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .guide-card {
+      min-height: 100%;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: 0 14px 36px rgba(22, 39, 38, 0.08);
+    }
+
+    .guide-card .mark {
+      display: inline-block;
+      margin-bottom: 14px;
+      color: var(--coral);
+      font: 900 0.74rem/1 "Avenir Next", sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .guide-card h3 { font-size: 1.32rem; line-height: 1.2; margin-bottom: 10px; }
+    .guide-card p { margin: 0; color: var(--soft); font-size: 0.96rem; }
+
+    .band {
+      width: 100%;
+      margin: 28px 0;
+      color: white;
+      background: var(--night);
+    }
+
+    .band-inner {
+      padding: 72px 0;
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .band .kicker { color: #f0c16b; }
+    .band h2 { color: white; }
+    .band p { color: rgba(255, 255, 255, 0.78); }
+
+    .ticket-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .ticket {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 16px;
+      padding: 16px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .ticket b {
+      color: #f0c16b;
+      font: 900 0.9rem/1.2 "Avenir Next", sans-serif;
+    }
+
+    .ticket span {
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.94rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .list-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: 0 14px 38px rgba(22, 39, 38, 0.08);
+      overflow: hidden;
+    }
+
+    .list-panel header {
+      padding: 22px 24px;
+      color: white;
+      background: var(--teal);
+    }
+
+    .list-panel:nth-child(2) header { color: var(--ink); background: var(--gold); }
+    .list-panel h3 { font-size: 1.44rem; line-height: 1.18; }
+
+    .list-panel ul {
+      margin: 0;
+      padding: 22px 24px 24px 42px;
+      color: var(--soft);
+    }
+
+    .list-panel li + li { margin-top: 12px; }
+
+    .sources {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .sources a {
+      display: block;
+      min-height: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--ink);
+      text-decoration: none;
+      font: 900 0.9rem/1.34 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .sources a:hover { color: var(--coral); border-color: rgba(211, 95, 69, 0.42); }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .section-head,
+      .recommend,
+      .map-layout,
+      .band-inner,
+      .two-col,
+      .flow-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid { grid-template-columns: repeat(2, 1fr); }
+      .days, .cards, .flow-grid, .sources { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .hero-content,
+      section,
+      .band-inner {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .hero { min-height: 86vh; }
+      .hero-content { padding: 96px 0 42px; }
+      .hero-grid { grid-template-columns: 1fr; margin-top: 30px; }
+      section { padding: 54px 0; }
+
+      .fukuoka-map { min-height: 680px; }
+      .pin { min-width: 70px; padding: 8px 9px; font-size: 0.71rem; }
+      .p-huis { left: 22%; top: 88%; }
+      .p-yanagawa { left: 70%; top: 96%; }
+
+      .day-card li { grid-template-columns: 62px 1fr; }
+      .ticket { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <img src="assets/fukuoka-family-guide.png" alt="福岡親子自由行主視覺，包含博多天神購物、福岡塔、大濠公園、太宰府與糸島海岸">
+      <div class="hero-content">
+        <div class="eyebrow">Fukuoka Family Guidebook</div>
+        <h1>福岡親子自由行旅遊手冊</h1>
+        <p class="hero-lede">兩位大人、一位 15 歲女生、一位 12 歲男生。每天 11 點起床、中午出門；以福岡市區連住為主，搭配太宰府、糸島、遠郊一日遊與購物美食。</p>
+        <div class="hero-grid" aria-label="旅行設定">
+          <div><b>主方案</b><span>6 天 5 夜，福岡市區 5 晚不換飯店</span></div>
+          <div><b>交通</b><span>地鐵、JR、西鐵、計程車；糸島用包車或一日遊</span></div>
+          <div><b>青少年亮點</b><span>teamLab Forest、E・ZO、LaLaport Gundam、海邊拍照</span></div>
+          <div><b>素食策略</b><span>市區先安排 vegan 餐，拉麵屋台另作分流</span></div>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Leader's Verdict</div>
+          <h2>領隊先講結論</h2>
+        </div>
+        <p>福岡非常適合晚起家庭。機場近、市區集中、晚上好逛，遠一點的景點則交給包車或當地一日遊，這樣自由行仍保有彈性。</p>
+      </div>
+      <div class="recommend">
+        <div class="stamp">首選<span>6 天 5 夜</span></div>
+        <div class="recommend-copy">
+          <h3>福岡市區 5 晚不換飯店 + 兩個遠郊重點</h3>
+          <p>住博多站或天神。Day 1-3 先熟悉市區與太宰府，Day 4 排糸島海邊包車或一日遊，Day 5 視興趣選豪斯登堡、柳川門司港或市區深度，Day 6 輕鬆補買回台灣。</p>
+          <div class="tags">
+            <span class="tag">少換飯店</span>
+            <span class="tag">中午出門友善</span>
+            <span class="tag">購物充足</span>
+            <span class="tag">有遠郊一日遊</span>
+            <span class="tag">素食可安排</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Overview Map</div>
+          <h2>先看懂福岡地圖與動線</h2>
+        </div>
+        <p>福岡機場離市區非常近；市區核心是博多、天神、大濠公園、百道海濱。遠郊主要看三個方向：東南太宰府、正西糸島、南邊柳川或更遠的豪斯登堡。</p>
+      </div>
+      <div class="map-layout">
+        <div class="fukuoka-map" aria-label="福岡總覽地圖">
+          <svg viewBox="0 0 920 700" role="img" aria-label="福岡機場、博多、天神、大濠公園、福岡塔、太宰府、糸島、柳川、豪斯登堡概念路線">
+            <path class="subway" d="M548 530 C518 490 472 445 410 392 C366 355 322 327 270 300"></path>
+            <path class="subway" d="M410 392 C370 372 330 350 286 335"></path>
+            <path class="rail" d="M548 530 C610 590 660 638 710 665"></path>
+            <path class="tour" d="M410 392 C305 440 202 490 110 530"></path>
+            <path class="tour" d="M548 530 C610 594 654 654 705 690"></path>
+            <path class="tour" d="M410 392 C320 505 240 610 160 655"></path>
+          </svg>
+          <div class="pin p-airport">福岡機場<small>FUK</small></div>
+          <div class="pin p-hakata">博多站<small>Hakata</small></div>
+          <div class="pin p-tenjin">天神<small>Tenjin</small></div>
+          <div class="pin p-ohori">大濠公園<small>Ohori</small></div>
+          <div class="pin p-tower">福岡塔<small>Momochi</small></div>
+          <div class="pin p-dazaifu">太宰府<small>Dazaifu</small></div>
+          <div class="pin p-itoshima">糸島<small>Itoshima</small></div>
+          <div class="pin p-yanagawa">柳川<small>Yanagawa</small></div>
+          <div class="pin p-huis">豪斯登堡<small>Huis Ten Bosch</small></div>
+          <div class="map-note">概念圖：藍線為市區地鐵/短程移動，綠線為西鐵/JR 方向，珊瑚色虛線代表適合包車或當地一日遊的遠郊動線。</div>
+        </div>
+        <div class="fact-stack">
+          <article class="fact">
+            <strong>福岡機場到市區</strong>
+            <p>官方與 JNTO 資料顯示，國內線地鐵到博多約 5 分鐘、到天神約 11 分鐘。國際線旅客需先搭免費接駁到國內線/地鐵站。</p>
+          </article>
+          <article class="fact">
+            <strong>住博多或天神</strong>
+            <p>博多適合 JR 移動與機場進出；天神適合購物、晚餐、百貨與地下街。你們重視購物，我會稍偏天神/大名。</p>
+          </article>
+          <article class="fact">
+            <strong>糸島不要硬搭公車串點</strong>
+            <p>糸島海邊、咖啡、夫婦岩、櫻井二見浦分散，公共交通能到但不順。家庭四人包車或一日遊體感會好很多。</p>
+          </article>
+          <article class="fact">
+            <strong>豪斯登堡適合 6 天 5 夜</strong>
+            <p>主題樂園、歐風街景與夜間燈飾很適合青少年，但來回較遠。5 天 4 夜且中午才出門，我會先放棄。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Daily Plan</div>
+          <h2>6 天 5 夜每日行程</h2>
+        </div>
+        <p>每一天只抓一個主題，不把福岡排成趕場團。中午出門、下午玩、晚上購物吃飯，是這趟的節奏。</p>
+      </div>
+      <div class="days">
+        <article class="day-card">
+          <header><span class="label">Day 1</span><h3>抵達福岡，博多與 Canal City</h3></header>
+          <ol>
+            <li><b>午後</b><span>FUK 國際線 → 接駁 → 地鐵或計程車進市區</span></li>
+            <li><b>傍晚</b><span>飯店放行李，博多站 AMU/Hankyu 先逛</span></li>
+            <li><b>晚上</b><span>Canal City 水舞、晚餐、天神/中洲散步</span></li>
+          </ol>
+        </article>
+        <article class="day-card">
+          <header><span class="label">Day 2</span><h3>大濠公園、福岡塔、teamLab</h3></header>
+          <ol>
+            <li><b>12:00</b><span>出門午餐，地鐵往大濠公園</span></li>
+            <li><b>下午</b><span>大濠公園、福岡城跡、百道海濱、福岡塔</span></li>
+            <li><b>晚上</b><span>BOSS E・ZO、teamLab Forest、天神宵夜</span></li>
+          </ol>
+        </article>
+        <article class="day-card">
+          <header><span class="label">Day 3</span><h3>太宰府 + 天神購物</h3></header>
+          <ol>
+            <li><b>12:00</b><span>天神搭西鐵往太宰府，約 35 分</span></li>
+            <li><b>下午</b><span>太宰府天滿宮、參道梅枝餅、九州國立博物館</span></li>
+            <li><b>晚上</b><span>回天神地下街、PARCO、Iwataya、Daimaru</span></li>
+          </ol>
+        </article>
+        <article class="day-card">
+          <header><span class="label">Day 4</span><h3>糸島海邊包車或一日遊</h3></header>
+          <ol>
+            <li><b>中午</b><span>飯店出發，包車/一日遊最順</span></li>
+            <li><b>下午</b><span>夫婦岩、海邊咖啡、芥屋大門或櫻井神社</span></li>
+            <li><b>晚上</b><span>回福岡市區，天神/大名晚餐購物</span></li>
+          </ol>
+        </article>
+        <article class="day-card">
+          <header><span class="label">Day 5</span><h3>遠郊選配：豪斯登堡或柳川</h3></header>
+          <ol>
+            <li><b>選 A</b><span>豪斯登堡一日：青少年、夜景、主題樂園</span></li>
+            <li><b>選 B</b><span>柳川遊船 + 太宰府/門司港類一日遊</span></li>
+            <li><b>選 C</b><span>不跑遠：LaLaport、Gundam、博多補買</span></li>
+          </ol>
+        </article>
+        <article class="day-card">
+          <header><span class="label">Day 6</span><h3>LaLaport 或博多站補買回台</h3></header>
+          <ol>
+            <li><b>中午</b><span>退房寄行李，LaLaport 或博多站伴手禮</span></li>
+            <li><b>下午</b><span>回飯店取行李，往機場</span></li>
+            <li><b>機場</b><span>國際線報到，最後補買明太子、甜點、零食</span></li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Station Flows</div>
+          <h2>站點流程：每天怎麼走</h2>
+        </div>
+        <p>這一區是領隊手板：每一天的站點順序、交通方式與大概移動時間。實際班次請出發前用 Google Maps/NAVITIME 再查一次。</p>
+      </div>
+      <div class="flow-grid">
+        <article class="flow-card">
+          <div class="day-map">
+            <svg viewBox="0 0 360 360"><path d="M96 274 C132 230 168 194 205 160 C226 141 246 124 270 96"></path></svg>
+            <div class="dot" style="left:26%;top:76%;">1</div>
+            <div class="dot" style="left:48%;top:55%;">2</div>
+            <div class="dot" style="left:63%;top:42%;">3</div>
+            <div class="dot" style="left:75%;top:27%;">4</div>
+          </div>
+          <div class="flow-copy">
+            <h3>Day 1：機場進城</h3>
+            <p>國際線先搭免費接駁到國內線地鐵站，或四人行李多時直接計程車。第一天不排遠點，讓大家進入旅行節奏。</p>
+            <div class="steps">
+              <div class="step"><b>FUK</b><span>國際線 → 接駁到地鐵站，抓 20-30 分緩衝</span></div>
+              <div class="step"><b>5-11分</b><span>地鐵到博多約 5 分、天神約 11 分</span></div>
+              <div class="step"><b>晚上</b><span>博多站或 Canal City，步行/計程車短移動</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="flow-card">
+          <div class="day-map">
+            <svg viewBox="0 0 360 360"><path d="M280 270 C238 230 198 194 165 160 C140 135 115 112 80 92"></path><path class="alt" d="M165 160 C130 190 104 220 80 260"></path></svg>
+            <div class="dot" style="left:78%;top:75%;">1</div>
+            <div class="dot" style="left:46%;top:44%;">2</div>
+            <div class="dot" style="left:22%;top:26%;">3</div>
+            <div class="dot" style="left:22%;top:72%;">4</div>
+          </div>
+          <div class="flow-copy">
+            <h3>Day 2：大濠到百道</h3>
+            <p>先地鐵到大濠公園，下午轉往福岡塔與百道海濱，晚上進 BOSS E・ZO 的 teamLab Forest。</p>
+            <div class="steps">
+              <div class="step"><b>地鐵</b><span>博多/天神 → 大濠公園，約 10-15 分</span></div>
+              <div class="step"><b>轉乘</b><span>大濠 → 福岡塔可用公車或計程車，四人計程車省腳力</span></div>
+              <div class="step"><b>晚上</b><span>teamLab Forest 通常營業到晚上，適合晚出門家庭</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="flow-card">
+          <div class="day-map">
+            <svg viewBox="0 0 360 360"><path d="M92 86 C125 132 162 178 206 224 C226 244 246 260 278 282"></path></svg>
+            <div class="dot" style="left:26%;top:24%;">1</div>
+            <div class="dot" style="left:47%;top:50%;">2</div>
+            <div class="dot" style="left:77%;top:78%;">3</div>
+          </div>
+          <div class="flow-copy">
+            <h3>Day 3：天神到太宰府</h3>
+            <p>太宰府很適合學生家庭，參道好吃好逛。官方路線常把太宰府與天神購物排成一日，正合你們需求。</p>
+            <div class="steps">
+              <div class="step"><b>西鐵</b><span>西鐵福岡（天神）→ 太宰府，約 35 分</span></div>
+              <div class="step"><b>步行</b><span>太宰府站 → 參道 → 天滿宮，慢慢走 10-15 分</span></div>
+              <div class="step"><b>回程</b><span>回天神地下街與百貨，不再換區</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="flow-card">
+          <div class="day-map">
+            <svg viewBox="0 0 360 360"><path d="M292 100 C230 122 176 162 128 214 C108 236 88 260 72 292"></path></svg>
+            <div class="dot" style="left:81%;top:28%;">1</div>
+            <div class="dot" style="left:54%;top:45%;">2</div>
+            <div class="dot" style="left:34%;top:60%;">3</div>
+            <div class="dot" style="left:20%;top:81%;">4</div>
+          </div>
+          <div class="flow-copy">
+            <h3>Day 4：糸島遠郊</h3>
+            <p>糸島是最適合交給包車或一日遊的日子。交通重點不是能不能到，而是能不能舒服地串完海邊與咖啡點。</p>
+            <div class="steps">
+              <div class="step"><b>包車</b><span>飯店出發，司機串景點，家庭四人最省心</span></div>
+              <div class="step"><b>電車</b><span>若自行前往，可 JR 到筑前前原，再轉公車/計程車</span></div>
+              <div class="step"><b>回程</b><span>夕陽後回福岡，晚上天神吃飯購物</span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Attractions</div>
+          <h2>景點介紹：每一站看什麼</h2>
+        </div>
+        <p>這裡用導遊口吻幫你抓重點。每個景點都有「為什麼去」與「怎麼停留」，避免到了現場才不知道看什麼。</p>
+      </div>
+      <div class="cards">
+        <article class="guide-card"><span class="mark">Hakata Station</span><h3>博多站</h3><p>交通與補給核心。AMU Plaza、博多阪急、地下街、伴手禮、餐廳集中。若住博多，適合第一天與最後一天處理交通、退稅、買伴手禮。</p></article>
+        <article class="guide-card"><span class="mark">Canal City Hakata</span><h3>Canal City</h3><p>娛樂型商場，有水舞、投影、餐廳與購物。抵達日晚上來剛好，不用太多交通，也能讓孩子進入旅行感。</p></article>
+        <article class="guide-card"><span class="mark">Tenjin</span><h3>天神與大名</h3><p>福岡購物主場：地下街、百貨、PARCO、Solaria、大名小店。下雨、太熱、晚出門都好處理，是你們家每天晚上的安全牌。</p></article>
+        <article class="guide-card"><span class="mark">Ohori Park</span><h3>大濠公園與福岡城跡</h3><p>湖邊散步、咖啡、福岡城跡，節奏鬆。官方介紹湖周步道約 2 公里，很適合下午慢慢走，不像寺廟景點那樣趕閉門。</p></article>
+        <article class="guide-card"><span class="mark">Momochi</span><h3>福岡塔、百道海濱</h3><p>城市海邊與夜景。下午到福岡塔，傍晚在海濱散步，晚上接 teamLab Forest，動線漂亮又適合青少年拍照。</p></article>
+        <article class="guide-card"><span class="mark">teamLab Forest</span><h3>BOSS E・ZO teamLab Forest</h3><p>沉浸式互動展，官方列於 BOSS E・ZO FUKUOKA 5F。營業到晚間，對中午出門家庭很友善，旁邊還有 PayPay Dome。</p></article>
+        <article class="guide-card"><span class="mark">Dazaifu</span><h3>太宰府天滿宮</h3><p>學生家庭很適合，主打學業祈願、參道小吃與梅枝餅。2026 出發前需確認本殿大修狀態；即使本殿施工，參道與氛圍仍值得。</p></article>
+        <article class="guide-card"><span class="mark">Itoshima</span><h3>糸島海邊</h3><p>海景、咖啡、夫婦岩鳥居、夕陽與拍照。缺點是景點分散，這一天不建議靠市區交通邏輯硬跑，包車/一日遊會舒服很多。</p></article>
+        <article class="guide-card"><span class="mark">LaLaport</span><h3>LaLaport Fukuoka</h3><p>家庭型商場與等身大 RX-93ff ν Gundam。適合雨天、最後一天、或不跑豪斯登堡時的青少年備案。</p></article>
+      </div>
+    </section>
+
+    <div class="band">
+      <div class="band-inner">
+        <div>
+          <div class="kicker">Local Day Tours</div>
+          <h2>網路上有賣福岡當地一日遊嗎？有，而且很適合補遠點</h2>
+          <p>自由行不代表每一天都要自己研究轉車。你們家四人、晚出門、有人吃素，遠郊點我會建議用「當地一日遊」或「包車」解決，尤其是糸島、柳川、湯布院/別府、豪斯登堡。</p>
+        </div>
+        <div class="ticket-list">
+          <div class="ticket"><b>糸島半日/一日</b><span>Klook、KKday、VELTRA 常見有糸島、櫻井二見浦、夫婦岩、海邊咖啡類行程。適合你們家，因為公共交通串點較麻煩。</span></div>
+          <div class="ticket"><b>太宰府 + 柳川</b><span>常見組合是太宰府天滿宮、柳川遊船、鰻魚飯街區。素食者要特別注意餐食，可選不含餐或先問餐廳。</span></div>
+          <div class="ticket"><b>湯布院/別府</b><span>KKday/Klook 常有九州溫泉一日遊。車程長，但想看九州溫泉風景可考慮；中午才出門則不適合。</span></div>
+          <div class="ticket"><b>豪斯登堡</b><span>可以買門票或交通套票，也有從福岡出發的交通/一日方案。若只玩 5 天 4 夜，除非很想去，否則不建議硬塞。</span></div>
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Transport</div>
+          <h2>交通資訊與時間感</h2>
+        </div>
+        <p>以下是排程用的時間感，實際班次請以出發當天為準。福岡市區交通很短，但遠郊一日遊要把集合、休息、塞車都算進去。</p>
+      </div>
+      <div class="two-col">
+        <article class="list-panel">
+          <header><h3>自由行交通</h3></header>
+          <ul>
+            <li><strong>FUK → 博多/天神：</strong>國內線地鐵到博多約 5 分、天神約 11 分；國際線先搭免費接駁。</li>
+            <li><strong>博多/天神 → 大濠公園：</strong>地鐵約 10-15 分，出站後步行。</li>
+            <li><strong>大濠 → 福岡塔/百道：</strong>公車或計程車；四人計程車可省腳力。</li>
+            <li><strong>天神 → 太宰府：</strong>西鐵約 35 分，適合半日到下午行程。</li>
+            <li><strong>福岡 → 糸島：</strong>JR 到筑前前原後轉公車/計程車；若要串海邊點，包車/一日遊較好。</li>
+          </ul>
+        </article>
+        <article class="list-panel">
+          <header><h3>開車與包車</h3></header>
+          <ul>
+            <li><strong>市區不建議自駕：</strong>博多、天神停車與單行道會降低效率。</li>
+            <li><strong>糸島適合包車：</strong>路線分散，家庭四人包車比自己研究轉乘舒服。</li>
+            <li><strong>豪斯登堡/湯布院：</strong>車程較長，若自己租車要考慮右駕、靠左、停車、還車與疲勞。</li>
+            <li><strong>日本交通規則：</strong>靠左、行人優先、紅色倒三角「止まれ」必須完全停車。</li>
+            <li><strong>晚出門提醒：</strong>一日遊通常早集合；如果你們一定 11 點起床，包車比團體巴士更合拍。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Food & Shopping</div>
+          <h2>美食、素食與購物建議</h2>
+        </div>
+        <p>福岡名物很多是肉湯或魚介，素食者要先規劃。購物則很強，天神、博多、Canal City、LaLaport 可以分散安排。</p>
+      </div>
+      <div class="two-col">
+        <article class="list-panel">
+          <header><h3>必吃與分流</h3></header>
+          <ul>
+            <li><strong>非素食者：</strong>豚骨拉麵、明太子、水炊雞鍋、牛腸鍋、屋台都很有福岡感。</li>
+            <li><strong>素食者：</strong>福岡官方與 Crossroad Fukuoka 有 vegetarian/vegan-friendly guide；建議先訂 vegan cafe 或百貨餐廳。</li>
+            <li><strong>點餐提醒：</strong>no meat, no fish, no seafood, no bonito flakes, no dashi。拉麵與屋台通常不容易改成素。</li>
+            <li><strong>家庭策略：</strong>一餐大家吃名物，一餐安排素食友善；百貨地下食品街可各買各的。</li>
+          </ul>
+        </article>
+        <article class="list-panel">
+          <header><h3>購物路線</h3></header>
+          <ul>
+            <li><strong>天神地下街：</strong>雨天、夏天、晚出門都舒服，連接地鐵與百貨。</li>
+            <li><strong>天神百貨圈：</strong>Iwataya、Daimaru、Mitsukoshi、PARCO、Solaria，主力購物區。</li>
+            <li><strong>博多站：</strong>AMU Plaza、阪急、伴手禮、交通方便。</li>
+            <li><strong>Canal City：</strong>娛樂型購物與水舞，適合抵達日晚上。</li>
+            <li><strong>LaLaport：</strong>Gundam、家庭商場、雨天備案；Marinoa City 已於 2024/8/18 起暫時關閉重建，舊攻略要避開。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Short Plan</div>
+          <h2>5 天 4 夜壓縮版</h2>
+        </div>
+        <p>如果只能 5 天 4 夜，就不要塞豪斯登堡。保留福岡市區、太宰府、糸島與購物，整體會舒服很多。</p>
+      </div>
+      <div class="cards">
+        <article class="guide-card"><span class="mark">Day 1</span><h3>抵達 → 博多/Canal City</h3><p>進市區很快，第一天主打熟悉飯店周邊、吃飯、購物，不排遠點。</p></article>
+        <article class="guide-card"><span class="mark">Day 2</span><h3>大濠、福岡塔、teamLab</h3><p>午後慢行到夜晚，室內外兼具，最適合晚起家庭。</p></article>
+        <article class="guide-card"><span class="mark">Day 3</span><h3>太宰府 + 天神購物</h3><p>半日文化、半日購物。學生家庭去太宰府很有主題。</p></article>
+        <article class="guide-card"><span class="mark">Day 4</span><h3>糸島一日遊或包車</h3><p>把遠郊交給當地 tour/包車，省掉轉車和等公車。</p></article>
+        <article class="guide-card"><span class="mark">Day 5</span><h3>LaLaport 或博多補買 → FUK</h3><p>最後一天不要跑遠，買伴手禮與整理行李最重要。</p></article>
+        <article class="guide-card"><span class="mark">Skip</span><h3>豪斯登堡留給 6 天版</h3><p>5 天 4 夜且中午出門，豪斯登堡來回太吃時間。</p></article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">References</div>
+          <h2>行前確認資料來源</h2>
+        </div>
+        <p>票券、一日遊、餐廳與營業時間會變動。出發前請以官方網站與平台實際日期確認。</p>
+      </div>
+      <div class="sources">
+        <a href="https://www.fukuoka-airport.jp/en/access/index.html">Fukuoka Airport Access</a>
+        <a href="https://www.japan.travel/en/plan/airport-access/fukuoka-airport/">JNTO Fukuoka Airport</a>
+        <a href="https://gofukuoka.jp/en/spots/detail/257499">Fukuoka Official: teamLab Forest</a>
+        <a href="https://www.gofukuoka.jp/spots/detail/26988">Fukuoka Official: Dazaifu</a>
+        <a href="https://gofukuoka.jp/route/detail/b52dd2dd-a009-4291-ae76-7bff8f61144a">Fukuoka Official: Dazaifu Route</a>
+        <a href="https://gofukuoka.jp/en/articles/detail/c709e062-bb80-4818-8cd4-2b3fe5e1af07">Fukuoka Official: Ohori Park</a>
+        <a href="https://www.crossroadfukuoka.jp/en/articles/vegetarian-muslim">Fukuoka Vegetarian/Vegan Guide</a>
+        <a href="https://canalcity.co.jp/english/about/">Canal City Hakata</a>
+        <a href="https://www.mitsuifudosan.co.jp/english/corporate/news/2024/0516/">Marinoa City Closure Notice</a>
+        <a href="https://www.klook.com/en-US/city/41-fukuoka-things-to-do/10-tag/">Klook Fukuoka Day Tours</a>
+        <a href="https://www.kkday.com/en-us/product/productlist?keyword=Fukuoka%20day%20tour">KKday Fukuoka Day Tours</a>
+        <a href="https://www.veltra.com/en/asia/japan/fukuoka/">VELTRA Fukuoka Tours</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

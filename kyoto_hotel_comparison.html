@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>京都飯店比較表 2026 · 4人2晚</title>
+<style>
+  :root {
+    --crimson:  #6B1A1A;
+    --deep-red: #8B3030;
+    --cream:    #FAF0E6;
+    --ink:      #1A1A2E;
+    --green:    #2E7D32;
+    --red:      #C62828;
+    --amber:    #E65100;
+    --blue:     #0D47A1;
+    --gray:     #757575;
+    --light:    #F5F0E8;
+    --border:   #DDD0C4;
+    --gold:     #C9A84C;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Noto Sans TC','Microsoft JhengHei',sans-serif; background:#E8DDD0; color:#2C2C2C; font-size:14px; line-height:1.6; }
+
+  header {
+    background: linear-gradient(135deg,#3D0C0C 0%,#6B1A1A 50%,#8B3030 100%);
+    color:white; padding:32px 24px 28px; text-align:center;
+  }
+  header h1 { font-size:1.6rem; font-weight:700; margin-bottom:6px; }
+  header p  { font-size:0.85rem; opacity:0.75; letter-spacing:0.05em; }
+  .legend { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-top:16px; }
+  .legend-item { display:flex; align-items:center; gap:6px; font-size:0.78rem; opacity:0.9; }
+  .dot { width:10px;height:10px;border-radius:50%;display:inline-block; }
+
+  .wrap { max-width:1600px; margin:0 auto; padding:20px; }
+
+  .note-box {
+    background:#FAF0E6; border-left:4px solid #8B3030;
+    border-radius:4px; padding:12px 16px; margin-bottom:20px;
+    font-size:0.82rem; color:#3D0C0C;
+  }
+  .note-box strong { color:#6B1A1A; }
+
+  .table-wrap { overflow-x:auto; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,.12); }
+  table { border-collapse:collapse; width:100%; min-width:1550px; background:white; }
+
+  thead tr:first-child th { background:#3D0C0C; color:white; font-size:0.72rem; letter-spacing:0.08em; padding:10px 12px; text-align:center; }
+  thead tr:nth-child(2) th { background:#6B1A1A; color:#FAF0E6; font-size:0.8rem; padding:12px 10px; text-align:center; border-right:1px solid rgba(255,255,255,.1); }
+
+  td:first-child, th:first-child {
+    position:sticky; left:0; z-index:2;
+    background:#FAF0E6; font-weight:600; color:#3D0C0C;
+    font-size:0.78rem; padding:10px 12px;
+    border-right:2px solid #DDB99E;
+    min-width:130px;
+  }
+  thead tr:first-child th:first-child, thead tr:nth-child(2) th:first-child {
+    background:#3D0C0C; color:rgba(255,255,255,.7);
+  }
+
+  td { padding:9px 10px; text-align:center; border-bottom:1px solid #EEEEEE; border-right:1px solid #F0F0F0; font-size:0.8rem; vertical-align:middle; }
+  tr:hover td { background:#FAF0E6; }
+
+  td:nth-child(even) { background:rgba(0,0,0,.015); }
+  tr:hover td:nth-child(even) { background:#F5E8D8; }
+
+  tr.section-row td { background:#FAE8DC; color:#3D0C0C; font-weight:700; font-size:0.72rem; letter-spacing:0.1em; text-align:left; padding:6px 12px; border-bottom:2px solid #DDB99E; }
+  tr.section-row td:first-child { background:#EECDB5; }
+
+  .ok    { color:var(--green); font-weight:700; }
+  .ng    { color:var(--red);   font-weight:700; }
+  .semi  { color:var(--amber); font-weight:700; }
+  .note  { color:var(--gray);  font-size:0.72rem; }
+
+  .badge { display:inline-block; border-radius:4px; padding:2px 7px; font-size:0.68rem; font-weight:700; margin:2px; white-space:nowrap; }
+  .badge-green   { background:#E8F5E9; color:#1B5E20; }
+  .badge-red     { background:#FFEBEE; color:#B71C1C; }
+  .badge-amber   { background:#FFF3E0; color:#BF360C; }
+  .badge-blue    { background:#E3F2FD; color:#0D47A1; }
+  .badge-purple  { background:#F3E5F5; color:#4A148C; }
+  .badge-gold    { background:#FFF8E1; color:#795548; }
+  .badge-gray    { background:#F5F5F5; color:#424242; }
+  .badge-crimson { background:#FAE8DC; color:#6B1A1A; }
+
+  td.highlight { background:#E8F5E9 !important; }
+  tr:hover td.highlight { background:#C8E6C9 !important; }
+  td.toppick { background:#FFFDE7 !important; }
+  tr:hover td.toppick { background:#FFF9C4 !important; }
+
+  .group-jr     { color:#6B1A1A; font-weight:700; }
+  .group-lhw    { color:#795548; font-weight:700; }
+  .group-dormy  { color:#2E7D32; font-weight:700; }
+  .group-hyatt  { color:#0D47A1; font-weight:700; }
+  .group-mitsui { color:#4A148C; font-weight:700; }
+  .group-ana    { color:#BF360C; font-weight:700; }
+  .group-west   { color:#1B5E20; font-weight:700; }
+  .group-bri    { color:#5D4037; font-weight:700; }
+  .group-daiwa  { color:#1A237E; font-weight:700; }
+
+  .stars { color:#F9A825; font-size:0.9rem; letter-spacing:1px; }
+
+  .footnotes { margin-top:24px; font-size:0.75rem; color:#666; line-height:2; }
+  .footnotes li { margin-left:16px; }
+
+  .rec-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-top:24px; }
+  .rec-card { background:white; border-radius:10px; padding:18px; box-shadow:0 2px 12px rgba(0,0,0,.08); border-top:4px solid var(--deep-red); }
+  .rec-card.gold   { border-top-color: var(--gold); }
+  .rec-card.blue   { border-top-color: #1565C0; }
+  .rec-card.amber  { border-top-color: var(--amber); }
+  .rec-card.green  { border-top-color: #2E7D32; }
+  .rec-card.purple { border-top-color: #6A1B9A; }
+  .rec-card h3 { font-size:0.9rem; margin-bottom:8px; color:#3D0C0C; }
+  .rec-card p  { font-size:0.8rem; color:#555; line-height:1.7; }
+  .rec-card .tag { display:inline-block; background:#FAE8DC; color:#6B1A1A; border-radius:4px; padding:2px 8px; font-size:0.7rem; margin-bottom:8px; font-weight:600; }
+  .rec-card.gold .tag   { background:#FFF8E1; color:#795548; }
+  .rec-card.blue .tag   { background:#E3F2FD; color:#0D47A1; }
+  .rec-card.amber .tag  { background:#FFF3E0; color:#BF360C; }
+  .rec-card.green .tag  { background:#E8F5E9; color:#1B5E20; }
+  .rec-card.purple .tag { background:#F3E5F5; color:#4A148C; }
+
+  .section-title { font-size:1rem; font-weight:700; color:#3D0C0C; margin:28px 0 10px; border-left:4px solid #8B3030; padding-left:10px; }
+
+  .price-table { width:100%; border-collapse:collapse; background:white; border-radius:10px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,.12); }
+  .price-table thead th { background:#3D0C0C; color:white; padding:12px 16px; text-align:center; font-size:0.8rem; }
+  .price-table tbody tr:nth-child(even) { background:#FAF0E6; }
+  .price-table tbody td { padding:10px 14px; border-bottom:1px solid #EEE; font-size:0.82rem; vertical-align:middle; }
+  .price-table tbody tr:hover td { background:#FAE8DC; }
+
+  footer { text-align:center; padding:24px; color:#999; font-size:0.72rem; margin-top:32px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏯 京都飯店比較表 2026</h1>
+  <p>入住條件：4人（2大人+15歲+11歲）· 2026/7/13–15 · 2晚 · 重視交通 + 景觀 + 早餐 + 素食採購</p>
+  <div class="legend">
+    <div class="legend-item"><span class="dot" style="background:#2E7D32"></span>✅ 確認符合</div>
+    <div class="legend-item"><span class="dot" style="background:#E65100"></span>△ 部分符合／需確認</div>
+    <div class="legend-item"><span class="dot" style="background:#C62828"></span>❌ 不符合／無</div>
+    <div class="legend-item"><span class="dot" style="background:#C9A84C"></span>⭐ 此項目最佳</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="note-box">
+  🗺️ <strong>京都旅遊說明：</strong>9間飯店分布三大區域——<strong>京都車站周邊</strong>（①②③⑨）交通最優，KIX Haruka 直達；<strong>河原町・四条・御所</strong>（⑤⑥⑧）深入市中心；<strong>東山・岡崎</strong>（④⑦）貼近寺社景點。<br>
+  ⚠️ <strong>建築高度限制：</strong>京都市區限高 15–31m，觀景與大阪不同——應以「庭園・山景・古都風情」為評分標準，而非城市高樓視角。<br>
+  🚄 <strong>KIX 交通：</strong>JR Haruka 特急 關西空港 → 京都站（約75分 / ¥1,880）。<strong>7/15 移動至難波大阪：</strong>京都站 → JR新快速 → 大阪站 → 地鐵御堂筋線 → 難波（約50分）。
+</div>
+
+<!-- ── 主比較表 ── -->
+<div class="section-title">📊 多面向飯店比較</div>
+<div class="table-wrap">
+<table>
+<thead>
+  <tr>
+    <th>比較項目</th>
+    <th><span class="group-jr">① JR Hotels</span><br>Hotel Granvia Kyoto<br>京都格蘭比亞大飯店</th>
+    <th><span class="group-lhw">② LHW精品</span><br>The Thousand Kyoto<br>ザ・サウザンド京都</th>
+    <th><span class="group-dormy">③ MyStays</span><br>Dormy Inn Premium<br>京都駅前</th>
+    <th><span class="group-hyatt">④ Hyatt</span><br>Hyatt Regency Kyoto<br>ハイアット リージェンシー</th>
+    <th><span class="group-mitsui">⑤ 三井</span><br>Mitsui Garden Hotel<br>京都四条</th>
+    <th><span class="group-ana">⑥ IHG/ANA</span><br>ANA Crowne Plaza<br>京都</th>
+    <th><span class="group-west">⑦ Marriott</span><br>Westin Miyako Kyoto<br>ウェスティン都ホテル</th>
+    <th><span class="group-bri">⑧ 獨立</span><br>Kyoto Brighton Hotel<br>京都ブライトンホテル</th>
+    <th><span class="group-daiwa">⑨ 大和Roynet</span><br>Daiwa Roynet Hotel<br>京都駅前PREMIER</th>
+  </tr>
+  <tr>
+    <th>區域 / 特色</th>
+    <th>車站 · JR直結</th>
+    <th>車站 · 精品5星</th>
+    <th>車站 · 溫泉CP值</th>
+    <th>東山 · 5星文化</th>
+    <th>四条 · 鴨川河畔</th>
+    <th>二条城 · ⚠️待查</th>
+    <th>東山丘陵 · 庭園</th>
+    <th>御所 · 評分9.2</th>
+    <th>車站 · 評分9.0</th>
+  </tr>
+</thead>
+<tbody>
+
+<!-- ─── 基本資訊 ─── -->
+<tr class="section-row"><td colspan="10">📋 基本資訊</td></tr>
+
+<tr>
+  <td>地址 / 最近車站</td>
+  <td>下京区烏丸通塩小路<br><span class="badge badge-crimson">JR京都站 中央口直結</span></td>
+  <td>下京区東塩小路町590<br><span class="badge badge-crimson">JR京都站 徒步3分</span></td>
+  <td>下京区丹波口通七条<br><span class="badge badge-crimson">JR京都站 徒步4分</span></td>
+  <td>東山区三十三間堂廻り<br><span class="badge badge-blue">市バス博物館前 3分</span></td>
+  <td>下京区四条通小橋西<br><span class="badge badge-purple">阪急烏丸駅 直結</span></td>
+  <td>中京区二条城前堀川<br><span class="badge badge-amber">地鐵二条城前 直結</span></td>
+  <td>東山区粟田口三条坊<br><span class="badge badge-blue">地鐵蹴上 3分</span></td>
+  <td>上京区新町通中立売<br><span class="badge badge-gray">地鐵丸太町 8分</span></td>
+  <td>下京区東塩小路町707-2<br><span class="badge badge-crimson">JR京都站 地下街直通 ~5分</span><br><span class="badge badge-gold">京都塔 100m</span></td>
+</tr>
+
+<tr>
+  <td>品牌 / 集團</td>
+  <td><span class="badge badge-crimson">JR Hotels &amp; Resorts</span></td>
+  <td><span class="badge badge-gold">Leading Hotels of the World</span></td>
+  <td><span class="badge badge-green">MyStays Hotel Group</span></td>
+  <td><span class="badge badge-blue">Hyatt Hotels &amp; Resorts</span></td>
+  <td><span class="badge badge-purple">三井不動産ホテルマネジメント</span></td>
+  <td><span class="badge badge-amber">IHG / ANA Hotels</span></td>
+  <td><span class="badge badge-green">Marriott International / Westin</span></td>
+  <td><span class="badge badge-gray">獨立飯店（京都系）</span></td>
+  <td><span class="badge badge-blue">Daiwa Roynet Hotels PREMIER<br>（大和ハウスグループ）</span></td>
+</tr>
+
+<tr>
+  <td>星級 / Booking評分</td>
+  <td>⭐⭐⭐⭐ / ~8.5</td>
+  <td class="highlight">⭐⭐⭐⭐⭐ / <strong>9.4</strong></td>
+  <td>⭐⭐⭐ / ~8.7</td>
+  <td>⭐⭐⭐⭐⭐ / ~8.8</td>
+  <td>⭐⭐⭐⭐ / ~8.5</td>
+  <td>⭐⭐⭐⭐ / 8.4<br><span class="note">⚠️Booking無法預訂</span></td>
+  <td>⭐⭐⭐⭐⭐ / ~8.2</td>
+  <td>⭐⭐⭐⭐ / <strong>9.2</strong></td>
+  <td class="highlight">⭐⭐⭐⭐ / <strong>9.0</strong><br><span class="note">3,698則評語</span></td>
+</tr>
+
+<tr>
+  <td>樓層數 / 客房數</td>
+  <td>14F / 535室</td>
+  <td>14F / 215室</td>
+  <td>~9F / ~200室</td>
+  <td class="ng">4F / 189室<br><span class="note">全棟低層</span></td>
+  <td>14F / ~200室</td>
+  <td>~8F / ~160室<br><span class="note">資料未確認</span></td>
+  <td>9F+丘陵 / ~495室</td>
+  <td>~10F / ~183室</td>
+  <td>~15F / ~238室<br><span class="note">2016年開業</span></td>
+</tr>
+
+<!-- ─── 高樓景觀 ─── -->
+<tr class="section-row"><td colspan="10">🏔️ 景觀（注意：京都建高限制，非大阪式高樓，以庭園・山景評分）</td></tr>
+
+<tr>
+  <td>景觀類型</td>
+  <td>東山・市街・新幹線</td>
+  <td class="toppick">東山連峰・車站鐵路</td>
+  <td>市街（低樓層）</td>
+  <td class="toppick">日本庭園・東山<br><span class="note">全棟低層但庭園優美</span></td>
+  <td>鴨川・河原町市街</td>
+  <td>二条城<br><span class="note">需官網確認</span></td>
+  <td class="toppick">大文字山・東山庭園<br><span class="badge badge-green">丘陵制高點</span></td>
+  <td>京都御所・中庭アトリウム</td>
+  <td>京都塔・市街・新幹線<br><span class="note">高層可見京都塔全景</span></td>
+</tr>
+
+<tr>
+  <td>景觀評分</td>
+  <td><span class="stars">★★★</span>☆☆</td>
+  <td><span class="stars">★★★★</span>☆</td>
+  <td><span class="stars">★★</span>☆☆☆</td>
+  <td><span class="stars">★★★</span>☆☆<br><span class="note">庭園優先</span></td>
+  <td><span class="stars">★★★</span>☆☆</td>
+  <td><span class="stars">★★★</span>☆☆<br><span class="note">未確認</span></td>
+  <td class="highlight"><span class="stars">★★★★</span>☆<br><span class="note">山景最佳</span></td>
+  <td><span class="stars">★★</span>☆☆☆<br><span class="note">中庭特色</span></td>
+  <td><span class="stars">★★★</span>☆☆<br><span class="note">京都塔景觀</span></td>
+</tr>
+
+<!-- ─── 早餐設施 ─── -->
+<tr class="section-row"><td colspan="10">🍳 早餐設施</td></tr>
+
+<tr>
+  <td>飯店內早餐設施</td>
+  <td><strong>ISOLA</strong>（Brasserie）<br>+ 朱雀（日式）<br>+ 梅（中式）</td>
+  <td><strong>TSURU</strong>（日本料理）<br>+ The Bar</td>
+  <td><strong>和洋ビュッフェ</strong><br>（Dormy Inn 標準）</td>
+  <td class="toppick"><strong>The Touzan</strong><br>（日式会席 / 鐵板燒）<br>高評價京都料理</td>
+  <td><strong>レストラン ビュッフェ</strong></td>
+  <td>未確認</td>
+  <td><strong>The Westin ビュッフェ</strong><br>（日洋混合）</td>
+  <td class="highlight"><strong>5間餐廳</strong><br>（法式・日式・廣東・鐵板燒）</td>
+  <td><strong>ニャー・ヴェトナム</strong><br>（越南料理 Buffet）</td>
+</tr>
+
+<tr>
+  <td>早餐時間</td>
+  <td>~6:30–10:30<br><span class="note">需確認</span></td>
+  <td>~6:30–10:30<br><span class="note">需確認</span></td>
+  <td>6:30–10:00</td>
+  <td>7:00–10:30</td>
+  <td>~7:00–10:00</td>
+  <td>未確認</td>
+  <td>~6:30–10:00</td>
+  <td>~7:00–10:30</td>
+  <td>~7:00–10:00<br><span class="note">需確認</span></td>
+</tr>
+
+<tr>
+  <td>早餐費用（另計）</td>
+  <td>~TWD 981/人</td>
+  <td>~TWD 1,334/人</td>
+  <td class="toppick">~TWD 400–500/人</td>
+  <td>~TWD 883/人</td>
+  <td class="highlight">~TWD 496/人</td>
+  <td>未確認</td>
+  <td>~TWD 981/人</td>
+  <td>~TWD 686/人</td>
+  <td class="toppick">~TWD 391/人<br><span class="note">最低價早餐</span></td>
+</tr>
+
+<tr>
+  <td>4人早餐合計（2晚×4人）</td>
+  <td>~TWD 7,848</td>
+  <td>~TWD 10,672</td>
+  <td class="toppick">~TWD 3,200</td>
+  <td>~TWD 7,064</td>
+  <td class="highlight">~TWD 3,968</td>
+  <td>未確認</td>
+  <td>~TWD 7,848</td>
+  <td>~TWD 5,488</td>
+  <td class="toppick">~TWD 3,128<br><span class="note">TWD 391×4人×2晚</span></td>
+</tr>
+
+<!-- ─── 特色設施 ─── -->
+<tr class="section-row"><td colspan="10">♨️ 特色設施</td></tr>
+
+<tr>
+  <td>天然溫泉 / 大浴場</td>
+  <td class="ng">❌ 無</td>
+  <td class="ng">❌ 無</td>
+  <td class="ok toppick">✅ 天然溫泉<br>「元湯」免費</td>
+  <td class="ng">❌ 無<br><span class="note">（付費SPA）</span></td>
+  <td class="semi">△ 大浴場（非溫泉）<br>免費使用</td>
+  <td class="ng">未確認</td>
+  <td class="ng">❌ 無</td>
+  <td class="ng">未確認</td>
+  <td class="ng">❌ 無<br><span class="note">商務型飯店</span></td>
+</tr>
+
+<tr>
+  <td>游泳池 / SPA / 其他</td>
+  <td>✅ 室內游泳池（有料）<br>京都Isetan直結</td>
+  <td>5間餐廳<br>精品規模（215室）</td>
+  <td class="toppick">✅ 宵夜拉麵免費<br>（21:30–23:00）</td>
+  <td>✅ Shiseido Spa（付費）<br>11歲以下孩童免費</td>
+  <td>鴨川景觀<br>錦市場5分</td>
+  <td>二条城 徒步圈<br>⚠️需查官網</td>
+  <td>✅ 游泳池+Heavenly Spa<br>免費京都站接駁バス</td>
+  <td class="highlight">✅ 5間餐廳<br>免費接駁バス（烏丸御池）</td>
+  <td>自助洗衣機<br>京都塔B1直結<br>Yodobashi Camera旁</td>
+</tr>
+
+<!-- ─── 素食採購 ─── -->
+<tr class="section-row"><td colspan="10">🌱 素食採購（步行可達）</td></tr>
+
+<tr>
+  <td>超市 / 食品館 / 市場</td>
+  <td class="toppick">京都站 Isetan B1F<br>地下食品館（直結）<br>+ 便利商店多</td>
+  <td class="toppick">京都站 Isetan B1F<br>徒步5分</td>
+  <td>スーパー平和堂 7分<br>7-11・FamilyMart 近</td>
+  <td>MaxValu 徒步15分<br>FamilyMart 近</td>
+  <td class="highlight">錦市場 徒步5分<br>（素食食材豐富）<br>阪急地下街直結</td>
+  <td>周辺CVS<br>（詳情需確認）</td>
+  <td>コンビニ 近<br>スーパー 遠め</td>
+  <td>コンビニ 近<br>御所周辺（選擇較少）</td>
+  <td class="toppick">京都站Isetan B1F ~5分<br>+ 京都塔地下コンビニ<br>+ Yodobashi 近</td>
+</tr>
+
+<!-- ─── 交通 ─── -->
+<tr class="section-row"><td colspan="10">🚊 交通（KIX → 飯店 / 主要景點 / 7/15 移動至難波）</td></tr>
+
+<tr>
+  <td>KIX 關西機場 → 飯店</td>
+  <td class="ok toppick">JR Haruka<br>75分 ¥1,880<br><strong>出站即到</strong></td>
+  <td class="ok">JR Haruka<br>75分 ¥1,880<br>+ 徒步3分</td>
+  <td class="ok">JR Haruka<br>75分 ¥1,880<br>+ 徒步4分</td>
+  <td class="semi">JR Haruka 75分<br>+ 市バス約20分<br>（合計~95分）</td>
+  <td class="semi">JR Haruka 75分<br>+ 阪急・地鐵 約15分<br>（合計~90分）</td>
+  <td class="semi">JR Haruka 75分<br>+ 地鐵 約15分<br>（合計~90分）</td>
+  <td class="semi">JR Haruka 75分<br>+ 免費接駁バス 約20分<br>（合計~95分）</td>
+  <td class="semi">JR Haruka 75分<br>+ 地鐵 約25分<br>（合計~100分）</td>
+  <td class="ok">JR Haruka<br>75分 ¥1,880<br>+ 地下街 ~5分</td>
+</tr>
+
+<tr>
+  <td>到 JR 京都站</td>
+  <td class="ok"><strong>直結 0分</strong></td>
+  <td class="ok">徒步 3分</td>
+  <td class="ok">徒步 4分</td>
+  <td class="semi">市バス 15–20分<br>or タクシー ~¥1,500</td>
+  <td class="semi">阪急→JR ~15分</td>
+  <td class="semi">地鐵東西線→JR ~20分</td>
+  <td class="semi">免費接駁バス 20分</td>
+  <td class="semi">地鐵 ~25分</td>
+  <td class="ok">地下街直通 ~5分</td>
+</tr>
+
+<tr>
+  <td>🦊 伏見稲荷大社</td>
+  <td class="ok toppick">JR 稲荷 ~5分<br>（1駅）</td>
+  <td class="ok">JR 稲荷 ~8分</td>
+  <td class="ok">JR 稲荷 ~9分</td>
+  <td>市バス・タクシー ~25分</td>
+  <td>地鐵→JR ~25分</td>
+  <td>地鐵→JR ~30分</td>
+  <td>地鐵→JR ~30分</td>
+  <td>地鐵→JR ~35分</td>
+  <td class="ok">JR 稲荷 ~6分<br>（地下街→JR→1駅）</td>
+</tr>
+
+<tr>
+  <td>🎋 嵐山</td>
+  <td>JR嵯峨野線 ~25分</td>
+  <td>JR嵯峨野線 ~28分</td>
+  <td>JR嵯峨野線 ~29分</td>
+  <td>地鐵+バス ~45分</td>
+  <td class="semi">阪急嵐山線 ~30分</td>
+  <td>地鐵+阪急 ~35分</td>
+  <td>地鐵+嵐電 ~40分</td>
+  <td>地鐵+阪急 ~35分</td>
+  <td>JR嵯峨野線 ~27分</td>
+</tr>
+
+<tr>
+  <td>⛩️ 清水寺・祇園</td>
+  <td>市バス206 ~30分</td>
+  <td>市バス206 ~28分</td>
+  <td>市バス ~30分</td>
+  <td class="ok toppick">徒步・市バス ~15分<br>（東山最近）</td>
+  <td>市バス ~20分</td>
+  <td>市バス ~30分</td>
+  <td class="ok">徒步 ~30分<br>（東山隣接）</td>
+  <td>市バス ~35分</td>
+  <td>市バス206 ~30分</td>
+</tr>
+
+<tr>
+  <td>🏯 金閣寺</td>
+  <td>市バス ~40分</td>
+  <td>市バス ~40分</td>
+  <td>市バス ~40分</td>
+  <td>市バス ~40分</td>
+  <td>市バス ~35分</td>
+  <td class="toppick">市バス ~20分<br>（最近）</td>
+  <td>市バス ~45分</td>
+  <td>市バス ~30分</td>
+  <td>市バス ~40分</td>
+</tr>
+
+<tr>
+  <td>7/15 → 大阪難波<br><span class="note">（拖行李移動）</span></td>
+  <td class="ok toppick">JR新快速<br>京都→大阪→難波<br>約50分</td>
+  <td class="ok">JR + 地鐵<br>約53分</td>
+  <td class="ok">JR + 地鐵<br>約54分</td>
+  <td class="semi">市バス+JR+地鐵<br>約65–70分</td>
+  <td class="semi">阪急+JR or 地鐵<br>約60分</td>
+  <td class="semi">地鐵+JR+地鐵<br>約65分</td>
+  <td class="semi">接駁バス+JR+地鐵<br>約70分</td>
+  <td class="semi">地鐵+JR+地鐵<br>約70分</td>
+  <td class="ok">地下街→JR新快速<br>→大阪→難波<br>約53分</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- ── 費用比較 ── -->
+<div class="section-title">💰 4人住房費用比較（7/13–15 · 2晚 · 含稅）</div>
+
+<div class="note-box">
+  🔍 <strong>搜尋條件：</strong>2026/7/13–15（2晚）・4人（2大人+15歲+11歲）・最佳4人方案。價格以 <strong>TWD</strong> 計，含稅。<br>
+  <span class="ok">✅ 已確認</span> = 直接從 Booking.com 即時取得（2026/6/19）；<span style="color:#E65100;">⚠️ 待查詢</span> = 尚未取得即時報價。<br>
+  📊 <strong>排序：</strong>依「每人每晚」由低至高。⑦ Westin 稅費另計，實際含稅約 TWD 33,404（稅前 TWD 26,406 + 稅費 TWD 6,998）。
+</div>
+
+<div style="overflow-x:auto; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,.12);">
+<table class="price-table">
+<thead>
+  <tr>
+    <th style="text-align:left;">飯店</th>
+    <th>最佳4人方案</th>
+    <th>合計面積</th>
+    <th>每人面積</th>
+    <th>每晚（合計）</th>
+    <th>2晚總價</th>
+    <th>每人每晚</th>
+    <th>狀態</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>⑤ 三井四条<br><span style="font-size:0.75rem;color:#666;">Mitsui Garden Hotel Kyoto Shijo</span></td>
+    <td>高級雙床房×2間</td>
+    <td>22㎡×2=44㎡</td>
+    <td>11㎡</td>
+    <td>TWD 5,452</td>
+    <td><strong>TWD 10,904</strong></td>
+    <td><strong>TWD 1,363 🥇</strong></td>
+    <td><span class="ok">✅</span></td>
+  </tr>
+  <tr>
+    <td>⑧ 京都布萊頓<br><span style="font-size:0.75rem;color:#666;">Kyoto Brighton Hotel</span></td>
+    <td>行政雙床間+2加床×1間</td>
+    <td>42㎡（同室）</td>
+    <td>10.5㎡</td>
+    <td>TWD 6,860</td>
+    <td><strong>TWD 13,720</strong></td>
+    <td><strong>TWD 1,715 ⭐</strong></td>
+    <td><span class="ok">✅</span> 評分9.2</td>
+  </tr>
+  <tr>
+    <td>③ Dormy Inn Premium<br><span style="font-size:0.75rem;color:#666;">京都駅前</span></td>
+    <td>雙人房×1 + 雙床間×1</td>
+    <td>~17㎡×2=~34㎡</td>
+    <td>~8.5㎡</td>
+    <td>~TWD 7,570</td>
+    <td><strong>TWD 15,140</strong></td>
+    <td><strong>TWD 1,893 ♨️</strong></td>
+    <td><span class="ok">✅</span></td>
+  </tr>
+  <tr>
+    <td>⑨ 大和Roynet PREMIER<br><span style="font-size:0.75rem;color:#666;">Daiwa Roynet Hotel Kyoto-Ekimae PREMIER</span></td>
+    <td>行政雙床房×1間（4人同室）<br><span style="font-size:0.75rem;color:#888;">※ 標準雙人房×2間 → TWD 11,902（TWD 1,488/人/晚）</span></td>
+    <td>36㎡（同室）</td>
+    <td>9㎡</td>
+    <td>TWD 10,786</td>
+    <td><strong>TWD 21,571</strong></td>
+    <td><strong>TWD 2,696 ⭐</strong></td>
+    <td><span class="ok">✅</span> 評分9.0</td>
+  </tr>
+  <tr>
+    <td>① Hotel Granvia Kyoto<br><span style="font-size:0.75rem;color:#666;">京都格蘭比亞大飯店</span></td>
+    <td>標準雙床房×2間（15%折扣）</td>
+    <td>30㎡×2=60㎡</td>
+    <td>15㎡</td>
+    <td>TWD 11,302</td>
+    <td><strong>TWD 22,604</strong></td>
+    <td><strong>TWD 2,826</strong></td>
+    <td><span class="ok">✅</span></td>
+  </tr>
+  <tr>
+    <td>⑦ Westin Miyako Kyoto<br><span style="font-size:0.75rem;color:#666;">ウェスティン都ホテル</span></td>
+    <td>Superior Room×2間</td>
+    <td>28㎡×2=56㎡</td>
+    <td>14㎡</td>
+    <td>~TWD 13,203（稅前）</td>
+    <td><strong>~TWD 26,406（稅前）<br>含稅 ~TWD 33,404</strong></td>
+    <td><strong>~TWD 4,176（含稅）</strong></td>
+    <td><span class="ok">✅</span> <span class="note">稅費另計</span></td>
+  </tr>
+  <tr>
+    <td>② The Thousand Kyoto<br><span style="font-size:0.75rem;color:#666;">ザ・サウザンド京都</span></td>
+    <td>雙床房×2間（32%優惠）</td>
+    <td>37㎡×2=74㎡</td>
+    <td>18.5㎡</td>
+    <td>TWD 19,724</td>
+    <td><strong>TWD 39,449</strong></td>
+    <td><strong>TWD 4,931</strong></td>
+    <td><span class="ok">✅</span> <span class="note">32%折扣中</span></td>
+  </tr>
+  <tr>
+    <td>④ Hyatt Regency Kyoto<br><span style="font-size:0.75rem;color:#666;">ハイアット リージェンシー</span></td>
+    <td>豪華雙人間（2雙人床+陽台）×1間</td>
+    <td>60㎡（同室）</td>
+    <td>15㎡</td>
+    <td>TWD 24,682</td>
+    <td><strong>TWD 49,364</strong></td>
+    <td><strong>TWD 6,170</strong></td>
+    <td><span class="ok">✅</span> <span class="note">11歲免費</span></td>
+  </tr>
+  <tr>
+    <td>⑥ ANA Crowne Plaza<br><span style="font-size:0.75rem;color:#666;">京都</span></td>
+    <td>—</td>
+    <td>—</td>
+    <td>—</td>
+    <td>—</td>
+    <td>—</td>
+    <td><span style="color:#E65100;">⚠️ 待查</span></td>
+    <td><span style="color:#E65100;">⚠️ Booking.com<br>7/13-15 無法預訂<br>請查 anahotels.com</span></td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<!-- ── 推薦建議 ── -->
+<div class="section-title">💡 推薦建議</div>
+
+<div class="rec-grid">
+
+  <div class="rec-card gold">
+    <div class="tag">🥇 最佳CP值</div>
+    <h3>⑤ 三井ガーデンホテル京都四条</h3>
+    <p>每人每晚僅 <strong>TWD 1,363</strong>，2間高級雙床房 TWD 10,904/2晚。直結阪急烏丸站，步行5分可到<strong>錦市場</strong>（素食採購最佳地點）。有免費大浴場。但22㎡/間偏小，兩間房各住2人，適合重視預算的家庭。</p>
+  </div>
+
+  <div class="rec-card green">
+    <div class="tag">🚄 交通最優先（首選）</div>
+    <h3>① Hotel Granvia Kyoto</h3>
+    <p>JR京都站 <strong>中央口直結</strong>——KIX Haruka 下車即入住，7/15移動大阪拖行李最方便。TWD 2,826/人/晚，30㎡×2間共60㎡，5間餐廳＋室內游泳池＋直通 Isetan 地下食品館。行李多的家庭首選，也最適合7月暑假旅遊的節奏。</p>
+  </div>
+
+  <div class="rec-card">
+    <div class="tag">🏆 最均衡推薦</div>
+    <h3>⑧ 京都ブライトンホテル</h3>
+    <p>評分 <strong>9.2</strong>（好極了），每人每晚 <strong>TWD 1,715</strong>，且4人住同一間 <strong>42㎡</strong>（含2張加床）。5間餐廳（法式・日式・廣東・鐵板燒），早餐只需 TWD 686/人。位置近<strong>京都御所</strong>，免費接駁バス往返烏丸御池。難得的高評分＋合理價格＋4人同室組合。</p>
+  </div>
+
+  <div class="rec-card amber">
+    <div class="tag">♨️ 溫泉體驗</div>
+    <h3>③ Dormy Inn Premium 京都駅前</h3>
+    <p>每人每晚 <strong>TWD 1,893</strong>，含<strong>天然溫泉「元湯」</strong>免費，宵夜拉麵每晚21:30–23:00免費。京都站徒步4分，評分8.7。7月暑假觀光後泡溫泉解疲勞，最適合有孩子的家庭。早餐費用也是8間中最低。房間約17㎡偏小，適合重視體驗勝過空間者。</p>
+  </div>
+
+  <div class="rec-card blue">
+    <div class="tag">⛩️ 景點最近（東山）</div>
+    <h3>④ Hyatt Regency Kyoto</h3>
+    <p>全棟僅4層，但東山丘陵位置讓<strong>清水寺・祇園・三十三間堂</strong>都在步行・市バス15分內。60㎡豪華套房（2張雙人床＋陽台）4人同住，11歲孩童免費。TWD 6,170/人/晚是本次最貴，但 Shiseido The Spa 與東山文化氛圍無可替代，適合想深度體驗京都的家庭。</p>
+  </div>
+
+  <div class="rec-card" style="border-top-color:#1A237E;">
+    <div class="tag" style="background:#E8EAF6;color:#1A237E;">🗼 車站直通・高評分</div>
+    <h3>⑨ 大和Roynet飯店京都駅前PREMIER</h3>
+    <p>Booking.com 評分 <strong>9.0</strong>（3,698則），JR京都站<strong>地下街直通</strong>，雨天也不怕。36㎡行政雙床房 4人同住 TWD 2,696/人/晚；若接受 18㎡×2間分住，可低至 <strong>TWD 1,488/人/晚</strong>（含稅可免費取消）。早餐越南料理 Buffet 僅 TWD 391/人，是9間中最低。京都塔 100m，Yodobashi Camera、Isetan B1F 採購方便。2016年新開幕，設施新穎。</p>
+  </div>
+
+  <div class="rec-card purple">
+    <div class="tag">🏔️ 最佳景觀（山景・庭園）</div>
+    <h3>⑦ Westin Miyako Kyoto</h3>
+    <p>座落東山丘陵，窗外是<strong>大文字山・日本庭園</strong>，含稅約 TWD 4,176/人/晚。免費往返京都站接駁巴士。Heavenly Spa＋室內游泳池設施完善，28㎡×2間共56㎡。若重視「京都山景＋西式豪華」是此行最具氣氛的選擇。注意：稅費 TWD 6,998 另計，最終含稅需確認。</p>
+  </div>
+
+</div>
+
+<ul class="footnotes">
+  <li>📌 KIX → 京都：JR Haruka 特急 約75分（自由席¥1,880 / 指定席¥2,530）</li>
+  <li>📌 7/15 京都→大阪難波：建議 JR新快速 京都→大阪（28分）→地鐵御堂筋線→難波（8分），合計約50分。</li>
+  <li>📌 ⑥ ANA Crowne Plaza：Booking.com顯示「7/13-15 無法預訂」，請洽 <a href="https://www.anahotels.com" target="_blank">anahotels.com</a> 官網或 Expedia 確認是否有空房及價格。</li>
+  <li>📌 ⑦ Westin Miyako 稅費：Booking.com 標示稅費 TWD 6,998 另計（2間×2晚），請確認最終含稅價格後再比較。</li>
+  <li>📌 ⑧ Brighton 加床：「行政雙床間-帶2張加床」為2張單人床+2張沙發加床，4人同住42㎡。</li>
+  <li>📌 大阪難波那份比較表原為7/13–18（5晚）。若實際行程改為京都7/13–15＋大阪7/15–18，請將大阪表格的5晚改算為<strong>3晚</strong>。</li>
+  <li>📌 ⑨ 大和Roynet PREMIER：行政雙床房36㎡（4人同室）TWD 2,696/人/晚；或標準雙人房×2間（各18㎡）TWD 1,488/人/晚。兩方案均可免費取消（7/6前）。</li>
+  <li>📌 所有價格均以 2026/6/19 Booking.com 即時報價為準（⑥ ANA Crowne Plaza 除外）。</li>
+</ul>
+
+</div>
+
+<footer>
+  🏯 京都飯店比較表 · 2026/7/13–15 · 4人（2大人+15歲+11歲）· 資料更新日：2026/6/20
+</footer>
+
+</body>
+</html>

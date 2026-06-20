@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🗾 Fox 家日本旅遊計劃</title>
+<style>
+  :root {
+    --osaka: #c03030;
+    --osaka-light: #fff4f4;
+    --kyushu: #c06820;
+    --kyushu-light: #fff8f0;
+    --hokkaido: #1e5a9a;
+    --hokkaido-light: #f0f5ff;
+    --green: #2d7d46;
+    --text: #222;
+    --sub: #666;
+    --border: #e8e8e8;
+    --bg: #f6f5f3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, 'Helvetica Neue', 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ─── Header ─── */
+  .site-header {
+    background: linear-gradient(135deg, #1a3a1a 0%, #2d7d46 60%, #3a9960 100%);
+    color: white;
+    padding: 36px 24px 30px;
+    text-align: center;
+  }
+  .site-header .logo { font-size: 36px; margin-bottom: 8px; }
+  .site-header h1 { font-size: 22px; font-weight: 800; letter-spacing: 1px; }
+  .site-header p { font-size: 13px; opacity: 0.75; margin-top: 6px; }
+
+  /* ─── Container ─── */
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 28px 16px 60px;
+  }
+
+  /* ─── Section label ─── */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #999;
+    margin: 32px 0 12px;
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  /* ─── Trip Card ─── */
+  .trip-card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    margin-bottom: 20px;
+  }
+
+  .trip-banner {
+    padding: 20px 22px 16px;
+    position: relative;
+  }
+  .trip-banner.osaka  { background: linear-gradient(135deg, #b02828 0%, #d04040 100%); }
+  .trip-banner.kyushu { background: linear-gradient(135deg, #a05a18 0%, #c87828 100%); }
+  .trip-banner.hokkaido { background: linear-gradient(135deg, #1a4880 0%, #2563a8 100%); }
+
+  .trip-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.22);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 8px;
+  }
+  .trip-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+    line-height: 1.2;
+  }
+  .trip-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 5px;
+  }
+
+  /* ─── Page Links ─── */
+  .page-links {
+    padding: 6px 12px 12px;
+  }
+
+  .page-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-link:last-child { border-bottom: none; }
+  .page-link:hover { background: #f5f5f5; }
+  .page-link:active { background: #ececec; }
+
+  .page-icon {
+    width: 36px; height: 36px;
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .icon-guide  { background: #fff0e8; }
+  .icon-food   { background: #e8f5ec; }
+  .icon-plan   { background: #f0ebff; }
+  .icon-hotel  { background: #e8f0ff; }
+
+  .page-info { flex: 1; min-width: 0; }
+  .page-name { font-size: 14px; font-weight: 600; color: #222; }
+  .page-desc { font-size: 12px; color: #888; margin-top: 1px; }
+
+  .page-arrow {
+    color: #ccc;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  /* ─── Status badge ─── */
+  .badge-new {
+    display: inline-block;
+    background: #2d7d46;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .badge-wip {
+    display: inline-block;
+    background: #e07b39;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* ─── Trip summary chips ─── */
+  .trip-chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .chip {
+    background: rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 2px 9px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.88);
+  }
+
+  /* ─── Divider group ─── */
+  .page-group-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #bbb;
+    padding: 10px 10px 2px;
+  }
+
+  /* ─── Footer ─── */
+  .footer {
+    text-align: center;
+    color: #aaa;
+    font-size: 12px;
+    padding: 20px 0 40px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">🗾</div>
+  <h1>Fox 家日本旅遊計劃</h1>
+  <p>點選旅程，查看所有規劃文件</p>
+</header>
+
+<div class="container">
+
+  <!-- ── 即將出發 ── -->
+  <div class="section-label">✈️ 即將出發</div>
+
+  <!-- 2026 大阪京都 -->
+  <div class="trip-card">
+    <div class="trip-banner osaka">
+      <div class="trip-tag">🗓 2026 年 7 月 13–18 日</div>
+      <div class="trip-title">大阪・京都 關西之旅</div>
+      <div class="trip-sub">4 人・蛋奶素・Swissôtel Nankai 難波</div>
+      <div class="trip-chips">
+        <span class="chip">✈️ CI 172 → KIX 18:05</span>
+        <span class="chip">✈️ CI 153 KIX 14:00 ←</span>
+        <span class="chip">🎫 DVZMGY</span>
+      </div>
+    </div>
+    <div class="page-links">
+
+      <div class="page-group-label">旅遊指南</div>
+
+      <a class="page-link" href="osaka_travel_guide.html">
+        <div class="page-icon icon-guide">🌸</div>
+        <div class="page-info">
+          <div class="page-name">大阪關西家庭旅遊指南</div>
+          <div class="page-desc">景點・交通・行程規劃・實用資訊</div>
+        </div>
+        <div class="page-arrow">›</div>
+      </a>
+
+      <a class="page-link" href="vegetarian_guide.html">
+        <div class="page-icon icon-food">🥗</div>
+        <div class="page-info">
+          <div class="page-name">素食餐廳指南（大阪・京都）<span class="badge-new">最新</span></div>
+          <div class="page-desc">蛋奶素・無五辛・含嵌入地圖・營業時間</div>
+        </div>
+        <div class="page-arrow">›</div>
+      </a>
+
+      <a class="page-link" href="osaka-kyoto-family-trip.html">
+        <div class="page-icon icon-plan">📔</div>
+        <div class="page-info">
+          <div class="page-name">大阪京都宇治 親子行程小冊</div>
+          <div class="page-desc">天天行程・景點・交通安排</div>
+        </div>
+        <div class="page-arrow">›</div>
+      </a>
+
+      <div class="page-group-label">飯店比較</div>
+
+      <a class="page-link" href="osaka_namba_hotel_comparison.html">
+        <div class="page-icon icon-hotel">🏨</div>
+        <div class="page-info">
+          <div class="page-name">大阪・難波周邊飯店比較</div>
+          <div class="page-desc">南大阪（難波・心齋橋）・4大人2房</div>
+        </div>
+        <div class="page-arrow">›</div>
+      </a>
+
+      <a class="page-link" href="osaka_hotel_comparison.html">
+        <div class="page-icon icon-hotel">🏨</div>
+        <div class="page-info">
+          <div class="page-name">大阪飯店綜合比較</div>
+          <div class="page-desc">梅田・心齋橋・難波 各區比較</div>
+        </div>
+        <div class="page-arrow">›</div>
+      </a>
+
+      <a class="page-link" href="kyoto_hotel_comparison.html">
+        <div class="page-icon icon-hotel">🏨</div>
+        <div class="page-info">
+          <div class="page-name">京都飯店比較</div>
+          <div class="page-desc">4人・2晚</div>
+        </div>
+        <div class="page-arrow">›</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ── 其他旅遊規劃 ── -->
+  <div class="section-label">📁 其他旅遊規劃</div>
+
+  <!-- 九州・福岡 -->
+  <div class="trip-card">
+    <div class="trip-banner kyushu">
+      <div class="trip-tag">🍜 九州・福岡</div>
+      <div class="trip-title">九州・福岡 家庭旅遊</div>
+      <div class="trip-sub">2026 規劃中</div>
+    </div>
+    <div class="page-links">
+
+      <a class="page-link" href="kyushu_travel_guide.html">
+        <div class="page-icon icon-guide">🚂</div>
+        <div class="page-info">
+          <div class="page-name">九州・福岡 家庭旅遊手冊</div>
+          <div class="page-desc">景點・交通・美食・行程規劃</div>
+        </div>
+        <div class="page-arrow">›</div>
+      </a>
+
+      <a class="page-link" href="fukuoka-family-trip.html">
+        <div class="page-icon icon-plan">📔</div>
+        <div class="page-info">
+          <div class="page-name">福岡 親子自由行旅遊手冊</div>
+          <div class="page-desc">親子行程・景點・餐廳</div>
+        </div>
+        <div class="page-arrow">›</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- 北海道 -->
+  <div class="trip-card">
+    <div class="trip-banner hokkaido">
+      <div class="trip-tag">❄️ 北海道</div>
+      <div class="trip-title">北海道 親子自駕之旅</div>
+      <div class="trip-sub">5 天 4 夜・規劃中</div>
+    </div>
+    <div class="page-links">
+
+      <a class="page-link" href="hokkaido-family-trip.html">
+        <div class="page-icon icon-guide">🚗</div>
+        <div class="page-info">
+          <div class="page-name">北海道 親子自駕 5天4夜 提案</div>
+          <div class="page-desc">自駕路線・景點・住宿建議</div>
+        </div>
+        <div class="page-arrow">›</div>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Fox 家旅遊計劃 · 用 Claude 整理
+</div>
+
+</body>
+</html>

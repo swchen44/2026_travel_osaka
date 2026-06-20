@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大阪飯店綜合比較表 2026 · 4大人2房</title>
+<style>
+  :root {
+    --gold: #C9A84C;
+    --deep-red: #7B1F1F;
+    --cream: #FBF7F0;
+    --ink: #1A1A2E;
+    --green: #2E7D32;
+    --red: #C62828;
+    --amber: #E65100;
+    --blue: #0D47A1;
+    --gray: #757575;
+    --light: #F5F5F5;
+    --border: #E0E0E0;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Noto Sans TC','Microsoft JhengHei',sans-serif; background:#F0EDE8; color:#2C2C2C; font-size:14px; line-height:1.6; }
+
+  header {
+    background: linear-gradient(135deg,#1A0A0A 0%,#3D0F0F 50%,#7B1F1F 100%);
+    color:white; padding:32px 24px 28px; text-align:center;
+  }
+  header h1 { font-size:1.6rem; font-weight:700; margin-bottom:6px; }
+  header p  { font-size:0.85rem; opacity:0.75; letter-spacing:0.05em; }
+  .legend { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-top:16px; }
+  .legend-item { display:flex; align-items:center; gap:6px; font-size:0.78rem; opacity:0.9; }
+  .dot { width:10px;height:10px;border-radius:50%;display:inline-block; }
+
+  .wrap { max-width:1600px; margin:0 auto; padding:20px; }
+
+  /* ── note box ── */
+  .note-box {
+    background:#FFF8E1; border-left:4px solid #F9A825;
+    border-radius:4px; padding:12px 16px; margin-bottom:20px;
+    font-size:0.82rem; color:#5D4037;
+  }
+  .note-box strong { color:#E65100; }
+
+  /* ── main scroll table ── */
+  .table-wrap { overflow-x:auto; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,.12); }
+  table { border-collapse:collapse; width:100%; min-width:1240px; background:white; }
+
+  /* header rows */
+  thead tr:first-child th { background:#1A1A2E; color:white; font-size:0.72rem; letter-spacing:0.08em; padding:10px 12px; text-align:center; }
+  thead tr:nth-child(2) th { background:#2C2C54; color:#F5F5F5; font-size:0.8rem; padding:12px 10px; text-align:center; border-right:1px solid rgba(255,255,255,.1); }
+
+  /* row label column */
+  td:first-child, th:first-child {
+    position:sticky; left:0; z-index:2;
+    background:#FAF7F2; font-weight:600; color:#3D0F0F;
+    font-size:0.78rem; padding:10px 12px;
+    border-right:2px solid #D4C5A5;
+    min-width:120px;
+  }
+  thead tr:first-child th:first-child, thead tr:nth-child(2) th:first-child {
+    background:#1A1A2E; color:rgba(255,255,255,.7);
+  }
+
+  /* cells */
+  td { padding:9px 10px; text-align:center; border-bottom:1px solid #EEEEEE; border-right:1px solid #F0F0F0; font-size:0.8rem; vertical-align:middle; }
+  tr:hover td { background:#FFF8F2; }
+
+  /* alternate column shading */
+  td:nth-child(even) { background:rgba(0,0,0,.015); }
+  tr:hover td:nth-child(even) { background:#FFF3EC; }
+
+  /* section rows */
+  tr.section-row td { background:#F0EDE8; color:#5D4037; font-weight:700; font-size:0.72rem; letter-spacing:0.1em; text-align:left; padding:6px 12px; border-bottom:2px solid #D4C5A5; }
+  tr.section-row td:first-child { background:#E8E0D5; }
+
+  /* highlights */
+  .ok    { color:var(--green); font-weight:700; }
+  .ng    { color:var(--red);   font-weight:700; }
+  .semi  { color:var(--amber); font-weight:700; }
+  .note  { color:var(--gray);  font-size:0.72rem; }
+
+  /* badges */
+  .badge { display:inline-block; border-radius:4px; padding:2px 7px; font-size:0.68rem; font-weight:700; margin:2px; white-space:nowrap; }
+  .badge-green  { background:#E8F5E9; color:#1B5E20; }
+  .badge-red    { background:#FFEBEE; color:#B71C1C; }
+  .badge-amber  { background:#FFF3E0; color:#BF360C; }
+  .badge-blue   { background:#E3F2FD; color:#0D47A1; }
+  .badge-purple { background:#F3E5F5; color:#4A148C; }
+  .badge-gold   { background:#FFF8E1; color:#795548; }
+  .badge-gray   { background:#F5F5F5; color:#424242; }
+
+  /* highlight column (best pick) */
+  td.highlight { background:#FFFDE7 !important; }
+  tr:hover td.highlight { background:#FFF9C4 !important; }
+
+  /* namba column */
+  td.namba { background:#E8F5E9 !important; }
+  tr:hover td.namba { background:#C8E6C9 !important; }
+
+  /* group tags */
+  .group-hh  { color:#7B1F1F; font-weight:700; }
+  .group-jr  { color:#0D47A1; font-weight:700; }
+  .group-ac  { color:#1B5E20; font-weight:700; }
+
+  /* footnotes */
+  .footnotes { margin-top:24px; font-size:0.75rem; color:#666; line-height:2; }
+  .footnotes li { margin-left:16px; }
+
+  /* recommendation boxes */
+  .rec-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-top:24px; }
+  .rec-card { background:white; border-radius:10px; padding:18px; box-shadow:0 2px 12px rgba(0,0,0,.08); border-top:4px solid var(--gold); }
+  .rec-card h3 { font-size:0.9rem; margin-bottom:8px; color:#3D0F0F; }
+  .rec-card p { font-size:0.8rem; color:#555; line-height:1.7; }
+  .rec-card .tag { display:inline-block; background:#FFF8E1; color:#795548; border-radius:4px; padding:2px 8px; font-size:0.7rem; margin-bottom:8px; font-weight:600; }
+
+  /* section title */
+  .section-title { font-size:1rem; font-weight:700; color:#1A1A2E; margin:28px 0 10px; border-left:4px solid #7B1F1F; padding-left:10px; }
+
+  /* footer */
+  footer { text-align:center; padding:24px; color:#999; font-size:0.72rem; margin-top:32px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏨 大阪飯店綜合比較表 2026</h1>
+  <p>入住條件：4大人 · 2房 · 2026/7/13–18 · 5晚 · 重視高樓景觀 + 早午餐到14:00 + 素食地下美食</p>
+  <div class="legend">
+    <div class="legend-item"><span class="dot" style="background:#2E7D32"></span>✅ 確認符合</div>
+    <div class="legend-item"><span class="dot" style="background:#E65100"></span>△ 部分符合／需確認</div>
+    <div class="legend-item"><span class="dot" style="background:#C62828"></span>❌ 不符合</div>
+    <div class="legend-item"><span class="dot" style="background:#C9A84C"></span>⭐ 此項目最佳</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="note-box">
+  ⚠️ <strong>地點警示：</strong>前 8 間飯店均位於 <strong>梅田/JR大阪 周邊（北大阪）</strong>；
+  <strong>大阪南海瑞士酒店</strong> 位於 <strong>難波（南大阪）</strong>，兩區距離約 3 公里、地鐵 5 分鐘。
+  如確認住難波，梅田百貨須搭車前往；但機場交通南海電鐵直達，且鄰近高島屋、道頓堀，是完全不同的旅遊基地風格。
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+  <tr>
+    <th>比較項目</th>
+    <th colspan="7">阪急阪神ホテルズ 集團（7館）</th>
+    <th>JR西日本</th>
+    <th>Accor / Swissôtel</th>
+  </tr>
+  <tr>
+    <th>─</th>
+    <th>①<br>阪急國際飯店</th>
+    <th>②<br>阪急大阪<br>格蘭龍仕柏飯店</th>
+    <th>③<br>阪急大阪<br>龍仕柏飯店</th>
+    <th>④<br>大阪新阪急<br>飯店別館</th>
+    <th>⑤<br>大阪阪神酒店</th>
+    <th>⑥<br>大阪阪神<br>酒店別館</th>
+    <th>⑦<br>雷姆·新大阪</th>
+    <th>⑧<br>大阪比偲奇<br>格蘭比亞酒店</th>
+    <th>⑨<br>大阪南海瑞士酒店<br>🌟 難波</th>
+  </tr>
+</thead>
+<tbody>
+
+<!-- ── 基本資訊 ── -->
+<tr class="section-row"><td colspan="10">📌 基本資訊</td></tr>
+
+<tr>
+  <td>日文正式名稱</td>
+  <td><span class="note">ホテル阪急インターナショナル</span></td>
+  <td><span class="note">ホテル阪急グランレスパイア大阪</span></td>
+  <td><span class="note">ホテル阪急レスパイア大阪</span></td>
+  <td><span class="note">新阪急ホテルアネックス</span></td>
+  <td><span class="note">ホテル阪神大阪</span></td>
+  <td><span class="note">ホテル阪神アネックス大阪</span></td>
+  <td><span class="note">レム新大阪</span></td>
+  <td><span class="note">ホテルヴィスキオ大阪 by GRANVIA</span></td>
+  <td class="namba"><span class="note">スイスホテル南海大阪<br>Swissôtel Nankai Osaka</span></td>
+</tr>
+
+<tr>
+  <td>地點區域</td>
+  <td>梅田・茶屋町</td>
+  <td>梅田<br><span class="note">グラングリーン大阪</span></td>
+  <td>梅田<br><span class="note">LINKS UMEDA内</span></td>
+  <td>梅田中心</td>
+  <td>梅田・福島</td>
+  <td>梅田・福島<br><span class="note">少し離れる</span></td>
+  <td>新大阪<br><span class="note">⚠️ 梅田から離れる</span></td>
+  <td>梅田<br><span class="note">JR大阪駅北</span></td>
+  <td class="namba"><strong>難波（南大阪）</strong><br><span class="note">南海難波駅直結</span></td>
+</tr>
+
+<tr>
+  <td>集團</td>
+  <td><span class="group-hh">阪急阪神<br>旗艦</span></td>
+  <td><span class="group-hh">阪急阪神<br>最新高端</span></td>
+  <td><span class="group-hh">阪急阪神<br>上級商務</span></td>
+  <td><span class="group-hh">阪急阪神<br>中級</span></td>
+  <td><span class="group-hh">阪急阪神<br>溫泉特化</span></td>
+  <td><span class="group-hh">阪急阪神<br>經濟</span></td>
+  <td><span class="group-hh">阪急阪神<br>快眠</span></td>
+  <td><span class="group-jr">JR西日本<br>ホテルズ</span></td>
+  <td class="namba"><span class="group-ac">Accor /<br>Swissôtel</span></td>
+</tr>
+
+<tr>
+  <td>樓層數 / 客室數</td>
+  <td>35F / 約360室</td>
+  <td>—（最新オープン）</td>
+  <td>—（LINKS内）</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td class="namba"><strong>36F / 546室</strong></td>
+</tr>
+
+<tr>
+  <td>開業 / 翻修</td>
+  <td>老舗</td>
+  <td><span class="badge badge-green">2025年3月新開</span></td>
+  <td>近年</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td class="namba">2025年翻修完成</td>
+</tr>
+
+<!-- ── 4人住房方案 ── -->
+<tr class="section-row"><td colspan="10">👨‍👩‍👧‍👦 4 大人住房方案（最重要！）</td></tr>
+
+<tr>
+  <td>單房可住 4 人</td>
+  <td class="highlight"><span class="ok">✅</span><br><span class="note">クラブスーペリアスイート</span></td>
+  <td><span class="ng">❌</span><br><span class="note">最大ツイン 35㎡/2名</span></td>
+  <td class="highlight"><span class="ok">✅</span><br><span class="note">フォース（4人対応）</span></td>
+  <td class="highlight"><span class="ok">✅</span><br><span class="note">フォース（4人対応）</span></td>
+  <td class="highlight"><span class="ok">✅</span><br><span class="note">フォース 40㎡ / 和室 40㎡</span></td>
+  <td><span class="ng">❌</span><br><span class="note">最大トリプル 37㎡/3名</span></td>
+  <td><span class="ng">❌</span><br><span class="note">快眠特化、ツインのみ</span></td>
+  <td class="highlight"><span class="ok">✅</span><br><span class="note">ヴィスキオツイン 41.4㎡/2-4名</span></td>
+  <td class="namba"><span class="semi">△</span><br><span class="note">Grand Room（2バスルーム家族向け）<br>予約ウィジェット4名対応</span></td>
+</tr>
+
+<tr>
+  <td>連通房（Connecting）</td>
+  <td><span class="semi">△</span><br><span class="note">要電話確認</span></td>
+  <td><span class="ng">❌</span><br><span class="note">公式記載なし</span></td>
+  <td><span class="ok">✅ 唯一確認！</span><br><span class="note">ツイン+トリプル、最大5名</span></td>
+  <td><span class="semi">△</span><br><span class="note">要確認</span></td>
+  <td><span class="semi">△</span><br><span class="note">要確認</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="semi">△</span><br><span class="note">要確認</span></td>
+  <td class="namba"><span class="semi">△</span><br><span class="note">公式記載なし、要確認</span></td>
+</tr>
+
+<tr>
+  <td>2房同一樓層</td>
+  <td><span class="semi">△</span><br><span class="note">電話申請</span></td>
+  <td><span class="semi">△</span><br><span class="note">電話申請（已寫信確認中）</span></td>
+  <td><span class="ok">✅</span><br><span class="note">連通房可保証同樓層</span></td>
+  <td><span class="semi">△</span><br><span class="note">電話申請</span></td>
+  <td><span class="semi">△</span></td>
+  <td><span class="semi">△</span></td>
+  <td><span class="semi">△</span></td>
+  <td><span class="semi">△</span></td>
+  <td class="namba"><span class="semi">△</span><br><span class="note">電話申請</span></td>
+</tr>
+
+<tr>
+  <td>4人最大房型面積</td>
+  <td>クラブスーペリアスイート<br><span class="note">（面積要確認）</span></td>
+  <td>クラブジュニアスイート<br><span class="note">48㎡（2名）</span></td>
+  <td>フォース<br><span class="note">（面積要確認）</span></td>
+  <td>フォース<br><span class="note">（面積要確認）</span></td>
+  <td><span class="ok">⭐ フォース 40㎡ 4ベッド<br>和室 40㎡ 4布団</span></td>
+  <td>トリプル 37㎡<br><span class="note">（3名まで）</span></td>
+  <td>—</td>
+  <td>ヴィスキオツイン<br><span class="note">41.4㎡（4名可）</span></td>
+  <td class="namba">Grand Room<br><span class="note">（面積未記載、2バスルーム）<br>Waraku Suite（和風twin）<br>Imperial Suite 181㎡/34F</span></td>
+</tr>
+
+<!-- ── 景觀與高樓 ── -->
+<tr class="section-row"><td colspan="10">🌆 高樓景觀</td></tr>
+
+<tr>
+  <td>景觀房 / 高樓層</td>
+  <td><span class="ok">✅</span><br><span class="note">上層クラブフロア、コーナー眺望</span></td>
+  <td><span class="ok">✅</span><br><span class="note">全室高層設計（最新建物）</span></td>
+  <td><span class="ok">✅</span><br><span class="note">上層フロア梅田景觀</span></td>
+  <td><span class="semi">△</span><br><span class="note">一部景觀あり</span></td>
+  <td><span class="semi">△</span><br><span class="note">温泉重視・眺望は並</span></td>
+  <td><span class="ng">❌</span><br><span class="note">低層・景觀不佳</span></td>
+  <td><span class="semi">△</span><br><span class="note">新大阪站景觀</span></td>
+  <td><span class="semi">△</span><br><span class="note">梅田眺望あり</span></td>
+  <td class="namba"><span class="ok">⭐ 最高！</span><br><span class="note">32-34F エグゼクティブラウンジ<br>34F プレスティージスイート<br>36F レストランTable36（最上層）</span></td>
+</tr>
+
+<tr>
+  <td>Executive / Club Lounge</td>
+  <td><span class="ok">✅</span><br><span class="note">クラブフロア付き</span></td>
+  <td><span class="semi">△</span><br><span class="note">一部スイートに付帯</span></td>
+  <td><span class="semi">△</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ng">❌</span></td>
+  <td class="namba"><span class="ok">✅</span><br><span class="note">Swiss Executive Lounge 32-34F<br>朝食・Cocktail Hour・カナッペ<br>※Executive Room/Suite以上で付帯</span></td>
+</tr>
+
+<!-- ── 早午餐 ── -->
+<tr class="section-row"><td colspan="10">🍳 早午餐（早餐到下午2點 Brunch）</td></tr>
+
+<tr>
+  <td>早餐供應時間</td>
+  <td><span class="semi">△</span><br><span class="note">通常10:30まで（要確認）</span></td>
+  <td><span class="semi">△</span><br><span class="note">新店・時間未公開</span></td>
+  <td><span class="semi">△</span></td>
+  <td><span class="semi">△</span></td>
+  <td><span class="semi">△</span></td>
+  <td><span class="semi">△</span></td>
+  <td><span class="semi">△</span></td>
+  <td><span class="semi">△</span></td>
+  <td class="namba"><span class="ok">✅</span><br><span class="note">Table36（36F）ビュッフェ<br>スイート宿泊者は朝食込み<br>Executive Lounge朝食も利用可</span></td>
+</tr>
+
+<tr>
+  <td>飯店餐廳多樣性</td>
+  <td><span class="ok">✅</span><br><span class="note">複数餐廳</span></td>
+  <td><span class="ok">✅</span><br><span class="note">タイムアウトマーケット直結</span></td>
+  <td><span class="semi">△</span></td>
+  <td><span class="semi">△</span></td>
+  <td><span class="semi">△</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="semi">△</span></td>
+  <td class="namba"><span class="ok">⭐ 最豐富！</span><br><span class="note">36F：Table36 + Bar36<br>10F：鉄板焼Minami・花暦・Empress Room<br>6F：THE LOUNGE・Swiss Gourmet</span></td>
+</tr>
+
+<!-- ── 素食採購 ── -->
+<tr class="section-row"><td colspan="10">🥗 素食地下街採購（デパ地下 Veggie Bento）</td></tr>
+
+<tr>
+  <td>最近百貨地下美食</td>
+  <td><span class="ok">⭐ 最優！</span><br><span class="note">阪急うめだ本店 B1<br>徒步 3分</span></td>
+  <td><span class="ok">✅</span><br><span class="note">タイムアウトマーケット B1F<br>LINKS UMEDA 直結</span></td>
+  <td><span class="ok">✅</span><br><span class="note">B2Fバルチカ（直結 23時まで）<br>阪急うめだ 徒步5分</span></td>
+  <td><span class="ok">✅</span><br><span class="note">阪急うめだ本店（近い）</span></td>
+  <td><span class="ok">✅</span><br><span class="note">阪急うめだ本店（近い）</span></td>
+  <td><span class="semi">△</span><br><span class="note">阪急まで少し距離あり</span></td>
+  <td><span class="ng">❌</span><br><span class="note">新大阪、選択肢少</span></td>
+  <td><span class="ok">✅</span><br><span class="note">LUCUA大阪 B1（JR大阪駅）</span></td>
+  <td class="namba"><span class="ok">✅</span><br><span class="note">大阪高島屋（ほぼ隣接）<br>難波エリア商業施設</span></td>
+</tr>
+
+<tr>
+  <td>深夜買物（22:00以降）</td>
+  <td><span class="ng">❌</span><br><span class="note">デパ地下は閉店</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ok">✅</span><br><span class="note">B2Fバルチカ 23:00まで</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ng">❌</span></td>
+  <td class="namba"><span class="ok">✅</span><br><span class="note">難波周邊コンビニ・黑門市場<br>（道頓堀も步行圈内）</span></td>
+</tr>
+
+<!-- ── 交通 ── -->
+<tr class="section-row"><td colspan="10">🚆 交通便利性</td></tr>
+
+<tr>
+  <td>關西機場（KIX）</td>
+  <td>梅田→南海利木津<br><span class="note">約60分 ¥1,900</span></td>
+  <td>梅田→南海利木津<br><span class="note">約60分 ¥1,900</span></td>
+  <td>梅田→南海利木津<br><span class="note">約60分 ¥1,900</span></td>
+  <td>梅田→南海利木津<br><span class="note">約60分 ¥1,900</span></td>
+  <td>梅田→南海利木津<br><span class="note">約60分 ¥1,900</span></td>
+  <td>梅田→南海利木津<br><span class="note">約60分 ¥1,900</span></td>
+  <td>新大阪→はるか<br><span class="note">約70分</span></td>
+  <td>梅田→南海利木津<br><span class="note">約60分 ¥1,900</span></td>
+  <td class="namba"><span class="ok">⭐ 最佳！</span><br><span class="note">南海難波駅（3F直結）<br>→ KIX 特急 30分 ¥1,110</span></td>
+</tr>
+
+<tr>
+  <td>USJ（環球影城）</td>
+  <td>梅田→JR約30分<br><span class="note">（JR大阪駅経由）</span></td>
+  <td>梅田→JR約30分</td>
+  <td>梅田→JR約30分</td>
+  <td>梅田→JR約30分</td>
+  <td>梅田→JR約30分</td>
+  <td>梅田→JR約30分</td>
+  <td>新大阪→JR約20分<br><span class="note">（乗換少ない）</span></td>
+  <td>梅田→JR約30分</td>
+  <td class="namba">難波→JR→USJ<br><span class="note">約40分（大阪環状線経由）</span></td>
+</tr>
+
+<tr>
+  <td>道頓堀・心齋橋</td>
+  <td>梅田→地鐵<br><span class="note">約10分</span></td>
+  <td>梅田→地鐵<br><span class="note">約10分</span></td>
+  <td>梅田→地鐵<br><span class="note">約10分</span></td>
+  <td>梅田→地鐵<br><span class="note">約10分</span></td>
+  <td>梅田→地鐵<br><span class="note">約10分</span></td>
+  <td>梅田→地鐵<br><span class="note">約15分</span></td>
+  <td>新大阪→地鐵<br><span class="note">約20分</span></td>
+  <td>梅田→地鐵<br><span class="note">約10分</span></td>
+  <td class="namba"><span class="ok">⭐ 最佳！</span><br><span class="note">步行 10分<br>道頓堀・心斎橋・黒門市場<br>全在步行圈</span></td>
+</tr>
+
+<tr>
+  <td>京都・奈良</td>
+  <td>梅田→JR/阪急<br><span class="note">京都45分 / 奈良45分</span></td>
+  <td>梅田→JR/阪急<br><span class="note">京都45分 / 奈良45分</span></td>
+  <td>梅田→JR/阪急<br><span class="note">京都45分 / 奈良45分</span></td>
+  <td>梅田→JR/阪急<br><span class="note">京都45分 / 奈良45分</span></td>
+  <td>梅田→JR/阪急<br><span class="note">京都45分 / 奈良45分</span></td>
+  <td>梅田→JR/阪急<br><span class="note">約50分（少し遠い）</span></td>
+  <td>新大阪→JR<br><span class="note">京都30分 / 奈良55分</span></td>
+  <td>梅田→JR/阪急<br><span class="note">京都45分 / 奈良45分</span></td>
+  <td class="namba">難波→近鐵<br><span class="note">京都45分 / 奈良35分<br>（奈良まで近鐵直通！）</span></td>
+</tr>
+
+<!-- ── 特色設施 ── -->
+<tr class="section-row"><td colspan="10">✨ 特色設施 / 加分項目</td></tr>
+
+<tr>
+  <td>溫泉 / SPA</td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ok">✅</span><br><span class="note">うめきた温泉「蓮」<br>（隣接・有料施設）</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ok">⭐</span><br><span class="note">うめ温泉（天然温泉）<br>館内直結・宿泊者割引</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ng">❌</span></td>
+  <td class="namba"><span class="ok">✅</span><br><span class="note">Pürovel Spa &amp; Sport<br>（室内プール・サウナ・ジム）<br>Grand Room以上で無料）</span></td>
+</tr>
+
+<tr>
+  <td>泳池 / 健身房</td>
+  <td><span class="semi">△</span><br><span class="note">健身房あり</span></td>
+  <td><span class="semi">△</span></td>
+  <td><span class="semi">△</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="semi">△</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="ng">❌</span></td>
+  <td><span class="semi">△</span></td>
+  <td class="namba"><span class="ok">✅</span><br><span class="note">室内プール＋ジム＋サウナ<br>（Pürovel Spa&amp;Sport）</span></td>
+</tr>
+
+<tr>
+  <td>特殊體驗 / 亮點</td>
+  <td>集團最高端旗艦<br><span class="note">奢華經典</span></td>
+  <td><span class="badge badge-green">大阪最新2025</span><br><span class="note">グラングリーン直結<br>タイムアウトマーケット</span></td>
+  <td><span class="badge badge-amber">連通房唯一確認</span><br><span class="note">LINKS UMEDA直結<br>バルチカ23時まで</span></td>
+  <td>コスパ最良<br><span class="note">梅田中心</span></td>
+  <td>天然溫泉<br><span class="note">4床和室獨特體驗</span></td>
+  <td>コスパ最安<br><span class="note">（4名对应なし）</span></td>
+  <td>快眠設計<br><span class="note">（家族向けではない）</span></td>
+  <td>JR大阪駅圏<br><span class="note">LUCUA直結圈</span></td>
+  <td class="namba"><span class="badge badge-blue">難波駅直結</span><br><span class="badge badge-purple">KIX 30分</span><br><span class="note">道頓堀步行圈<br>36F最上層ダイニング<br>近鐵で奈良直通</span></td>
+</tr>
+
+<!-- ── 總評 ── -->
+<tr class="section-row"><td colspan="10">⭐ 綜合評分（依本次旅行需求）</td></tr>
+
+<tr>
+  <td>4人住房方案</td>
+  <td>⭐⭐⭐⭐</td>
+  <td>⭐⭐<br><span class="note">需訂2室</span></td>
+  <td>⭐⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐⭐</td>
+  <td>⭐⭐<br><span class="note">3名まで</span></td>
+  <td>⭐<br><span class="note">不適合</span></td>
+  <td>⭐⭐⭐⭐</td>
+  <td class="namba">⭐⭐⭐<br><span class="note">Grand Room要確認</span></td>
+</tr>
+
+<tr>
+  <td>景觀</td>
+  <td>⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td>⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td class="namba">⭐⭐⭐⭐⭐</td>
+</tr>
+
+<tr>
+  <td>早午餐 / 飲食</td>
+  <td>⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td>⭐⭐</td>
+  <td>⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td class="namba">⭐⭐⭐⭐⭐</td>
+</tr>
+
+<tr>
+  <td>素食採購便利</td>
+  <td>⭐⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td>⭐</td>
+  <td>⭐⭐⭐⭐</td>
+  <td class="namba">⭐⭐⭐⭐</td>
+</tr>
+
+<tr>
+  <td>機場交通</td>
+  <td>⭐⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td>⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td class="namba">⭐⭐⭐⭐⭐</td>
+</tr>
+
+<tr>
+  <td>觀光便利</td>
+  <td>⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td>⭐⭐⭐</td>
+  <td>⭐⭐⭐⭐</td>
+  <td class="namba">⭐⭐⭐⭐⭐</td>
+</tr>
+
+<tr>
+  <td><strong>綜合推薦度</strong></td>
+  <td><strong>⭐⭐⭐⭐</strong></td>
+  <td><strong>⭐⭐⭐⭐</strong><br><span class="note">（無4人房為限制）</span></td>
+  <td><strong>⭐⭐⭐⭐⭐</strong><br><span class="badge badge-amber">連通房首選！</span></td>
+  <td><strong>⭐⭐⭐</strong></td>
+  <td><strong>⭐⭐⭐⭐</strong><br><span class="badge badge-blue">溫泉獨特體驗</span></td>
+  <td><strong>⭐</strong><br><span class="note">不適合本次</span></td>
+  <td><strong>⭐</strong><br><span class="note">不適合本次</span></td>
+  <td><strong>⭐⭐⭐</strong></td>
+  <td class="namba"><strong>⭐⭐⭐⭐⭐</strong><br><span class="badge badge-green">難波旅遊的最強選擇</span></td>
+</tr>
+
+</tbody>
+</table>
+</div><!-- /table-wrap -->
+
+<!-- ─── Price Comparison Section ─── -->
+<p class="section-title">💰 4人住房費用比較（7/13–18 · 5晚）</p>
+
+<div class="note-box">
+  🔍 <strong>搜尋條件：</strong>2026/7/13–18（5晚）・4人（2大人+15歲+11歲）・最佳4人方案。價格以 <strong>TWD</strong> 計，含稅不含早餐（另標者除外）。<br>
+  <span style="color:#1B5E20;font-weight:700;">✅ 已確認</span> = 直接從 Booking.com 即時取得（2026/6/19）；<span style="color:#E65100;">⚠️ 待查詢</span> = 尚未取得即時報價。<br>
+  📊 <strong>排序：</strong>依「每人每晚」由低至高。⑤阪神 フォース 40㎡（4人房）需至官網預訂，Booking.com 僅顯示 2 間雙人房方案。
+</div>
+
+<div class="table-wrap" style="margin-bottom:24px;">
+<table style="min-width:780px;">
+<thead>
+  <tr style="background:#1A1A2E;color:white;">
+    <th style="text-align:left;min-width:145px;">飯店</th>
+    <th style="text-align:left;min-width:200px;">推薦4人方案</th>
+    <th>合計面積</th>
+    <th>每人面積</th>
+    <th>每晚<br>（TWD）</th>
+    <th>5晚合計<br>（TWD）</th>
+    <th>每人每晚<br>（TWD）</th>
+    <th>資料來源</th>
+  </tr>
+</thead>
+<tbody>
+  <!-- ⑥ 阪神別館: 1,115/人/晚 -->
+  <tr>
+    <td style="text-align:left;font-weight:600;">⑥ 阪神別館<br><span style="font-size:0.72rem;color:#757575;">Hanshin Annex</span></td>
+    <td style="text-align:left;">雙人間（160cm）× 2間<br><span style="font-size:0.72rem;color:#757575;">2室分住 · 無4人房</span></td>
+    <td>15㎡×2<br>=30㎡</td>
+    <td style="color:#C62828;font-weight:700;">7.5㎡</td>
+    <td><strong>4,458</strong></td>
+    <td><strong>22,292</strong></td>
+    <td style="background:#C8E6C9;font-size:0.95rem;font-weight:700;color:#1B5E20;">1,115 🥇</td>
+    <td><span class="badge badge-green">✅ Booking.com</span></td>
+  </tr>
+  <!-- ⑦ Remm: 1,187/人/晚 -->
+  <tr>
+    <td style="text-align:left;font-weight:600;">⑦ Remm 新大阪<br><span style="font-size:0.72rem;color:#757575;">remm Shin-Osaka</span></td>
+    <td style="text-align:left;">經濟雙人房－禁菸 × 2間<br><span style="font-size:0.72rem;color:#757575;">2室分住 · 快眠特化</span></td>
+    <td>—×2</td>
+    <td style="color:#C62828;font-weight:700;">—</td>
+    <td><strong>4,746</strong></td>
+    <td><strong>23,731</strong></td>
+    <td style="font-weight:700;">1,187</td>
+    <td><span class="badge badge-green">✅ Booking.com</span></td>
+  </tr>
+  <!-- ⑤ 阪神本館: 1,336/人/晚（Booking.com 雙人×2；フォース官網） -->
+  <tr>
+    <td style="text-align:left;font-weight:600;">⑤ 大阪阪神酒店<br><span style="font-size:0.72rem;color:#757575;">Hotel Hanshin</span></td>
+    <td style="text-align:left;">舒適雙人房 × 2間（各20㎡）<br><span style="font-size:0.72rem;color:#757575;">Booking.com 方案・<strong style="color:#E65100;">フォース 40㎡ 需官網訂</strong></span></td>
+    <td>20㎡×2<br>=40㎡</td>
+    <td>10㎡</td>
+    <td><strong>5,344</strong></td>
+    <td><strong>26,721</strong></td>
+    <td style="font-weight:700;">1,336</td>
+    <td><span class="badge badge-green">✅ Booking.com</span></td>
+  </tr>
+  <!-- ④ 新阪急別館: 1,663/人/晚 -->
+  <tr style="background:#F9FBE7;">
+    <td style="text-align:left;font-weight:600;">④ 新阪急別館<br><span style="font-size:0.72rem;color:#757575;">New Hankyu Annex</span></td>
+    <td style="text-align:left;">四人間（4張床）× 1間<br><span style="font-size:0.72rem;color:#757575;">4人同室 · 確認連通房可同層</span></td>
+    <td>30㎡</td>
+    <td style="color:#C62828;font-weight:700;">7.5㎡</td>
+    <td><strong>6,652</strong></td>
+    <td><strong>33,262</strong></td>
+    <td style="font-weight:700;color:#1B5E20;">1,663 ⭐</td>
+    <td><span class="badge badge-green">✅ Booking.com</span></td>
+  </tr>
+  <!-- ⑧ Granvia: 2,775/人/晚 -->
+  <tr>
+    <td style="text-align:left;font-weight:600;">⑧ 格蘭比亞<br><span style="font-size:0.72rem;color:#757575;">Hotel Granvia Osaka</span></td>
+    <td style="text-align:left;">家庭房（ヴィスキオツイン）× 1間<br><span style="font-size:0.72rem;color:#757575;">43㎡ · 4人同室 · JR直結</span></td>
+    <td>43㎡</td>
+    <td>10.75㎡</td>
+    <td><strong>11,099</strong></td>
+    <td><strong>55,494</strong></td>
+    <td style="font-weight:700;">2,775</td>
+    <td><span class="badge badge-green">✅ Booking.com</span></td>
+  </tr>
+  <!-- ⑨ Swissôtel: ~2,704-2,896/人/晚 -->
+  <tr>
+    <td style="text-align:left;font-weight:600;">⑨ Swissôtel 南海<br><span style="font-size:0.72rem;color:#757575;">🌟 難波</span></td>
+    <td style="text-align:left;">Swiss Select Twin × 2間<br><span style="font-size:0.72rem;color:#757575;">五星 · 高樓海景 · KIX直通</span></td>
+    <td>~56㎡</td>
+    <td>~14㎡</td>
+    <td>~10,816–11,584<br><span style="font-size:0.68rem;color:#757575;">USD $169–181/間×2</span></td>
+    <td>~54,080–57,920</td>
+    <td style="font-weight:700;">~2,704–2,896</td>
+    <td><span class="badge badge-amber">✅ Expedia/USD</span></td>
+  </tr>
+  <!-- ③ 龍仕柏: 3,501/人/晚 -->
+  <tr>
+    <td style="text-align:left;font-weight:600;">③ 龍仕柏<br><span style="font-size:0.72rem;color:#757575;">Hankyu Respire</span></td>
+    <td style="text-align:left;">四人房（12–23F）× 1間<br><span style="font-size:0.72rem;color:#757575;">47㎡ · 4張單人床 · 連通房 TWD 75,420</span></td>
+    <td>47㎡</td>
+    <td>11.75㎡</td>
+    <td><strong>14,002</strong></td>
+    <td><strong>70,010</strong></td>
+    <td style="font-weight:700;">3,501</td>
+    <td><span class="badge badge-green">✅ Booking.com</span></td>
+  </tr>
+  <!-- ① 阪急國際: 3,810/人/晚 -->
+  <tr>
+    <td style="text-align:left;font-weight:600;">① 阪急國際<br><span style="font-size:0.72rem;color:#757575;">Hankyu International</span></td>
+    <td style="text-align:left;">小型套房（4人）× 1間<br><span style="font-size:0.72rem;color:#757575;">67㎡ · 2單人床+沙發床 · Club Lounge可加購</span></td>
+    <td>67㎡</td>
+    <td style="color:#2E7D32;font-weight:700;">16.75㎡</td>
+    <td><strong>15,239</strong></td>
+    <td><strong>76,193</strong></td>
+    <td style="font-weight:700;">3,810</td>
+    <td><span class="badge badge-green">✅ Booking.com</span></td>
+  </tr>
+  <!-- ② 格蘭龍仕柏: 4,789/人/晚（官網JPY轉換） -->
+  <tr>
+    <td style="text-align:left;font-weight:600;">② 格蘭龍仕柏<br><span style="font-size:0.72rem;color:#757575;">Grand Respire（2025新）</span></td>
+    <td style="text-align:left;">スタンダード × 2間（食事なし）<br><span style="font-size:0.72rem;color:#757575;">各35㎡コーナーツイン → TWD 116,200 / コーナー以外 → TWD 95,800起</span></td>
+    <td>~35㎡×2<br>=70㎡</td>
+    <td>~17.5㎡</td>
+    <td>~19,160<br><span style="font-size:0.68rem;color:#757575;">JPY 87,080/晚×0.22</span></td>
+    <td>~95,800<br><span style="font-size:0.68rem;color:#757575;">435,400 JPY×0.22</span></td>
+    <td style="font-weight:700;">~4,789<br><span style="font-size:0.68rem;color:#757575;">コーナー→~5,812</span></td>
+    <td><span class="badge badge-amber">✅ 官網/JPY</span></td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<div class="note-box" style="background:#FFF8E1;border-color:#F9A825;">
+  <strong>💡 補充說明：</strong>
+  ⑤阪神本館的 <strong>フォース 40㎡（4張床）</strong>和 <strong>和室 40㎡（4張榻榻米）</strong>是4人同室的獨特選擇，但 Booking.com 未顯示，建議直接至 <a href="https://www.hotelhanshin.com/" target="_blank">阪神官網</a>查詢。
+  ②格蘭龍仕柏（2025年3月新開幕）Booking.com 未上架，價格來自<a href="https://go-hhd.reservation.jp/ja/hotels/granrespire/plans" target="_blank">官網預訂系統</a>（JPY），以 1 JPY ≈ 0.22 TWD 換算。スタンダードフロア 食事なし：一般価格 435,400 JPY ≈ TWD 95,800 / 5晚（2室），会員価格 348,320 JPY ≈ TWD 76,630。
+  ③龍仕柏連通房（ツイン+トリプル 50㎡）5晚 TWD 75,420，為梅田唯一官方確認可連通的飯店。
+</div>
+
+<!-- ── 推薦建議 ── -->
+<div class="rec-grid">
+
+  <div class="rec-card">
+    <div class="tag">🏆 連通房首選（梅田）</div>
+    <h3>③ 阪急大阪龍仕柏飯店</h3>
+    <p>唯一有<strong>官方確認連通房</strong>的選擇（ツイン＋トリプル），4人住宿最安心。LINKS UMEDA直結，B2F バルチカ 23時まで營業可深夜買素食便當。梅田百貨步行5分。</p>
+  </div>
+
+  <div class="rec-card">
+    <div class="tag">⭐ 最新旗艦（梅田）</div>
+    <h3>② 阪急大阪格蘭龍仕柏飯店</h3>
+    <p>2025年3月最新開業，設計感最強、景觀最新。但<strong>無四人房、無連通房</strong>，4人必須訂2室且不確定是否同層。已去信確認中，適合2間各訂 Corner Twin 的方案。</p>
+  </div>
+
+  <div class="rec-card">
+    <div class="tag">🌸 高端 + 素食採購（梅田）</div>
+    <h3>① 阪急國際飯店</h3>
+    <p>集團旗艦，有可住4人的クラブスーペリアスイート。距阪急うめだ本店 B1 只要步行3分，素食便當採購最方便。適合重視購物與百貨地下街的行程。</p>
+  </div>
+
+  <div class="rec-card">
+    <div class="tag">♨️ 溫泉體驗（梅田）</div>
+    <h3>⑤ 大阪阪神酒店</h3>
+    <p>有天然溫泉「うめ温泉」（館内直結），フォース 40㎡（4床）或和室 40㎡（4布団）是最適合4人的獨特體驗。全組9間飯店中，4人正式床位最多的選擇。</p>
+  </div>
+
+  <div class="rec-card">
+    <div class="tag">✈️ 如果以難波為基地</div>
+    <h3>⑨ 大阪南海瑞士酒店</h3>
+    <p>與其他8間飯店性質完全不同——難波基地、南海電鐵 KIX 直達僅30分、道頓堀步行圈、高島屋地下鄰接。<strong>36F景觀最高、設施最豐富（泳池+SPA+多間餐廳）</strong>。Grand Room 為家族向房型（2浴室），Swiss Executive Lounge 32-34F景觀絕佳。若計畫以難波而非梅田為旅遊基地，這是本表中最頂級的選擇。</p>
+  </div>
+
+</div>
+
+<ul class="footnotes">
+  <li>① 所有飯店資訊均來自各官方網站，實際房況與方案以訂房時為準</li>
+  <li>② 連通房（コネクティングルーム）建議電話確認，通常需在訂房後另外申請</li>
+  <li>③ 阪急大阪格蘭龍仕柏飯店已去信詢問同層安排，等候回覆中</li>
+  <li>④ 大阪南海瑞士酒店 Grand Room 的具體容納人數建議電話確認（06-6646-1111）</li>
+  <li>⑤ 星級評分為相對比較，非絕對評分，依本次旅行優先條件而定</li>
+  <li>⑥ 梅田⇔難波：地鐵御堂筋線 約5分鐘 / ¥290，步行約30分鐘</li>
+</ul>
+
+</div><!-- /wrap -->
+
+<footer>
+  🏨 大阪飯店比較表 2026 · Fox's Family Trip · 資料截至 2026年6月<br>
+  官方網站：
+  <a href="https://www.hankyu-hotel.com/hotel/hh/hhinternational/" target="_blank">阪急國際</a> ·
+  <a href="https://www.hankyu-hotel.com/hotel/respire/granosaka/" target="_blank">格蘭龍仕柏</a> ·
+  <a href="https://www.hankyu-hotel.com/hotel/respire/osaka/" target="_blank">龍仕柏</a> ·
+  <a href="https://swissotelnankaiosaka.com/rooms-and-suites/" target="_blank">南海瑞士酒店</a>
+</footer>
+
+</body>
+</html>

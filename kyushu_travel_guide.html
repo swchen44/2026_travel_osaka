@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九州・福岡 家庭自助旅遊手冊 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --vermillion: #C0392B;
+  --gold: #C9A84C;
+  --deep-red: #7B1F1F;
+  --sakura: #F8C8D4;
+  --bamboo: #5D7A5D;
+  --ink: #1A1A2E;
+  --cream: #FBF7F0;
+  --sky: #4A90C4;
+  --sea: #1E6B8C;
+  --spring: #6BAE8C;
+  --plan-a: #C0392B;
+  --plan-b: #2980B9;
+  --plan-c: #8E44AD;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans TC', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
+
+/* HERO */
+.hero {
+  height: 100vh; min-height: 600px;
+  background: linear-gradient(160deg, #0d2137 0%, #1a3a52 40%, #7B1F1F 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1590559899731-a382839e5549?w=1400&q=80') center/cover no-repeat;
+  opacity: 0.25;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(13,33,55,0.7) 0%, rgba(123,31,31,0.6) 100%);
+}
+.hero-content { position: relative; z-index: 2; text-align: center; padding: 2rem; }
+.hero-badge {
+  display: inline-block; border: 2px solid var(--gold); color: var(--gold);
+  font-family: 'Noto Serif TC', serif; font-size: 0.85rem; letter-spacing: 0.3em;
+  padding: 0.4rem 1.5rem; margin-bottom: 1.5rem; border-radius: 2px;
+}
+.hero h1 {
+  font-family: 'Noto Serif TC', serif; font-size: clamp(2.5rem,6vw,4.5rem);
+  color: #fff; line-height: 1.2; margin-bottom: 0.5rem; text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+.hero h1 span { color: var(--gold); }
+.hero-sub { color: rgba(255,255,255,0.85); font-size: 1.1rem; letter-spacing: 0.1em; margin-bottom: 2.5rem; }
+.hero-pills { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+.hero-pill {
+  background: rgba(255,255,255,0.15); backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.3); color: #fff;
+  padding: 0.5rem 1.2rem; border-radius: 20px; font-size: 0.9rem;
+}
+.petal {
+  position: absolute; width: 12px; height: 12px; border-radius: 50% 0 50% 0;
+  background: rgba(255,255,255,0.3); animation: fall linear infinite;
+  pointer-events: none;
+}
+@keyframes fall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* NAV */
+.sticky-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(26,26,46,0.97); backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--gold);
+  display: flex; overflow-x: auto; scrollbar-width: none;
+}
+.sticky-nav::-webkit-scrollbar { display: none; }
+.nav-btn {
+  padding: 1rem 1.4rem; color: rgba(255,255,255,0.7);
+  font-size: 0.85rem; font-family: 'Noto Sans TC'; cursor: pointer;
+  border: none; background: none; white-space: nowrap;
+  border-bottom: 3px solid transparent; transition: all 0.2s;
+}
+.nav-btn:hover, .nav-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* MAIN */
+main { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+.section { padding: 3.5rem 0 2rem; }
+.section-header { text-align: center; margin-bottom: 2.5rem; }
+.section-tag {
+  display: inline-block; background: var(--vermillion); color: #fff;
+  font-size: 0.75rem; letter-spacing: 0.2em; padding: 0.3rem 1rem;
+  border-radius: 2px; margin-bottom: 0.8rem;
+}
+.section-title {
+  font-family: 'Noto Serif TC', serif; font-size: clamp(1.6rem,3vw,2.2rem);
+  color: var(--ink); margin-bottom: 0.5rem;
+}
+.section-sub { color: #666; font-size: 0.95rem; }
+.divider { border: none; border-top: 1px solid rgba(201,168,76,0.3); margin: 2rem 0; }
+
+/* COMPARE TABLE */
+.compare-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-top: 2rem;
+}
+@media(max-width:768px){ .compare-grid { grid-template-columns: 1fr; } }
+.plan-card {
+  border-radius: 12px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.2s;
+}
+.plan-card:hover { transform: translateY(-4px); }
+.plan-card-header {
+  padding: 1.5rem; color: #fff; text-align: center;
+}
+.plan-card-header h3 { font-family: 'Noto Serif TC', serif; font-size: 1.3rem; margin-bottom: 0.3rem; }
+.plan-card-header .plan-sub { font-size: 0.85rem; opacity: 0.9; }
+.plan-a-bg { background: linear-gradient(135deg, #C0392B, #922B21); }
+.plan-b-bg { background: linear-gradient(135deg, #2980B9, #1a5276); }
+.plan-c-bg { background: linear-gradient(135deg, #8E44AD, #6C3483); }
+.plan-card-body { background: #fff; padding: 1.5rem; }
+.plan-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 0.6rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9rem; }
+.plan-row:last-child { border-bottom: none; }
+.plan-row-label { color: #888; font-size: 0.82rem; min-width: 70px; }
+.plan-row-val { color: var(--ink); font-weight: 500; text-align: right; flex: 1; }
+.plan-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+.plan-tag {
+  padding: 0.25rem 0.7rem; border-radius: 12px; font-size: 0.78rem;
+  background: #f0f0f0; color: #555;
+}
+.tag-good { background: #e8f5e9; color: #2e7d32; }
+.tag-warn { background: #fff3e0; color: #e65100; }
+.plan-recommend {
+  text-align: center; padding: 0.8rem; font-size: 0.82rem;
+  background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.2));
+  border-top: 1px solid rgba(201,168,76,0.3); color: var(--deep-red); font-weight: 500;
+}
+
+/* ITINERARY */
+.plan-section-header {
+  display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding: 1.5rem 2rem;
+  border-radius: 12px; color: #fff;
+}
+.plan-section-header.a { background: linear-gradient(135deg, #C0392B, #922B21); }
+.plan-section-header.b { background: linear-gradient(135deg, #2980B9, #1a5276); }
+.plan-section-header.c { background: linear-gradient(135deg, #8E44AD, #6C3483); }
+.psh-icon { font-size: 2.5rem; }
+.psh-info h2 { font-family: 'Noto Serif TC', serif; font-size: 1.5rem; }
+.psh-info p { opacity: 0.9; font-size: 0.9rem; margin-top: 0.3rem; }
+
+.day-timeline { position: relative; padding-left: 2rem; }
+.day-timeline::before {
+  content: ''; position: absolute; left: 0.6rem; top: 0; bottom: 0;
+  width: 2px; background: linear-gradient(to bottom, var(--gold), transparent);
+}
+.day-card {
+  position: relative; background: #fff; border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 1.5rem; overflow: hidden;
+}
+.day-card::before {
+  content: ''; position: absolute; left: -2rem; top: 1.8rem;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--gold); border: 2px solid #fff;
+  box-shadow: 0 0 0 2px var(--gold);
+}
+.day-header {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 1.5rem; border-bottom: 1px solid #f0f0f0;
+}
+.day-num {
+  background: var(--vermillion); color: #fff;
+  font-family: 'Noto Serif TC', serif; font-size: 0.8rem;
+  padding: 0.3rem 0.8rem; border-radius: 4px; white-space: nowrap;
+}
+.day-num.b { background: var(--sky); }
+.day-num.c { background: #8E44AD; }
+.day-title { font-weight: 700; font-size: 1rem; color: var(--ink); }
+.day-meta { color: #888; font-size: 0.82rem; margin-left: auto; }
+.day-body { padding: 1.2rem 1.5rem; }
+.stop-list { list-style: none; }
+.stop-item {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 0.7rem 0; border-bottom: 1px dashed #f0ebe0;
+}
+.stop-item:last-child { border-bottom: none; }
+.stop-time { color: var(--gold); font-size: 0.82rem; font-weight: 700; min-width: 50px; }
+.stop-info { flex: 1; }
+.stop-name { font-weight: 600; font-size: 0.95rem; color: var(--ink); }
+.stop-desc { color: #666; font-size: 0.83rem; margin-top: 0.2rem; line-height: 1.5; }
+.stop-badges { display: flex; gap: 0.3rem; flex-wrap: wrap; margin-top: 0.3rem; }
+.sbadge {
+  padding: 0.15rem 0.5rem; border-radius: 10px; font-size: 0.72rem; font-weight: 500;
+}
+.sbadge.kids { background: #fff3e0; color: #e65100; }
+.sbadge.food { background: #e8f5e9; color: #2e7d32; }
+.sbadge.shop { background: #e3f2fd; color: #1565c0; }
+.sbadge.hot { background: #fce4ec; color: #c2185b; }
+.sbadge.drive { background: #f3e5f5; color: #7b1fa2; }
+.sbadge.tip { background: #fffde7; color: #f57f17; }
+
+.transport-row {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.4rem 1rem; background: #f8f4ed; border-radius: 6px;
+  margin: 0.5rem 0; font-size: 0.82rem; color: #555;
+}
+.tr-icon { font-size: 1rem; }
+.tr-label { font-weight: 500; }
+.tr-detail { color: #888; margin-left: auto; }
+
+/* SPOTS */
+.spots-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+.spot-card {
+  background: #fff; border-radius: 12px; overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08); transition: transform 0.2s;
+}
+.spot-card:hover { transform: translateY(-4px); }
+.spot-img {
+  height: 180px; background-size: cover; background-position: center;
+  position: relative;
+}
+.spot-region {
+  position: absolute; top: 1rem; left: 1rem;
+  background: rgba(26,26,46,0.8); color: #fff; font-size: 0.75rem;
+  padding: 0.2rem 0.7rem; border-radius: 10px;
+}
+.spot-body { padding: 1.2rem; }
+.spot-name { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.4rem; }
+.spot-tags { display: flex; gap: 0.3rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+.spot-tag { padding: 0.15rem 0.6rem; border-radius: 10px; font-size: 0.75rem; background: #f0f0f0; color: #555; }
+.spot-desc { font-size: 0.85rem; color: #555; line-height: 1.6; }
+.spot-info { display: flex; gap: 1rem; margin-top: 0.8rem; font-size: 0.8rem; color: #888; }
+
+/* DRIVING */
+.driving-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media(max-width:600px){ .driving-grid { grid-template-columns: 1fr; } }
+.driving-card {
+  background: #fff; border-radius: 12px; padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08); border-left: 4px solid var(--sky);
+}
+.driving-card.warn { border-left-color: var(--vermillion); }
+.driving-card.tip { border-left-color: var(--gold); }
+.driving-card h4 { font-family: 'Noto Serif TC', serif; font-size: 1rem; margin-bottom: 0.8rem; color: var(--ink); }
+.driving-card ul { list-style: none; }
+.driving-card li { padding: 0.4rem 0; font-size: 0.87rem; color: #555; border-bottom: 1px dashed #f0f0f0; }
+.driving-card li:last-child { border-bottom: none; }
+.driving-card li::before { content: '• '; color: var(--gold); }
+
+/* TIPS BOX */
+.tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.2rem; }
+.tip-card {
+  background: #fff; border-radius: 12px; padding: 1.3rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.tip-icon { font-size: 2rem; margin-bottom: 0.6rem; }
+.tip-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.4rem; color: var(--ink); }
+.tip-body { font-size: 0.83rem; color: #555; line-height: 1.6; }
+
+/* ROUTE MAP */
+.route-map-wrap { background: #fff; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow-x: auto; }
+.route-map-wrap svg { min-width: 700px; display: block; margin: 0 auto; }
+
+/* FOOTER */
+footer {
+  background: var(--ink); color: rgba(255,255,255,0.6);
+  text-align: center; padding: 2rem; font-size: 0.85rem;
+}
+footer span { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✈ 家庭自助旅遊手冊 · 2026</div>
+    <h1>九州・<span>福岡</span><br>深度家庭遊</h1>
+    <p class="hero-sub">豪斯登堡 · teamLab · 由布院 · 阿蘇 · 熊本城</p>
+    <div class="hero-pills">
+      <span class="hero-pill">🚗 自駕可行</span>
+      <span class="hero-pill">👨‍👩‍👧‍👦 大人2 + 小孩2</span>
+      <span class="hero-pill">🗓 6天5夜</span>
+      <span class="hero-pill">🇯🇵 不懂日文也沒問題</span>
+    </div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="sticky-nav" id="nav">
+  <button class="nav-btn" onclick="scrollTo('compare')">📊 行程比較</button>
+  <button class="nav-btn" onclick="scrollTo('plan-a')">🚃 行程A・經典遊</button>
+  <button class="nav-btn" onclick="scrollTo('plan-b')">🚗 行程B・自駕遊</button>
+  <button class="nav-btn" onclick="scrollTo('plan-c')">🎡 行程C・親子遊</button>
+  <button class="nav-btn" onclick="scrollTo('spots')">🗺 景點介紹</button>
+  <button class="nav-btn" onclick="scrollTo('driving')">🚗 自駕攻略</button>
+  <button class="nav-btn" onclick="scrollTo('tips')">💡 自助Tips</button>
+</nav>
+
+<main>
+
+<!-- COMPARE -->
+<section class="section" id="compare">
+  <div class="section-header">
+    <div class="section-tag">三種行程比較</div>
+    <h2 class="section-title">選擇適合你的九州旅法</h2>
+    <p class="section-sub">6天5夜，桃園/高雄 飛福岡（約2小時），以下三種行程各有特色</p>
+  </div>
+
+  <div class="compare-grid">
+    <!-- Plan A -->
+    <div class="plan-card">
+      <div class="plan-card-header plan-a-bg">
+        <div style="font-size:2.5rem">🚃</div>
+        <h3>行程 A</h3>
+        <p class="plan-sub">經典精華遊<br>全程大眾交通</p>
+      </div>
+      <div class="plan-card-body">
+        <div class="plan-row"><span class="plan-row-label">難度</span><span class="plan-row-val">⭐⭐ 輕鬆</span></div>
+        <div class="plan-row"><span class="plan-row-label">交通</span><span class="plan-row-val">JR・地鐵・特急</span></div>
+        <div class="plan-row"><span class="plan-row-label">住宿</span><span class="plan-row-val">全程福岡市區</span></div>
+        <div class="plan-row"><span class="plan-row-label">亮點</span><span class="plan-row-val">豪斯登堡・由布院<br>teamLab・熊本城</span></div>
+        <div class="plan-row"><span class="plan-row-label">預估花費</span><span class="plan-row-val">4人約 NT$12-16萬</span></div>
+        <div class="plan-tags">
+          <span class="plan-tag tag-good">✅ 不需駕照</span>
+          <span class="plan-tag tag-good">✅ 票券彈性</span>
+          <span class="plan-tag tag-warn">⚠️ 鄉間難達</span>
+          <span class="plan-tag tag-warn">⚠️ 需等電車</span>
+        </div>
+      </div>
+      <div class="plan-recommend">🌸 推薦給：第一次來九州、不想自駕的家庭</div>
+    </div>
+    <!-- Plan B -->
+    <div class="plan-card">
+      <div class="plan-card-header plan-b-bg">
+        <div style="font-size:2.5rem">🚗</div>
+        <h3>行程 B</h3>
+        <p class="plan-sub">自駕混合遊<br>市區＋大自然</p>
+      </div>
+      <div class="plan-card-body">
+        <div class="plan-row"><span class="plan-row-label">難度</span><span class="plan-row-val">⭐⭐⭐ 中等</span></div>
+        <div class="plan-row"><span class="plan-row-label">交通</span><span class="plan-row-val">前2天電車<br>後3天租車</span></div>
+        <div class="plan-row"><span class="plan-row-label">住宿</span><span class="plan-row-val">福岡+黑川溫泉</span></div>
+        <div class="plan-row"><span class="plan-row-label">亮點</span><span class="plan-row-val">阿蘇火山・黑川溫泉<br>由布院・豪斯登堡</span></div>
+        <div class="plan-row"><span class="plan-row-label">預估花費</span><span class="plan-row-val">4人約 NT$15-20萬</span></div>
+        <div class="plan-tags">
+          <span class="plan-tag tag-good">✅ 極高彈性</span>
+          <span class="plan-tag tag-good">✅ 阿蘇絕景</span>
+          <span class="plan-tag tag-warn">⚠️ 需國際駕照</span>
+          <span class="plan-tag tag-warn">⚠️ 靠左行駛</span>
+        </div>
+      </div>
+      <div class="plan-recommend">🌋 推薦給：有自駕經驗、想看壯麗大自然的家庭</div>
+    </div>
+    <!-- Plan C -->
+    <div class="plan-card">
+      <div class="plan-card-header plan-c-bg">
+        <div style="font-size:2.5rem">🎡</div>
+        <h3>行程 C</h3>
+        <p class="plan-sub">親子主題遊<br>樂園深度玩</p>
+      </div>
+      <div class="plan-card-body">
+        <div class="plan-row"><span class="plan-row-label">難度</span><span class="plan-row-val">⭐ 最輕鬆</span></div>
+        <div class="plan-row"><span class="plan-row-label">交通</span><span class="plan-row-val">JR・特急為主</span></div>
+        <div class="plan-row"><span class="plan-row-label">住宿</span><span class="plan-row-val">福岡＋豪斯登堡</span></div>
+        <div class="plan-row"><span class="plan-row-label">亮點</span><span class="plan-row-val">豪斯登堡兩天<br>九十九島・teamLab</span></div>
+        <div class="plan-row"><span class="plan-row-label">預估花費</span><span class="plan-row-val">4人約 NT$14-18萬</span></div>
+        <div class="plan-tags">
+          <span class="plan-tag tag-good">✅ 孩子最開心</span>
+          <span class="plan-tag tag-good">✅ 行程不趕</span>
+          <span class="plan-tag tag-warn">⚠️ 歷史景點少</span>
+          <span class="plan-tag tag-warn">⚠️ 豪斯登堡費用高</span>
+        </div>
+      </div>
+      <div class="plan-recommend">🎠 推薦給：以孩子為主角、想在樂園盡情玩的家庭</div>
+    </div>
+  </div>
+
+  <!-- SVG 地理位置圖 -->
+  <div class="route-map-wrap" style="margin-top:2.5rem">
+    <h3 style="font-family:'Noto Serif TC',serif; text-align:center; margin-bottom:1.5rem; color:var(--ink)">九州主要景點地理位置</h3>
+    <svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:800px">
+      <defs>
+        <filter id="shadow">
+          <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.2"/>
+        </filter>
+      </defs>
+      <!-- 背景 -->
+      <rect width="800" height="520" fill="#e8f4f8"/>
+      <!-- 海洋 -->
+      <path d="M0,0 L800,0 L800,520 L0,520 Z" fill="#c8e6f0"/>
+      <!-- 九州陸地 (簡化輪廓) -->
+      <path d="M120,60 L280,40 L420,55 L520,80 L590,120 L620,200 L600,300 L580,380 L520,440 L450,480 L380,490 L300,470 L220,430 L160,360 L120,280 L100,180 Z" fill="#d4e8d0" stroke="#b0c8a0" stroke-width="2"/>
+      <!-- 玄界灘 label -->
+      <text x="80" y="70" fill="#6aa4c0" font-size="13" font-family="Noto Sans TC">玄界灘</text>
+      <!-- 有明海 -->
+      <text x="360" y="340" fill="#6aa4c0" font-size="11" font-family="Noto Sans TC">有明海</text>
+      <!-- 別府灣 -->
+      <text x="540" y="240" fill="#6aa4c0" font-size="11" font-family="Noto Sans TC">別府灣</text>
+      <!-- 錦江灣 -->
+      <text x="390" y="450" fill="#6aa4c0" font-size="11" font-family="Noto Sans TC">錦江灣</text>
+
+      <!-- 新幹線 (紅線) -->
+      <line x1="200" y1="100" x2="290" y2="200" stroke="#E53935" stroke-width="3" stroke-dasharray="6,3" opacity="0.7"/>
+      <line x1="290" y1="200" x2="360" y2="300" stroke="#E53935" stroke-width="3" stroke-dasharray="6,3" opacity="0.7"/>
+      <line x1="360" y1="300" x2="400" y2="400" stroke="#E53935" stroke-width="3" stroke-dasharray="6,3" opacity="0.7"/>
+      <!-- 特急 (藍線) -->
+      <line x1="200" y1="100" x2="480" y2="150" stroke="#1565C0" stroke-width="2" stroke-dasharray="8,4" opacity="0.6"/>
+      <line x1="480" y1="150" x2="500" y2="220" stroke="#1565C0" stroke-width="2" stroke-dasharray="8,4" opacity="0.6"/>
+
+      <!-- 交通圖例 -->
+      <rect x="620" y="20" width="160" height="80" rx="6" fill="white" opacity="0.9"/>
+      <text x="630" y="38" font-size="11" fill="#333" font-family="Noto Sans TC">交通圖例</text>
+      <line x1="630" y1="50" x2="660" y2="50" stroke="#E53935" stroke-width="3" stroke-dasharray="6,3"/>
+      <text x="668" y="54" font-size="10" fill="#555" font-family="Noto Sans TC">九州新幹線</text>
+      <line x1="630" y1="66" x2="660" y2="66" stroke="#1565C0" stroke-width="2" stroke-dasharray="8,4"/>
+      <text x="668" y="70" font-size="10" fill="#555" font-family="Noto Sans TC">JR特急</text>
+      <circle cx="635" cy="82" r="5" fill="#C0392B"/>
+      <text x="645" y="86" font-size="10" fill="#555" font-family="Noto Sans TC">主要景點</text>
+
+      <!-- 城市節點 -->
+      <!-- 福岡 -->
+      <circle cx="200" cy="100" r="14" fill="#C0392B" filter="url(#shadow)"/>
+      <text x="200" y="104" text-anchor="middle" fill="white" font-size="10" font-family="Noto Sans TC">福岡</text>
+      <text x="220" y="88" fill="#C0392B" font-size="12" font-family="Noto Serif TC" font-weight="bold">福岡・博多</text>
+
+      <!-- 由布院 -->
+      <circle cx="480" cy="150" r="11" fill="#8E44AD" filter="url(#shadow)"/>
+      <text x="480" y="154" text-anchor="middle" fill="white" font-size="9" font-family="Noto Sans TC">由布</text>
+      <text x="498" y="142" fill="#8E44AD" font-size="11" font-family="Noto Serif TC" font-weight="bold">由布院</text>
+
+      <!-- 別府 -->
+      <circle cx="510" cy="195" r="9" fill="#1E6B8C" filter="url(#shadow)"/>
+      <text x="510" y="199" text-anchor="middle" fill="white" font-size="8" font-family="Noto Sans TC">別府</text>
+
+      <!-- 阿蘇 -->
+      <circle cx="400" cy="220" r="11" fill="#E65100" filter="url(#shadow)"/>
+      <text x="400" y="224" text-anchor="middle" fill="white" font-size="9" font-family="Noto Sans TC">阿蘇</text>
+      <text x="416" y="212" fill="#E65100" font-size="11" font-family="Noto Serif TC" font-weight="bold">阿蘇火山</text>
+
+      <!-- 黑川溫泉 -->
+      <circle cx="420" cy="168" r="8" fill="#6BAE8C" filter="url(#shadow)"/>
+      <text x="420" y="172" text-anchor="middle" fill="white" font-size="7" font-family="Noto Sans TC">黑川</text>
+      <text x="434" y="162" fill="#6BAE8C" font-size="10" font-family="Noto Serif TC">黑川溫泉</text>
+
+      <!-- 熊本 -->
+      <circle cx="290" cy="295" r="11" fill="#C0392B" filter="url(#shadow)"/>
+      <text x="290" y="299" text-anchor="middle" fill="white" font-size="9" font-family="Noto Sans TC">熊本</text>
+      <text x="308" y="287" fill="#C0392B" font-size="11" font-family="Noto Serif TC" font-weight="bold">熊本城</text>
+
+      <!-- 柳川 -->
+      <circle cx="240" cy="345" r="8" fill="#1E6B8C" filter="url(#shadow)"/>
+      <text x="240" y="349" text-anchor="middle" fill="white" font-size="7" font-family="Noto Sans TC">柳川</text>
+
+      <!-- 鹿兒島 -->
+      <circle cx="340" cy="430" r="10" fill="#555" filter="url(#shadow)"/>
+      <text x="340" y="434" text-anchor="middle" fill="white" font-size="8" font-family="Noto Sans TC">鹿島</text>
+      <text x="356" y="426" fill="#555" font-size="10" font-family="Noto Serif TC">鹿兒島</text>
+
+      <!-- 佐世保/豪斯登堡 -->
+      <circle cx="150" cy="215" r="12" fill="#F39C12" filter="url(#shadow)"/>
+      <text x="150" y="219" text-anchor="middle" fill="white" font-size="8" font-family="Noto Sans TC">HTB</text>
+      <text x="168" y="206" fill="#F39C12" font-size="11" font-family="Noto Serif TC" font-weight="bold">豪斯登堡</text>
+      <text x="168" y="218" fill="#888" font-size="9" font-family="Noto Sans TC">佐世保</text>
+
+      <!-- 長崎 -->
+      <circle cx="130" cy="300" r="9" fill="#2980B9" filter="url(#shadow)"/>
+      <text x="130" y="304" text-anchor="middle" fill="white" font-size="7" font-family="Noto Sans TC">長崎</text>
+
+      <!-- 交通時間標示 -->
+      <!-- 福岡→豪斯登堡 -->
+      <text x="148" y="148" fill="#F39C12" font-size="10" font-family="Noto Sans TC" font-weight="bold">特急2.5h</text>
+      <!-- 福岡→由布院 -->
+      <text x="320" y="108" fill="#1565C0" font-size="10" font-family="Noto Sans TC" font-weight="bold">特急2h</text>
+      <!-- 福岡→熊本 -->
+      <text x="230" y="208" fill="#E53935" font-size="10" font-family="Noto Sans TC" font-weight="bold">新幹線33min</text>
+      <!-- 熊本→柳川 -->
+      <text x="248" y="330" fill="#888" font-size="9" font-family="Noto Sans TC">特急40min</text>
+
+      <!-- FUK機場圖示 -->
+      <rect x="190" y="56" width="40" height="18" rx="3" fill="#1a3a52" opacity="0.8"/>
+      <text x="210" y="68" text-anchor="middle" fill="white" font-size="9" font-family="Noto Sans TC">FUK</text>
+      <text x="236" y="68" fill="#888" font-size="9" font-family="Noto Sans TC">地鐵5min</text>
+    </svg>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PLAN A -->
+<section class="section" id="plan-a">
+  <div class="plan-section-header a">
+    <div class="psh-icon">🚃</div>
+    <div class="psh-info">
+      <h2>行程 A ・ 經典精華遊</h2>
+      <p>全程大眾交通 · 住福岡市區 · 不需駕照 · 輕鬆好玩</p>
+    </div>
+  </div>
+
+  <div class="day-timeline">
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num">Day 1</span>
+        <span class="day-title">🛬 抵達福岡・市區探索</span>
+        <span class="day-meta">住：博多/天神</span>
+      </div>
+      <div class="day-body">
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">午間</span>
+            <div class="stop-info">
+              <div class="stop-name">🛬 福岡機場抵達</div>
+              <div class="stop-desc">地鐵機場線5分鐘直達博多站，辦理入住後放行李。買 Suica 或 ICOCA 交通卡備用。</div>
+              <div class="stop-badges"><span class="sbadge tip">💡 機場有免費SIM卡取機台</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">下午</span>
+            <div class="stop-info">
+              <div class="stop-name">🏬 Canal City 博多</div>
+              <div class="stop-desc">複合式購物中心，有LOFT、各類餐廳、小型主題公園。孩子超愛中庭的噴水秀。</div>
+              <div class="stop-badges"><span class="sbadge shop">購物</span><span class="sbadge kids">親子</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">傍晚</span>
+            <div class="stop-info">
+              <div class="stop-name">🛍 天神地下街</div>
+              <div class="stop-desc">西日本最大地下街，UNIQLO、MUJI、各類平價服飾。雨天也不怕。</div>
+              <div class="stop-badges"><span class="sbadge shop">購物</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">晚上</span>
+            <div class="stop-info">
+              <div class="stop-name">🍜 博多屋台</div>
+              <div class="stop-desc">中洲川端或那珂川沿岸的屋台攤（路邊攤），博多拉麵、串燒、おでん。大人小孩都愛的夜食體驗！</div>
+              <div class="stop-badges"><span class="sbadge food">美食</span><span class="sbadge tip">💡 屋台只收現金</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num">Day 2</span>
+        <span class="day-title">🏰 豪斯登堡・全天</span>
+        <span class="day-meta">住：博多/天神</span>
+      </div>
+      <div class="day-body">
+        <div class="transport-row"><span class="tr-icon">🚃</span><span class="tr-label">特急 ハウステンボス 號</span><span class="tr-detail">博多→豪斯登堡 約2.5小時・¥4,000/人</span></div>
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">11:00</span>
+            <div class="stop-info">
+              <div class="stop-name">🌹 豪斯登堡入園</div>
+              <div class="stop-desc">歐風荷蘭主題樂園。全球唯一 Miffy 夢幻小鎮、玫瑰花海、機器人秀、恐龍公園、煙火（晚上）。</div>
+              <div class="stop-badges"><span class="sbadge kids">親子必去</span><span class="sbadge tip">💡 建議網路買票</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">全天</span>
+            <div class="stop-info">
+              <div class="stop-name">🎠 園內設施暢玩</div>
+              <div class="stop-desc">小孩重點：Miffy 小鎮、迷你遊樂設施、巧克力屋。青少年：VR體驗、鬼屋。大人：花海散步、照相打卡。</div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">晚上</span>
+            <div class="stop-info">
+              <div class="stop-name">🎆 夜間燈光節＋煙火</div>
+              <div class="stop-desc">豪斯登堡最著名的夜間燈光秀，百萬顆燈泡打造的夢幻世界。每天晚上有煙火。</div>
+              <div class="stop-badges"><span class="sbadge kids">必看</span></div>
+            </div>
+          </li>
+        </ul>
+        <div class="transport-row"><span class="tr-icon">🚃</span><span class="tr-label">返回博多</span><span class="tr-detail">最晚特急約21:00出發 · 抵達23:30</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num">Day 3</span>
+        <span class="day-title">🎨 teamLab 森林・福岡市區</span>
+        <span class="day-meta">住：博多/天神</span>
+      </div>
+      <div class="day-body">
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">11:00</span>
+            <div class="stop-info">
+              <div class="stop-name">🌊 teamLab 森林（福岡）</div>
+              <div class="stop-desc">位於 BOSS E・ZO FUKUOKA（PayPay Dome 旁），互動數位藝術體驗。小孩最愛！建議預訂固定時段入場。</div>
+              <div class="stop-badges"><span class="sbadge kids">親子必去</span><span class="sbadge tip">💡 建議提前網路購票</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">13:30</span>
+            <div class="stop-info">
+              <div class="stop-name">⚾ BOSS E・ZO 大樓</div>
+              <div class="stop-desc">同棟還有 V-World 虛擬實境、王貞治棒球博物館、屋頂滑索。青少年超愛。</div>
+              <div class="stop-badges"><span class="sbadge kids">親子</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">15:00</span>
+            <div class="stop-info">
+              <div class="stop-name">🌊 福岡塔・海之中道</div>
+              <div class="stop-desc">福岡地標。可直接走到沙灘邊。或前往大濠公園散步（市中心最美公園，有划船）。</div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">晚上</span>
+            <div class="stop-info">
+              <div class="stop-name">🦪 長浜市場・海鮮</div>
+              <div class="stop-desc">日本最大鮮魚市場之一，晚間開放零售。生魚片便宜又新鮮。</div>
+              <div class="stop-badges"><span class="sbadge food">美食</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num">Day 4</span>
+        <span class="day-title">♨️ 由布院・溫泉小鎮日歸</span>
+        <span class="day-meta">住：博多/天神</span>
+      </div>
+      <div class="day-body">
+        <div class="transport-row"><span class="tr-icon">🚃</span><span class="tr-label">ゆふいんの森 特急</span><span class="tr-detail">博多→由布院 約2小時 · ¥5,540/人 （需預訂）</span></div>
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">11:00</span>
+            <div class="stop-info">
+              <div class="stop-name">🚂 搭乘觀光列車</div>
+              <div class="stop-desc">「ゆふいんの森」是日本人氣觀光列車，木造內裝、大觀景窗，途中風景美麗。</div>
+              <div class="stop-badges"><span class="sbadge kids">體驗</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">13:00</span>
+            <div class="stop-info">
+              <div class="stop-name">🏔 由布院・金鱗湖</div>
+              <div class="stop-desc">霧氣繚繞的湖泊，四周古民宅。清早或傍晚最美。湖邊有咖啡廳和冰淇淋店。</div>
+              <div class="stop-badges"><span class="sbadge hot">打卡景點</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">14:00</span>
+            <div class="stop-info">
+              <div class="stop-name">🛍 湯の坪街道散步購物</div>
+              <div class="stop-desc">由布院最熱鬧的購物街，布丁、可麗餅、草莓大福、各種伴手禮。孩子最愛邊走邊吃！</div>
+              <div class="stop-badges"><span class="sbadge shop">購物</span><span class="sbadge food">美食</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">16:00</span>
+            <div class="stop-info">
+              <div class="stop-name">♨️ 日歸溫泉（可選）</div>
+              <div class="stop-desc">由布院有多間可日歸的溫泉旅館，¥800-1,500/人。推薦：花由屋・庄屋の館（泡湯+休憩）。</div>
+              <div class="stop-badges"><span class="sbadge hot">溫泉</span><span class="sbadge tip">💡 先確認開放時間</span></div>
+            </div>
+          </li>
+        </ul>
+        <div class="transport-row"><span class="tr-icon">🚃</span><span class="tr-label">返回博多</span><span class="tr-detail">由布院→博多 最晚特急約17:40 · 抵達19:40</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num">Day 5</span>
+        <span class="day-title">🏯 熊本城・柳川遊船</span>
+        <span class="day-meta">住：博多/天神</span>
+      </div>
+      <div class="day-body">
+        <div class="transport-row"><span class="tr-icon">🚄</span><span class="tr-label">九州新幹線</span><span class="tr-detail">博多→熊本 約33分 · ¥4,360/人</span></div>
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">11:00</span>
+            <div class="stop-info">
+              <div class="stop-name">🏯 熊本城</div>
+              <div class="stop-desc">日本三大名城之一，2016年地震後大規模修復完成。天守閣入場可看到修復工程說明，教育意義深。</div>
+              <div class="stop-badges"><span class="sbadge kids">歷史文化</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">13:30</span>
+            <div class="stop-info">
+              <div class="stop-name">🐻 くまモン廣場</div>
+              <div class="stop-desc">熊本代言吉祥物「くまモン」的免費展示廳。偶爾有舞台表演（免費！）。孩子必拍。</div>
+              <div class="stop-badges"><span class="sbadge kids">免費</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">15:00</span>
+            <div class="stop-info">
+              <div class="stop-name">🚣 柳川遊船（川下り）</div>
+              <div class="stop-desc">乘坐小平底船漂流在柳川的護城河水道，船夫邊撐船邊唱民謠。全程約1小時，老少咸宜！</div>
+              <div class="stop-badges"><span class="sbadge kids">必體驗</span><span class="sbadge tip">💡 從熊本搭特急35分</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">晚上</span>
+            <div class="stop-info">
+              <div class="stop-name">🍱 柳川鰻魚飯・回博多</div>
+              <div class="stop-desc">柳川名物「せいろ蒸し（蒸籠鰻魚飯）」，蒸烤鰻魚配特製醬汁。從柳川搭西鐵回博多約1小時。</div>
+              <div class="stop-badges"><span class="sbadge food">名物</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num">Day 6</span>
+        <span class="day-title">🛍 博多購物・飛回台灣</span>
+        <span class="day-meta">回程</span>
+      </div>
+      <div class="day-body">
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">上午</span>
+            <div class="stop-info">
+              <div class="stop-name">🏬 博多站 AMU PLAZA / KITTE 博多</div>
+              <div class="stop-desc">博多站直結百貨，集合LOFT、MUJI、各式餐廳和伴手禮。最後採購紀念品！</div>
+              <div class="stop-badges"><span class="sbadge shop">購物</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">中午</span>
+            <div class="stop-info">
+              <div class="stop-name">✈️ 前往福岡機場</div>
+              <div class="stop-desc">地鐵機場線從博多站出發，5分鐘到機場。建議飛機起飛前3小時到機場。</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PLAN B -->
+<section class="section" id="plan-b">
+  <div class="plan-section-header b">
+    <div class="psh-icon">🚗</div>
+    <div class="psh-info">
+      <h2>行程 B ・ 自駕混合遊</h2>
+      <p>前2天電車遊福岡市區 · 後3天租車探索大自然 · 黑川溫泉過夜</p>
+    </div>
+  </div>
+
+  <div class="day-timeline">
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num b">Day 1</span>
+        <span class="day-title">🛬 抵達福岡・天神市區</span>
+        <span class="day-meta">住：博多/天神</span>
+      </div>
+      <div class="day-body">
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">午間</span>
+            <div class="stop-info">
+              <div class="stop-name">🛬 福岡機場抵達</div>
+              <div class="stop-desc">入住博多或天神飯店。提前在台灣辦好「國際駕照」（監理站辦理，台灣有效期1年）。</div>
+              <div class="stop-badges"><span class="sbadge drive">🚗 國際駕照準備</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">下午</span>
+            <div class="stop-info">
+              <div class="stop-name">🏬 Canal City + 天神</div>
+              <div class="stop-desc">放輕鬆逛街，為後面自駕保存體力。採購行程所需物品（零食、飲料等）。</div>
+              <div class="stop-badges"><span class="sbadge shop">購物</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">晚上</span>
+            <div class="stop-info">
+              <div class="stop-name">🍜 博多屋台體驗</div>
+              <div class="stop-desc">今晚最後一頓「城市夜食」，明天開始進入鄉間旅程。</div>
+              <div class="stop-badges"><span class="sbadge food">美食</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num b">Day 2</span>
+        <span class="day-title">🎨 teamLab 森林・購物</span>
+        <span class="day-meta">住：博多/天神</span>
+      </div>
+      <div class="day-body">
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">11:00</span>
+            <div class="stop-info">
+              <div class="stop-name">🌊 teamLab 森林</div>
+              <div class="stop-desc">互動數位藝術體驗，位於PayPay Dome旁。建議預訂入場時段。</div>
+              <div class="stop-badges"><span class="sbadge kids">親子必去</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">下午</span>
+            <div class="stop-info">
+              <div class="stop-name">🛍 天神阪急・岩田屋</div>
+              <div class="stop-desc">天神最大百貨群。岩田屋有高品質服裝；旁邊有親子玩具、雜貨。</div>
+              <div class="stop-badges"><span class="sbadge shop">購物</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">晚上</span>
+            <div class="stop-info">
+              <div class="stop-name">🍣 中洲川端・餐廳</div>
+              <div class="stop-desc">享受最後的福岡市區美食。明天租車出發，準備好行程！</div>
+              <div class="stop-badges"><span class="sbadge tip">💡 晚上確認租車時間和地址</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num b">Day 3</span>
+        <span class="day-title">🚗 租車出發！由布院 → 阿蘇 → 黑川溫泉</span>
+        <span class="day-meta">住：黑川溫泉旅館</span>
+      </div>
+      <div class="day-body">
+        <div class="transport-row"><span class="tr-icon">🚗</span><span class="tr-label">租車取車</span><span class="tr-detail">博多站附近トヨタレンタカー等 · 建議7人座 · 4人約¥15,000/天</span></div>
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">11:00</span>
+            <div class="stop-info">
+              <div class="stop-name">🚗 取車・出發</div>
+              <div class="stop-desc">全程走九州自動車道。靠左行駛，ETC卡可預先購買或在租車公司租借。Google Maps導航日文可設成英文。</div>
+              <div class="stop-badges"><span class="sbadge drive">首次自駕說明</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">13:00</span>
+            <div class="stop-info">
+              <div class="stop-name">🏔 由布院・金鱗湖・散步</div>
+              <div class="stop-desc">自駕直接停在由布院站附近停車場（¥500-800），比電車更彈性。湯の坪街道邊走邊吃。</div>
+              <div class="stop-badges"><span class="sbadge hot">溫泉小鎮</span><span class="sbadge shop">購物</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">15:30</span>
+            <div class="stop-info">
+              <div class="stop-name">🌋 阿蘇・大觀峰展望台</div>
+              <div class="stop-desc">九州最壯觀的火山口全景！大觀峰可眺望阿蘇五岳和雲海。自駕才能輕鬆到達此處。</div>
+              <div class="stop-badges"><span class="sbadge drive">自駕必去</span><span class="sbadge kids">壯觀</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">傍晚</span>
+            <div class="stop-info">
+              <div class="stop-name">♨️ 黑川溫泉入住</div>
+              <div class="stop-desc">九州最有名的隱秘溫泉鄉，山中秘湯感十足。推薦：いこい旅館、御客屋。購買「入湯手形」可泡3間不同浴場（¥1,500/人）。</div>
+              <div class="stop-badges"><span class="sbadge hot">溫泉住宿</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num b">Day 4</span>
+        <span class="day-title">🏯 阿蘇神社 → 熊本城 → 柳川</span>
+        <span class="day-meta">住：博多或佐世保</span>
+      </div>
+      <div class="day-body">
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">11:00</span>
+            <div class="stop-info">
+              <div class="stop-name">⛩ 阿蘇神社</div>
+              <div class="stop-desc">日本最古老神社之一，熊本地震後精心修復中。樓門已修復完成，非常壯觀。</div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">12:30</span>
+            <div class="stop-info">
+              <div class="stop-name">🏯 熊本城</div>
+              <div class="stop-desc">開車約1小時到熊本城。停車場在城附近，走路10分鐘。</div>
+              <div class="stop-badges"><span class="sbadge kids">歷史</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">15:30</span>
+            <div class="stop-info">
+              <div class="stop-name">🚣 柳川遊船</div>
+              <div class="stop-desc">自駕到柳川停車方便（免費停車場），可悠閒排隊遊船不用趕電車。</div>
+              <div class="stop-badges"><span class="sbadge kids">體驗</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">晚上</span>
+            <div class="stop-info">
+              <div class="stop-name">🏨 前往佐世保或回福岡</div>
+              <div class="stop-desc">若明天玩豪斯登堡，建議住佐世保市區（車程約20分鐘），省去隔天通車時間。</div>
+              <div class="stop-badges"><span class="sbadge drive">建議住佐世保</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num b">Day 5</span>
+        <span class="day-title">🏰 豪斯登堡・九十九島</span>
+        <span class="day-meta">住：博多/天神</span>
+      </div>
+      <div class="day-body">
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">11:00</span>
+            <div class="stop-info">
+              <div class="stop-name">🏰 豪斯登堡</div>
+              <div class="stop-desc">自駕前來，停車場就在門口（¥500）。自駕最大好處：可以待到煙火結束再開車走，不用擔心末班電車。</div>
+              <div class="stop-badges"><span class="sbadge kids">親子必去</span><span class="sbadge drive">自駕優勢</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">晚上</span>
+            <div class="stop-info">
+              <div class="stop-name">🎆 夜間燈光＋煙火看到結束</div>
+              <div class="stop-desc">不用擔心末班車！自駕讓你完整享受夜間節目後再出發回福岡。</div>
+            </div>
+          </li>
+        </ul>
+        <div class="transport-row"><span class="tr-icon">🚗</span><span class="tr-label">還車（博多站附近）</span><span class="tr-detail">隔天早上還車或今晚抵達後還車</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num b">Day 6</span>
+        <span class="day-title">🛍 博多購物・回台灣</span>
+        <span class="day-meta">回程</span>
+      </div>
+      <div class="day-body">
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">上午</span>
+            <div class="stop-info">
+              <div class="stop-name">🚗 還車 → 博多站購物</div>
+              <div class="stop-desc">AMU PLAZA 博多、KITTE 博多最後採購。</div>
+              <div class="stop-badges"><span class="sbadge shop">購物</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">中午</span>
+            <div class="stop-info">
+              <div class="stop-name">✈️ 福岡機場飛回台灣</div>
+              <div class="stop-desc">地鐵機場線5分鐘直達機場。</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PLAN C -->
+<section class="section" id="plan-c">
+  <div class="plan-section-header c">
+    <div class="psh-icon">🎡</div>
+    <div class="psh-info">
+      <h2>行程 C ・ 親子主題遊</h2>
+      <p>豪斯登堡兩天深度玩 · 九十九島遊船 · 孩子為主角 · 行程最輕鬆</p>
+    </div>
+  </div>
+
+  <div class="day-timeline">
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num c">Day 1</span>
+        <span class="day-title">🛬 抵達福岡・Canal City</span>
+        <span class="day-meta">住：博多/天神</span>
+      </div>
+      <div class="day-body">
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">下午</span>
+            <div class="stop-info">
+              <div class="stop-name">🏬 Canal City 博多</div>
+              <div class="stop-desc">抵達後直接前往，孩子玩噴水廣場，大人逛各樓層。有LOFT、任天堂遊戲、餐廳。</div>
+              <div class="stop-badges"><span class="sbadge kids">親子</span><span class="sbadge shop">購物</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">晚上</span>
+            <div class="stop-info">
+              <div class="stop-name">🍜 博多屋台</div>
+              <div class="stop-desc">傳統屋台體驗，博多拉麵、串燒。</div>
+              <div class="stop-badges"><span class="sbadge food">必吃</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num c">Day 2</span>
+        <span class="day-title">🏰 豪斯登堡 Day 1</span>
+        <span class="day-meta">住：豪斯登堡園區或佐世保</span>
+      </div>
+      <div class="day-body">
+        <div class="transport-row"><span class="tr-icon">🚃</span><span class="tr-label">特急 ハウステンボス 號</span><span class="tr-detail">博多→豪斯登堡 約2.5小時 · 建議早班</span></div>
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">全天</span>
+            <div class="stop-info">
+              <div class="stop-name">🌹 豪斯登堡・日間探索</div>
+              <div class="stop-desc">Miffy 夢幻小鎮、玫瑰花海攝影、機器人秀、恐龍公園、巧克力屋、腳踏船。</div>
+              <div class="stop-badges"><span class="sbadge kids">第1天重點</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">晚上</span>
+            <div class="stop-info">
+              <div class="stop-name">🎆 夜間燈光節</div>
+              <div class="stop-desc">今晚住在豪斯登堡園區內飯店或佐世保市區，明天繼續玩！</div>
+              <div class="stop-badges"><span class="sbadge tip">💡 住園區可免費連日入場</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num c">Day 3</span>
+        <span class="day-title">🏰 豪斯登堡 Day 2</span>
+        <span class="day-meta">住：佐世保或回福岡</span>
+      </div>
+      <div class="day-body">
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">全天</span>
+            <div class="stop-info">
+              <div class="stop-name">🎠 豪斯登堡・第2天</div>
+              <div class="stop-desc">昨天沒玩到的設施補玩。推薦：VR體驗、迷宮、騎馬體驗（青少年超愛）、溫泉設施。</div>
+              <div class="stop-badges"><span class="sbadge kids">第2天重點</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">晚上</span>
+            <div class="stop-info">
+              <div class="stop-name">🎆 煙火秀</div>
+              <div class="stop-desc">豪斯登堡每晚大煙火，第2天看更有感。晚上搭特急或返福岡。</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num c">Day 4</span>
+        <span class="day-title">🚢 九十九島遊船・水族館</span>
+        <span class="day-meta">住：博多/天神</span>
+      </div>
+      <div class="day-body">
+        <div class="transport-row"><span class="tr-icon">🚃</span><span class="tr-label">MR佐世保線</span><span class="tr-detail">佐世保→三ヶ町 約10分 · 或計程車</span></div>
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">11:00</span>
+            <div class="stop-info">
+              <div class="stop-name">🚢 九十九島遊船</div>
+              <div class="stop-desc">99座小島散布的多島海，乘船欣賞壯麗海景。推薦「パールクイーン」觀光船，約50分鐘。</div>
+              <div class="stop-badges"><span class="sbadge kids">絕景</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">13:00</span>
+            <div class="stop-info">
+              <div class="stop-name">🐟 海洋KIRARA水族館</div>
+              <div class="stop-desc">九十九島旁的水族館，以珍珠牡蠣和海月水母著名，有觸摸水池，孩子必愛。</div>
+              <div class="stop-badges"><span class="sbadge kids">親子</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">下午</span>
+            <div class="stop-info">
+              <div class="stop-name">🍔 佐世保漢堡</div>
+              <div class="stop-desc">「佐世保バーガー」是日本最知名的在地漢堡，新鮮食材現做。推薦：LOG KIT、HIKARI本店。</div>
+              <div class="stop-badges"><span class="sbadge food">名物</span></div>
+            </div>
+          </li>
+        </ul>
+        <div class="transport-row"><span class="tr-icon">🚃</span><span class="tr-label">返回福岡</span><span class="tr-detail">佐世保→博多 特急みどり號 約1.5小時</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num c">Day 5</span>
+        <span class="day-title">🎨 teamLab 森林・福岡</span>
+        <span class="day-meta">住：博多/天神</span>
+      </div>
+      <div class="day-body">
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">11:00</span>
+            <div class="stop-info">
+              <div class="stop-name">🌊 teamLab 森林</div>
+              <div class="stop-desc">福岡 BOSS E・ZO 大樓，互動數位藝術。提前預訂。</div>
+              <div class="stop-badges"><span class="sbadge kids">親子必去</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">下午</span>
+            <div class="stop-info">
+              <div class="stop-name">🛍 天神購物</div>
+              <div class="stop-desc">最後機會採購：MUJI、LOFT、藥妝、零食。</div>
+              <div class="stop-badges"><span class="sbadge shop">購物</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">晚上</span>
+            <div class="stop-info">
+              <div class="stop-name">🍱 最後晚餐</div>
+              <div class="stop-desc">吃一頓好的！推薦：天神の屋台、博多一幸舍（豚骨拉麵）或燒肉。</div>
+              <div class="stop-badges"><span class="sbadge food">美食</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-num c">Day 6</span>
+        <span class="day-title">🛍 博多最後採購・回台灣</span>
+        <span class="day-meta">回程</span>
+      </div>
+      <div class="day-body">
+        <ul class="stop-list">
+          <li class="stop-item">
+            <span class="stop-time">上午</span>
+            <div class="stop-info">
+              <div class="stop-name">🏬 博多 KITTE・AMU PLAZA</div>
+              <div class="stop-desc">伴手禮最後採購：明太子（博多名物）、博多通りもん（和菓子）、各類零食。</div>
+              <div class="stop-badges"><span class="sbadge shop">伴手禮</span></div>
+            </div>
+          </li>
+          <li class="stop-item">
+            <span class="stop-time">中午</span>
+            <div class="stop-info">
+              <div class="stop-name">✈️ 福岡機場飛回台灣</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SPOTS -->
+<section class="section" id="spots">
+  <div class="section-header">
+    <div class="section-tag">景點精選</div>
+    <h2 class="section-title">九州・福岡 必遊景點</h2>
+    <p class="section-sub">三種行程共同精選，詳細介紹各地特色</p>
+  </div>
+  <div class="spots-grid">
+    <div class="spot-card">
+      <div class="spot-img" style="background-image:url('https://images.unsplash.com/photo-1614680376739-414d95ff43df?w=600&q=80')">
+        <span class="spot-region">長崎縣佐世保</span>
+      </div>
+      <div class="spot-body">
+        <div class="spot-name">🏰 豪斯登堡（ハウステンボス）</div>
+        <div class="spot-tags">
+          <span class="spot-tag">親子必去</span><span class="spot-tag">主題樂園</span><span class="spot-tag">夜景</span>
+        </div>
+        <div class="spot-desc">九州最大主題樂園，荷蘭歐風建築，全年有各種活動。Miffy夢幻小鎮、花海、機器人表演、每晚煙火。建議整天。</div>
+        <div class="spot-info">
+          <span>🕐 全天</span>
+          <span>💴 入場約¥7,000/大人</span>
+          <span>🚃 博多特急2.5h</span>
+        </div>
+      </div>
+    </div>
+    <div class="spot-card">
+      <div class="spot-img" style="background-image:url('https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=600&q=80')">
+        <span class="spot-region">福岡市</span>
+      </div>
+      <div class="spot-body">
+        <div class="spot-name">🌊 teamLab 森林（福岡）</div>
+        <div class="spot-tags">
+          <span class="spot-tag">數位藝術</span><span class="spot-tag">親子</span><span class="spot-tag">必預約</span>
+        </div>
+        <div class="spot-desc">位於BOSS E・ZO FUKUOKA（PayPay Dome旁）。互動式沉浸數位藝術，孩子可以在光影世界中奔跑玩耍。建議提前網路購票。</div>
+        <div class="spot-info">
+          <span>🕐 1.5-2小時</span>
+          <span>💴 約¥3,200/大人</span>
+          <span>🚌 地鐵唐人町步行15分</span>
+        </div>
+      </div>
+    </div>
+    <div class="spot-card">
+      <div class="spot-img" style="background-image:url('https://images.unsplash.com/photo-1565117831133-75b29d0fdb11?w=600&q=80')">
+        <span class="spot-region">大分縣由布市</span>
+      </div>
+      <div class="spot-body">
+        <div class="spot-name">♨️ 由布院（湯布院）</div>
+        <div class="spot-tags">
+          <span class="spot-tag">溫泉</span><span class="spot-tag">小鎮</span><span class="spot-tag">購物</span>
+        </div>
+        <div class="spot-desc">夢幻溫泉小鎮，金鱗湖晨霧絕景，湯の坪街道邊走邊吃。布丁、可麗餅、草莓大福是必買。觀光列車「ゆふいんの森」本身也是體驗。</div>
+        <div class="spot-info">
+          <span>🕐 半天-全天</span>
+          <span>💴 交通¥5,540/人</span>
+          <span>🚃 博多特急2h</span>
+        </div>
+      </div>
+    </div>
+    <div class="spot-card">
+      <div class="spot-img" style="background-image:url('https://images.unsplash.com/photo-1542640244-7e672d6cef4e?w=600&q=80')">
+        <span class="spot-region">熊本縣熊本市</span>
+      </div>
+      <div class="spot-body">
+        <div class="spot-name">🏯 熊本城</div>
+        <div class="spot-tags">
+          <span class="spot-tag">歷史</span><span class="spot-tag">文化</span><span class="spot-tag">地震修復</span>
+        </div>
+        <div class="spot-desc">日本三大名城，2016年地震後已大幅修復。天守閣重建完成，可入內參觀修復過程展示。旁邊有くまモン廣場（免費！）。</div>
+        <div class="spot-info">
+          <span>🕐 2-3小時</span>
+          <span>💴 入場¥800/大人</span>
+          <span>🚄 博多新幹線33分</span>
+        </div>
+      </div>
+    </div>
+    <div class="spot-card">
+      <div class="spot-img" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80')">
+        <span class="spot-region">熊本縣阿蘇市</span>
+      </div>
+      <div class="spot-body">
+        <div class="spot-name">🌋 阿蘇火山（行程B限定）</div>
+        <div class="spot-tags">
+          <span class="spot-tag">自駕必去</span><span class="spot-tag">壯觀</span><span class="spot-tag">大自然</span>
+        </div>
+        <div class="spot-desc">九州最壯觀的活火山區。大觀峰展望台可俯瞰整個阿蘇盆地。草千里是綠草遼闊的高原。火山口步道（視硫磺濃度開放）。公共交通不便，自駕才能盡興。</div>
+        <div class="spot-info">
+          <span>🕐 半天</span>
+          <span>💴 免費（停車場¥510）</span>
+          <span>🚗 自駕專屬</span>
+        </div>
+      </div>
+    </div>
+    <div class="spot-card">
+      <div class="spot-img" style="background-image:url('https://images.unsplash.com/photo-1548802673-380ab8ebc7b7?w=600&q=80')">
+        <span class="spot-region">福岡縣柳川市</span>
+      </div>
+      <div class="spot-body">
+        <div class="spot-name">🚣 柳川遊船（川下り）</div>
+        <div class="spot-tags">
+          <span class="spot-tag">體驗</span><span class="spot-tag">老少咸宜</span><span class="spot-tag">文化</span>
+        </div>
+        <div class="spot-desc">乘坐小平底船漂流在柳川護城河，船夫撐竹竿唱民謠，沿途柳樹低垂，非常悠閒。全程約1小時。結束後別忘了吃蒸籠鰻魚飯！</div>
+        <div class="spot-info">
+          <span>🕐 1小時遊船</span>
+          <span>💴 約¥1,800/人</span>
+          <span>🚃 博多西鐵1h</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- DRIVING -->
+<section class="section" id="driving">
+  <div class="section-header">
+    <div class="section-tag">行程B專用</div>
+    <h2 class="section-title">🚗 九州自駕攻略</h2>
+    <p class="section-sub">不懂日文也能自駕！詳細準備事項和注意事項</p>
+  </div>
+  <div class="driving-grid">
+    <div class="driving-card">
+      <h4>📋 出發前準備</h4>
+      <ul>
+        <li>台灣監理所辦理「國際駕照」（需帶台灣駕照，工本費250元，當天可取）</li>
+        <li>台灣駕照正本也要帶（需與國際駕照一起出示）</li>
+        <li>在台灣或日本租車（Toyota Rent a Car、Times Car 等）</li>
+        <li>建議預訂7人座車（Alphard/Voxy），4人寬敞且行李放得下</li>
+        <li>購買或租借 ETC 卡（高速公路自動收費）</li>
+      </ul>
+    </div>
+    <div class="driving-card warn">
+      <h4>⚠️ 日本行駛注意事項</h4>
+      <ul>
+        <li>日本靠左行駛！方向盤在右側，切記</li>
+        <li>市區限速50km/h，高速公路80-100km/h</li>
+        <li>嚴禁酒駕（零容忍，酒測即逮）</li>
+        <li>停車場需付費，市中心約¥400-800/小時</li>
+        <li>加油：入滿（満タン）寫好給加油站員工看即可</li>
+        <li>遇到窄路：讓對方先通，日本人非常有禮貌</li>
+      </ul>
+    </div>
+    <div class="driving-card tip">
+      <h4>💡 不懂日文的自駕技巧</h4>
+      <ul>
+        <li>Google Maps 可設定成中文，導航日文路牌不需看懂</li>
+        <li>Google 翻譯拍照翻譯，掃描任何日文告示即可</li>
+        <li>高速公路標示都有英文對照</li>
+        <li>遇到不確定：停下來用手機翻譯詢問</li>
+        <li>租車公司提供的 ETC 卡插入後自動感應，不需操作</li>
+        <li>停車場入口取票，離開時刷票付款即可</li>
+      </ul>
+    </div>
+    <div class="driving-card">
+      <h4>💰 自駕費用估算（4人3天）</h4>
+      <ul>
+        <li>租車費：¥15,000-20,000/天 × 3天 = ¥45,000-60,000</li>
+        <li>高速公路費：約¥8,000-12,000（3天）</li>
+        <li>油費：¥3,000-5,000（3天）</li>
+        <li>停車費：約¥2,000-4,000</li>
+        <li>總計：約¥60,000-80,000（分攤4人，每人約NT$5,000-6,000）</li>
+        <li>比電車+計程車組合便宜，且彈性大很多！</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TIPS -->
+<section class="section" id="tips">
+  <div class="section-header">
+    <div class="section-tag">不懂日文也沒問題</div>
+    <h2 class="section-title">💡 九州自助旅行實用Tips</h2>
+    <p class="section-sub">家庭出遊必知，讓旅程更順暢</p>
+  </div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">📱</div>
+      <div class="tip-title">網路不能斷</div>
+      <div class="tip-body">機場購買 SIM 卡（10天 1.5GB 約¥3,000）或在台灣購買日本 eSIM。Google Maps 是最強導航，完全不需要懂日文。</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">💳</div>
+      <div class="tip-title">交通卡 ICOCA / Suica</div>
+      <div class="tip-body">福岡機場可買「ICOCA」交通卡（¥2,000充值），可搭地鐵、JR、公車，便利店也能付款。比每次買票方便很多。</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🎫</div>
+      <div class="tip-title">JR 九州 PASS</div>
+      <div class="tip-body">外國人限定的 JR 九州全線 Pass（3日/5日），可無限搭乘 JR 列車含新幹線。行程A/C都很划算，在台灣提前購買。</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🗣</div>
+      <div class="tip-title">語言溝通</div>
+      <div class="tip-body">Google 翻譯「拍照翻譯」可掃描任何日文菜單/告示。福岡是觀光大城，很多店員會基本英文。必備：「えいご　おねがいします」（請用英文）</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🏨</div>
+      <div class="tip-title">住宿選擇</div>
+      <div class="tip-body">行程A/C：住博多站或天神附近（交通方便）。行程B：黑川溫泉住宿提前預約（超搶手！）。親子房推薦：東橫INN、天然溫泉旅館。</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🛒</div>
+      <div class="tip-title">退稅購物</div>
+      <div class="tip-body">同一家店同天消費5,000日圓以上可辦退稅（約8-10%）。護照要帶。博多站百貨、Canal City、天神百貨都有服務台。</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🍱</div>
+      <div class="tip-title">素食注意</div>
+      <div class="tip-body">日本素食較難，但可以：便利商店找蔬菜飯糰/沙拉、找「精進料理」寺廟餐廳、Google Maps 搜「vegan fukuoka」、豆腐料理餐廳。</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">👶</div>
+      <div class="tip-title">帶孩子的tips</div>
+      <div class="tip-body">日本廁所乾淨到處都有。嬰兒車可帶，大部分設施有電梯。便利商店有熱食微波、牛奶、點心。孩子發燒：藥局（薬局）買兒童退燒藥。</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🚨</div>
+      <div class="tip-title">緊急聯絡</div>
+      <div class="tip-body">警察：110 | 救護車/消防：119 | 台灣駐福岡辦事處：(092)734-2704 | Google翻譯對話模式可與當地人溝通。</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>✈ 九州・福岡 家庭自助旅遊手冊 <span>2026</span></p>
+  <p style="margin-top:0.5rem; font-size:0.8rem">三種行程比較：A. 經典精華遊 ・ B. 自駕混合遊 ・ C. 親子主題遊</p>
+</footer>
+
+<script>
+// Sakura petals
+for(let i=0;i<15;i++){
+  const p=document.createElement('div');
+  p.className='petal';
+  p.style.cssText=`left:${Math.random()*100}%;top:-20px;animation-delay:${Math.random()*8}s;animation-duration:${6+Math.random()*6}s;opacity:${0.3+Math.random()*0.4};width:${8+Math.random()*10}px;height:${8+Math.random()*10}px;background:rgba(255,255,255,${0.2+Math.random()*0.3})`;
+  document.querySelector('.hero').appendChild(p);
+}
+
+// Nav scroll
+function scrollTo(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// Scroll spy
+const sections=['compare','plan-a','plan-b','plan-c','spots','driving','tips'];
+const navBtns=document.querySelectorAll('.nav-btn');
+window.addEventListener('scroll',()=>{
+  let curr='';
+  sections.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&window.scrollY>=el.offsetTop-120) curr=id;
+  });
+  navBtns.forEach((b,i)=>{
+    b.classList.toggle('active',sections[i]===curr);
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>北海道親子自駕 5 天 4 夜提案</title>
+  <style>
+    :root {
+      --ink: #17252b;
+      --ink-soft: #48606a;
+      --paper: #fbfaf5;
+      --mist: #eef7f5;
+      --lake: #217c8d;
+      --pine: #23624e;
+      --flower: #cc596d;
+      --sun: #e3aa37;
+      --line: rgba(23, 37, 43, 0.14);
+      --shadow: 0 18px 50px rgba(28, 54, 62, 0.14);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(238, 247, 245, 0.88), rgba(251, 250, 245, 0.98) 34rem),
+        var(--paper);
+      font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif TC", Georgia, serif;
+      line-height: 1.65;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .page {
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      display: grid;
+      align-items: end;
+      isolation: isolate;
+      color: white;
+      background: #17363c;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(9, 24, 28, 0.74), rgba(9, 24, 28, 0.26) 54%, rgba(9, 24, 28, 0.08)),
+        linear-gradient(0deg, rgba(9, 24, 28, 0.84), rgba(9, 24, 28, 0.08) 42%);
+    }
+
+    .hero img {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-content {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 112px 0 76px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      color: rgba(255, 255, 255, 0.86);
+      font: 700 0.78rem/1.2 "Avenir Next", "Gill Sans", sans-serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: var(--sun);
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      letter-spacing: 0;
+      text-wrap: pretty;
+    }
+
+    h1 {
+      max-width: 820px;
+      font-size: clamp(2.65rem, 8vw, 6.8rem);
+      line-height: 0.96;
+      font-weight: 800;
+    }
+
+    .hero-lede {
+      max-width: 680px;
+      margin: 24px 0 0;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: clamp(1.05rem, 2.4vw, 1.45rem);
+    }
+
+    .hero-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin-top: 46px;
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero-strip div {
+      min-height: 86px;
+      padding: 18px;
+      background: rgba(10, 28, 31, 0.36);
+    }
+
+    .hero-strip b {
+      display: block;
+      color: white;
+      font: 800 1.02rem/1.2 "Avenir Next", "Gill Sans", sans-serif;
+    }
+
+    .hero-strip span {
+      display: block;
+      margin-top: 6px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.92rem;
+    }
+
+    section {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 74px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(260px, 0.45fr);
+      gap: 42px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .kicker {
+      color: var(--flower);
+      font: 800 0.78rem/1.2 "Avenir Next", "Gill Sans", sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin-top: 8px;
+      font-size: clamp(2rem, 4.4vw, 4rem);
+      line-height: 1.02;
+    }
+
+    .section-head p,
+    .lead {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 1.02rem;
+    }
+
+    .map-panel {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .route-map {
+      position: relative;
+      min-height: 560px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 84% 26%, rgba(33, 124, 141, 0.12) 0 14%, transparent 15%),
+        radial-gradient(circle at 58% 62%, rgba(204, 89, 109, 0.12) 0 16%, transparent 17%),
+        linear-gradient(145deg, #fffdf8, #eaf6f2);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .route-map::before {
+      content: "";
+      position: absolute;
+      inset: 34px;
+      border: 1px solid rgba(35, 98, 78, 0.15);
+      border-radius: 50% 38% 44% 46%;
+      transform: rotate(-9deg);
+    }
+
+    .map-route {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .map-route path {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .map-route .main {
+      stroke: var(--pine);
+      stroke-width: 6;
+      stroke-dasharray: 12 12;
+      opacity: 0.88;
+    }
+
+    .map-route .side {
+      stroke: var(--flower);
+      stroke-width: 4;
+      opacity: 0.78;
+    }
+
+    .place {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      display: grid;
+      place-items: center;
+      min-width: 92px;
+      padding: 9px 12px;
+      border: 1px solid rgba(23, 37, 43, 0.14);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 8px 24px rgba(23, 37, 43, 0.12);
+      font: 800 0.9rem/1 "Avenir Next", "Noto Serif TC", sans-serif;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .place small {
+      display: block;
+      margin-top: 4px;
+      color: var(--ink-soft);
+      font: 700 0.68rem/1 "Avenir Next", sans-serif;
+    }
+
+    .sapporo { left: 31%; top: 38%; }
+    .otaru { left: 17%; top: 31%; }
+    .cts { left: 41%; top: 57%; }
+    .furano { left: 70%; top: 52%; }
+    .biei { left: 76%; top: 39%; }
+    .rusutsu { left: 31%; top: 76%; }
+    .toya { left: 45%; top: 84%; }
+    .asahikawa { left: 78%; top: 24%; }
+
+    .map-note {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      bottom: 24px;
+      padding: 16px 18px;
+      border-top: 1px solid var(--line);
+      color: var(--ink-soft);
+      background: rgba(255, 253, 248, 0.72);
+      backdrop-filter: blur(12px);
+      font-size: 0.95rem;
+    }
+
+    .map-copy {
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .fact {
+      padding: 22px;
+      border-left: 4px solid var(--lake);
+      background: white;
+      box-shadow: 0 12px 34px rgba(28, 54, 62, 0.08);
+    }
+
+    .fact strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font: 800 1rem/1.2 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .fact p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.97rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .proposal {
+      display: flex;
+      min-height: 100%;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fffdf8;
+      box-shadow: 0 16px 42px rgba(28, 54, 62, 0.1);
+      overflow: hidden;
+    }
+
+    .proposal-top {
+      padding: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .proposal .tag {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 5px 9px;
+      color: white;
+      border-radius: 999px;
+      background: var(--pine);
+      font: 800 0.72rem/1 "Avenir Next", "Gill Sans", sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .proposal:nth-child(2) .tag {
+      background: var(--flower);
+    }
+
+    .proposal:nth-child(3) .tag {
+      color: var(--ink);
+      background: var(--sun);
+    }
+
+    .proposal h3 {
+      font-size: 1.45rem;
+      line-height: 1.18;
+    }
+
+    .proposal .route {
+      margin: 12px 0 0;
+      color: var(--ink-soft);
+      font-size: 0.96rem;
+    }
+
+    .days {
+      margin: 0;
+      padding: 18px 22px 8px;
+      list-style: none;
+      flex: 1;
+    }
+
+    .days li {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 12px;
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(23, 37, 43, 0.09);
+      color: var(--ink-soft);
+      font-size: 0.94rem;
+    }
+
+    .days li:last-child {
+      border-bottom: 0;
+    }
+
+    .days b {
+      color: var(--lake);
+      font: 900 0.76rem/1.2 "Avenir Next", "Gill Sans", sans-serif;
+      letter-spacing: 0.05em;
+    }
+
+    .verdict {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      margin-top: auto;
+      background: var(--line);
+      font-size: 0.9rem;
+    }
+
+    .verdict div {
+      padding: 16px;
+      background: rgba(238, 247, 245, 0.74);
+    }
+
+    .verdict strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+      font: 800 0.82rem/1.2 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .band {
+      width: 100%;
+      background: #17363c;
+      color: white;
+      margin: 28px 0;
+    }
+
+    .band-inner {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 68px 0;
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .band .kicker {
+      color: #f2c861;
+    }
+
+    .band h2 {
+      color: white;
+    }
+
+    .band p {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .time-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .month {
+      color: #f8e8b5;
+      font: 900 1.08rem/1.1 "Avenir Next", "Gill Sans", sans-serif;
+    }
+
+    .bar {
+      position: relative;
+      min-height: 52px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .fill {
+      position: absolute;
+      inset: 9px auto 9px 9px;
+      display: grid;
+      place-items: center;
+      padding: 0 14px;
+      color: #10262b;
+      background: #f8e8b5;
+      font: 900 0.76rem/1 "Avenir Next", "Gill Sans", sans-serif;
+      white-space: nowrap;
+    }
+
+    .june { width: 38%; }
+    .july { width: 92%; background: #f08fa0; }
+    .aug { width: 58%; background: #99d5d0; }
+
+    .compare {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .compare-box {
+      border-top: 5px solid var(--pine);
+      background: white;
+      box-shadow: 0 14px 38px rgba(28, 54, 62, 0.08);
+      padding: 26px;
+    }
+
+    .compare-box:nth-child(2) {
+      border-color: var(--flower);
+    }
+
+    .compare-box h3 {
+      margin-bottom: 16px;
+      font-size: 1.5rem;
+    }
+
+    .compare-box ul {
+      margin: 0;
+      padding-left: 1.2em;
+      color: var(--ink-soft);
+    }
+
+    .compare-box li + li {
+      margin-top: 10px;
+    }
+
+    .closing {
+      padding-bottom: 86px;
+    }
+
+    .recommendation {
+      display: grid;
+      grid-template-columns: 0.45fr 1fr;
+      gap: 28px;
+      align-items: stretch;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .stamp {
+      display: grid;
+      place-items: center;
+      padding: 34px;
+      color: white;
+      background: var(--pine);
+      text-align: center;
+      font: 900 1.9rem/1.1 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .stamp span {
+      display: block;
+      margin-top: 12px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.96rem;
+      font-weight: 700;
+    }
+
+    .recommendation-copy {
+      padding: 30px 32px;
+    }
+
+    .recommendation-copy h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .recommendation-copy p {
+      margin: 0;
+      color: var(--ink-soft);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .pill {
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink-soft);
+      background: var(--mist);
+      font: 800 0.82rem/1 "Avenir Next", "Gill Sans", sans-serif;
+    }
+
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .guide-card {
+      min-height: 100%;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: 0 14px 38px rgba(28, 54, 62, 0.08);
+    }
+
+    .guide-card h3,
+    .mini-card h3,
+    .route-step h3 {
+      margin-bottom: 10px;
+      font-size: 1.28rem;
+      line-height: 1.22;
+    }
+
+    .guide-card p,
+    .mini-card p,
+    .route-step p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.96rem;
+    }
+
+    .guide-card .mark {
+      display: inline-block;
+      margin-bottom: 14px;
+      color: var(--lake);
+      font: 900 0.76rem/1 "Avenir Next", "Gill Sans", sans-serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .city-grid {
+      display: grid;
+      grid-template-columns: 0.88fr 1.12fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .city-axis {
+      position: relative;
+      padding: 28px;
+      border-radius: var(--radius);
+      color: white;
+      background: #17363c;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .city-axis::before {
+      content: "";
+      position: absolute;
+      left: 45px;
+      top: 42px;
+      bottom: 42px;
+      width: 4px;
+      background: linear-gradient(var(--sun), var(--flower), #99d5d0);
+    }
+
+    .axis-stop {
+      position: relative;
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 14px;
+      padding: 16px 0;
+      z-index: 1;
+    }
+
+    .axis-stop b {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: #17363c;
+      background: #f8e8b5;
+      font: 900 0.78rem/1 "Avenir Next", sans-serif;
+    }
+
+    .axis-stop strong {
+      display: block;
+      color: white;
+      font: 900 1.06rem/1.2 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .axis-stop span {
+      display: block;
+      margin-top: 5px;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 0.92rem;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .mini-card {
+      padding: 22px;
+      border-left: 4px solid var(--flower);
+      background: white;
+      box-shadow: 0 12px 32px rgba(28, 54, 62, 0.08);
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .list-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: 0 14px 38px rgba(28, 54, 62, 0.08);
+      overflow: hidden;
+    }
+
+    .list-panel header {
+      padding: 22px 24px;
+      color: white;
+      background: var(--pine);
+    }
+
+    .list-panel:nth-child(2) header {
+      color: var(--ink);
+      background: #f2c861;
+    }
+
+    .list-panel h3 {
+      font-size: 1.45rem;
+      line-height: 1.18;
+    }
+
+    .list-panel ul {
+      margin: 0;
+      padding: 22px 24px 24px 42px;
+      color: var(--ink-soft);
+    }
+
+    .list-panel li + li {
+      margin-top: 12px;
+    }
+
+    .shopping-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+    }
+
+    .shopping-card {
+      padding: 24px;
+      border-top: 5px solid var(--lake);
+      background: #fffdf8;
+      box-shadow: 0 14px 38px rgba(28, 54, 62, 0.08);
+    }
+
+    .shopping-card:nth-child(2) {
+      border-color: var(--flower);
+    }
+
+    .shopping-card:nth-child(3) {
+      border-color: var(--sun);
+    }
+
+    .shopping-card h3 {
+      font-size: 1.34rem;
+      margin-bottom: 10px;
+    }
+
+    .shopping-card p {
+      margin: 0 0 14px;
+      color: var(--ink-soft);
+    }
+
+    .shopping-card ul {
+      margin: 0;
+      padding-left: 1.2em;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+    }
+
+    .drive-layout {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .drive-map {
+      position: relative;
+      min-height: 540px;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(145deg, rgba(255, 253, 248, 0.96), rgba(234, 246, 242, 0.98)),
+        var(--mist);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .drive-map svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .drive-map path {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .drive-map .highway {
+      stroke: var(--lake);
+      stroke-width: 8;
+    }
+
+    .drive-map .local {
+      stroke: var(--flower);
+      stroke-width: 5;
+      stroke-dasharray: 10 10;
+    }
+
+    .drive-pin {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      padding: 8px 10px;
+      border-radius: 999px;
+      color: var(--ink);
+      background: white;
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 24px rgba(28, 54, 62, 0.12);
+      font: 900 0.76rem/1 "Avenir Next", "Noto Serif TC", sans-serif;
+      white-space: nowrap;
+    }
+
+    .d-cts { left: 30%; top: 78%; }
+    .d-sapporo { left: 38%; top: 46%; }
+    .d-otaru { left: 20%; top: 34%; }
+    .d-furano { left: 74%; top: 42%; }
+    .d-biei { left: 78%; top: 28%; }
+    .d-rusutsu { left: 36%; top: 86%; }
+    .d-outlet { left: 34%; top: 65%; }
+
+    .route-steps {
+      display: grid;
+      gap: 14px;
+    }
+
+    .route-step {
+      padding: 20px;
+      border-left: 4px solid var(--lake);
+      background: white;
+      box-shadow: 0 12px 32px rgba(28, 54, 62, 0.08);
+    }
+
+    .route-step:nth-child(2) {
+      border-color: var(--flower);
+    }
+
+    .route-step:nth-child(3) {
+      border-color: var(--sun);
+    }
+
+    .notice-band {
+      margin-top: 22px;
+      padding: 24px;
+      border-radius: var(--radius);
+      color: white;
+      background: var(--pine);
+      box-shadow: var(--shadow);
+    }
+
+    .notice-band h3 {
+      font-size: 1.45rem;
+      margin-bottom: 10px;
+    }
+
+    .notice-band ul {
+      margin: 0;
+      padding-left: 1.2em;
+      color: rgba(255, 255, 255, 0.84);
+    }
+
+    .source-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .source-list a {
+      display: block;
+      min-height: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.74);
+      text-decoration: none;
+      font: 800 0.9rem/1.35 "Avenir Next", "Noto Serif TC", sans-serif;
+    }
+
+    .source-list a:hover {
+      border-color: rgba(33, 124, 141, 0.42);
+      color: var(--lake);
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        min-height: 84vh;
+      }
+
+      .hero-strip,
+      .section-head,
+      .map-panel,
+      .band-inner,
+      .compare,
+      .recommendation,
+      .city-grid,
+      .two-column,
+      .drive-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cards,
+      .guide-grid,
+      .shopping-grid,
+      .source-list {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .route-map {
+        min-height: 500px;
+      }
+
+      .place {
+        min-width: 76px;
+        padding: 8px 10px;
+        font-size: 0.78rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero-content,
+      section,
+      .band-inner {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .hero-content {
+        padding-bottom: 42px;
+      }
+
+      .hero-strip {
+        grid-template-columns: 1fr;
+        margin-top: 30px;
+      }
+
+      section {
+        padding: 54px 0;
+      }
+
+      .route-map {
+        min-height: 560px;
+      }
+
+      .asahikawa { left: 74%; top: 20%; }
+      .biei { left: 75%; top: 33%; }
+      .furano { left: 72%; top: 47%; }
+      .sapporo { left: 31%; top: 35%; }
+      .otaru { left: 17%; top: 27%; }
+      .cts { left: 43%; top: 58%; }
+      .rusutsu { left: 30%; top: 75%; }
+      .toya { left: 47%; top: 84%; }
+
+      .time-row {
+        grid-template-columns: 74px 1fr;
+      }
+
+      .verdict {
+        grid-template-columns: 1fr;
+      }
+
+      .drive-map {
+        min-height: 560px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <img src="assets/hokkaido-summer-family-roadtrip.png" alt="北海道夏季花田、自駕道路與遠方山景的旅行主視覺">
+      <div class="hero-content">
+        <div class="eyebrow">Hokkaido Family Road Trip</div>
+        <h1>北海道親子自駕 5 天 4 夜</h1>
+        <p class="hero-lede">兩位大人、一位 15 歲女生、一位 12 歲男生。少換飯店、一定購物、行程偏鬆，兼顧花田、遊樂園與素食安排。</p>
+        <div class="hero-strip" aria-label="旅行重點">
+          <div><b>最佳月份</b><span>7 月下旬花季最穩，8 月避開日本連假</span></div>
+          <div><b>飯店策略</b><span>札幌 3 晚 + 留壽都 1 晚最平衡</span></div>
+          <div><b>青少年亮點</b><span>Rusutsu Resort 遊樂園、纜車與渡假村活動</span></div>
+          <div><b>素食策略</b><span>札幌吃正式素食，郊區準備備用糧</span></div>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Geography</div>
+          <h2>先看懂北海道的相對位置</h2>
+        </div>
+        <p>新千歲機場在札幌南邊。小樽靠札幌西側，富良野與美瑛在東邊，留壽都、洞爺湖、登別在南邊。5 天 4 夜要輕鬆，重點是不要每個方向都拉太遠。</p>
+      </div>
+
+      <div class="map-panel">
+        <div class="route-map" aria-label="北海道自駕概念地圖">
+          <svg class="map-route" viewBox="0 0 900 620" role="img" aria-label="札幌、小樽、富良野美瑛、留壽都、洞爺湖與新千歲機場的概念路線">
+            <path class="main" d="M280 235 C245 210 210 190 160 195"></path>
+            <path class="main" d="M280 235 C365 260 485 280 632 318"></path>
+            <path class="side" d="M632 318 C670 286 688 258 682 228"></path>
+            <path class="side" d="M682 228 C692 188 694 165 704 140"></path>
+            <path class="main" d="M280 235 C300 285 330 330 372 355"></path>
+            <path class="main" d="M372 355 C340 420 302 458 280 485"></path>
+            <path class="side" d="M280 485 C326 506 372 520 405 525"></path>
+          </svg>
+          <div class="place sapporo">札幌<small>Sapporo</small></div>
+          <div class="place otaru">小樽<small>Otaru</small></div>
+          <div class="place cts">新千歲<small>CTS</small></div>
+          <div class="place furano">富良野<small>Furano</small></div>
+          <div class="place biei">美瑛<small>Biei</small></div>
+          <div class="place asahikawa">旭川<small>Asahikawa</small></div>
+          <div class="place rusutsu">留壽都<small>Rusutsu</small></div>
+          <div class="place toya">洞爺湖<small>Toya</small></div>
+          <div class="map-note">概念比例圖：實際車程會受天氣、停車、休息與旺季塞車影響。排親子行程時，每天只抓 1 個主目的地會舒服很多。</div>
+        </div>
+
+        <div class="map-copy">
+          <article class="fact">
+            <strong>札幌是基地</strong>
+            <p>購物、素食、四人房選擇最多。小樽半日遊很順，晚上還能回札幌站、大丸、狸小路補買。</p>
+          </article>
+          <article class="fact">
+            <strong>富良野與美瑛是花田方向</strong>
+            <p>從札幌一日來回可行，但會是比較長的一天。若花田是第一順位，改住富良野 2 晚會更舒服。</p>
+          </article>
+          <article class="fact">
+            <strong>留壽都是青少年亮點</strong>
+            <p>遊樂園、渡假村活動、比較大的房型都集中在這裡。住 1 晚比一日來回更有度假感。</p>
+          </article>
+          <article class="fact">
+            <strong>機場與 Outlet 同方向</strong>
+            <p>Mitsui Outlet Park 札幌北廣島在札幌與新千歲機場中間，適合放第一天或最後一天。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Three Routes</div>
+          <h2>三種少換飯店路線</h2>
+        </div>
+        <p>都控制在最多兩間飯店。A 是最推薦的平衡版，B 是花田優先，C 是完全不搬行李的札幌基地版。</p>
+      </div>
+
+      <div class="cards">
+        <article class="proposal">
+          <div class="proposal-top">
+            <span class="tag">Best Balance</span>
+            <h3>A. 札幌 3 晚 + 留壽都 1 晚</h3>
+            <p class="route">購物、小樽、花田、遊樂園都收進來。</p>
+          </div>
+          <ol class="days">
+            <li><b>Day 1</b><span>新千歲取車 → Outlet → 札幌入住</span></li>
+            <li><b>Day 2</b><span>小樽半日 → 札幌購物</span></li>
+            <li><b>Day 3</b><span>富良野/美瑛花田一日</span></li>
+            <li><b>Day 4</b><span>札幌 → 留壽都 Resort</span></li>
+            <li><b>Day 5</b><span>留壽都 → 機場或 Outlet 補買</span></li>
+          </ol>
+          <div class="verdict">
+            <div><strong>優點</strong>青少年有遊樂園，大人有購物，住宿只換一次。</div>
+            <div><strong>缺點</strong>富良野/美瑛當天車程較長。</div>
+          </div>
+        </article>
+
+        <article class="proposal">
+          <div class="proposal-top">
+            <span class="tag">Flower First</span>
+            <h3>B. 札幌 2 晚 + 富良野 2 晚</h3>
+            <p class="route">最適合 7 月下旬看花、拍照、慢慢走。</p>
+          </div>
+          <ol class="days">
+            <li><b>Day 1</b><span>新千歲 → 札幌購物</span></li>
+            <li><b>Day 2</b><span>小樽 + 札幌</span></li>
+            <li><b>Day 3</b><span>札幌 → 富良野花田</span></li>
+            <li><b>Day 4</b><span>美瑛、青池、白鬚瀑布</span></li>
+            <li><b>Day 5</b><span>富良野 → 新千歲機場</span></li>
+          </ol>
+          <div class="verdict">
+            <div><strong>優點</strong>看花最舒服，不需要一日來回硬衝。</div>
+            <div><strong>缺點</strong>大型遊樂園元素較弱。</div>
+          </div>
+        </article>
+
+        <article class="proposal">
+          <div class="proposal-top">
+            <span class="tag">No Hotel Change</span>
+            <h3>C. 札幌 4 晚固定基地</h3>
+            <p class="route">最輕鬆、最安全，也最適合素食安排。</p>
+          </div>
+          <ol class="days">
+            <li><b>Day 1</b><span>新千歲 → Outlet → 札幌</span></li>
+            <li><b>Day 2</b><span>小樽半日 + 札幌購物</span></li>
+            <li><b>Day 3</b><span>富良野/美瑛一日</span></li>
+            <li><b>Day 4</b><span>留壽都或登別一日</span></li>
+            <li><b>Day 5</b><span>札幌 → 新千歲還車</span></li>
+          </ol>
+          <div class="verdict">
+            <div><strong>優點</strong>完全不搬行李，素食與購物最方便。</div>
+            <div><strong>缺點</strong>兩天郊區來回，車上時間較多。</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Sightseeing Notes</div>
+          <h2>景點特色與適合停留方式</h2>
+        </div>
+        <p>這趟不是要把所有景點踩滿，而是挑「一家四口都能接受」的點：大人有風景與購物，青少年有遊樂園與好拍場景，素食者也能在札幌先吃好。</p>
+      </div>
+
+      <div class="guide-grid">
+        <article class="guide-card">
+          <span class="mark">Sapporo</span>
+          <h3>札幌市區</h3>
+          <p>市區精華在札幌站、大通、狸小路、薄野這條軸線。適合安排第一天晚上與最後一天補買，天氣不好也能走地下街與百貨。</p>
+        </article>
+        <article class="guide-card">
+          <span class="mark">Otaru</span>
+          <h3>小樽運河與堺町通</h3>
+          <p>半日剛好：運河拍照、玻璃工藝、音樂盒、甜點與壽司。和札幌距離近，不需要換飯店。</p>
+        </article>
+        <article class="guide-card">
+          <span class="mark">Furano</span>
+          <h3>富良野 Farm Tomita</h3>
+          <p>北海道代表性的薰衣草景點。7 月下旬最穩，8 月若薰衣草收割，仍可看夏季花田、吃哈密瓜與薰衣草霜淇淋。</p>
+        </article>
+        <article class="guide-card">
+          <span class="mark">Biei</span>
+          <h3>美瑛四季彩之丘、青池</h3>
+          <p>四季彩之丘是大面積彩色花毯，青池與白鬚瀑布是自然景觀。比單純看一片薰衣草更適合 8 月備案。</p>
+        </article>
+        <article class="guide-card">
+          <span class="mark">Rusutsu</span>
+          <h3>留壽都 Resort</h3>
+          <p>青少年重點：遊樂園、纜車、夏季活動與較大的渡假村房型。若碰上夜間遊樂園日期，住一晚體驗最好。</p>
+        </article>
+        <article class="guide-card">
+          <span class="mark">Airport</span>
+          <h3>新千歲機場</h3>
+          <p>不只是機場。ROYCE' Chocolate World、北海道拉麵道場、伴手禮街都在這裡，最後一天至少留 2 小時以上比較安心。</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Sapporo City</div>
+          <h2>札幌市區一定要懂的逛法</h2>
+        </div>
+        <p>札幌不需要開車逐點移動。市中心停車費與單行道會讓人分心，建議車停飯店或停車場，用走路、地下街、地鐵串起來。</p>
+      </div>
+
+      <div class="city-grid">
+        <div class="city-axis" aria-label="札幌市區購物與散步軸線">
+          <div class="axis-stop">
+            <b>01</b>
+            <div><strong>札幌站</strong><span>Daimaru、Stellar Place、JR Tower。百貨、地下食品街、藥妝、Pokemon Center 都容易集中處理。</span></div>
+          </div>
+          <div class="axis-stop">
+            <b>02</b>
+            <div><strong>大通公園與電視塔</strong><span>城市中心，適合拍照、散步、看夜景。鐘樓也在附近，當作短停點即可。</span></div>
+          </div>
+          <div class="axis-stop">
+            <b>03</b>
+            <div><strong>狸小路商店街</strong><span>有屋頂，雨天也能逛。藥妝、Don Quijote、伴手禮、球鞋、雜貨很集中。</span></div>
+          </div>
+          <div class="axis-stop">
+            <b>04</b>
+            <div><strong>薄野 Susukino</strong><span>晚上吃飯、甜點、商場 COCONO SUSUKINO。親子同行可早點吃完，不必排太晚場。</span></div>
+          </div>
+        </div>
+
+        <div class="mini-grid">
+          <article class="mini-card">
+            <h3>市區半日建議</h3>
+            <p>下午札幌站百貨與地下食品街，傍晚走地下街到大通，晚上狸小路與薄野吃飯。這樣不用一直找停車位。</p>
+          </article>
+          <article class="mini-card">
+            <h3>青少年可加點</h3>
+            <p>Pokemon Center、扭蛋、藥妝零食、COCONO SUSUKINO、JR Tower 展望台，都比純看古蹟更有感。</p>
+          </article>
+          <article class="mini-card">
+            <h3>大人購物策略</h3>
+            <p>百貨買品質，狸小路買藥妝與雜貨，Outlet 買品牌折扣，機場買最後伴手禮。不要把所有購物都塞最後一天。</p>
+          </article>
+          <article class="mini-card">
+            <h3>停車提醒</h3>
+            <p>市區路口多、行人多、停車場入口常在小路。晚上若要逛薄野，建議車留飯店，人走路過去。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Food & Restaurants</div>
+          <h2>必吃食物、餐廳與素食策略</h2>
+        </div>
+        <p>北海道美食以海鮮、乳製品、拉麵、湯咖哩、成吉思汗烤肉最有代表性。素食者最穩的方式是在札幌安排正式 vegan 餐，郊區則準備白飯與素肉鬆備案。</p>
+      </div>
+
+      <div class="two-column">
+        <article class="list-panel">
+          <header>
+            <h3>必吃清單</h3>
+          </header>
+          <ul>
+            <li><strong>湯咖哩：</strong>札幌代表食物，蔬菜量多，較容易找到可調整的選項；但仍要確認高湯是否含雞、魚、蝦。</li>
+            <li><strong>味噌拉麵：</strong>非素食者可排薄野拉麵街或機場北海道拉麵道場；素食者不要只看「蔬菜拉麵」，要問湯底。</li>
+            <li><strong>海鮮丼與壽司：</strong>小樽、札幌二條市場、百貨地下街都可安排；吃素者可分開點飯糰、甜點或 vegan 餐。</li>
+            <li><strong>成吉思汗烤羊肉：</strong>北海道經典，但不適合嚴格素食者共餐；建議安排給非素食者，素食者另吃。</li>
+            <li><strong>乳製品甜點：</strong>霜淇淋、起司塔、布丁、哈密瓜甜點，對青少年通常很有吸引力。</li>
+          </ul>
+        </article>
+
+        <article class="list-panel">
+          <header>
+            <h3>餐廳方向</h3>
+          </header>
+          <ul>
+            <li><strong>Holistic Bio Cafe Veggy Way：</strong>札幌官方旅遊網站列出的 vegan cafe，適合安排一餐讓素食者好好吃。</li>
+            <li><strong>湯咖哩店：</strong>可找有 vegetable soup curry 的店，但要再問「no meat, no fish, no seafood, no dashi」。</li>
+            <li><strong>百貨地下食品街：</strong>Daimaru、Stellar Place 一帶適合買麵包、甜點、飯糰、飲料與伴手禮，家庭成員可各買各的。</li>
+            <li><strong>留壽都 Resort：</strong>餐廳要先看營業日與訂位；素食者建議從札幌帶備用糧、即食飯友、素肉鬆。</li>
+            <li><strong>新千歲機場：</strong>最後一天可吃拉麵道場、買 ROYCE'，但素食選擇不如札幌市區穩。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Shopping & Gifts</div>
+          <h2>購物行程與必買伴手禮</h2>
+        </div>
+        <p>購物要分散安排：第一天 Outlet 試水溫，札幌市區買藥妝與百貨，最後機場補伴手禮。這樣行李重量、退稅與時間都比較好控制。</p>
+      </div>
+
+      <div class="shopping-grid">
+        <article class="shopping-card">
+          <h3>Day 1 或 Day 5：Mitsui Outlet</h3>
+          <p>位在札幌與新千歲機場之間，北海道官方旅遊介紹它是全室內 outlet，雨天也能逛。</p>
+          <ul>
+            <li>適合買運動品牌、戶外用品、鞋、行李箱。</li>
+            <li>若第一天去，別買太重；若最後一天去，要留還車與機場時間。</li>
+          </ul>
+        </article>
+        <article class="shopping-card">
+          <h3>札幌市區：百貨 + 狸小路</h3>
+          <p>百貨適合食品地下街、衣服、保養品；狸小路適合藥妝、零食、Don Quijote、雜貨。</p>
+          <ul>
+            <li>札幌站：Daimaru、Stellar Place、JR Tower。</li>
+            <li>大通到薄野：地下街、狸小路、COCONO SUSUKINO。</li>
+          </ul>
+        </article>
+        <article class="shopping-card">
+          <h3>新千歲機場：最後伴手禮</h3>
+          <p>適合買易碎、冷藏、限定品。建議不要壓線，國際線前至少留 2 小時以上逛與整理行李。</p>
+          <ul>
+            <li>ROYCE' 生巧克力與洋芋片巧克力。</li>
+            <li>白色戀人、六花亭、北菓樓、LeTAO。</li>
+            <li>Calbee Potato Farm 薯條三兄弟、夕張哈密瓜果凍。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <div class="band">
+      <div class="band-inner">
+        <div>
+          <div class="kicker">Best Month</div>
+          <h2>看花，我會選 7 月下旬</h2>
+          <p>富良野與美瑛的夏季花田從 6 月中開始進入季節，7 月通常最穩。8 月仍有花可看，但薰衣草可能逐步收割，行程要把焦點放在美瑛丘陵、四季彩之丘與夏季花田，而不是只押薰衣草。</p>
+        </div>
+        <div class="timeline" aria-label="北海道花季月份比較">
+          <div class="time-row">
+            <div class="month">6 月</div>
+            <div class="bar"><div class="fill june">開始進入花季</div></div>
+          </div>
+          <div class="time-row">
+            <div class="month">7 月</div>
+            <div class="bar"><div class="fill july">最推薦，花況最穩</div></div>
+          </div>
+          <div class="time-row">
+            <div class="month">8 月</div>
+            <div class="bar"><div class="fill aug">仍可看花，避開連假</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Driving Map</div>
+          <h2>北海道自駕路線與行車注意事項</h2>
+        </div>
+        <p>北海道路大、距離也大。不要只看地圖直線距離，要把取車、停車、休息、廁所、加油、塞車與還車時間都算進去。</p>
+      </div>
+
+      <div class="drive-layout">
+        <div class="drive-map" aria-label="北海道行車路線概念圖">
+          <svg viewBox="0 0 900 620" role="img" aria-label="新千歲到札幌、小樽、富良野美瑛、留壽都的行車路線概念圖">
+            <path class="highway" d="M270 485 C300 405 325 335 345 280"></path>
+            <path class="highway" d="M345 280 C286 246 236 218 178 210"></path>
+            <path class="local" d="M345 280 C450 250 575 238 694 255"></path>
+            <path class="local" d="M694 255 C712 225 718 198 704 174"></path>
+            <path class="highway" d="M270 485 C275 430 285 382 304 344"></path>
+            <path class="local" d="M270 485 C292 522 314 552 342 575"></path>
+            <path class="local" d="M304 344 C315 378 326 414 332 448"></path>
+          </svg>
+          <div class="drive-pin d-cts">新千歲機場</div>
+          <div class="drive-pin d-outlet">北廣島 Outlet</div>
+          <div class="drive-pin d-sapporo">札幌市區</div>
+          <div class="drive-pin d-otaru">小樽</div>
+          <div class="drive-pin d-furano">富良野</div>
+          <div class="drive-pin d-biei">美瑛</div>
+          <div class="drive-pin d-rusutsu">留壽都</div>
+        </div>
+
+        <div class="route-steps">
+          <article class="route-step">
+            <h3>新千歲機場 → 札幌</h3>
+            <p>租車櫃台辦理後通常搭免費接駁到機場外營業所取車。往札幌可走道央自動車道，第一天若飛行後疲累，先到 Outlet 或直接進札幌都可以。</p>
+          </article>
+          <article class="route-step">
+            <h3>札幌 → 小樽</h3>
+            <p>半日最順。小樽市區停車後用走的逛運河、堺町通、甜點與玻璃工藝，回札幌晚餐與購物。</p>
+          </article>
+          <article class="route-step">
+            <h3>札幌 → 富良野/美瑛</h3>
+            <p>這天是最長的一日遊，建議早出發，只排 Farm Tomita、四季彩之丘、青池三個主點，別再硬塞旭川。</p>
+          </article>
+          <article class="route-step">
+            <h3>札幌 → 留壽都 → 新千歲</h3>
+            <p>最後一晚住留壽都，Day 5 回機場前可視時間經北廣島 Outlet。還車前加滿油，並預留接駁與國際線報到時間。</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="notice-band">
+        <h3>新千歲到市區與日本行車規則</h3>
+        <ul>
+          <li>新千歲機場官方說明：國內線前方車道僅供下車，國際線前方一般車不能停；接人或久停請用停車場。</li>
+          <li>租車多半不在航廈內直接取車，會由接駁車帶到營業所。請把取車手續抓 40 到 60 分鐘比較保守。</li>
+          <li>日本靠左行駛，駕駛座在右邊。轉彎時最容易習慣錯邊，出停車場與小路口要特別慢。</li>
+          <li>紅色倒三角「止まれ」是停止標誌，必須完全停下確認左右，不是慢慢滑過。</li>
+          <li>行人優先、全員繫安全帶。12 歲、15 歲不需要兒童安全座椅，但後座仍要繫安全帶。</li>
+          <li>普通道路常見上限 60 km/h，高速公路依標誌。北海道直路長，容易不知不覺超速。</li>
+          <li>市區不要路邊亂停；札幌、富良野、美瑛熱門景點都用指定停車場。若有 ETC/HEP，可向租車公司確認是否適合你們路線。</li>
+          <li>夏天也要注意山路、濃霧、突然下雨、鄉間路口與野生動物；長途日建議每 90 分鐘休息一次。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Tour Group</div>
+          <h2>跟團會不會也這樣排？</h2>
+        </div>
+        <p>大方向會很像：新千歲、札幌/小樽、富良野/美瑛、洞爺湖/登別、Outlet 或機場購物。但體感會不同，尤其是飯店更換、素食彈性與青少年活動。</p>
+      </div>
+
+      <div class="compare">
+        <article class="compare-box">
+          <h3>自由行自駕</h3>
+          <ul>
+            <li>最容易做到只住一到兩間飯店。</li>
+            <li>購物時間、餐廳、休息節奏可自己控制。</li>
+            <li>素食可以先排札幌餐廳，郊區帶備用糧。</li>
+            <li>可特別安排留壽都，青少年比較不無聊。</li>
+          </ul>
+        </article>
+        <article class="compare-box">
+          <h3>一般北海道團</h3>
+          <ul>
+            <li>不用開車，第一次去比較省心。</li>
+            <li>常見 5 天 4 夜換 3 到 4 間飯店。</li>
+            <li>購物與拍照時間通常固定，比較難臨時改。</li>
+            <li>素食與四人家庭房要看旅行社能否保證。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="kicker">References</div>
+          <h2>行前確認資料來源</h2>
+        </div>
+        <p>營業時間、航班、餐廳菜單與交通規則都可能變動，出發前請再用官方網站確認一次。</p>
+      </div>
+      <div class="source-list">
+        <a href="https://www.visit-hokkaido.jp/en/spot/detail_10003.html">Hokkaido Official Tourism: Tanukikoji</a>
+        <a href="https://visit.sapporo.travel/discover/art-culture/sapporo-clock-tower/">Visit Sapporo: Clock Tower</a>
+        <a href="https://www.visit-hokkaido.jp/en/spot/detail_10174.html">Hokkaido Official Tourism: Farm Tomita</a>
+        <a href="https://rusutsu.com/en/amusement-park/calendar-tickets/">Rusutsu Resort Amusement Park Calendar</a>
+        <a href="https://www.visit-hokkaido.jp/en/spot/detail_11204.html">Hokkaido Official Tourism: Mitsui Outlet Park</a>
+        <a href="https://www.hokkaido-airports.com/en/new-chitose/access/car/">New Chitose Airport: Car Access</a>
+        <a href="https://www.japan.travel/en/plan/airport-access/new-chitose-airport/">JNTO: New Chitose Airport Access</a>
+        <a href="https://www.npa.go.jp/english/bureau/traffic/document/r8_followtherules_en01.pdf">Japan Police: Safe Driving Rules</a>
+        <a href="https://www.sapporo.travel/gourmet/shop/shop_816/">Sapporo Official Gourmet: Veggy Way</a>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="recommendation">
+        <div class="stamp">
+          首選
+          <span>2026 年 7 月下旬</span>
+        </div>
+        <div class="recommendation-copy">
+          <h3>札幌 3 晚 + 留壽都 1 晚</h3>
+          <p>這條路線把你們家的需求放在同一個平衡點：飯店最多兩間、札幌購物與素食最穩、富良野美瑛花田有收進來，最後用留壽都補上青少年喜歡的遊樂園與渡假村感。</p>
+          <div class="actions" aria-label="行程重點標籤">
+            <span class="pill">少換飯店</span>
+            <span class="pill">購物充足</span>
+            <span class="pill">花田一日</span>
+            <span class="pill">遊樂園住宿</span>
+            <span class="pill">素食較好安排</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

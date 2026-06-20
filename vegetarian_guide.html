@@ -1,0 +1,2493 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 日本關西素食指南｜大阪・京都</title>
+<style>
+  :root {
+    --green: #2d7d46;
+    --green-light: #e8f5ec;
+    --green-mid: #a8d5b5;
+    --orange: #e07b39;
+    --orange-light: #fdf0e8;
+    --blue: #2563a8;
+    --blue-light: #e8f0fb;
+    --gray: #555;
+    --gray-light: #f5f5f5;
+    --border: #ddd;
+    --primary-osaka: #d04040;
+    --primary-osaka-light: #fdf0f0;
+    --primary-kyoto: #7b5ea7;
+    --primary-kyoto-light: #f4f0fb;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Helvetica Neue', Arial, 'Noto Sans TC', sans-serif;
+    background: #f8f7f5;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: linear-gradient(135deg, #2d7d46 0%, #1a4f2c 100%);
+    color: white;
+    padding: 28px 24px 24px;
+    text-align: center;
+  }
+  .site-header h1 { font-size: 22px; font-weight: 700; letter-spacing: 1px; }
+  .site-header p { font-size: 13px; opacity: 0.85; margin-top: 6px; }
+  .trip-info {
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    margin-top: 14px;
+  }
+  .trip-badge {
+    background: rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+  }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    padding: 12px 20px;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    justify-content: center;
+    font-size: 12px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+
+  /* ── Tabs ── */
+  .tabs {
+    display: flex;
+    position: sticky; top: 0; z-index: 10;
+    background: white;
+    border-bottom: 2px solid var(--border);
+  }
+  .tab-btn {
+    flex: 1; padding: 13px; border: none; background: none;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    color: var(--gray); transition: all 0.2s;
+    border-bottom: 3px solid transparent; margin-bottom: -2px;
+  }
+  .tab-btn.active-osaka { color: var(--primary-osaka); border-color: var(--primary-osaka); background: #fff8f8; }
+  .tab-btn.active-kyoto { color: var(--primary-kyoto); border-color: var(--primary-kyoto); background: #f9f7fd; }
+  .tab-btn:not(.active-osaka):not(.active-kyoto):hover { background: var(--gray-light); }
+
+  /* ── Main content ── */
+  .content { display: none; }
+  .content.active { display: block; }
+
+  /* ── Section header ── */
+  .section-header {
+    padding: 20px 20px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+    background: var(--green);
+  }
+  .section-header.osaka { background: linear-gradient(90deg, var(--primary-osaka), #b03030); }
+  .section-header.kyoto { background: linear-gradient(90deg, var(--primary-kyoto), #5a3d8a); }
+  .section-sub {
+    padding: 8px 20px 14px;
+    background: var(--gray-light);
+    font-size: 12px;
+    color: var(--gray);
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Meal section ── */
+  .meal-section {
+    padding: 14px 20px 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #eee;
+    background: white;
+  }
+
+  /* ── Restaurant card ── */
+  .card {
+    background: white;
+    margin: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .card.recommended { border-left: 4px solid var(--green); }
+  .card.backup { border-left: 4px solid #ccc; }
+  .card.highlight { border-left: 4px solid var(--orange); }
+
+  .card-header {
+    padding: 12px 14px 8px;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;
+  }
+  .card-title-group { flex: 1; }
+  .card-name { font-size: 16px; font-weight: 700; }
+  .card-name-en { font-size: 12px; color: var(--gray); margin-top: 1px; }
+
+  .badge-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+  .badge {
+    font-size: 11px; padding: 2px 8px; border-radius: 12px; font-weight: 600;
+  }
+  .badge-primary { background: var(--green-light); color: var(--green); }
+  .badge-backup { background: var(--gray-light); color: var(--gray); }
+  .badge-vegan { background: #e8f8e8; color: #1a7a1a; }
+  .badge-lacto { background: #fff8e1; color: #b07800; }
+  .badge-no5xin { background: #fde8ff; color: #8800b0; }
+  .badge-halal { background: #e8f0ff; color: #003db0; }
+  .badge-sweet { background: #ffe8f4; color: #b00060; }
+  .badge-warning { background: #fff3e0; color: #b05000; }
+  .badge-highlight { background: var(--orange-light); color: var(--orange); }
+
+  .rating-box { text-align: right; flex-shrink: 0; }
+  .stars { color: #f59e0b; font-size: 13px; }
+  .rating-num { font-size: 17px; font-weight: 700; color: #333; }
+  .rating-src { font-size: 10px; color: #aaa; }
+
+  .card-body { padding: 0 14px 12px; }
+
+  .info-row {
+    display: flex; align-items: flex-start; gap: 6px;
+    margin-bottom: 6px; font-size: 13px;
+  }
+  .info-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .info-text { flex: 1; }
+  .info-label { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  a.map-link {
+    display: inline-block; margin-top: 3px;
+    background: var(--blue-light); color: var(--blue);
+    padding: 3px 10px; border-radius: 10px; font-size: 11px;
+    text-decoration: none; font-weight: 600;
+  }
+  a.map-link:hover { background: #d0e4ff; }
+
+  .divider { height: 1px; background: #eee; margin: 8px 0; }
+
+  .notes-box {
+    background: var(--orange-light);
+    border-radius: 6px;
+    padding: 7px 10px;
+    font-size: 12px;
+    color: #7a4000;
+    margin-top: 8px;
+  }
+  .notes-box.green { background: var(--green-light); color: #1a4f2c; }
+  .notes-box.purple { background: #f4f0fb; color: #5a3d8a; }
+
+  .nearby-list {
+    display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px;
+  }
+  .nearby-tag {
+    background: #f0f4ff; color: #2c4a8a;
+    font-size: 11px; padding: 2px 8px; border-radius: 10px;
+  }
+
+  .hours-grid {
+    display: grid; grid-template-columns: auto 1fr; gap: 2px 10px;
+    font-size: 12px;
+  }
+  .hours-label { color: var(--gray); }
+  .hours-val { font-weight: 500; }
+  .closed-day { color: #cc3333; }
+
+  /* ── Priority banner ── */
+  .priority-banner {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 14px;
+    font-size: 12px; font-weight: 600;
+    border-bottom: 1px solid #eee;
+  }
+  .priority-banner.main { background: #f0faf4; color: var(--green); }
+  .priority-banner.alt { background: var(--gray-light); color: var(--gray); }
+
+  /* ── Legend ── */
+  .footer-note {
+    text-align: center; padding: 24px; font-size: 11px; color: #aaa;
+    border-top: 1px solid var(--border); background: white; margin-top: 16px;
+  }
+
+  /* ── Quick ref table ── */
+  .quick-ref {
+    margin: 10px 14px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    font-size: 12px;
+  }
+  .quick-ref table { width: 100%; border-collapse: collapse; }
+  .quick-ref th {
+    background: var(--green-light);
+    padding: 8px 10px;
+    text-align: left;
+    font-size: 11px;
+    color: var(--green);
+    font-weight: 700;
+  }
+  .quick-ref td { padding: 7px 10px; border-top: 1px solid #eee; }
+  .quick-ref tr:hover td { background: #fafafa; }
+  .quick-ref .meal-tag { font-size: 10px; color: var(--gray); }
+
+  /* ── Responsive ── */
+  @media (min-width: 600px) {
+    .card { margin: 12px 20px; }
+    .card-header { gap: 12px; }
+    .card-name { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════ -->
+<div class="site-header">
+  <h1>🌿 2026 關西素食自由行指南</h1>
+  <p>大阪・京都｜蛋奶素友善・附交通・景點・Google Map</p>
+  <div class="trip-info">
+    <span class="trip-badge">🗓 7/13–18</span>
+    <span class="trip-badge">👨‍👩‍👧‍👦 2大2小</span>
+    <span class="trip-badge">🥛 蛋奶素（大人）</span>
+    <span class="trip-badge">🍱 小孩可葷</span>
+    <span class="trip-badge">🏨 大阪住 Swissôtel Nankai 難波</span>
+  </div>
+</div>
+
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-item"><span class="badge badge-primary">🌟 主要推薦</span> 優先嘗試</div>
+  <div class="legend-item"><span class="badge badge-backup">🔁 備案</span> 替代選項</div>
+  <div class="legend-item"><span class="badge badge-vegan">🌱 全素</span> Vegan</div>
+  <div class="legend-item"><span class="badge badge-lacto">🥛 蛋奶素</span> Lacto-ovo</div>
+  <div class="legend-item"><span class="badge badge-no5xin">🧄 無五辛</span> 不含蔥蒜</div>
+  <div class="legend-item"><span class="badge badge-sweet">🍡 甜品</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TABS
+══════════════════════════════════════════ -->
+<div class="tabs">
+  <button class="tab-btn active-osaka" onclick="showTab('osaka', this)">🏙 大阪 Osaka</button>
+  <button class="tab-btn" onclick="showTab('kyoto', this)">⛩ 京都 Kyoto</button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     OSAKA
+══════════════════════════════════════════ -->
+<div id="osaka" class="content active">
+
+  <div class="section-header osaka">🏙 大阪・難波エリア素食指南</div>
+  <div class="section-sub">
+    🏨 住宿：Swissôtel Nankai Osaka（難波）7/15–18 ・ 大人蛋奶素、小孩葷食皆可
+  </div>
+
+  <!-- Quick Reference -->
+  <div class="quick-ref">
+    <table>
+      <tr>
+        <th>餐次</th>
+        <th>主要推薦</th>
+        <th>備案</th>
+      </tr>
+      <tr>
+        <td><b>早餐</b><br><span class="meal-tag">超商/超市</span></td>
+        <td>附近超商 鹽梅飯糰 ✅</td>
+        <td>AEON FoodStyle 心齋橋</td>
+      </tr>
+      <tr>
+        <td><b>午餐</b></td>
+        <td>Green Earth（本町，限午間）</td>
+        <td>Halal Ramen Naniwaya</td>
+      </tr>
+      <tr>
+        <td><b>晚餐</b></td>
+        <td>Shama 印度素食（四ツ橋）</td>
+        <td>OKO 御好燒 / 夫婦善哉＋散步</td>
+      </tr>
+      <tr>
+        <td><b>甜點</b></td>
+        <td>夫婦善哉（法善寺）</td>
+        <td>Shinsekai Paprika 新世界</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ─── MAIN RECOMMENDATIONS ─── -->
+  <div class="meal-section">⭐ 主要推薦 — 難波・心齋橋エリア</div>
+
+  <!-- 1. Shama -->
+  <div class="card recommended">
+    <div class="priority-banner main">🌟 主要推薦・晚餐首選</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">菜食インドレストラン Shama</div>
+        <div class="card-name-en">Vegetarian Indian Restaurant Shama</div>
+        <div class="badge-row">
+          <span class="badge badge-vegan">🌱 全素</span>
+          <span class="badge badge-no5xin">🧄 無五辛（含蔥蒜）</span>
+          <span class="badge badge-primary">🌟 主要推薦</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★★</div>
+        <div class="rating-num">4.5</div>
+        <div class="rating-src">Tripadvisor</div>
+        <div class="rating-src">HappyCow 4.5 / TA 4.5</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          大阪市西区北堀江1-3-7 倉正ビルB1F
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Shama+Vegetarian+Indian+Restaurant+Osaka+Kitahorie" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          大阪Metro 心齋橋站（7号出口）<b>步行約1分</b>
+          <br>大阪Metro 四ツ橋站 <b>步行約5分</b>
+          <br>Swissôtel Nankai（難波） → 心齋橋站 地下鐵御堂筋線 1站 ≈ 10分
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+  <span class="hours-label">週一</span><span class="hours-val">11:00–15:00（無晚餐）</span>
+  <span class="hours-label">週二</span><span class="hours-val">17:00–22:00（無午餐）</span>
+  <span class="hours-label">週三–日</span><span class="hours-val">11:00–15:00 + 17:00–22:00</span>
+  <span class="hours-label">公休</span><span class="hours-val" style="color:#cc0000;font-weight:bold;">不定休（出發前確認）</span>
+</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          午餐 ¥1,000–1,500 ／ 晚餐 ¥1,500–2,500（人均）
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🛍 心齋橋商店街（步行3分）</span>
+            <span class="nearby-tag">🎨 美國村（步行5分）</span>
+            <span class="nearby-tag">🌊 道頓堀（步行8分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box green">
+        💡 <b>為什麼推薦：</b>全餐不使用肉、魚、蛋、乳製品、蔥蒜韭，是難波一帶最符合「蛋奶素＋無五辛」的餐廳。茄子咖哩、起司薄餅（奶素）、炸豆腐必點。英文OK。
+      </div>
+      <div class="notes-box" style="background:#e8f0fb;border-left:4px solid #2563a8;margin-top:8px;">
+  🗺 <b>行程建議：</b>餐後→美國村 Amerika-mura（步行5分）→堀江 Horie 精品街散步→心齋橋筋（步行15分）
+</div>
+<div style="margin-top:10px;border-radius:8px;overflow:hidden;">
+  <iframe src="https://maps.google.com/maps?q=Indian+Restaurant+Shama+Osaka+Yotsubashi&output=embed&hl=zh-TW"
+    width="100%" height="180" style="border:0;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+    </div>
+  </div>
+
+  <!-- 2. 夫婦善哉 -->
+  <div class="card recommended">
+    <div class="priority-banner main">🌟 主要推薦・甜品＋散策</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">夫婦善哉（法善寺）</div>
+        <div class="card-name-en">Meoto Zenzai - Hozenji</div>
+        <div class="badge-row">
+          <span class="badge badge-lacto">🥛 蛋奶素OK</span>
+          <span class="badge badge-sweet">🍡 甜品</span>
+          <span class="badge badge-primary">🌟 主要推薦</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.2</div>
+        <div class="rating-src">Google</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          大阪市中央区難波1-2-10（法善寺横丁内）
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=夫婦善哉+法善寺+大阪難波" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          大阪Metro 難波站 <b>步行約3–5分</b>（道頓堀方向）
+          <br>Swissôtel Nankai → 徒步直達 ≈ <b>7分</b>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+            <span class="hours-label">每日</span><span class="hours-val">10:00–22:00</span>
+            <span class="hours-label">公休</span><span class="hours-val">全年無休</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          夫婦善哉（一人份兩碗紅豆湯）¥815
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">⛩ 法善寺水掛不動尊（旁邊）</span>
+            <span class="nearby-tag">🌉 道頓堀（步行3分）</span>
+            <span class="nearby-tag">🎭 法善寺横丁（步行即達）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box green">
+        💡 <b>推薦方式：</b>晚餐後散步道頓堀，順道到法善寺橫丁吃甜點。130年以上老舗，紅豆湯用兩個小漆碗盛裝（象徵夫婦），宇治抹茶刨冰也很好吃。⚠️ 鹽漬海帶建議不吃（過鹹）。
+      </div>
+      <div class="notes-box" style="background:#e8f0fb;border-left:4px solid #2563a8;margin-top:8px;">
+  🗺 <b>行程建議：</b>甜品→法善寺水掛不動尊（旁邊拍照）→道頓堀燈光夜景→心齋橋
+</div>
+<div style="margin-top:10px;border-radius:8px;overflow:hidden;">
+  <iframe src="https://maps.google.com/maps?q=夫婦善哉+法善寺横丁+大阪難波&output=embed&hl=zh-TW"
+    width="100%" height="180" style="border:0;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+    </div>
+  </div>
+
+  <!-- 3. Green Earth -->
+  <div class="card recommended">
+    <div class="priority-banner main">🌟 主要推薦・午餐（本町）</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">Green Earth</div>
+        <div class="card-name-en">Green Earth Vegan Restaurant - 本町</div>
+        <div class="badge-row">
+          <span class="badge badge-vegan">🌱 全素 Vegan</span>
+          <span class="badge badge-primary">🌟 主要推薦</span>
+          <span class="badge badge-warning">⚠️ 限午間・需確認</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.3</div>
+        <div class="rating-src">HappyCow</div>
+        <div class="rating-src">HappyCow #3（大阪最佳）</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          大阪市中央区北久宝寺町4-2-2 久宝ビル1F（本町）
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Green+Earth+Vegan+Osaka+Hommachi" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          大阪Metro 本町站 <b>步行約5分</b>
+          <br>Swissôtel Nankai → 地鐵御堂筋線 本町站 ≈ 10分（2站）
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+  <span class="hours-label">週一–四</span><span class="hours-val">11:30–16:00</span>
+  <span class="hours-label">週五</span><span class="hours-val">11:30–15:00 + 18:00–21:00</span>
+  <span class="hours-label">週六</span><span class="hours-val">11:30–16:00</span>
+  <span class="hours-label">公休</span><span class="hours-val" style="color:#cc0000;font-weight:bold;">🚫 週日公休</span>
+</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          午餐套餐 ¥1,200–1,800（人均）・英文菜單OK
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🏢 本町エリア（商業區）</span>
+            <span class="nearby-tag">⛩ 坐摩神社（步行5分）</span>
+            <span class="nearby-tag">🛍 心齋橋（地鐵1站）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box green">
+        💡 大阪最老的素食餐廳（1991年創業），2019年升級為全素。西式料理為主：素雞、素熱狗、披薩、沙拉。英文菜單。⚠️ 僅午間營業，出發前建議查 Instagram 確認今日開業。
+      </div>
+      <div class="notes-box" style="background:#e8f0fb;border-left:4px solid #2563a8;margin-top:8px;">
+  🗺 <b>行程建議：</b>午餐前排大阪城（地鐵20分）→午餐→心齋橋（地鐵5分）
+</div>
+<div style="margin-top:10px;border-radius:8px;overflow:hidden;">
+  <iframe src="https://maps.google.com/maps?q=Green+Earth+Vegan+Osaka+Hommachi&output=embed&hl=zh-TW"
+    width="100%" height="180" style="border:0;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+    </div>
+  </div>
+
+  <!-- ─── BACKUP ─── -->
+  <div class="meal-section">🔁 備案・替代選項</div>
+
+  <!-- OKO -->
+  <div class="card backup">
+    <div class="priority-banner alt">🔁 備案・晚間宵夜</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">OKO - Fun Okonomiyaki Bar</div>
+        <div class="card-name-en">遊べるお好み焼き屋 OKO・東心斎橋</div>
+        <div class="badge-row">
+          <span class="badge badge-vegan">🌱 素食御好燒</span>
+          <span class="badge badge-backup">🔁 備案</span>
+          <span class="badge badge-warning">⚠️ 評價兩極</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.6</div>
+        <div class="rating-src">Tripadvisor</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          大阪市中央区東心斎橋1-15-24
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=OKO+Fun+Okonomiyaki+Bar+Osaka+Shinsaibashi" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          大阪Metro 心齋橋站 <b>步行約5分</b>
+          <br>Swissôtel Nankai → 心齋橋 地下鐵1站 or 步行 ≈ 12分
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+            <span class="hours-label">週一~四・日</span><span class="hours-val">18:00–02:00</span>
+            <span class="hours-label">週五・六</span><span class="hours-val">18:00–05:00（深夜！）</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          半份 ¥1,020 ／ 中 ¥1,480 ／ 大 ¥2,200・飲料 ¥200/杯（自助）
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🛍 心齋橋商店街（步行5分）</span>
+            <span class="nearby-tag">🌉 道頓堀（步行8分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box">
+        ⚠️ <b>注意：</b>花栗愷blogger評為「普通」，PTT 和 Tripadvisor 評分較高（評價兩極）。小孩可能喜歡氣氛；大人如果對口味期待高，可考慮改去 Shama。營業至深夜，適合晚餐後還想吃宵夜的夜晚。
+      </div>
+    </div>
+  </div>
+
+  <!-- Paprika Shokudo 大阪 -->
+  <div class="card backup">
+    <div class="priority-banner alt">🔁 備案・午餐/晚餐</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">パプリカ食堂 Vegan</div>
+        <div class="card-name-en">Paprika Shokudo Vegan・新町</div>
+        <div class="badge-row">
+          <span class="badge badge-vegan">🌱 全素 100% Vegan</span>
+          <span class="badge badge-backup">🔁 備案</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★☆☆</div>
+        <div class="rating-num">3.5</div>
+        <div class="rating-src">Tabelog</div>
+        <div class="rating-src">Tabelog 3.36（116則）/ Yelp 4.0</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          大阪市西区新町1-9-9 alivio新町1F
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Paprika+Shokudo+Vegan+Osaka+Shinsaibashi" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          大阪Metro 四ツ橋站 <b>步行約5分</b>
+          <br>Swissôtel Nankai → 四ツ橋 ≈ 地鐵+步行 15分 or タクシー 5分
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+  <span class="hours-label">週一、四</span><span class="hours-val">17:30–22:00（晚餐only）</span>
+  <span class="hours-label">週二–三</span><span class="hours-val">11:30–14:00 + 17:30–22:00</span>
+  <span class="hours-label">週五–日</span><span class="hours-val">11:30–14:00 + 17:30–22:00</span>
+  <span class="hours-label">公休</span><span class="hours-val">無固定公休</span>
+</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          午餐 ¥1,950（套餐）・晚餐約 ¥2,500
+        </div>
+      </div>
+      <div class="notes-box">
+        ⚠️ 花栗愷認為豆製品口感普通，但有機蔬菜品質佳。週三四休息，出發前務必確認。點餐需用手機線上操作（可翻譯）。
+      </div>
+      <div style="margin-top:10px;border-radius:8px;overflow:hidden;">
+  <iframe src="https://maps.google.com/maps?q=Paprika+Shokudo+Vegan+Osaka+Shinmachi&output=embed&hl=zh-TW"
+    width="100%" height="180" style="border:0;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+    </div>
+  </div>
+
+  <!-- Halal Ramen Naniwaya -->
+  <div class="card backup">
+    <div class="priority-banner alt">🔁 備案・午餐/晚餐拉麵</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">Halal Ramen 浪速屋（なにわや）</div>
+        <div class="card-name-en">Halal Ramen Naniwaya・西心斎橋</div>
+        <div class="badge-row">
+          <span class="badge badge-halal">🕌 清真認證</span>
+          <span class="badge badge-backup">🔁 備案</span>
+          <span class="badge badge-warning">⚠️ 需確認素食選項</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.1</div>
+        <div class="rating-src">Google</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          大阪市中央区西心斎橋2-7-22
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Halal+Ramen+Naniwaya+Osaka+Shinsaibashi" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          大阪Metro 心齋橋站 <b>步行約5分</b> / 難波站 步行約7分
+          <br>Swissôtel Nankai → 步行 ≈ 10–12分
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+  <span class="hours-label">週一–五+前日</span><span class="hours-val">12:00–15:00 + 18:00–22:00</span>
+  <span class="hours-label">週六、日、假日</span><span class="hours-val">12:00–22:00（通し）</span>
+  <span class="hours-label">公休</span><span class="hours-val">無固定公休</span>
+</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          拉麵 ¥1,000–1,500
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🛍 心齋橋（步行5分）</span>
+            <span class="nearby-tag">🌉 道頓堀（步行8分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box">
+        ⚠️ 以 Halal 清真認證為主（外國旅客多），需事先確認是否有「野菜ベース」純素選項。PTT 作者有推薦 Vegan 拉麵，但菜單可能變動，建議現場詢問或查官網。
+      </div>
+      <div style="margin-top:10px;border-radius:8px;overflow:hidden;">
+  <iframe src="https://maps.google.com/maps?q=Halal+Ramen+Naniwaya+Osaka+Nishishinsaibashi&output=embed&hl=zh-TW"
+    width="100%" height="180" style="border:0;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+    </div>
+  </div>
+
+  <!-- Shinsekai Paprika -->
+  <div class="card backup">
+    <div class="priority-banner alt">🔁 備案・新世界順道</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">Shinsekai Paprika Shokudo Vegan</div>
+        <div class="card-name-en">新世界パプリカ食堂・ジャンジャン横丁</div>
+        <div class="badge-row">
+          <span class="badge badge-vegan">🌱 全素 Vegan</span>
+          <span class="badge badge-backup">🔁 備案</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★☆☆</div>
+        <div class="rating-num">3.5</div>
+        <div class="rating-src">Tabelog</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          大阪市浪速区（新世界・ジャンジャン横丁内）
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Shinsekai+Paprika+Shokudo+Vegan+Osaka" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          大阪Metro 動物園前站 <b>步行約5分</b> / 恵美須町站 步行約7分
+          <br>Swissôtel Nankai → 地鐵 ≈ 15分（換乗or直行なんば線）
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+            <span class="hours-label">每日</span><span class="hours-val">11:30–14:00 / 17:30–22:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          串炸 ¥140–370 / 件・素食章魚燒（6個）¥740
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🗼 通天閣（步行3分）</span>
+            <span class="nearby-tag">🦁 天王寺動物園（步行10分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box green">
+        💡 如果行程安排去通天閣/新世界，可以在這邊吃串炸。掃QR Code點餐，系統可翻譯。全素＋無麩質。
+      </div>
+    </div>
+  </div>
+
+  <!-- あじゅ -->
+  <div class="card backup">
+    <div class="priority-banner alt">🔁 備案・中崎町 散策</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">菜食バル あじゅ（Aju）</div>
+        <div class="card-name-en">Vegetable Kitchen Bar Aju・中崎町</div>
+        <div class="badge-row">
+          <span class="badge badge-vegan">🌱 全素（無蛋無奶）</span>
+          <span class="badge badge-backup">🔁 備案</span>
+          <span class="badge badge-warning">⚠️ 週一~三公休</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.0</div>
+        <div class="rating-src">Tripadvisor</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          大阪市北区中崎1-10-14
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=菜食バルあじゅ+大阪+中崎町" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          大阪Metro 谷町線 中崎町站 <b>步行約3分</b>
+          <br>Swissôtel Nankai → 難波→梅田→中崎町 ≈ 25分（較遠）
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+            <span class="hours-label">午餐</span><span class="hours-val">11:45–15:30（L.O. 15:00）</span>
+            <span class="hours-label">晚餐</span><span class="hours-val">17:30–22:40（L.O. 22:00）</span>
+            <span class="hours-label">公休</span><span class="hours-val closed-day">週一・二・三 定休</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          ¥1,000–2,500（人均）・中英菜單OK
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🏛 大阪生活今昔館（步行7分）</span>
+            <span class="nearby-tag">☕ 中崎町古著咖啡街</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box green">
+        💡 花栗愷強力推薦，綜合串燒神奇複製烤肉香氣。適合搭配大阪生活今昔館（博物館）一起玩。⚠️ 週一~三公休，且從難波較遠，建議安排去梅田/天滿宮那天順道造訪。
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 梅田・北エリア ─── -->
+  <div class="meal-section" style="background:#fff8f0;color:#a04000;">🗼 梅田・北エリア（梅田/大阪站 周邊）</div>
+
+  <!-- Vegan and Gluten Free Osaka -->
+  <div class="card recommended">
+    <div class="priority-banner main">🌟 主要推薦・梅田・家庭友善</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">Vegan and Gluten Free Osaka</div>
+        <div class="card-name-en">大阪站步行3分・完全素食＋無麩質</div>
+        <div class="badge-row">
+          <span class="badge badge-vegan">🌱 全素 Vegan</span>
+          <span class="badge badge-no5xin">🧄 可要求無五辛</span>
+          <span class="badge badge-primary">🌟 梅田首選</span>
+          <span class="badge" style="background:#e0f0ff;color:#004080;">👶 兒童友善</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.3</div>
+        <div class="rating-src">Google</div>
+        <div class="rating-src">HappyCow + Tabelog 有登錄</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          大阪市北区（大阪站步行約3分，進建築物內，需注意入口）
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Vegan+and+Gluten+Free+Osaka+station" target="_blank">📍 Google Maps</a>
+          <br><a class="map-link" href="https://www.veganandglutenfree-osaka.com/access/" target="_blank">🔗 官網路線圖</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          JR 大阪站 / 阪急・阪神 大阪梅田站 <b>步行約3分</b>
+          <br>Swissôtel Nankai → 御堂筋線 難波→梅田 ≈ <b>15分</b>（2站）
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+  <span class="hours-label">週一–二、四–日</span><span class="hours-val">11:00–22:00（LO 21:30）</span>
+  <span class="hours-label">公休</span><span class="hours-val" style="color:#cc0000;font-weight:bold;">🚫 週三公休</span>
+</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          人均 ¥1,500–2,500・菜單全英文
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🏬 グランフロント大阪（步行5分）</span>
+            <span class="nearby-tag">🎡 HEP FIVE 摩天輪（步行8分）</span>
+            <span class="nearby-tag">🌆 梅田スカイビル（步行15分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box green">
+        💡 <b>超適合帶小孩！</b>包廂式用餐（有電視），提供玩具給小朋友，90%以上客人是外國旅客，菜單全英文。<br>
+        素食大阪燒、章魚燒（全素＋無麩）、串炸、手捲壽司（可DIY）都值得點。<br>
+        🧄 蛋奶素＋不吃五辛：點餐時告知「<b>五葷抜き（ごくんぬき）</b>」即可。
+      </div>
+      <div class="notes-box" style="background:#e8f0fb;border-left:4px solid #2563a8;margin-top:8px;">
+  🗺 <b>行程建議：</b>午餐後→梅田藍天大廈（步行10分）→HEP FIVE 摩天輪（步行5分）
+</div>
+<div style="margin-top:10px;border-radius:8px;overflow:hidden;">
+  <iframe src="https://maps.google.com/maps?q=Vegan+Gluten+Free+Osaka+Umeda+ekimae+4th+building&output=embed&hl=zh-TW"
+    width="100%" height="180" style="border:0;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+    </div>
+  </div>
+
+  <!-- Ganesh N -->
+  <div class="card backup">
+    <div class="priority-banner alt">🔁 備案・Michelin 印度咖哩・天滿</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">Ganesh N（ガネーシュN）</div>
+        <div class="card-name-en">Michelin推薦北印度咖哩・南森町</div>
+        <div class="badge-row">
+          <span class="badge badge-lacto">🥛 素食咖哩</span>
+          <span class="badge badge-backup">🔁 備案</span>
+          <span class="badge badge-highlight">⭐ Michelin</span>
+          <span class="badge badge-warning">⚠️ 每日限1道素食</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★★</div>
+        <div class="rating-num">4.6</div>
+        <div class="rating-src">Google</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          大阪市北区（南森町・大阪天満宮附近）
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Ganesh+N+Minamimorimachi+Osaka+Indian+curry" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          地鐵 南森町站（谷町線・堺筋線）<b>步行約7分</b>
+          <br>JR 大阪天満宮站 <b>步行約7分</b>
+          <br>Swissôtel Nankai → 御堂筋線 難波→梅田→谷町線 南森町 ≈ 25分
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+            <span class="hours-label">週二~日</span><span class="hours-val">11:30–15:00 / 16:00–21:00（賣完即止）</span>
+            <span class="hours-label">公休</span><span class="hours-val closed-day">週一 定休（國定假日除外）</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          咖哩套餐 ¥1,200–1,800（含飯、Lassi可加購）
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">⛩ 大阪天満宮（步行5分）</span>
+            <span class="nearby-tag">🌉 天神橋筋商店街（步行3分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box">
+        ⚠️ 每天只有<b>1道素食咖哩</b>（可選印度米或日式白飯），吃完就沒了！人氣很高，午間需排隊。如有特殊飲食需求，建議事先填官網表單告知。Lassi（優格飲料）非常推薦。
+      </div>
+    </div>
+  </div>
+
+  <!-- Natural Kitchen Medaka No.2 -->
+  <div class="card backup">
+    <div class="priority-banner alt">🔁 備案・大豆肉替換・天六</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">Natural Kitchen めだか 2号店</div>
+        <div class="card-name-en">Natural Kitchen Medaka No.2・天神橋筋六丁目</div>
+        <div class="badge-row">
+          <span class="badge badge-lacto">🌿 大豆肉替換</span>
+          <span class="badge badge-backup">🔁 備案</span>
+          <span class="badge" style="background:#e0f0ff;color:#004080;">👨‍👩‍👧‍👦 葷素共桌OK</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.1</div>
+        <div class="rating-src">Google</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          大阪市北区（天神橋筋六丁目・扇町 附近）
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Natural+Kitchen+Medaka+No2+Osaka+Tenjinbashisuji" target="_blank">📍 Google Maps</a>
+          <br><a class="map-link" href="https://shin-medaka.com/menu/english-menu/" target="_blank">🔗 英文菜單</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          地鐵 天神橋筋六丁目（天六）站 <b>步行約7分</b>
+          <br>JR 天満站 <b>步行約7分</b>
+          <br>大阪站から<b>步行約12分</b>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+            <span class="hours-label">週一~六</span><span class="hours-val">11:00–20:30</span>
+            <span class="hours-label">週日</span><span class="hours-val">11:00–20:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          日替わりランチセット ¥1,000–1,500・可加費升級為無五辛套餐
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🏛 大阪生活今昔館（步行3分）</span>
+            <span class="nearby-tag">🌉 天神橋筋商店街（步行5分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box green">
+        💡 非純素食餐廳，但可用大豆肉替換所有肉類・海鮮，葷素同行完全沒問題。英文菜單。<b>可加費要求「東方素食（Oriental Vegetarian）」</b>—即可去除五辛。使用99.9%淨化水烹調，黑芝麻拿鐵推薦。搭配大阪生活今昔館最方便。
+      </div>
+    </div>
+  </div>
+
+  <!-- Optimus Cafe -->
+  <div class="card backup">
+    <div class="priority-banner alt">🔁 備案・早餐・天六</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">Optimus Cafe（オプティマスカフェ）</div>
+        <div class="card-name-en">大豆肉Vegan Cafe・天神橋筋六丁目</div>
+        <div class="badge-row">
+          <span class="badge badge-vegan">🌱 全素・大豆肉</span>
+          <span class="badge badge-sweet">☕ 早餐・輕食</span>
+          <span class="badge badge-backup">🔁 備案</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.2</div>
+        <div class="rating-src">Google</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          大阪市北区（天神橋筋六丁目 / 土佐堀川沿い）
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Optimus+Cafe+Osaka+Tenjinbashisuji" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          地鐵 天神橋筋六丁目（天六）站 <b>步行約3分</b>
+          <br>JR 天満站 <b>步行約5分</b>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+            <span class="hours-label">週一~五</span><span class="hours-val">08:30–17:00</span>
+            <span class="hours-label">週六・日・假日</span><span class="hours-val">08:30–18:00</span>
+            <span class="hours-label">午餐</span><span class="hours-val">11:00–15:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          早餐・輕食 ¥800–1,500・午餐 ¥1,200–1,800
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🏛 大阪生活今昔館（步行5分）</span>
+            <span class="nearby-tag">🌊 土佐堀川河畔（旁邊・露台座）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box green">
+        💡 河畔露台座位風景超好，適合悠閒早餐。使用大豆肉、米粉/蕎麥粉（無小麥）烹飪，季節菜單。適合去天六（大阪生活今昔館）或天滿宮那天的早餐/午餐。
+      </div>
+    </div>
+  </div>
+
+  <!-- 都野菜賀茂 大阪駅店 -->
+  <div class="card">
+    <div class="priority-banner" style="background:#2d7d46;color:white;">🌿 梅田エリア・野菜吃到飽・大阪站直結</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">都野菜賀茂 大阪駅店</div>
+        <div class="card-name-en">Miyakoveggie Kamo Osaka-eki・Southgate 16F</div>
+        <div class="badge-row">
+          <span class="badge badge-lacto">🥛 蛋奶素可</span>
+          <span class="badge" style="background:#f0fff0;color:#226622;border:1px solid #aaddaa;">🥗 野菜吃到飽</span>
+          <span class="badge badge-warning">⚠️ 葷素共食</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.0</div>
+        <div class="rating-src">Google</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          大阪市北区梅田3丁目（JR 大阪站 Southgate Building 南ゲートビル 16F）
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=都野菜賀茂+大阪駅店+Southgate+Building" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          JR 大阪站 直結 Southgate Building 16F（電扶梯上去即到）<br>
+          阪神 大阪梅田站 步行 1 分<br>
+          Swissôtel Nankai → 地鐵御堂筋線 約 15 分
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+            <span class="hours-label">早餐</span><span class="hours-val">7:00–10:00（入店截止 9:00）</span>
+            <span class="hours-label">午餐</span><span class="hours-val">11:30–16:00</span>
+            <span class="hours-label">晚餐</span><span class="hours-val">17:00–22:00（Buffet截止 21:30）</span>
+            <span class="hours-label">公休</span><span class="hours-val">不定休（確認官網）</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位（Buffet）</div>
+          午餐：平日 ¥1,550 / 週末假日 ¥1,730<br>
+          晚餐：平日 ¥1,750
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🛍 大阪站商業設施（同樓）</span>
+            <span class="nearby-tag">🎡 HEP FIVE 摩天輪（步行5分）</span>
+            <span class="nearby-tag">🏙 梅田藍天大廈（步行10分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box green">
+        💡 <b>2023年11月新開幕：</b>京都有機農家直送當天晨採蔬菜，品質高且種類豐富。葷素共食店，自行選取蔬菜類。非常適合早餐或午餐配合大阪駅周邊觀光。
+      </div>
+      <div style="margin-top:10px;border-radius:8px;overflow:hidden;">
+        <iframe src="https://maps.google.com/maps?q=都野菜賀茂+大阪駅店+Southgate&output=embed&hl=zh-TW"
+          width="100%" height="180" style="border:0;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 十三エリア ─── -->
+  <div class="meal-section" style="background:#f0f0ff;color:#4040a0;">🚉 十三（じゅうそう）エリア</div>
+
+  <!-- Swsoo Wswoo -->
+  <div class="card highlight">
+    <div class="priority-banner main">📸 Facebook 素食社群推薦・蕈素</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">Swsoo Wswoo（蕈素）</div>
+        <div class="card-name-en">蕈素餐廳・阪急十三駅 步行5分</div>
+        <div class="badge-row">
+          <span class="badge badge-vegan">🌱 蕈素（菌菇素食）</span>
+          <span class="badge badge-highlight">🍕 Pizza 超推</span>
+          <span class="badge badge-warning">⚠️ 資訊待確認</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <div class="rating-num">FB推</div>
+        <div class="rating-src">日本素食交流會</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          阪急十三站附近（詳細地址請查 Instagram @TN00415387）
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Swsoo+Wswoo+Juso+Osaka+vegan" target="_blank">📍 Google Maps 搜尋</a>
+          <br><a class="map-link" href="https://www.instagram.com/TN00415387/" target="_blank">📸 Instagram @TN00415387</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          阪急 十三（じゅうそう）站 <b>步行約5分</b>
+          <br>Swissôtel Nankai → 難波（南海・近鐵）→ 乘船or バス → 十三
+          <br>或 難波→御堂筋線→梅田→阪急本線→十三 ≈ <b>25分</b>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          請查 Instagram 或 Google Maps 確認（小店，建議先確認）
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🎆 淀川河川公園（步行10分・夏日煙火）</span>
+            <span class="nearby-tag">🛍 十三商店街</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box purple">
+        📸 <b>Facebook「日本素食交流會」社群推薦：</b><br>
+        🥑 炒酪梨（口感濃郁綿密）<br>
+        🍚 香料炒飯（香料味道豐富）<br>
+        🍕 Pizza（被評為「日本目前吃過最好吃的素食pizza」）<br>
+        🎆 吃完可順道看淀川煙花！<br><br>
+        ⚠️ 這家店線上資料極少，強烈建議：①先查 IG @TN00415387 確認營業日；②前往前用 Google Maps 搜尋「Swsoo Wswoo」或「蕈素 十三」確認地址。
+      </div>
+    </div>
+  </div>
+
+  <!-- Facebook 社群新發現 -->
+  <div class="meal-section" style="background:#fff0e8;color:#a04800;">📱 Facebook「日本素食交流會」社群新發現</div>
+
+  <!-- Pivot BASE Cafe & Bar -->
+  <div class="card recommended">
+    <div class="priority-banner main">🌟 主要推薦・道頓堀素食大阪料理</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">Pivot BASE Cafe &amp; Bar</div>
+        <div class="card-name-en">Pivot BASE Cafe & Bar ＠Dotonbori・道頓堀</div>
+        <div class="badge-row">
+          <span class="badge badge-vegan">🌱 全素 Vegan</span>
+          <span class="badge badge-primary">🌟 主要推薦</span>
+          <span class="badge badge-warning">⏳ 晚餐排隊30–40分</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.2</div>
+        <div class="rating-src">Google</div>
+        <div class="rating-src">Tabelog 3.02 / TA 3.5</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          大阪市中央区道頓堀（心齋橋・難波中間）
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Pivot+BASE+Cafe+Bar+Dotonbori+Osaka" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          大阪Metro 難波站 <b>步行約5分</b>（道頓堀沿河）<br>
+          Swissôtel Nankai → 徒步 ≈ <b>10分</b>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🍽</span>
+        <div class="info-text">
+          <div class="info-label">菜單亮點</div>
+          🍜 素食拉麵・🥟 煎餃・🍢 串炸・🥬 炒蔬菜・🐙 素章魚燒<br>
+          QR Code 點餐，可用 i Coca 結帳
+        </div>
+      </div>
+      <div class="info-row">
+  <span class="info-icon">🕐</span>
+  <div class="info-text">
+    <div class="info-label">營業時間</div>
+    <div class="hours-grid">
+      <span class="hours-label">週一–五</span><span class="hours-val">11:30–22:30</span>
+      <span class="hours-label">週六、日、假日</span><span class="hours-val">10:00–22:00</span>
+      <span class="hours-label">公休</span><span class="hours-val">無固定公休</span>
+    </div>
+  </div>
+</div>
+      <div class="divider"></div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🌉 道頓堀（就在這裡）</span>
+            <span class="nearby-tag">🎭 法善寺横丁（步行3分）</span>
+            <span class="nearby-tag">🦀 蟹道楽（旁邊）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box green">
+        💡 <b>Facebook 群組高度推薦：</b>能吃到「蔬食版大阪料理」（素章魚燒、串炸）很感動！推薦點炒蔬菜（出門在外難吃到熱蔬菜）。煎餃偏小，炸物有時過熱。晚餐人多，建議早點去或午餐時段。
+      </div>
+      <div class="notes-box" style="background:#e8f0fb;border-left:4px solid #2563a8;margin-top:8px;">
+  🗺 <b>行程建議：</b>傍晚道頓堀遊船（步行2分，¥800）→晚餐→法善寺横丁夜遊
+</div>
+<div style="margin-top:10px;border-radius:8px;overflow:hidden;">
+  <iframe src="https://maps.google.com/maps?q=Pivot+BASE+Cafe+Bar+Dotonbori+Osaka&output=embed&hl=zh-TW"
+    width="100%" height="180" style="border:0;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+    </div>
+  </div>
+
+  <!-- Pizzeria da Tigre -->
+  <div class="card recommended">
+    <div class="priority-banner main">🌟 主要推薦・米其林披薩・蛋奶素無五辛</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">Pizzeria da Tigre</div>
+        <div class="card-name-en">ピッツェリア ダ ティグレ・心齋橋</div>
+        <div class="badge-row">
+          <span class="badge badge-lacto">🥛 蛋奶素OK</span>
+          <span class="badge badge-nogo">🚫 無五辛 ✅</span>
+          <span class="badge badge-primary">⭐ 米其林必比登</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.1</div>
+        <div class="rating-src">Tabelog</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          大阪市中央区心齋橋附近（詳細地址請查 Google Maps）
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Pizzeria+da+Tigre+Shinsaibashi+Osaka" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          地鐵 西大橋站 <b>步行約3分</b>、四橋站 <b>步行約5分</b>、心齋橋站 約10分<br>
+          Swissôtel Nankai → 徒步約 <b>20 分</b>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+  <span class="hours-label">每日</span><span class="hours-val">11:30–14:30 + 17:00–21:00</span>
+  <span class="hours-label">公休</span><span class="hours-val"><span style="color:#cc0000;font-weight:bold;">🚫 週一 + 週二公休</span></span>
+</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🍕</span>
+        <div class="info-text">
+          <div class="info-label">素食可選（蛋奶素無五辛，點餐機直接點，無需告知店員）</div>
+          🍕 <b>瑪格麗特披薩</b>（Margherita）<br>
+          🧀 <b>四種起司披薩</b>（QD・可加蜂蜜，藍紋乳酪味溫和）<br>
+          ➕ 加料 +¥300：新鮮蘑菇 / 玉米可選
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🛍 心齋橋筋商店街（步行即達）</span>
+            <span class="nearby-tag">🌉 道頓堀（步行5分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box green">
+        💡 <b>全家最友善選擇之一：</b>蛋奶素且無五辛，不需特別向店員解釋，直接在點餐機選就好。米其林必比登認證正統義式披薩，很多外國人光顧。⚠️ 葷素共食店，注意避免接觸肉類。
+        <br>⭐ 第二評分：Tabelog 3.56（465則）+ 米其林必比登認證
+      </div>
+      <div class="notes-box" style="background:#e8f0fb;border-left:4px solid #2563a8;margin-top:8px;">
+  🗺 <b>行程建議：</b>午餐→堀江精品街散步（步行5分）→美國村
+</div>
+<div style="margin-top:10px;border-radius:8px;overflow:hidden;">
+  <iframe src="https://maps.google.com/maps?q=Pizzeria+da+Tigre+Osaka+Nishiohashi&output=embed&hl=zh-TW"
+    width="100%" height="180" style="border:0;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+    </div>
+  </div>
+
+  <!-- Vegetarian Cafe Ren 仁 大阪 -->
+  <div class="card backup">
+    <div class="priority-banner" style="background:#e07b39;color:white;">⚠️ 注意：大阪無實體分店</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">Vegetarian Cafe Ren 仁</div>
+        <div class="card-name-en">Vegetarian Cafe Ren・⚠️ 實際無大阪分店</div>
+        <div class="badge-row">
+          <span class="badge badge-lacto">🥛 蛋奶素OK</span>
+          <span class="badge badge-nogo">🚫 無五辛 ✅</span>
+          <span class="badge badge-warning">⚠️ 大阪無分店</span>
+          <span class="badge badge-highlight">🇹🇼 台灣素食風格</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.3</div>
+        <div class="rating-src">Google</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址（大阪分店 — 請先查 Google Maps 確認最近分店）</div>
+          大阪・京都均有多家分店
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Vegetarian+Cafe+Ren+仁+Osaka" target="_blank">📍 Google Maps 搜尋大阪店</a>
+          <br><a class="map-link" href="https://maps.app.goo.gl/MmkB53h4Bzp7esZT9" target="_blank">📍 Google Maps（四条大宮京都店）</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🍽</span>
+        <div class="info-text">
+          <div class="info-label">特色</div>
+          台灣來的素食餐廳，道地日本料理套餐，完全不加蔥蒜韭菜洋蔥（無五辛）。店員本身也是吃全素的，非常熱情。
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="notes-box green">
+        ⚠️ <b>實際確認無大阪分店，最近分店在京都四条大宮（從難波搭阪急約45分），詳見京都頁面。</b><br><br>
+        💡 <b>Facebook 群組大力推薦：</b>台灣素友的最愛！無五辛又有日本料理感，適合全家共食。大阪和京都各有分店，行程哪天方便就去哪家。建議出發前查 Google Maps 確認分店地址和營業時間。
+      </div>
+    </div>
+  </div>
+
+  <!-- KIX 機場 -->
+  <div class="meal-section" style="background:#e8f0ff;color:#2040a0;">✈️ 關西機場（KIX）・入境日 7/13 或出發前 7/18</div>
+
+  <div class="card">
+    <div class="priority-banner" style="background:#3060c0;color:white;">✈️ 機場內・蛋奶素可客製</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">COLOSSEO Pizza e Pasta</div>
+        <div class="card-name-en">関西国際空港店・T1 2F（Landside）</div>
+        <div class="badge-row">
+          <span class="badge badge-lacto">🥛 蛋奶素可客製</span>
+          <span class="badge badge-warning">✈️ 過海關前可用</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">位置</div>
+          關西機場第一航廈 2F（AEROPLAZA 方向，入境大廳附近）<br>
+          <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=COLOSSEO+Pizza+Pasta+Kansai+Airport" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🍕</span>
+        <div class="info-text">
+          <div class="info-label">素食做法</div>
+          可客製蛋奶素餐點（請告知服務人員需求，有附菜單）。義式披薩、義大利麵均可調整。
+        </div>
+      </div>
+      <div class="notes-box">
+        💡 <b>7/13 抵達（18:05 落地）：</b>辦完入境手續約 19:00，可在此吃晚餐再搭 南海電鐵到難波（約35分）。<br>
+        <b>7/18 出發前：</b>CI 153 14:00 起飛，建議 12:00 前到機場，在此吃午餐。
+      </div>
+    </div>
+  </div>
+
+  <!-- 超市便利商店 section -->
+  <div class="meal-section">🏪 超商・超市・外帶</div>
+
+  <div class="card" style="border-left: 4px solid #888; margin: 10px 14px 16px;">
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">超商・超市實用指南</div>
+        <div class="card-name-en">Convenience Store &amp; Supermarket Tips</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">🏪</span>
+        <div class="info-text">
+          <div class="info-label">附近超市（難波）</div>
+          <b>Life Central Square 難波店</b>：JR難波站直連・每日8:00–24:00<br>
+          <b>AEON FoodStyle 東心斎橋</b>：步行15分・24小時<br>
+          <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Life+supermarket+Namba+Osaka" target="_blank">📍 Life 難波店</a>
+          &nbsp;
+          <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=AEON+FoodStyle+Higashi-Shinsaibashi+Osaka" target="_blank">📍 AEON 心齋橋</a>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="info-row">
+        <span class="info-icon">🍙</span>
+        <div class="info-text">
+          <div class="info-label">超商飯糰指南（蛋奶素）</div>
+          ✅ <b>鹽味おにぎり（塩）</b>：純素，安全<br>
+          ✅ <b>梅干おにぎり（梅）</b>：純素，安全<br>
+          ❌ <b>昆布おにぎり（昆布）</b>：確認含動物性成分（2024.10更新）<br>
+          ✅ <b>蔬食豆腐棒</b>（7-11限定）：全素<br>
+          ✅ <b>生菜沙拉（無附醬）</b>：全素
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="info-row">
+        <span class="info-icon">🛒</span>
+        <div class="info-text">
+          <div class="info-label">超市推薦購物清單</div>
+          🍣 豆皮壽司（稻荷寿司）・涼麵・烏龍麵<br>
+          🥗 KEWPIE 深煎胡麻醬（確認全素）<br>
+          🧊 冷藏豆腐・納豆<br>
+          🍱 冷便當需注意：大部分都有魚或肉，選純蔬菜類
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end osaka -->
+
+<!-- ══════════════════════════════════════════
+     KYOTO
+══════════════════════════════════════════ -->
+<div id="kyoto" class="content">
+
+  <div class="section-header kyoto">⛩ 京都素食指南</div>
+  <div class="section-sub">
+    📅 7/14（全天）＋ 7/15（上午至午後）・四条河原町エリアが中心
+  </div>
+
+  <!-- Quick Ref -->
+  <div class="quick-ref">
+    <table>
+      <tr>
+        <th>餐次</th>
+        <th>主要推薦</th>
+        <th>備案</th>
+      </tr>
+      <tr>
+        <td><b>早餐</b></td>
+        <td>Smart Coffee（三条・早8點開）</td>
+        <td>超商 / 旅館早餐</td>
+      </tr>
+      <tr>
+        <td><b>午餐</b></td>
+        <td>松富や壽采（精進料理・博物館内）</td>
+        <td>Tokkyu Ramen（清水寺路上）</td>
+      </tr>
+      <tr>
+        <td><b>晚餐</b></td>
+        <td>虹屋 Nijiya（河原町・需早去）</td>
+        <td>Gyoza ChaoChao / Kyoto Engine Ramen</td>
+      </tr>
+      <tr>
+        <td><b>宵夜/下午茶</b></td>
+        <td>Omen 先斗町（烏龍麵）</td>
+        <td>Kamehameha 御好燒（寺町）</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ─── MAIN ─── -->
+  <div class="meal-section">⭐ 主要推薦・京都中心エリア</div>
+
+  <!-- 虹屋 Nijiya -->
+  <div class="card highlight">
+    <div class="priority-banner main">🌟 最高推薦・評分4.9</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">Vegan Izakaya 虹屋 nijiya</div>
+        <div class="card-name-en">Vegan Izakaya Nijiya VEGAN FARM・木屋町</div>
+        <div class="badge-row">
+          <span class="badge badge-vegan">🌱 全素 Vegan</span>
+          <span class="badge badge-primary">🌟 最高推薦</span>
+          <span class="badge badge-warning">⚠️ 僅7席・早去</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★★</div>
+        <div class="rating-num">4.9</div>
+        <div class="rating-src">Google（573則）</div>
+        <div class="rating-src">HappyCow 4.8 / Google 4.9</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          京都市中京区南車屋町287 木屋町会館1階
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Vegan+Izakaya+Nijiya+虹屋+Kyoto+Kiyamachi" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          阪急 京都河原町站 <b>步行約2分</b>
+          <br>京阪 三条站 <b>步行約5分</b>
+          <br>地下鐵東西線 京都市役所前站 <b>步行約8分</b>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+  <span class="hours-label">週一–六</span><span class="hours-val">17:30–20:00（視當日而定）</span>
+  <span class="hours-label">公休</span><span class="hours-val" style="color:#cc0000;font-weight:bold;">🚫 週日公休</span>
+  <span class="hours-label">⚠️ 注意</span><span class="hours-val" style="color:#cc0000;">目前暫停網路預約，只接受現場等位（2024/3起）</span>
+</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          人均 ¥2,000–3,500（居酒屋風、點菜式）
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🌸 木屋町・先斗町（旁邊）</span>
+            <span class="nearby-tag">🍽 錦市場（步行10分）</span>
+            <span class="nearby-tag">⛩ 八坂神社（步行18分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box purple">
+        💡 <b>強力推薦！</b>Google 4.9顆星（573則）是京都評分最高的素食餐廳之一。花栗愷每道都好吃：vegan 烤雞肉串（假肉香氣超逼真）、油豆腐、烤飯糰、巧克力羊羹。<br>
+        ⚠️ <b>只有7個座位</b>，建議 17:30 開門前去等，或查 Instagram 是否可以預約。
+      </div>
+      <div class="notes-box" style="background:#e8f0fb;border-left:4px solid #2563a8;margin-top:8px;">
+  🗺 <b>行程建議：</b>傍晚先斗町散步→晚餐虹屋→鴨川夜景
+</div>
+<div style="margin-top:10px;border-radius:8px;overflow:hidden;">
+  <iframe src="https://maps.google.com/maps?q=虹屋+nijiya+京都+木屋町&output=embed&hl=zh-TW"
+    width="100%" height="180" style="border:0;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+    </div>
+  </div>
+
+  <!-- 松富や壽采 -->
+  <div class="card recommended">
+    <div class="priority-banner main">🌟 主要推薦・精進料理・午餐</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">松富や壽采（まつとみや ことぶき）</div>
+        <div class="card-name-en">Matsutomiya Kotobuki・京都文化博物館内</div>
+        <div class="badge-row">
+          <span class="badge badge-vegan">🌱 全素</span>
+          <span class="badge badge-no5xin">🧄 無五辛</span>
+          <span class="badge badge-no5xin" style="background:#e8fff8;color:#006644;">⚠️ 無鹽・無糖</span>
+          <span class="badge badge-primary">🌟 主要推薦</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★☆☆</div>
+        <div class="rating-num">3.1</div>
+        <div class="rating-src">Tabelog</div>
+        <div class="rating-src">Vegewel 精進料理推薦</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          京都市中京区東片町623-1（京都府京都文化博物館内 路地店舗）
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=松富や壽采+京都文化博物館" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          地下鐵烏丸線 烏丸御池站 <b>步行約5分</b>
+          <br>阪急 烏丸站 <b>步行約8分</b>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+  <span class="hours-label">午餐（週二–日）</span><span class="hours-val">11:30–15:00</span>
+  <span class="hours-label">晚餐（週二–六）</span><span class="hours-val">17:30–19:30（完全預約制 ℡ 075-744-1626）</span>
+  <span class="hours-label">公休</span><span class="hours-val" style="color:#cc0000;font-weight:bold;">🚫 週一公休（博物館休館日）</span>
+</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          午餐套餐 ¥1,500–2,500
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🏛 京都文化博物館（在裡面）</span>
+            <span class="nearby-tag">🥩 錦市場（步行8分）</span>
+            <span class="nearby-tag">⛩ 本能寺（步行5分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box purple">
+        💡 <b>最適合蛋奶素＋無五辛！</b>完全不使用肉、魚、蛋、乳製品、五辛，甚至也不用鹽和精製糖。咖哩飯（香料調味）和柚子醬油湯頭拉麵是代表作。⚠️ 7/14 適合安排，7/15 早上若時間夠也可午餐。建議事先確認開業。
+      </div>
+      <div class="notes-box" style="background:#e8f0fb;border-left:4px solid #2563a8;margin-top:8px;">
+  🗺 <b>行程建議：</b>午餐前→京都文化博物館參觀→錦市場（步行10分）
+</div>
+<div style="margin-top:10px;border-radius:8px;overflow:hidden;">
+  <iframe src="https://maps.google.com/maps?q=松富や壽采+京都文化博物館&output=embed&hl=zh-TW"
+    width="100%" height="180" style="border:0;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+    </div>
+  </div>
+
+  <!-- Omen -->
+  <div class="card recommended">
+    <div class="priority-banner main">🌟 主要推薦・烏龍麵・先斗町</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">おめん 四条先斗町店</div>
+        <div class="card-name-en">Omen / NIPPON Shijou Pontochou・先斗町</div>
+        <div class="badge-row">
+          <span class="badge badge-lacto">🥛 蛋奶素 可</span>
+          <span class="badge badge-primary">🌟 主要推薦</span>
+          <span class="badge badge-warning">⚠️ 需索取無肉菜單</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.4</div>
+        <div class="rating-src">Tripadvisor</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          京都市下京区四条通先斗町西入（Nakagyoku 四条先斗町）
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Omen+Shijo+Pontocho+Kyoto" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          阪急 京都河原町站 <b>步行約3分</b>
+          <br>京阪 祇園四条站 <b>步行約5分</b>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+  <span class="hours-label">平日</span><span class="hours-val">10:30–17:00（LO 16:30）</span>
+  <span class="hours-label">週末假日</span><span class="hours-val">10:30–16:00（LO 15:30）+ 17:00–20:30（LO 20:00）</span>
+  <span class="hours-label">公休</span><span class="hours-val" style="color:#cc0000;font-weight:bold;">每月第2・4個週三 + 每週四 公休</span>
+</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          人均 ¥1,800–2,500（烏龍麵＋小菜）
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🍽 先斗町（旁邊）</span>
+            <span class="nearby-tag">⛩ 八坂神社（步行15分）</span>
+            <span class="nearby-tag">🌸 鴨川（步行2分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box purple">
+        💡 1967年創業的京都老店。冷沾麵＋蔬菜天婦羅口感絕佳。<b>記得要求店員給「無肉菜單」（no-meat menu）</b>。Vegan 豆腐烏龍麵＋季節天婦羅是代表作。先斗町漫步後很適合來這吃。
+      </div>
+      <div class="notes-box" style="background:#e8f0fb;border-left:4px solid #2563a8;margin-top:8px;">
+  🗺 <b>行程建議：</b>午餐→先斗町散步→鴨川河岸（步行1分）→祇園花見小路
+</div>
+<div style="margin-top:10px;border-radius:8px;overflow:hidden;">
+  <iframe src="https://maps.google.com/maps?q=Omen+NIPPON+Shijo+Pontochou+Kyoto&output=embed&hl=zh-TW"
+    width="100%" height="180" style="border:0;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+    </div>
+  </div>
+
+  <!-- Smart Coffee -->
+  <div class="card recommended">
+    <div class="priority-banner main">🌟 主要推薦・早餐・三条</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">スマート珈琲店</div>
+        <div class="card-name-en">Smart Coffee・京都三条</div>
+        <div class="badge-row">
+          <span class="badge badge-lacto">🥛 蛋奶素OK</span>
+          <span class="badge badge-sweet">🍡 早餐・甜品</span>
+          <span class="badge badge-primary">🌟 主要推薦</span>
+          <span class="badge badge-warning">⚠️ 需排隊</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.2</div>
+        <div class="rating-src">Tripadvisor</div>
+        <div class="rating-src">Tabelog 100大珈琲（2021-22）/ Google 4.3</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          京都市中京区寺町通三条上ル天性寺前町537
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Smart+Coffee+Kyoto+Sanjo" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          地鐵東西線 京都市役所前站 <b>步行約1分</b>
+          <br>京阪 三条站 <b>步行約5分</b>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+  <span class="hours-label">每日</span><span class="hours-val">8:00–19:00</span>
+  <span class="hours-label">公休</span><span class="hours-val">全年無休</span>
+</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          咖啡 ¥500・法式吐司早餐 ¥1,300・午餐 ¥1,500
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🏛 本能寺（步行3分）</span>
+            <span class="nearby-tag">🛍 寺町商店街（旁邊）</span>
+            <span class="nearby-tag">🏯 京都御所（步行20分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box purple">
+        💡 1932年創業的昭和復古老咖啡店。外酥內軟法式吐司＋軟嫩布丁＋熱紅茶是代表早餐。票選日本百大咖啡廳（2021・2022）。⚠️ 人氣很高，建議早點去（8點剛開門）或等待30分以上。
+      </div>
+      <div class="notes-box" style="background:#e8f0fb;border-left:4px solid #2563a8;margin-top:8px;">
+  🗺 <b>行程建議：</b>早餐→寺町商店街散步→本能寺（步行3分）→三条商店街
+</div>
+<div style="margin-top:10px;border-radius:8px;overflow:hidden;">
+  <iframe src="https://maps.google.com/maps?q=Smart+Coffee+Kyoto+Teramachi+Sanjo&output=embed&hl=zh-TW"
+    width="100%" height="180" style="border:0;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+    </div>
+  </div>
+
+  <!-- ─── BACKUP Kyoto ─── -->
+  <div class="meal-section">🔁 備案・替代選項</div>
+
+  <!-- Gyoza ChaoChao -->
+  <div class="card backup">
+    <div class="priority-banner alt">🔁 備案・晚餐・四条河原町</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">Gyoza ChaoChao 四条河原町店</div>
+        <div class="card-name-en">餃子専門店・四条河原町</div>
+        <div class="badge-row">
+          <span class="badge badge-vegan">🌱 素食餃子 明確標示</span>
+          <span class="badge badge-backup">🔁 備案</span>
+          <span class="badge badge-warning">⚠️ 等位40–75分</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★½</div>
+        <div class="rating-num">4.7</div>
+        <div class="rating-src">Abillion</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          京都市下京区河原町通四条下ル順風町312-1
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Gyoza+ChaoChao+Shijo+Kawaramachi+Kyoto" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          阪急 京都河原町站 <b>步行約1–2分</b>
+          <br>京阪 祇園四条站 <b>步行約5分</b>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+            <span class="hours-label">週一~五</span><span class="hours-val">16:00–23:00</span>
+            <span class="hours-label">週六・日</span><span class="hours-val">12:00–23:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          每顆 ¥80–120 不等・套餐 ¥1,800–2,200
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🛍 四条商店街（旁邊）</span>
+            <span class="nearby-tag">⛩ 八坂神社（步行15分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box purple">
+        💡 英文菜單清楚標示 vegan/非vegan。素食選項：蔬菜餃子、凍豆腐＆湯葉餃子、巧克力香蕉甜點餃子。等位時間長，建議週六日午間去（12點開始），或和前往河原町購物結合。花栗愷推薦炸豆腐為必點小菜。
+      </div>
+    </div>
+  </div>
+
+  <!-- Tokkyu Ramen -->
+  <div class="card backup">
+    <div class="priority-banner alt">🔁 備案・清水寺路上・午餐</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">特急ラーメン Hiroshi</div>
+        <div class="card-name-en">Tokkyu Ramen・東山 毘沙門町</div>
+        <div class="badge-row">
+          <span class="badge badge-vegan">🌱 豆乳 Vegan 拉麵</span>
+          <span class="badge badge-backup">🔁 備案</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.0</div>
+        <div class="rating-src">HappyCow</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          京都市東山区毘沙門町30-4
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Tokkyu+Ramen+Hiroshi+Kyoto+Higashiyama" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          清水寺から <b>步行約15分</b>（二寧坂→三年坂を下りた辺り）
+          <br>八坂神社 <b>步行約10分</b>
+          <br>京阪 清水五条站 <b>步行約20分</b>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+            <span class="hours-label">每日</span><span class="hours-val">11:30–深夜</span>
+            <span class="hours-label">公休</span><span class="hours-val closed-day">週三 定休</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          Vegan 拉麵 M ¥950 / L ¥1,050（非常實惠！）
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">⛩ 清水寺（步行15分）</span>
+            <span class="nearby-tag">🌸 八坂神社（步行10分）</span>
+            <span class="nearby-tag">🏮 二年坂・三年坂（步行5分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box purple">
+        💡 清水寺東山觀光路上的平價 Vegan 拉麵（¥950）。豆乳湯底清爽，大量高麗菜。老闆夫婦經營，接地氣。現金支付。逛完清水寺回程時，可以順道在這解決午餐。
+      </div>
+    </div>
+  </div>
+
+  <!-- Kyoto Engine Ramen -->
+  <div class="card backup">
+    <div class="priority-banner alt">🔁 備案・四条河原町・正餐</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">京都炎神（KYOTO ENGINE RAMEN）</div>
+        <div class="card-name-en">Kyoto Engine Ramen・新京極</div>
+        <div class="badge-row">
+          <span class="badge badge-vegan">🌱 Vegan 拉麵</span>
+          <span class="badge badge-backup">🔁 備案</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.1</div>
+        <div class="rating-src">Tripadvisor</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          京都市中京区松ヶ枝町452-1（新京極内）
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Kyoto+Engine+Ramen+Shinkyogoku" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          阪急 京都河原町站 <b>步行約2分</b>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+            <span class="hours-label">每日</span><span class="hours-val">12:00–23:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          Vegan 拉麵（ZESTY・麻辣味噌）¥1,800 ／ KYOTO BEANing ¥1,800
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🛍 新京極商店街（旁邊）</span>
+            <span class="nearby-tag">⛩ 錦天満宮（步行3分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box purple">
+        💡 濃厚巧達湯底風格的 Vegan 拉麵，外國人多、氣氛時髦。兩款 Vegan 選項：辣麻辣味噌（ZESTY）和京都豆乳風（BEANing）。不接受預約，等位時可逛新京極。
+      </div>
+    </div>
+  </div>
+
+  <!-- Kamehameha -->
+  <div class="card backup">
+    <div class="priority-banner alt">🔁 備案・晚餐・寺町</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">広島風お好み焼 かめはめは</div>
+        <div class="card-name-en">Hiroshima Okonomiyaki Kamehameha・寺町</div>
+        <div class="badge-row">
+          <span class="badge badge-lacto">🥛 可客製蔬食</span>
+          <span class="badge badge-backup">🔁 備案</span>
+          <span class="badge badge-warning">⚠️ 建議訂位</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.2</div>
+        <div class="rating-src">Tripadvisor</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          京都市中京区円福寺前町274-12
+          <br><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Kamehameha+Hiroshima+Okonomiyaki+Kyoto+Teramachi" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          寺町商店街内・地鐵四条站 <b>步行約10分</b>
+          <br>阪急 京都河原町站 <b>步行約10分</b>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div class="info-text">
+          <div class="info-label">營業時間</div>
+          <div class="hours-grid">
+            <span class="hours-label">週一~三・五・六</span><span class="hours-val">17:00–23:30</span>
+            <span class="hours-label">週日</span><span class="hours-val">17:00–23:00</span>
+            <span class="hours-label">公休</span><span class="hours-val closed-day">週四 定休</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💴</span>
+        <div class="info-text">
+          <div class="info-label">價位</div>
+          人均 ¥2,000–3,000（御好燒＋炒飯）
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🛍 寺町商店街（旁邊）</span>
+            <span class="nearby-tag">⛩ 錦天満宮（步行5分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box purple">
+        💡 廣島風御好燒，老闆是蔬菜鑑定師（野菜ソムリエ）。師傅在鐵板前現做，可現場溝通客製素食/全素。蔬食御好燒＋炒飯組合超好吃（花栗愷最推）。⚠️ 座位極少，建議電話預約：075-256-8734。
+      </div>
+    </div>
+  </div>
+
+  <!-- Facebook 社群京都新發現 -->
+  <div class="meal-section" style="background:#fff0e8;color:#a04800;">📱 Facebook「日本素食交流會」社群新發現・京都</div>
+
+  <!-- Vegetarian Cafe Ren 仁 京都 -->
+  <div class="card recommended">
+    <div class="priority-banner main">🌟 主要推薦・台灣素食・無五辛・四条大宮</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">Vegetarian Cafe Ren 仁</div>
+        <div class="card-name-en">仁 Shijō Ōmiya・四条大宮店</div>
+        <div class="badge-row">
+          <span class="badge badge-lacto">🥛 蛋奶素OK</span>
+          <span class="badge badge-nogo">🚫 無五辛 ✅</span>
+          <span class="badge badge-primary">🌟 主要推薦</span>
+          <span class="badge badge-highlight">🇹🇼 台灣素食</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★★</div>
+        <div class="rating-num">4.5</div>
+        <div class="rating-src">Google</div>
+        <div class="rating-src">TripAdvisor 5.0 / HappyCow 4.8</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          京都市（四条大宮附近 — 請查 Google Maps 確認最新地址）
+          <br><a class="map-link" href="https://maps.app.goo.gl/MmkB53h4Bzp7esZT9" target="_blank">📍 Google Maps</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          阪急 四条大宮站 <b>步行約3分</b>（或地鐵 四条站）
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🍽</span>
+        <div class="info-text">
+          <div class="info-label">特色</div>
+          台灣風格日本料理套餐。完全不加蔥蒜韭菜洋蔥（無五辛）。店員本身吃全素，熱情友善，會說中文。裝潢別緻，餐點好吃。共有 3 家分店（京都）。
+        </div>
+      </div>
+      <div class="info-row">
+  <span class="info-icon">🕐</span>
+  <div class="info-text">
+    <div class="info-label">營業時間</div>
+    <div class="hours-grid">
+      <span class="hours-label">每日</span><span class="hours-val">11:30–15:30 + 17:30–20:00</span>
+      <span class="hours-label">公休</span><span class="hours-val" style="color:#cc0000;font-weight:bold;">🚫 週日公休</span>
+    </div>
+  </div>
+</div>
+      <div class="divider"></div>
+      <div class="info-row">
+        <span class="info-icon">🗺</span>
+        <div class="info-text">
+          <div class="info-label">附近景點</div>
+          <div class="nearby-list">
+            <span class="nearby-tag">🏯 二条城（步行15分）</span>
+            <span class="nearby-tag">⛩ 壬生寺（步行5分）</span>
+          </div>
+        </div>
+      </div>
+      <div class="notes-box purple">
+        💡 <b>Facebook 群組一致大推：</b>台灣來的素食餐廳，在京都開了 3 間分店，口碑極好。「真正的台灣素、沒有蔥蒜韭菜不加洋蔥，可以安心享用道地日本料理套餐」。大阪也有分店，兩城市行程都可排入。
+      </div>
+      <div class="notes-box" style="background:#e8f0fb;border-left:4px solid #2563a8;margin-top:8px;">
+  🗺 <b>行程建議：</b>午餐→壬生寺（步行5分）→二条城（步行15分）
+</div>
+<div style="margin-top:10px;border-radius:8px;overflow:hidden;">
+  <iframe src="https://maps.google.com/maps?q=Vegetarian+Cafe+Ren+四条大宮+京都&output=embed&hl=zh-TW"
+    width="100%" height="180" style="border:0;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+    </div>
+  </div>
+
+  <!-- 都野菜賀茂 -->
+  <div class="card">
+    <div class="priority-banner" style="background:#2d7d46;color:white;">🌿 備案・野菜吃到飽（葷素共食）</div>
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-name">都野菜賀茂 烏丸店</div>
+        <div class="card-name-en">Miyakoveggie Kamo・烏丸四条</div>
+        <div class="badge-row">
+          <span class="badge badge-lacto">🥛 蛋奶素可</span>
+          <span class="badge" style="background:#f0fff0;color:#226622;border:1px solid #aaddaa;">🥗 野菜吃到飽</span>
+          <span class="badge badge-warning">⚠️ 非純素食店</span>
+        </div>
+      </div>
+      <div class="rating-box">
+        <div class="stars">★★★★☆</div>
+        <div class="rating-num">4.0</div>
+        <div class="rating-src">Google</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <div class="info-label">地址</div>
+          京都市下京区大宮通り木津屋橋上る上之Town 439-1 2F（Ministop樓上）
+          <br><a class="map-link" href="https://maps.app.goo.gl/T5HbEsGVGSSLtNDs7" target="_blank">📍 Google Maps（烏丸店）</a>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🚇</span>
+        <div class="info-text">
+          <div class="info-label">交通</div>
+          阪急 四条站 / 地鐵 烏丸站 <b>步行約3分</b>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🍽</span>
+        <div class="info-text">
+          <div class="info-label">特色</div>
+          大量野菜（蔬菜）自助吃到飽。非純素食餐廳（有肉類選項），但蔬菜種類豐富，蛋奶素可以吃得很好。京都和大阪均有分店。
+        </div>
+      </div>
+      <div class="info-row">
+  <span class="info-icon">🕐</span>
+  <div class="info-text">
+    <div class="info-label">營業時間</div>
+    <div class="hours-grid">
+      <span class="hours-label">早餐</span><span class="hours-val">7:00–10:00（入店截止 9:00）</span>
+      <span class="hours-label">午餐</span><span class="hours-val">11:30–16:00</span>
+      <span class="hours-label">晚餐</span><span class="hours-val">17:00–22:00（Buffet截止 21:30）</span>
+    </div>
+  </div>
+</div>
+      <div class="notes-box">
+        ⚠️ <b>注意：</b>葷素共食店，需自行選取蔬菜類。適合小朋友（食材選擇自由度高）。Facebook 群組有人去了吃了兩次，評價不錯。
+      </div>
+      <div class="notes-box" style="background:#e8f0fb;border-left:4px solid #2563a8;margin-top:8px;">
+  🗺 <b>行程建議：</b>早餐→搭地鐵去伏見稻荷→回程午餐→錦市場（步行5分）
+</div>
+<div style="margin-top:10px;border-radius:8px;overflow:hidden;">
+  <iframe src="https://maps.google.com/maps?q=都野菜賀茂+烏丸店+京都&output=embed&hl=zh-TW"
+    width="100%" height="180" style="border:0;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+    </div>
+  </div>
+
+</div><!-- end kyoto -->
+
+<!-- Footer -->
+<div class="footer-note">
+  📝 資料來源：花栗愷 chipmunkai.com・SavorJapan・HappyCow・PTT Japan_Travel・Tripadvisor・Tabelog<br>
+  ⚠️ 營業時間和菜單可能變動，出發前請查 Google Maps 或官方 Instagram 確認。<br>
+  製作日期：2026.06｜Fox の日本旅行 🇯🇵
+</div>
+
+<script>
+function showTab(city, btn) {
+  // Hide all content
+  document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
+  // Remove active class from all tabs
+  document.querySelectorAll('.tab-btn').forEach(el => {
+    el.classList.remove('active-osaka');
+    el.classList.remove('active-kyoto');
+  });
+  // Show selected
+  document.getElementById(city).classList.add('active');
+  btn.classList.add('active-' + city);
+}
+</script>
+</body>
+</html>
