@@ -73,6 +73,7 @@
   .rank-top    { background: var(--green); }
   .rank-user   { background: var(--blue); }
   .rank-other  { background: var(--gray); }
+  .rank-hotel  { background: #8E24AA; }
   .card-type { font-size: 0.74rem; color: var(--gray); margin: 3px 0; }
   .card-area { font-size: 0.74rem; color: var(--green); font-weight: 600; }
   .ratings { display: flex; gap: 10px; margin: 5px 0; flex-wrap: wrap; }
@@ -181,7 +182,7 @@
     <p>HappyCow 精選 × 大阪觀光局推薦　點擊地圖或卡片查看詳情、Google 評分與營業時間</p>
   </div>
   <div style="margin-left:auto; display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;">
-    <span class="badge">共 25 家</span>
+    <span class="badge">共 37 家</span>
     <span class="badge" style="background:#1565C0;">2026 更新</span>
   </div>
 </header>
@@ -193,6 +194,7 @@
   <button class="filter-btn" onclick="filterCards('gf',this)">🌾 無麩質 GF</button>
   <button class="filter-btn" onclick="filterCards('top10',this)">🏆 Top 10</button>
   <button class="filter-btn" onclick="filterCards('user',this)">⭐ 使用者清單</button>
+  <button class="filter-btn" onclick="filterCards('hotel',this)">🏨 飯店推薦</button>
   <button class="filter-btn" onclick="filterCards('takeout',this)">🥡 外帶/外送</button>
   <button class="filter-btn" onclick="filterCards('latenite',this)">🌙 深夜</button>
   <input type="text" id="search-input" placeholder="🔍 搜尋餐廳名稱…" oninput="searchCards(this.value)">
@@ -299,6 +301,14 @@ const photos = {
   23: 'https://images.happycow.net/venues/500/83/12/hcmp83128_2999903.jpeg',
   24: 'https://images.happycow.net/venues/500/22/65/hcmp226558_1407241.jpeg',
   25: 'https://images.happycow.net/venues/500/11/91/hcmp119162_976709.jpeg',
+  // ── 飯店推薦（南海ビル＝高島屋/Swissôtel、難波スカイオ、大丸） ──
+  28: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Namba_Station.JPG/500px-Namba_Station.JPG',
+  31: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Namba_SkyO_on_26th_April_2019.jpg/500px-Namba_SkyO_on_26th_April_2019.jpg',
+  32: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Namba_Station.JPG/500px-Namba_Station.JPG',
+  34: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/DAIMARU_Shinsaibashi_Store_Main_Building.jpg/500px-DAIMARU_Shinsaibashi_Store_Main_Building.jpg',
+  35: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Namba_Station.JPG/500px-Namba_Station.JPG',
+  36: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Namba_Station.JPG/500px-Namba_Station.JPG',
+  37: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Namba_Station.JPG/500px-Namba_Station.JPG',
 };
 
 // ── Restaurant data ────────────────────────────────────────────────────────
@@ -780,6 +790,235 @@ const restaurants = [
     hcUrl:'https://www.happycow.net/reviews/life-shimodera-osaka-119162',
     phone:''
   },
+  // ── 飯店推薦（Swissôtel Nankai Osaka 提供） ──────────────────
+  {
+    id:26, rank:26, group:'hotel',
+    name:'Halal Ramen Naniwaya 浪速屋',
+    nameJa:'ハラールラーメン 浪速屋',
+    type:'拉麵｜清真 Halal（含蔬食拉麵）',
+    tags:['hotel'],
+    area:'西心齋橋・中央區（獨立店面・御堂筋ドンキ後方）',
+    address:'大阪市中央区西心斎橋 2-7-22',
+    lat:34.66966, lng:135.49817,
+    hours:'平日 12:00-15:00 / 18:00-22:00（LO21:30）\n週六日假日 12:00-22:00（LO21:30）',
+    dishes:'清真拉麵・蔬食拉麵・和牛丼・炸物',
+    notes:'全清真認證，設祈禱室。難波站步行 3 分。',
+    flag:'🏨 飯店推薦・清真',
+    hcStars:'—', gStars:'4.6 ★（約 5,963 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Halal+Ramen+Naniwaya+西心斎橋',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Halal+Ramen+Naniwaya+西心斎橋',
+    hcUrl:'https://naniwaya-osaka.com/en/',
+    phone:'+81-669268888'
+  },
+  {
+    id:27, rank:27, group:'hotel',
+    name:'CHIBO Diversity 道頓堀（素食友善店）',
+    nameJa:'千房 Diversity 道頓堀ビル店',
+    type:'大阪燒｜素食/純素・無五辛・無麩質・清真',
+    tags:['hotel','vegan','gf'],
+    area:'千房道頓堀ビル 7F・道頓堀',
+    address:'大阪市中央区道頓堀 1-5-5 千房道頓堀ビル 7F',
+    lat:34.66886, lng:135.50391,
+    hours:'週日-三・五六 12:00-15:00 / 17:00-22:00\n週四 17:00-24:00（LO 打烊前 1 小時）',
+    dishes:'素食/純素・無五辛精進・無麩質・清真 大阪燒（鐵板現做）',
+    notes:'7 樓設專屬清真廚房；多語菜單。即 v3 行程的 CHIBO Diversity。',
+    flag:'🏨 飯店推薦・素食友善',
+    hcStars:'—', gStars:'4.0 ★（約 156 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=CHIBO+Diversity+道頓堀ビル店',
+    ghours:'https://www.google.com/maps/search/?api=1&query=CHIBO+Diversity+道頓堀ビル店',
+    hcUrl:'https://shop.chibo.com/detail/37392/',
+    phone:'+81-5018090649'
+  },
+  {
+    id:28, rank:28, group:'hotel',
+    name:'Hana-Goyomi 花暦（飯店內 10F）',
+    nameJa:'花暦（はなごよみ）',
+    type:'日本料理｜懷石・壽司・天婦羅（有素食菜單）',
+    tags:['hotel'],
+    area:'Swissôtel 南海大阪 10F・難波',
+    address:'大阪市中央区難波 5-1-60 スイスホテル南海大阪 10F',
+    lat:34.66237, lng:135.50183,
+    hours:'午餐 11:30-15:00（週末假日 11:00-）\n晚餐 17:30-21:00（週五六及假日前 -21:30）',
+    dishes:'懷石・壽司・天婦羅；提供素食菜單',
+    notes:'10 樓，仿傳統旅館設計，有和式包廂與庭園景；建議預約。',
+    flag:'🏨 飯店內・有素食菜單',
+    hcStars:'—', gStars:'3.9 ★｜食べログ 3.32',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Hana-Goyomi+Swissotel+Nankai+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Hana-Goyomi+Swissotel+Nankai+Osaka',
+    hcUrl:'https://swissotelnankaiosaka.com/restaurants-and-bars/hana-goyomi/',
+    phone:'+81-666465127'
+  },
+  {
+    id:29, rank:29, group:'hotel',
+    name:'Paprika Shokudo Vegan 本店（新町）',
+    nameJa:'パプリカ食堂 Vegan',
+    type:'全素 Vegan｜日式蔬食・可外帶',
+    tags:['hotel','vegan','takeout'],
+    area:'アリビオ新町 1F・西區新町（四ツ橋）',
+    address:'大阪市西区新町 1-9-9 アリビオ新町 1F',
+    lat:34.67728, lng:135.49645,
+    hours:'11:30-15:00（餐 LO14:00）/ 17:30-21:00（餐 LO20:00）\n週三公休＋不定休',
+    dishes:'純素定食・日式蔬食・QR 點餐・Uber Eats',
+    notes:'完全菜食專門店（無動物性食材）；提供外帶。新世界另有 2 號店。（與 #11 新世界店為不同分店）',
+    flag:'🏨 飯店推薦・全素',
+    hcStars:'—', gStars:'4.6 ★（約 1,201 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=パプリカ食堂+新町',
+    ghours:'https://www.google.com/maps/search/?api=1&query=パプリカ食堂+新町',
+    hcUrl:'https://paprikacafe.owst.jp/',
+    phone:'+81-665999788'
+  },
+  {
+    id:30, rank:30, group:'hotel',
+    name:'AEON Food Style 東心斎橋店',
+    nameJa:'イオンフードスタイル東心斎橋店',
+    type:'超市｜24 小時・免稅',
+    tags:['hotel'],
+    area:'東心齋橋・中央區（獨立超市・原 foodium）',
+    address:'大阪市中央区東心斎橋 1-5-9',
+    lat:34.67216, lng:135.50592,
+    hours:'24 小時營業・全年無休',
+    dishes:'生鮮・熟食・零食・日用品（提供免稅）',
+    notes:'1F 生鮮/熟食、2F 零食日用。最寄長堀橋站。一般超市可購素食食材。',
+    flag:'🏨 飯店推薦・超市',
+    hcStars:'—', gStars:'查無（參考 Yahoo 3.79・193 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=イオンフードスタイル東心斎橋店',
+    ghours:'https://www.google.com/maps/search/?api=1&query=イオンフードスタイル東心斎橋店',
+    hcUrl:'https://www.daiei.co.jp/stores/d0820/',
+    phone:'+81-662524147'
+  },
+  {
+    id:31, rank:31, group:'hotel',
+    name:'Ikari Super 南海なんば店',
+    nameJa:'いかりスーパー 南海なんば店',
+    type:'超市｜高級進口超市',
+    tags:['hotel'],
+    area:'なんばスカイオ 3F・難波（南海難波站直結）',
+    address:'大阪市中央区難波 5-1-60 なんばスカイオ 3F',
+    lat:34.66385, lng:135.50086,
+    hours:'平日 10:00-22:00｜週日假日 10:00-21:00',
+    dishes:'高級進口食材・熟食・麵包',
+    notes:'直結南海難波站 3 樓北改札口；進口食材豐富，可購素食食材。',
+    flag:'🏨 飯店推薦・超市',
+    hcStars:'—', gStars:'查無（參考 Yahoo 3.98・202 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=いかり南海なんば店+なんばスカイオ',
+    ghours:'https://www.google.com/maps/search/?api=1&query=いかり南海なんば店+なんばスカイオ',
+    hcUrl:'https://www.ikarisuper.com/info/author/nankai_nanba/',
+    phone:'+81-666332288'
+  },
+  {
+    id:32, rank:32, group:'hotel',
+    name:'Takashimaya 高島屋大阪店（難波ダイニングメゾン）',
+    nameJa:'高島屋大阪店（なんばダイニングメゾン）',
+    type:'百貨美食街｜デパ地下＋餐廳樓層',
+    tags:['hotel'],
+    area:'高島屋大阪店・難波（南海/御堂筋難波站直結）',
+    address:'大阪市中央区難波 5-1-5',
+    lat:34.66466, lng:135.50089,
+    hours:'本館 10:00-20:00｜餐廳 7-9F 11:00-23:00｜1/1・1/2 公休',
+    dishes:'デパ地下美食（B1/B2）＋餐廳樓層 7-9F（多店，建議個別確認素食）',
+    notes:'南海・御堂筋線難波站直結；與 Swissôtel 同為南海ビル。',
+    flag:'🏨 飯店推薦・百貨',
+    hcStars:'—', gStars:'查無（參考 Yahoo 4.36・738 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66466,135.50089',
+    ghours:'https://www.diningmaison.jp/',
+    hcUrl:'https://www.takashimaya.co.jp/osaka/',
+    phone:'+81-666311101'
+  },
+  {
+    id:33, rank:33, group:'hotel',
+    name:'Life セントラルスクエアなんば店',
+    nameJa:'ライフ セントラルスクエアなんば店',
+    type:'超市｜JR難波/OCAT 旁',
+    tags:['hotel'],
+    area:'セントラルスクエアなんば・浪速區',
+    address:'大阪市浪速区湊町 1-2-3',
+    lat:34.66661, lng:135.49609,
+    hours:'每日 9:00-24:00（麵包坊 08:00 起）',
+    dishes:'生鮮・熟食・麵包坊・藥妝',
+    notes:'JR 難波站／四つ橋線難波站即達；可購素食食材。',
+    flag:'🏨 飯店推薦・超市',
+    hcStars:'—', gStars:'查無（參考 Yahoo 3.94・795 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=ライフ+セントラルスクエアなんば店',
+    ghours:'https://www.google.com/maps/search/?api=1&query=ライフ+セントラルスクエアなんば店',
+    hcUrl:'https://store.lifecorp.jp/detail/west219/',
+    phone:'+81-666340300'
+  },
+  {
+    id:34, rank:34, group:'hotel',
+    name:'Daimaru 大丸心斎橋店（本館）',
+    nameJa:'大丸心斎橋店 本館',
+    type:'百貨｜デパ地下美食・餐廳樓層',
+    tags:['hotel'],
+    area:'大丸心斎橋店 本館・心齋橋（御堂筋線直結）',
+    address:'大阪市中央区心斎橋筋 1-7-1',
+    lat:34.67392, lng:135.50096,
+    hours:'本館 10:00-20:00｜B2 心斎橋フードホール 11:00-22:00｜10F 餐廳 11:00-22:00',
+    dishes:'B1F 食品・B2F 美食街・10F 餐廳（多店，建議個別確認素食）',
+    notes:'御堂筋線心斎橋站直結。',
+    flag:'🏨 飯店推薦・百貨',
+    hcStars:'—', gStars:'約 4.0',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67392,135.50096',
+    ghours:'https://www.daimaru.co.jp/shinsaibashi/',
+    hcUrl:'https://www.daimaru.co.jp/shinsaibashi/',
+    phone:'+81-5017810000'
+  },
+  {
+    id:35, rank:35, group:'hotel',
+    name:'Teppanyaki Minami 鉄板焼みなみ（飯店內 10F）',
+    nameJa:'鉄板焼「みなみ」',
+    type:'鐵板燒（有素食菜單）',
+    tags:['hotel'],
+    area:'Swissôtel 南海大阪 10F・難波',
+    address:'大阪市中央区難波 5-1-60 スイスホテル南海大阪 10F',
+    lat:34.66237, lng:135.50183,
+    hours:'午餐 11:30-15:00（週末假日 11:00-）\n晚餐 17:30-21:00（週五六及假日前 -21:30）',
+    dishes:'神戶牛・和牛・橄欖牛＋泉州有機蔬菜；提供素食菜單',
+    notes:'10 樓，產地直送；15 席主台＋半包廂；建議預約。',
+    flag:'🏨 飯店內・有素食菜單',
+    hcStars:'—', gStars:'食べログ 3.31（TripAdvisor 3.9）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Teppanyaki+Minami+Swissotel+Nankai+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Teppanyaki+Minami+Swissotel+Nankai+Osaka',
+    hcUrl:'https://swissotelnankaiosaka.com/restaurants-and-bars/minami/',
+    phone:'+81-666465128'
+  },
+  {
+    id:36, rank:36, group:'hotel',
+    name:"SH'UN Wine & Dine（飯店內 6F）",
+    nameJa:'シュン SH’UN',
+    type:'餐酒館｜串炸・日式小盤（有素食套餐）',
+    tags:['hotel'],
+    area:'Swissôtel 南海大阪 6F・難波',
+    address:'大阪市中央区難波 5-1-60 スイスホテル南海大阪 6F',
+    lat:34.66237, lng:135.50183,
+    hours:'午餐（三-日）11:30-15:00\n晚餐（三四日）17:30-21:00、（五六）-22:30｜週一二公休',
+    dishes:'大阪串炸 kushiage・日式創作小盤＋稀有日威/葡萄酒（得獎酒單）',
+    notes:'6 樓餐酒館；提供季節素食套餐；建議預約。營業時間以預約頁為準。',
+    flag:'🏨 飯店內・有素食套餐',
+    hcStars:'—', gStars:'查無（飯店餐廳）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=SHUN+Wine+Dine+Swissotel+Nankai+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=SHUN+Wine+Dine+Swissotel+Nankai+Osaka',
+    hcUrl:'https://swissotelnankaiosaka.com/restaurants-and-bars/shun/',
+    phone:'+81-666465122'
+  },
+  {
+    id:37, rank:37, group:'hotel',
+    name:'Table36（飯店內 36F 天空餐廳）',
+    nameJa:'ターブル36（Table36）',
+    type:'自助餐｜36F 天空・歐陸料理（有素食選項）',
+    tags:['hotel'],
+    area:'Swissôtel 南海大阪 36F・難波',
+    address:'大阪市中央区難波 5-1-60 スイスホテル南海大阪 36F',
+    lat:34.66237, lng:135.50183,
+    hours:'早餐 6:30-10:30｜午餐 11:30-15:00\n晚餐 18:00-23:30（週五六 -24:30）',
+    dishes:'歐陸自助餐・沙拉/蔬菜/義大利麵・純素早餐（可客製）',
+    notes:'36 樓（地上 147m）天空餐廳，三面落地窗城市景；食材來自館內垂直農園 The Sky Farm。',
+    flag:'🏨 飯店內・有素食選項',
+    hcStars:'—', gStars:'4.2 ★（約 667 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Table36+Swissotel+Nankai+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Table36+Swissotel+Nankai+Osaka',
+    hcUrl:'https://swissotelnankaiosaka.com/restaurants-and-bars/table36/',
+    phone:'+81-666465125'
+  },
 ];
 
 // ── Map init ───────────────────────────────────────────────────────────────
@@ -799,12 +1038,13 @@ function makeIcon(color) {
 const iconTop  = makeIcon('#2E7D32');
 const iconUser = makeIcon('#1565C0');
 const iconOther= makeIcon('#78909C');
+const iconHotel= makeIcon('#8E24AA');
 
 let markers = {};
 let selectedId = null;
 
 restaurants.forEach(r => {
-  const icon = r.group==='top10' ? iconTop : r.group==='user' ? iconUser : iconOther;
+  const icon = r.group==='top10' ? iconTop : r.group==='user' ? iconUser : r.group==='hotel' ? iconHotel : iconOther;
   const m = L.marker([r.lat, r.lng], { icon, title: r.name }).addTo(map);
   const popup = L.popup({ maxWidth: 260 }).setContent(`
     <div class="popup-inner">
@@ -812,14 +1052,14 @@ restaurants.forEach(r => {
       <div class="popup-type">${r.type}</div>
       <div class="popup-hours" style="color:#333;"><b>📍</b> ${r.area}</div>
       <div class="popup-hours"><b>🕐</b> ${r.hours.split('\n')[0]}</div>
-      <div style="margin-top:6px; display:flex; gap:4px;">
-        <span style="background:#FFF3E0;color:#E65100;border-radius:10px;padding:2px 7px;font-size:0.72rem;font-weight:700;">HC: ${r.hcStars}</span>
-        <span style="background:#E8F5E9;color:#2E7D32;border-radius:10px;padding:2px 7px;font-size:0.72rem;font-weight:700;">G: ${r.gStars}★</span>
+      <div style="margin-top:6px; display:flex; gap:4px; flex-wrap:wrap;">
+        ${r.group!=='hotel' ? `<span style="background:#FFF3E0;color:#E65100;border-radius:10px;padding:2px 7px;font-size:0.72rem;font-weight:700;">HC: ${r.hcStars}</span>` : ''}
+        <span style="background:#E8F5E9;color:#2E7D32;border-radius:10px;padding:2px 7px;font-size:0.72rem;font-weight:700;">G: ${r.gStars}${r.group!=='hotel' ? '★' : ''}</span>
       </div>
       <div class="popup-btns" style="margin-top:8px;">
         <a class="popup-btn g" href="${r.gmap}" target="_blank">🗺 Google Maps</a>
         <a class="popup-btn t" href="${r.ghours}" target="_blank">🕐 營業時間</a>
-        <a class="popup-btn h" href="${r.hcUrl}" target="_blank">🌱 HappyCow</a>
+        <a class="popup-btn h" href="${r.hcUrl}" target="_blank">${r.group==='hotel' ? '🔗 官網' : '🌱 HappyCow'}</a>
       </div>
     </div>
   `);
@@ -840,7 +1080,7 @@ function buildCards(list) {
     const card = document.createElement('div');
     card.className = 'card';
     card.id = `card-${r.id}`;
-    const rankClass = r.group==='top10' ? 'rank-top' : r.group==='user' ? 'rank-user' : 'rank-other';
+    const rankClass = r.group==='top10' ? 'rank-top' : r.group==='user' ? 'rank-user' : r.group==='hotel' ? 'rank-hotel' : 'rank-other';
     const photoUrl = photos[r.id];
     card.innerHTML = `
       <div class="card-content">
@@ -853,8 +1093,8 @@ function buildCards(list) {
           <div class="card-type">${r.type}</div>
           <div class="card-area">📍 ${r.area}</div>
           <div class="ratings">
-            <span class="rating-pill hc-pill">🌱 HC ${r.hcStars}</span>
-            <span class="rating-pill g-pill">⭐ Google ${r.gStars}★</span>
+            ${r.group!=='hotel' ? `<span class="rating-pill hc-pill">🌱 HC ${r.hcStars}</span>` : ''}
+            <span class="rating-pill g-pill">⭐ Google ${r.gStars}${r.group!=='hotel' ? '★' : ''}</span>
           </div>
           <div class="card-hours">🕐 ${r.hours.replace(/\n/g,'　')}</div>
           <div class="card-dishes">🍽 ${r.dishes}</div>
@@ -862,7 +1102,7 @@ function buildCards(list) {
           <div class="card-links">
             <a class="link-btn btn-gmap" href="${r.gmap}" target="_blank">🗺 Google Maps</a>
             <a class="link-btn btn-hours" href="${r.ghours}" target="_blank">🕐 查看營業時間</a>
-            <a class="link-btn btn-hc"   href="${r.hcUrl}" target="_blank">🌱 HappyCow</a>
+            <a class="link-btn btn-hc"   href="${r.hcUrl}" target="_blank">${r.group==='hotel' ? '🔗 官網/資訊' : '🌱 HappyCow'}</a>
             ${r.phone ? `<a class="link-btn" style="background:#555;color:#fff;" href="tel:${r.phone}">📞 電話</a>` : ''}
           </div>
         </div>
@@ -901,12 +1141,12 @@ function selectCard(id, panMap) {
     <div class="dp-row"><strong>類型：</strong>${r.type}</div>
     <div class="dp-row"><strong>🕐 時間：</strong>${r.hours.replace(/\n/g,' | ')}</div>
     <div class="dp-row"><strong>🍽 菜色：</strong>${r.dishes}</div>
-    <div class="dp-row"><strong>HappyCow：</strong>${r.hcStars} &nbsp; <strong>Google：</strong>${r.gStars}★</div>
+    <div class="dp-row">${r.group!=='hotel' ? `<strong>HappyCow：</strong>${r.hcStars} &nbsp; ` : ''}<strong>Google：</strong>${r.gStars}${r.group!=='hotel' ? '★' : ''}</div>
     ${r.notes ? `<div class="dp-note">💬 ${r.notes}</div>` : ''}
     <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
       <a class="link-btn btn-gmap" href="${r.gmap}" target="_blank">🗺 Google Maps</a>
       <a class="link-btn btn-hours" href="${r.ghours}" target="_blank">🕐 查看即時營業時間</a>
-      <a class="link-btn btn-hc" href="${r.hcUrl}" target="_blank">🌱 HappyCow 頁面</a>
+      <a class="link-btn btn-hc" href="${r.hcUrl}" target="_blank">${r.group==='hotel' ? '🔗 官網/資訊' : '🌱 HappyCow 頁面'}</a>
     </div>
   `;
   const panel = document.getElementById('detail-panel');
@@ -935,6 +1175,7 @@ function getFiltered() {
       activeFilter === 'all'     ? true :
       activeFilter === 'top10'   ? r.group === 'top10' :
       activeFilter === 'user'    ? r.group === 'user'  :
+      activeFilter === 'hotel'   ? r.group === 'hotel' :
       r.tags.includes(activeFilter);
     const matchSearch = !searchVal || r.name.toLowerCase().includes(searchVal) ||
       r.nameJa.includes(searchVal) || r.area.includes(searchVal) || r.dishes.includes(searchVal);
@@ -986,7 +1227,8 @@ legend.onAdd = () => {
     <b>圖例</b><br>
     <span style="color:#2E7D32;">●</span> HappyCow Top 10<br>
     <span style="color:#1565C0;">●</span> 旅遊推薦（使用者清單）<br>
-    <span style="color:#78909C;">●</span> 大使推薦備選
+    <span style="color:#78909C;">●</span> 大使推薦備選<br>
+    <span style="color:#8E24AA;">●</span> 飯店推薦（餐廳・超市・百貨）
   `;
   return d;
 };
