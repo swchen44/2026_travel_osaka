@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎙️ 導遊版行程手冊 v3 · Fox 家 2026 關西之旅</title>
+<style>
+  :root {
+    --green: #2d7d46; --green-dark: #1a3a1a;
+    --osaka: #c03030; --mic: #6b4d9e; --mic-bg: #f4efff;
+    --text: #1f1f1f; --sub: #555; --border: #e6e6e6; --bg: #f6f5f3;
+    --shadow: 0 2px 12px rgba(0,0,0,0.1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; overflow-x: hidden; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Noto Sans TC', 'PingFang TC', sans-serif;
+    background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.7;
+    -webkit-text-size-adjust: 100%;
+  }
+  /* 所有文字防溢出 */
+  h1, p, div, span, td, th, li, a { overflow-wrap: break-word; word-break: break-word; }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg, #1a3a1a 0%, #2d7d46 60%, #3a9960 100%);
+    color: #fff; padding: 16px 20px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  header .logo { font-size: 2rem; flex-shrink: 0; }
+  header .htitle { flex: 1; min-width: 200px; }
+  header h1 { font-size: 1.35rem; font-weight: 800; }
+  header p { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
+  header .right { display: flex; gap: 8px; flex-wrap: wrap; }
+  .hbadge { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4);
+    color: #fff; border-radius: 20px; padding: 6px 14px; font-size: 0.85rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+  .hbadge:hover { background: rgba(255,255,255,0.34); }
+
+  /* Filter bar */
+  #filter-bar {
+    background: #fff; border-bottom: 1px solid #ddd; padding: 10px 16px;
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+  }
+  #filter-bar .lbl { font-size: 0.9rem; color: var(--sub); font-weight: 700; }
+  .filter-btn {
+    border: 1.5px solid #ccc; background: #fff; border-radius: 22px;
+    padding: 7px 15px; font-size: 0.9rem; cursor: pointer; transition: all 0.15s; color: #333; font-weight: 600;
+  }
+  .filter-btn.active, .filter-btn:hover { color: #fff; }
+
+  /* Main two-pane */
+  #main { display: flex; height: calc(100vh - 130px); min-height: 460px; }
+  #map-pane { flex: 0 0 50%; position: relative; background: #e9eae6; }
+  #bigmap { width: 100%; height: 100%; border: 0; display: block; }
+  /* 左圖上方資訊條 */
+  #map-bar {
+    position: absolute; top: 12px; left: 12px; right: 12px; z-index: 5;
+    background: rgba(255,255,255,0.97); border-radius: 10px; box-shadow: var(--shadow);
+    padding: 10px 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  }
+  #map-bar .mb-name { font-weight: 800; font-size: 0.95rem; color: var(--text); flex: 1; min-width: 120px; }
+  #map-bar .mb-open {
+    background: #4285F4; color: #fff; text-decoration: none; border-radius: 8px;
+    padding: 7px 13px; font-size: 0.85rem; font-weight: 700; white-space: nowrap;
+  }
+  #map-bar .mb-open:hover { opacity: 0.88; }
+
+  #sidebar {
+    flex: 1; overflow-y: auto; padding: 14px; background: var(--bg);
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  #count-label { font-size: 0.88rem; color: var(--sub); padding: 0 2px; font-weight: 600; }
+
+  /* Day section header */
+  .day-head {
+    color: #fff; border-radius: 10px; padding: 11px 15px; font-weight: 800;
+    font-size: 1.02rem; box-shadow: var(--shadow);
+  }
+
+  /* Spot card */
+  .card {
+    background: #fff; border-radius: 12px; box-shadow: var(--shadow);
+    overflow: hidden; border-left: 5px solid #ccc; transition: box-shadow 0.15s;
+  }
+  .card.selected { box-shadow: 0 6px 22px rgba(0,0,0,0.22); }
+  .card-head { display: flex; gap: 13px; padding: 13px; cursor: pointer; align-items: flex-start; }
+  .photo-wrap {
+    width: 116px; height: 96px; border-radius: 10px; flex-shrink: 0; overflow: hidden;
+    position: relative; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #e8efe9, #d7e3da); color: #9aa; font-size: 2.1rem;
+  }
+  .photo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card-body { flex: 1; min-width: 0; }
+  .card-name { font-size: 1.08rem; font-weight: 800; color: var(--text); line-height: 1.35; }
+  .card-type { font-size: 0.85rem; color: var(--sub); margin-top: 3px; }
+  .card-meta { font-size: 0.88rem; color: #444; margin-top: 6px; line-height: 1.6; }
+  .card-meta a { color: var(--osaka); text-decoration: none; font-weight: 700; }
+  .card-meta a:hover { text-decoration: underline; }
+  .flag-tag {
+    display: inline-block; background: #fff3e0; color: #e65100;
+    border-radius: 8px; padding: 2px 9px; font-size: 0.78rem; font-weight: 700; margin-top: 6px;
+  }
+  .card-toggle { font-size: 0.82rem; color: #fff; background: var(--green); border-radius: 16px;
+    padding: 4px 10px; flex-shrink: 0; align-self: center; font-weight: 700; white-space: nowrap; }
+
+  /* Expandable body */
+  .card-detail { display: none; padding: 0 13px 14px; }
+  .card.open .card-detail { display: block; }
+  .guide {
+    position: relative; background: var(--mic-bg); border-left: 4px solid var(--mic);
+    border-radius: 0 10px 10px 0; padding: 13px 15px 13px 16px; margin: 6px 0 12px;
+    font-size: 0.95rem; line-height: 1.78; color: #352c4d;
+  }
+  .guide::before {
+    content: "🎙️"; position: absolute; top: -11px; left: -2px; font-size: 16px;
+    background: #fff; border-radius: 50%; padding: 1px 3px;
+  }
+  .guide p { margin: 0 0 10px; }
+  .guide p:last-child { margin-bottom: 0; }
+  .guide strong { color: var(--mic); }
+  .embed-map { width: 100%; height: 220px; border: 0; border-radius: 10px; background: #eee; display: block; }
+  .card-links { display: flex; gap: 8px; margin-top: 11px; flex-wrap: wrap; }
+  .link-btn {
+    text-decoration: none; border-radius: 8px; padding: 8px 14px; font-size: 0.86rem;
+    font-weight: 700; color: #fff; display: inline-flex; align-items: center; gap: 5px;
+  }
+  .link-btn:hover { opacity: 0.86; }
+  .btn-gmap { background: #4285F4; } .btn-dir { background: #34A853; }
+  .btn-wiki { background: #777; }
+
+  /* Lower sections */
+  .lower { max-width: 880px; margin: 0 auto; padding: 26px 16px 50px; }
+  .panel { background: #fff; border-radius: 14px; box-shadow: var(--shadow); padding: 6px 18px 18px; margin-bottom: 22px; }
+  .sec-h { font-size: 1rem; font-weight: 800; letter-spacing: 0.3px; color: var(--green); padding-top: 15px; margin-bottom: 6px; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 0.9rem; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: #f4f1ee; font-weight: 700; color: #444; }
+  td a { color: var(--osaka); text-decoration: none; font-weight: 700; }
+  .meal-day { font-weight: 800; color: var(--osaka); margin-top: 12px; font-size: 0.92rem; }
+  .meal-row { font-size: 0.9rem; color: #444; margin: 3px 0 3px 4px; line-height: 1.6; }
+  .meal-row a { color: var(--osaka); text-decoration: none; font-weight: 700; }
+  .checklist { list-style: none; padding: 0; }
+  .checklist li { padding: 8px 0 8px 30px; position: relative; font-size: 0.92rem; border-bottom: 1px solid #f0f0f0; line-height: 1.6; }
+  .checklist li::before { content: "☐"; position: absolute; left: 4px; top: 6px; color: var(--green); font-size: 1.1rem; }
+  .note { font-size: 0.8rem; color: #999; text-align: center; line-height: 1.9; padding: 8px 0 0; }
+  .footer { text-align: center; color: #aaa; font-size: 0.8rem; padding: 8px 0 40px; }
+
+  #sidebar::-webkit-scrollbar { width: 7px; }
+  #sidebar::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+
+  /* ── 手機版：上下排列，不變形 ── */
+  @media (max-width: 820px) {
+    body { font-size: 16px; }
+    #main { flex-direction: column; height: auto; min-height: 0; }
+    #map-pane { flex: none; width: 100%; height: 52vh; min-height: 320px; position: sticky; top: 0; z-index: 10; }
+    #sidebar { flex: none; width: 100%; overflow-y: visible; }
+    .photo-wrap { width: 100px; height: 88px; font-size: 1.9rem; }
+    .card-name { font-size: 1.05rem; }
+  }
+  @media (max-width: 420px) {
+    header h1 { font-size: 1.2rem; }
+    .card-head { gap: 10px; padding: 11px; }
+    .photo-wrap { width: 84px; height: 78px; }
+    .embed-map { height: 200px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🎙️</div>
+  <div class="htitle">
+    <h1>導遊版行程手冊 v3</h1>
+    <p>Fox 家 2026 關西之旅 ｜ 7/13–7/18 · 6天5夜 ｜ 點卡片看照片・導遊解說，左側地圖同步顯示位置</p>
+  </div>
+  <div class="right">
+    <a class="hbadge" href="index.html">← 回首頁</a>
+    <a class="hbadge" href="itinerary_guide_v3.md">📄 純文字版</a>
+  </div>
+</header>
+
+<div id="filter-bar">
+  <span class="lbl">天數：</span>
+  <button class="filter-btn active" data-day="all" onclick="filterDay('all',this)">全部</button>
+  <button class="filter-btn" data-day="1" onclick="filterDay('1',this)">⛩️ Day1 京都</button>
+  <button class="filter-btn" data-day="2" onclick="filterDay('2',this)">🦌 Day2 奈良</button>
+  <button class="filter-btn" data-day="3" onclick="filterDay('3',this)">🏙️ Day3 大阪南</button>
+  <button class="filter-btn" data-day="4" onclick="filterDay('4',this)">🎡 Day4 大阪北/USJ</button>
+  <button class="filter-btn" data-day="5" onclick="filterDay('5',this)">✈️ Day0/5 機場飯店</button>
+</div>
+
+<div id="main">
+  <div id="map-pane">
+    <div id="map-bar">
+      <span class="mb-name" id="mb-name">📍 關西全區地圖</span>
+      <a class="mb-open" id="mb-open" href="https://www.google.com/maps/search/?api=1&query=34.686,135.520" target="_blank">在 Google Maps 開啟</a>
+    </div>
+    <iframe id="bigmap" loading="lazy" allowfullscreen
+      src="https://www.google.com/maps?q=34.686,135.520&z=9&output=embed"></iframe>
+  </div>
+  <div id="sidebar">
+    <div id="count-label"></div>
+  </div>
+</div>
+
+<div class="lower">
+  <!-- 訂單資訊 -->
+  <div class="panel">
+    <div class="sec-h">📋 訂單資訊</div>
+    <table>
+      <tr><th>項目</th><th>詳細</th></tr>
+      <tr><td>✈️ 去程</td><td><b>中華航空 CI 172</b>｜TPE 14:20 → KIX 18:05（7/13 Mon）</td></tr>
+      <tr><td>✈️ 回程</td><td><b>中華航空 CI 153</b>｜KIX 14:00 → TPE（7/18 Sat）</td></tr>
+      <tr><td>🎫 訂位代碼</td><td><b>DVZMGY</b></td></tr>
+      <tr><td>🏨 飯店</td><td><b>Swissôtel Nankai Osaka</b>｜📞 <a href="tel:0666461111">06-6646-1111</a>（訂位 QLRSGZRT）</td></tr>
+      <tr><td>🛏️ 房型</td><td>Swiss Select Twin × 2（連通房）</td></tr>
+    </table>
+  </div>
+
+  <!-- 每日素食餐廳速查 -->
+  <div class="panel">
+    <div class="sec-h">🍽️ 每日素食餐廳速查（蛋奶素・無五辛友善）</div>
+    <div class="meal-day">Day 1 · 京都</div>
+    <div class="meal-row">🍱 午餐：嵐山 Shigetsu 精進料理（天龍寺）📞 <a href="tel:0758829725">075-882-9725</a>（需預約）</div>
+    <div class="meal-row">🌙 晚餐：Vegetarian Indian Shama（心齋橋）📞 <a href="tel:0662125688">06-6212-5688</a>｜備：PRANA Macrobiotic 📞 <a href="tel:0662417776">06-6241-7776</a></div>
+    <div class="meal-day">Day 2 · 奈良</div>
+    <div class="meal-row">🍱 午餐：Kinatei 喜菜亭 📞 <a href="tel:0742206188">0742-20-6188</a>（週二-六 11:30-14:30）｜備：Ramuna 📞 <a href="tel:0742249192">0742-24-9192</a></div>
+    <div class="meal-row">🌙 晚餐：susuru_susuran（難波，乾式麻婆豆腐拉麵）｜備：The Fire Vegan Ramen Bar（深夜至 02:00）</div>
+    <div class="meal-day">Day 3 · 大阪南</div>
+    <div class="meal-row">🍱 午餐：Pivot BASE Cafe @Dotonbori（純素）｜備：Falafel Sababa</div>
+    <div class="meal-row">🌙 晚餐：CHIBO Diversity 道頓堀（素食大阪燒）📞 <a href="tel:05018090649">050-18090649</a>｜備：Shama 📞 <a href="tel:0662125688">06-6212-5688</a></div>
+    <div class="meal-day">Day 4 · 大阪北 / USJ</div>
+    <div class="meal-row">🌙 方案A：CHIBO Diversity 📞 <a href="tel:05018090649">050-18090649</a>｜方案B（USJ）：園區內 Three Broomsticks（哈利波特，素食選項）</div>
+  </div>
+
+  <!-- 電話總表 -->
+  <div class="panel">
+    <div class="sec-h">📞 重要電話號碼總表</div>
+    <table>
+      <tr><th>場所</th><th>電話</th><th>類別</th></tr>
+      <tr><td>Swissôtel Nankai Osaka</td><td><a href="tel:0666461111">06-6646-1111</a></td><td>飯店</td></tr>
+      <tr><td>伏見稻荷大社</td><td><a href="tel:0756417331">075-641-7331</a></td><td>景點</td></tr>
+      <tr><td>清水寺</td><td><a href="tel:0755511234">075-551-1234</a></td><td>景點</td></tr>
+      <tr><td>天龍寺（精進料理 Shigetsu）</td><td><a href="tel:0758829725">075-882-9725</a></td><td>景點/餐廳</td></tr>
+      <tr><td>東大寺</td><td><a href="tel:0742225511">0742-22-5511</a></td><td>景點</td></tr>
+      <tr><td>春日大社</td><td><a href="tel:0742227788">0742-22-7788</a></td><td>景點</td></tr>
+      <tr><td>奈良公園事務所</td><td><a href="tel:0742220375">0742-22-0375</a></td><td>景點</td></tr>
+      <tr><td>Kinatei 喜菜亭（奈良）</td><td><a href="tel:0742206188">0742-20-6188</a></td><td>餐廳</td></tr>
+      <tr><td>大阪城天守閣</td><td><a href="tel:0669413044">06-6941-3044</a></td><td>景點</td></tr>
+      <tr><td>通天閣</td><td><a href="tel:0666419555">06-6641-9555</a></td><td>景點</td></tr>
+      <tr><td>梅田空中庭園</td><td><a href="tel:0664403899">06-6440-3899</a></td><td>景點</td></tr>
+      <tr><td>USJ 環球影城</td><td><a href="tel:0570200606">0570-20-0606</a></td><td>景點</td></tr>
+      <tr><td>OCAT 利木津巴士（KATE）</td><td><a href="tel:0120670110">0120-670-110</a></td><td>交通</td></tr>
+    </table>
+  </div>
+
+  <!-- Checklist -->
+  <div class="panel">
+    <div class="sec-h">📝 行前 Checklist</div>
+    <ul class="checklist">
+      <li>Visit Japan Web 填完（快速入境通道）</li>
+      <li>每人 ICOCA（¥2,000，機場購買）</li>
+      <li><b>周遊卡 2 日券</b>購買決定（選 USJ → 只買 1 日；選梅田 → 買 2 日）</li>
+      <li><b>7/17 方案確認</b>：USJ 🎡 或 梅田大阪城 🏯？</li>
+      <li>USJ Express Pass 提前購買（若選方案 B）</li>
+      <li>Shigetsu 精進料理預約：📞 075-882-9725</li>
+      <li>Kinatei 確認週四開業：📞 0742-20-6188</li>
+      <li>Swissôtel 連通房再確認：📞 06-6646-1111（訂位 QLRSGZRT）</li>
+    </ul>
+  </div>
+
+  <div class="note">
+    資料來源：NotebookLM 50 篇旅遊筆記 + 官方網站 + 歷史資料整合｜照片來源：Wikipedia / Wikimedia Commons（動態載入）｜地圖：Google Maps<br>
+    景點歷史：伏見稻荷（711 年）、清水寺（778 年）、春日大社（768 年）、東大寺（743-752 年）、大阪城（1583 年）、通天閣（1912/1956 年）、道頓堀（1615 年）
+  </div>
+</div>
+
+<div class="footer">Fox 家旅遊計劃 · 用 Claude 整理</div>
+
+<script>
+// ── 天數設定 ──────────────────────────────────────────────
+const DAYS = {
+  0: { label: 'Day 0 · 7/13（一）抵達', color: '#2563a8' },
+  1: { label: 'Day 1 · 7/14（二）京都一日', color: '#8a68c0' },
+  2: { label: 'Day 2 · 7/15（三）奈良一日', color: '#3a9960' },
+  3: { label: 'Day 3 · 7/16（四）大阪南部', color: '#d04040' },
+  4: { label: 'Day 4 · 7/17（五）大阪北部 / USJ', color: '#e07b39' },
+  5: { label: 'Day 5 · 7/18（六）出發日', color: '#a05a18' },
+};
+
+// ── 景點資料 ──────────────────────────────────────────────
+const SPOTS = [
+  { id:'hotel', day:0, emoji:'🏨', name:'Swissôtel Nankai Osaka', type:'飯店｜難波・高島屋正上方',
+    lat:34.66237, lng:135.50183, wiki:'', wikiLang:'ja',
+    meta:'📞 <a href="tel:0666461111">06-6646-1111</a>｜大阪市中央区難波 5-1-60｜訂位 QLRSGZRT',
+    guide:[`我們今晚入住的是 <strong>Swissôtel Nankai Osaka</strong>，位置真的是絕佳！這棟樓就是難波最地標性的建築之一——<strong>高島屋百貨的正上方</strong>，直接蓋在百貨頂樓。飯店本身是瑞士品牌，採瑞士現代設計風格，從客房往下看就是整個難波的夜景。我們訂的是兩間 <strong>Swiss Select Twin 連通房</strong>，四個人住非常方便。`,
+          `飯店旁邊步行 5 分鐘就是道頓堀，10 分鐘到心齋橋，地鐵站就在樓下，交通位置一等一的方便。明天開始我們就以這裡為基地，每天出發冒險！`] },
+
+  { id:'fushimi', day:1, emoji:'⛩️', name:'伏見稻荷大社', type:'景點｜全日本稻荷神社總本社（711 年）',
+    lat:34.96712, lng:135.77268, wiki:'伏見稲荷大社', wikiLang:'ja',
+    meta:'📞 <a href="tel:0756417331">075-641-7331</a>｜京都市伏見区深草薮之内町 68｜24 小時・免費',
+    guide:[`好，各位，我們現在到的地方是 <strong>伏見稻荷大社</strong>，這裡是全日本約 <strong>三萬座稻荷神社的總本社</strong>，創建於西元 <strong>711 年</strong>，距今已超過 <strong>1,300 年</strong>！`,
+          `這裡最有名的就是那條 <strong>千本鳥居</strong>——實際上整座山上的鳥居加起來約有 <strong>一萬座</strong>，是江戶時代開始，生意成功的商人、許願成真的信徒一座一座捐獻的。每一座鳥居後面都刻有捐獻者的名字和日期。`,
+          `這裡供奉的是 <strong>稻荷神</strong>，掌管農業豐收、商業繁榮。神社裡的狐狸不是被拜的對象，<strong>狐狸是稻荷神的使者</strong>——嘴裡咬鑰匙代表米倉的鑰匙，咬寶珠代表神明的功德。`,
+          `今天時間有限，建議走到「<strong>奧社奉拜所</strong>」（約 30-40 分鐘），那裡有有名的「願之石」，搬起來很輕就代表心願能實現！早上 8 點以前人最少，拍照完全沒人潮，大家把握一下！`] },
+
+  { id:'kiyomizu', day:1, emoji:'🏯', name:'清水寺', type:'景點｜世界遺產・懸空舞台（778 年）',
+    lat:34.99491, lng:135.78492, wiki:'清水寺', wikiLang:'ja',
+    meta:'📞 <a href="tel:0755511234">075-551-1234</a>｜京都市東山区清水 1-294｜06:00–18:00｜門票 ¥400',
+    guide:[`我們現在要去的是 <strong>清水寺</strong>，西元 <strong>778 年</strong>創建，距今超過 <strong>1,200 年</strong>。名字由來很浪漫——山上有一道清澈的瀑布，僧人延鎮在夢中受神諭指引，在瀑布邊建寺，就以泉水命名為「清水寺」。`,
+          `最壯觀的是 <strong>清水舞台</strong>，懸空伸出山崖的木造平台，由 <strong>139 根圓木</strong>支撐，約 13 公尺高（4 層樓）。最厲害的是<strong>完全沒有用一根釘子</strong>，純靠榫接，是日本傳統工法「懸造」的代表作。`,
+          `日本有句老話「<strong>從清水舞台跳下去</strong>」，意思是「背水一戰、豁出去了」——江戶時代真的有人相信跳下去能實現心願，史書記載過 234 次！當然現在已禁止。`,
+          `下山一定要去 <strong>音羽瀑布</strong>，三道水流分別代表 <strong>長壽・戀愛・學業</strong>。注意只能選一道喝，喝全部反而沒效喔！沿途的 <strong>三年坂・二年坂</strong> 是京都保存最完整的江戶街景，還有全世界唯一有榻榻米座位的星巴克！`] },
+
+  { id:'tenryuji', day:1, emoji:'🍽️', name:'嵐山 天龍寺・精進料理 Shigetsu', type:'世界遺產禪寺＋午餐｜蛋奶素',
+    lat:35.01560, lng:135.67380, wiki:'天龍寺', wikiLang:'ja',
+    meta:'📞 <a href="tel:0758829725">075-882-9725</a>（需預約）｜11:00-14:00｜¥3,500 起',
+    guide:[`今天午餐安排了一個特別體驗——<strong>精進料理（Shojin Ryori）</strong>，日本禪宗寺院流傳下來的素食料理，從鎌倉時代就有，至今 800 年歷史。`,
+          `精進料理 <strong>完全沒有肉食，也不使用五辛</strong>（蔥蒜等），基於佛教戒律。用豆腐、高野豆腐、野菜、海藻做出各種精緻擺盤，調味細膩，是日本飲食文化的精髓。`,
+          `用餐的 <strong>天龍寺</strong> 是嵐山最重要的禪寺，足利尊氏在 <strong>1339 年</strong>為超渡後醍醐天皇而建，是世界遺產，曹源池庭園是日本史上第一個特別史蹟・特別名勝雙重認定的庭園。窗外就是 700 年歷史的庭園！`] },
+
+  { id:'bamboo', day:1, emoji:'🎋', name:'嵐山竹林（竹林の小径）', type:'景點｜日本音風景百選',
+    lat:35.01760, lng:135.67100, wiki:'嵐山', wikiLang:'ja',
+    meta:'📞 075-213-1717（嵐山保勝會）｜嵐電嵐山站步行 5 分｜24 小時・免費',
+    guide:[`吃完飯去走走 <strong>嵐山竹林</strong>，位於天龍寺後方，種的是 <strong>孟宗竹</strong>，每根 10 到 20 公尺高，遮天蔽日，形成一條綠色隧道。`,
+          `竹子是世界上生長最快的植物，一天最多可長 90 公分！風吹過竹葉「沙沙沙」的聲音被日本環境省選入「<strong>日本音風景百選</strong>」，是唯一入選的嵐山聲音。`,
+          `建議下午 2:00 以後來，光線從竹葉間隙篩下來最漂亮。走完往前就是 <strong>渡月橋</strong>，嵐山最地標性的橋。`] },
+
+  { id:'uniqlo-kyoto', day:1, emoji:'🛍️', name:'UNIQLO 京都河原町店', type:'購物｜ミーナ京都 B1-3F',
+    lat:35.00480, lng:135.76860, wiki:'', wikiLang:'ja',
+    meta:'📞 <a href="tel:0752311170">075-231-1170</a>｜11:00-21:00｜阪急河原町站步行 3 分',
+    guide:[`回程順路逛 <strong>UNIQLO 京都河原町店</strong>，位於 ミーナ京都，地下一樓到三樓，補貨方便。`] },
+
+  { id:'kasuga', day:2, emoji:'⛩️', name:'春日大社', type:'景點｜3000 盞燈籠・神鹿傳說（768 年）',
+    lat:34.68170, lng:135.84830, wiki:'春日大社', wikiLang:'ja',
+    meta:'📞 <a href="tel:0742227788">0742-22-7788</a>｜奈良市春日野町 160｜06:00-18:00',
+    guide:[`踏入奈良，先到 <strong>春日大社</strong>，奈良地區最重要的神社，西元 <strong>768 年</strong>創建，供奉保佑武運、農業、商業的神明。`,
+          `最令人印象深刻的是境內多達 <strong>3,000 盞燈籠</strong>，每年 2 月和 8 月的「萬燈籠」儀式同時點亮，整個神社沐浴在橙色光芒中，是奈良最美的夜晚之一。`,
+          `傳說第一位神明是 <strong>騎著白鹿從鹿島神宮來到奈良的</strong>，所以奈良的鹿全被視為神的使者，受保護超過 <strong>1,300 年</strong>。牠們不是寵物，是真正的『野生神鹿』喔！`] },
+
+  { id:'narapark', day:2, emoji:'🦌', name:'奈良公園', type:'景點｜1200 頭野生神鹿',
+    lat:34.68510, lng:135.84300, wiki:'奈良公園', wikiLang:'ja',
+    meta:'📞 <a href="tel:0742220375">0742-22-0375</a>｜24 小時・免費｜鹿餅 ¥200',
+    guide:[`奈良公園的鹿大約有 <strong>1,200 頭</strong>，被人類保護了 <strong>1,300 年</strong>，所以對人非常不怕，會主動靠近。`,
+          `<strong>鹿餅（鹿せんべい）</strong>買了要馬上餵完，不要拿在手上走路！鹿很聰明，看到你手裡有東西會一直追。如果你向鹿低頭點頭，鹿也會點頭回禮，這叫「お辞儀」，是奈良鹿的招牌動作！`,
+          `小孩要特別注意，旺季的鹿較興奮，大人請在旁守護。鹿角每年 10 月會被鋸掉防止互相攻擊，7 月鹿角完整但通常溫和。`] },
+
+  { id:'todaiji', day:2, emoji:'🏛️', name:'東大寺大佛殿', type:'景點｜世界最大木造建築（743-752 年）',
+    lat:34.68890, lng:135.83970, wiki:'東大寺', wikiLang:'ja',
+    meta:'📞 <a href="tel:0742225511">0742-22-5511</a>｜奈良市雑司町 406-1｜07:30-17:30｜門票 ¥800',
+    guide:[`東大寺是奈良之行的重頭戲！先告訴大家一個震撼的背景——<strong>東大寺大佛是因為一場大瘟疫而建造的。</strong>`,
+          `西元 735 年，日本爆發天花大流行，殺死了當時 <strong>將近三成的人口</strong>，連掌權的藤原四兄弟都病死。<strong>聖武天皇</strong>悲痛，相信是自己失德導致天災，於 <strong>743 年</strong>下詔建造巨佛，以佛法保護國家。`,
+          `大佛從 747 年起鑄造，耗時 <strong>5 年</strong>，用去當時日本 <strong>80%</strong> 的銅，鑄成高 <strong>15 公尺</strong>的盧舍那大佛，<strong>752 年</strong>舉行開眼儀式，全日本萬人聚集慶祝。`,
+          `包覆大佛的 <strong>大佛殿</strong>正面寬 <strong>57 公尺</strong>，是 <strong>世界現存最大的木造建築</strong>！而且現在的還只有原始規模的三分之二大。`,
+          `進去找 <strong>大佛身後的柱子</strong>，有一根底部有個洞，大小剛好和大佛鼻孔一樣寬。傳說 <strong>鑽過去可保佑聰明、智慧和健康</strong>。兩個孩子去鑽一下！`] },
+
+  { id:'kinatei', day:2, emoji:'🍽️', name:'Kinatei 喜菜亭', type:'午餐｜奈良評價最高素食之一',
+    lat:34.67900, lng:135.82700, wiki:'', wikiLang:'ja',
+    meta:'📞 <a href="tel:0742206188">0742-20-6188</a>｜近鐵奈良站步行 5 分｜週二-六 11:30-14:30',
+    flag:'蛋奶素友善・有英文菜單',
+    guide:[`今天午餐去 <strong>喜菜亭（Kinatei）</strong>，奈良市內評價最高的素食餐廳之一。主廚是純素主義者，但提供蛋奶素友善定食，常見天婦羅、豆腐鍋、蔬菜咖哩、有機沙拉。菜單有英文，老闆娘英文很好，也略通中文，服務親切。`] },
+
+  { id:'dotonbori', day:3, emoji:'🎭', name:'道頓堀・心齋橋', type:'景點｜格力高跑跑男・運河（1615 年）',
+    lat:34.66863, lng:135.50118, wiki:'道頓堀', wikiLang:'ja',
+    meta:'大阪市中央区道頓堀 / 心斎橋筋｜地鐵難波站・心齋橋站步行可達',
+    guide:[`大阪的心臟，就是今天走的 <strong>道頓堀和心齋橋</strong>！西元 <strong>1615 年</strong>，商人 <strong>安井道頓</strong>花自己的積蓄開鑿了這條運河，用他的名字命名。400 年後，這裡是大阪最熱鬧的地方！`,
+          `看到那個巨大的跑步人像了嗎？那就是大名鼎鼎的 <strong>格力高跑跑男</strong>！格力高 <strong>1922 年</strong>成立，創辦人從牡蠣汁提煉肝糖做成糖果。跑跑男的意思是「吃一顆 Glico 焦糖，剛好有跑 300 公尺的能量」。第一代招牌 1935 年豎立，現在是第六代 LED 版。`,
+          `心齋橋拱廊商店街長達 <strong>580 公尺</strong>，從江戶時代就是大阪最重要的商業街。清晨 9 點店還沒開，人最少，拍照最佳！`] },
+
+  { id:'uniqlo-osaka', day:3, emoji:'🛍️', name:'UNIQLO 心齋橋旗艦店', type:'購物｜B1~2F UNIQLO + 3~4F GU',
+    lat:34.67190, lng:135.50080, wiki:'', wikiLang:'ja',
+    meta:'📞 <a href="tel:0664844000">06-6484-4000</a>｜心斎橋筋 1-2-14｜11:00-21:00',
+    guide:[`<strong>UNIQLO 心齋橋旗艦店</strong> 2023 年 11 月重新開幕，是日本最重要的旗艦店之一。B1 到 2F 是 UNIQLO，3~4F 是 <strong>GU</strong>——台灣沒有 GU 實體店，款式更年輕、價格更平，很適合幫孩子挑衣服！`] },
+
+  { id:'parco', day:3, emoji:'🛍️', name:'心齋橋 PARCO 百貨', type:'購物｜任天堂・寶可夢・吉卜力',
+    lat:34.67260, lng:135.50060, wiki:'', wikiLang:'ja',
+    meta:'📞 <a href="tel:0663477000">06-6347-7000</a>｜心斎橋筋 1-8-3｜10:00-21:00',
+    flag:'小孩天堂',
+    guide:[`心齋橋 PARCO 2020 年開幕，台灣人必去：<strong>7F MUJI</strong>；<strong>14F 任天堂 OSAKA</strong>（西日本旗艦官方直營，限定商品這裡才有）；同樓還有 <strong>寶可夢中心和吉卜力官方商店</strong>！小孩的天堂！`] },
+
+  { id:'tsutenkaku', day:3, emoji:'🗼', name:'通天閣・新世界', type:'景點｜幸運神 Billiken・串炸發源（1912/1956 年）',
+    lat:34.65251, lng:135.50631, wiki:'通天閣', wikiLang:'ja',
+    meta:'📞 <a href="tel:0666419555">06-6641-9555</a>｜浪速区恵美須東 1-18-6｜10:00-20:00｜¥1,000（周遊卡免費）',
+    guide:[`<strong>通天閣</strong>！名字的意思是「<strong>直通天空的高樓</strong>」。歷史分兩段——<strong>初代</strong>於 <strong>1912 年</strong>建立，靈感來自 <strong>巴黎艾菲爾鐵塔</strong>，是當時全亞洲最高的建築！腳下還有 Luna Park 遊樂園。`,
+          `<strong>1943 年</strong>二戰期間塔底電影院火災，初代被拆，銅材做軍需。戰後地方居民集資，請來 <strong>設計東京鐵塔的內藤多仲</strong>重新設計，1956 年建了第二代，高 <strong>108 公尺</strong>。`,
+          `塔頂有 <strong>比利肯（Billiken）幸運之神</strong>，摸他的 <strong>腳底板</strong>帶來好運！大人小孩都去摸一下，還有刺激的溜滑梯！`,
+          `周邊的 <strong>新世界商店街</strong>是大阪串炸的發源地！串炸規矩是每串只能沾一次醬，因為醬汁桶共用，這叫 <strong>「二度漬け禁止！」</strong>，違反店員會直接阻止你！`] },
+
+  { id:'osakajo', day:4, emoji:'🏯', name:'大阪城天守閣', type:'景點｜豐臣秀吉的城（1583 年）',
+    lat:34.68730, lng:135.52590, wiki:'大阪城', wikiLang:'ja',
+    meta:'📞 <a href="tel:0669413044">06-6941-3044</a>｜中央区大阪城 1-1｜09:00-17:00｜¥600（周遊卡免費）',
+    guide:[`<strong>大阪城</strong>！它的主人是日本史上最傳奇的人物之一——<strong>豐臣秀吉</strong>！他出身農民，連姓都沒有，從掃廁所的小卒一路爬到統一全日本。<strong>1583 年</strong>選在大阪建城，花 3 年建成當時最宏偉的城堡，外牆鑲金，連黃金茶室都搬進去。`,
+          `但這座城沒讓秀吉後代享用太久——秀吉死後 <strong>德川家康</strong>趁機奪權，<strong>1615 年「大阪夏之陣」</strong>攻入大阪城，豐臣家族滅亡，這是戰國時代最後一場大戰。`,
+          `現在的天守閣是 <strong>1931 年</strong>大阪市民捐款重建的第三代，高 54.8 公尺，內部是博物館，8 樓展望台 360 度俯瞰大阪市區。`] },
+
+  { id:'muji', day:4, emoji:'🏬', name:'MUJI Grand Front Osaka', type:'購物｜西日本最大無印良品',
+    lat:34.70530, lng:135.49450, wiki:'', wikiLang:'ja',
+    meta:'📞 <a href="tel:0663590123">06-6359-0123</a>｜Grand Front Osaka 2F-4F｜11:00-21:00',
+    guide:[`<strong>MUJI Grand Front Osaka</strong> 是關西最大的無印良品，整整佔了 3 層樓。有一般門市買不到的商品，也有 <strong>MUJI Café & Meal</strong>，健康有機定食，是下午休息補充能量的好地方。`] },
+
+  { id:'umeda-sky', day:4, emoji:'🎡', name:'梅田空中庭園展望台', type:'景點｜BBC 全球最美 20 棟建築',
+    lat:34.70520, lng:135.49030, wiki:'梅田スカイビル', wikiLang:'ja',
+    meta:'📞 <a href="tel:0664403899">06-6440-3899</a>｜大淀中 1-1-88｜10:00-22:30｜¥1,500（周遊卡免費）',
+    guide:[`<strong>梅田空中庭園</strong>是兩棟 40 層樓大樓在頂部互相連通，形成懸空的圓環平台，非常大膽的現代建築。`,
+          `最驚人的是這個展望台是<strong>露天的</strong>——頭頂是真實的天空，腳下是整個大阪燈海，遠方還有淡路島輪廓。BBC 曾選它為「<strong>全球最美的 20 棟建築之一</strong>」。`,
+          `建議 <strong>19:00-20:00</strong> 到達，欣賞從日落到夜景的完整變化，是大阪旅行的完美句號！`] },
+
+  { id:'usj', day:4, emoji:'🅱️', name:'環球影城 USJ（方案 B）', type:'景點｜超級任天堂世界・哈利波特',
+    lat:34.66544, lng:135.43230, wiki:'ユニバーサル・スタジオ・ジャパン', wikiLang:'ja',
+    meta:'📞 <a href="tel:0570200606">0570-20-0606</a>｜此花区桜島 2-1-33｜09:00-21:00',
+    flag:'7 月旺季・建議買 Express Pass',
+    guide:[`<strong>環球影城 USJ</strong>，全世界四座環球影城中日本獨有的特殊版本！`,
+          `<strong>超級任天堂世界</strong>：2021 年開幕，全世界第一個任天堂園區，2026 年正值 <strong>5 週年</strong>有限定活動！必搭 <strong>瑪利歐賽車：酷離奇之旅</strong>，AR 眼鏡加實體賽道，全球最先進的設施之一。`,
+          `<strong>哈利波特魔法世界</strong>：霍格華茲城堡就在眼前！去「奧利凡德魔杖店」看魔法示範，一定要喝一杯 <strong>奶油啤酒</strong>！還有 2024 新開的 <strong>咚奇剛魔法森林</strong>。`,
+          `<strong>夏季提醒</strong>：7 月是旺季，務必提前買 <strong>Express Pass（快速通關）</strong>，不然熱門設施排 2 小時以上！票價：大人 ¥10,800-11,900、兒童 ¥7,400-8,500、Express Pass 7 另付 ¥9,400-11,000。`] },
+
+  { id:'ocat', day:5, emoji:'🚌', name:'難波 OCAT → 關西機場 利木津巴士', type:'交通｜出發日',
+    lat:34.66480, lng:135.49600, wiki:'', wikiLang:'ja',
+    meta:'📞 KATE 客服 <a href="tel:0120670110">0120-670-110</a>｜湊町 1-4-1｜飯店步行 7-10 分',
+    guide:[`今天是最後一天，搭 <strong>利木津巴士</strong>去機場，從 OCAT 出發走路 10 分鐘就到。巴士好處是可放 <strong>大件行李在行李艙</strong>，帶小孩比擠電車舒服很多。`,
+          `行駛約 <strong>48 分鐘</strong>，大人 ¥1,300、兒童 ¥650，全家約 <strong>¥3,900</strong>。每 15-30 分鐘一班。CI 153 14:00 起飛，建議 <strong>09:30-09:45</strong> 出發、11:30 前 check-in。記得提前 15 分鐘到把行李放好！`] },
+
+  { id:'kix', day:5, emoji:'🛍️', name:'KIX 關西機場購物', type:'機場｜日本最大免稅區之一',
+    lat:34.43200, lng:135.23040, wiki:'関西国際空港', wikiLang:'ja',
+    meta:'泉佐野市泉州空港北 1（T1）｜免稅區：出境安檢後 2 樓',
+    guide:[`關西機場免稅店是日本規模最大之一！必買伴手禮：<strong>Henri Charpentier 費南雪</strong>（全球銷售冠軍）、<strong>ROYCE' 生巧克力</strong>、<strong>白色戀人</strong>、<strong>LeTAO 起司蛋糕</strong>、<strong>NARS / YSL 化妝品</strong>（比台灣便宜 15-25%）。`,
+          `機場餐廳（出境前 T1 2F）：神座拉麵、LE PAN 神戶北野麵包坊（淡路島鹽麵包 ✅ 素）、千房大阪燒、7-11 / LAWSON 素食飯糰。上機前最後採買！`] },
+];
+
+// ── 連結與嵌入 ──────────────────────────────────────────────
+function gmapLink(s){ return `https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lng}`; }
+function dirLink(s){ return `https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}`; }
+function embedSrc(s){ return `https://www.google.com/maps?q=${s.lat},${s.lng}&z=16&hl=zh-TW&output=embed`; }
+
+const bigmap = document.getElementById('bigmap');
+const mbName = document.getElementById('mb-name');
+const mbOpen = document.getElementById('mb-open');
+const sidebar = document.getElementById('sidebar');
+const countLabel = document.getElementById('count-label');
+let selectedId = null;
+
+// ── 卡片建立 ──────────────────────────────────────────────
+function buildCards(filterDayVal) {
+  sidebar.querySelectorAll('.card, .day-head').forEach(el => el.remove());
+  const list = SPOTS.filter(s => filterDayVal==='all' ? true :
+    filterDayVal==='5' ? (s.day===0 || s.day===5) : String(s.day)===filterDayVal);
+  countLabel.textContent = `顯示 ${list.length} 個景點　·　點卡片展開照片・導遊解說・嵌入地圖`;
+
+  let lastDay = null;
+  list.forEach(s => {
+    if (s.day !== lastDay) {
+      const dh = document.createElement('div');
+      dh.className = 'day-head';
+      dh.style.background = DAYS[s.day].color;
+      dh.textContent = DAYS[s.day].label;
+      sidebar.appendChild(dh);
+      lastDay = s.day;
+    }
+    const color = DAYS[s.day].color;
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = `card-${s.id}`;
+    card.style.borderLeftColor = color;
+    const guideHtml = s.guide.map(p => `<p>${p}</p>`).join('');
+    card.innerHTML = `
+      <div class="card-head" onclick="toggleCard('${s.id}')">
+        <div class="photo-wrap" data-wiki="${s.wiki}" data-lang="${s.wikiLang}">${s.emoji}</div>
+        <div class="card-body">
+          <div class="card-name">${s.emoji} ${s.name}</div>
+          <div class="card-type">${s.type}</div>
+          <div class="card-meta">${s.meta}</div>
+          ${s.flag ? `<div class="flag-tag">${s.flag}</div>` : ''}
+        </div>
+        <div class="card-toggle">展開 ▾</div>
+      </div>
+      <div class="card-detail">
+        <div class="guide">${guideHtml}</div>
+        <iframe class="embed-map" loading="lazy" data-src="${embedSrc(s)}" src="" allowfullscreen></iframe>
+        <div class="card-links">
+          <a class="link-btn btn-gmap" href="${gmapLink(s)}" target="_blank" rel="noopener">📍 在 Google Maps 開啟</a>
+          <a class="link-btn btn-dir" href="${dirLink(s)}" target="_blank" rel="noopener">🧭 導航路線</a>
+          ${s.wiki ? `<a class="link-btn btn-wiki" href="https://${s.wikiLang}.wikipedia.org/wiki/${encodeURIComponent(s.wiki)}" target="_blank" rel="noopener">📖 維基</a>` : ''}
+        </div>
+      </div>`;
+    sidebar.appendChild(card);
+  });
+
+  sidebar.querySelectorAll('.photo-wrap[data-wiki]').forEach(loadPhoto);
+}
+
+// ── Wikipedia 照片載入 ──────────────────────────────────────
+async function loadPhoto(el) {
+  const title = el.getAttribute('data-wiki');
+  const lang = el.getAttribute('data-lang') || 'ja';
+  if (!title) return;
+  try {
+    const res = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`);
+    if (!res.ok) return;
+    const data = await res.json();
+    const src = (data.thumbnail && data.thumbnail.source) || (data.originalimage && data.originalimage.source);
+    if (src) {
+      const img = new Image();
+      img.alt = title; img.loading = 'lazy';
+      img.onload = () => { el.innerHTML = ''; el.appendChild(img); };
+      img.src = src;
+    }
+  } catch (e) { /* 保留 emoji 底 */ }
+}
+
+// ── 卡片互動：展開 + 左側 Google 地圖同步 ───────────────────
+function toggleCard(id) {
+  const card = document.getElementById(`card-${id}`);
+  if (!card) return;
+  const opening = !card.classList.contains('open');
+  card.classList.toggle('open');
+  const tog = card.querySelector('.card-toggle');
+  if (tog) tog.textContent = opening ? '收起 ▴' : '展開 ▾';
+  if (opening) {
+    const iframe = card.querySelector('.embed-map');
+    if (iframe && !iframe.src) iframe.src = iframe.getAttribute('data-src');
+  }
+  focusSpot(id);
+}
+
+function focusSpot(id) {
+  if (selectedId && document.getElementById(`card-${selectedId}`))
+    document.getElementById(`card-${selectedId}`).classList.remove('selected');
+  selectedId = id;
+  const card = document.getElementById(`card-${id}`);
+  if (card) card.classList.add('selected');
+  const s = SPOTS.find(x => x.id === id);
+  if (!s) return;
+  // 更新左側大地圖（Google Maps）
+  bigmap.src = embedSrc(s);
+  mbName.textContent = `${s.emoji} ${s.name}`;
+  mbOpen.href = gmapLink(s);
+}
+
+// ── 天數篩選 ──────────────────────────────────────────────
+function filterDay(val, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.remove('active'); b.style.background = '#fff'; b.style.borderColor = '#ccc'; b.style.color = '#333';
+  });
+  if (btn) {
+    btn.classList.add('active');
+    const c = val==='all' ? '#2d7d46' : val==='5' ? '#a05a18' : DAYS[val].color;
+    btn.style.background = c; btn.style.borderColor = c; btn.style.color = '#fff';
+  }
+  buildCards(val);
+}
+
+// ── 初始化 ──────────────────────────────────────────────
+const allBtn = document.querySelector('.filter-btn[data-day="all"]');
+allBtn.style.background = '#2d7d46'; allBtn.style.borderColor = '#2d7d46'; allBtn.style.color = '#fff';
+buildCards('all');
+</script>
+</body>
+</html>
