@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌿 大阪素食餐廳地圖</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  :root {
+    --green-dark: #1B5E20; --green: #2E7D32; --green-light: #4CAF50;
+    --green-pale: #E8F5E9; --accent: #FF6F00; --blue: #1565C0;
+    --gray: #546E7A; --bg: #F5F7F2; --white: #fff;
+    --shadow: 0 2px 12px rgba(0,0,0,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', 'Noto Sans TC', Arial, sans-serif; background: var(--bg); color: #222; }
+
+  /* ── Header ── */
+  header {
+    background: linear-gradient(135deg, var(--green-dark) 0%, #388E3C 100%);
+    color: #fff; padding: 18px 24px; display: flex; align-items: center; gap: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  header h1 { font-size: 1.5rem; font-weight: 700; }
+  header p  { font-size: 0.82rem; opacity: 0.85; margin-top: 3px; }
+  .badge { background: var(--accent); color: #fff; border-radius: 20px; padding: 3px 10px; font-size: 0.78rem; font-weight: 700; }
+
+  /* ── Filter bar ── */
+  #filter-bar {
+    background: var(--white); border-bottom: 1px solid #ddd;
+    padding: 10px 18px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+  }
+  #filter-bar span { font-size: 0.82rem; color: var(--gray); font-weight: 600; }
+  .filter-btn {
+    border: 1.5px solid #ccc; background: #fff; border-radius: 20px;
+    padding: 4px 12px; font-size: 0.8rem; cursor: pointer; transition: all 0.15s;
+  }
+  .filter-btn.active, .filter-btn:hover { background: var(--green); color: #fff; border-color: var(--green); }
+  #search-input {
+    margin-left: auto; padding: 5px 12px; border: 1.5px solid #ccc;
+    border-radius: 20px; font-size: 0.82rem; width: 200px;
+  }
+
+  /* ── Main layout ── */
+  #main { display: flex; height: calc(100vh - 115px); }
+
+  /* ── Map ── */
+  #map { flex: 0 0 55%; height: 100%; position: relative; }
+
+  /* ── Sidebar ── */
+  #sidebar {
+    flex: 1; overflow-y: auto; padding: 12px;
+    display: flex; flex-direction: column; gap: 10px;
+    background: var(--bg);
+  }
+  #count-label { font-size: 0.8rem; color: var(--gray); padding: 0 4px; }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--white); border-radius: 10px; box-shadow: var(--shadow);
+    padding: 12px 14px; cursor: pointer; border-left: 4px solid var(--green-light);
+    transition: box-shadow 0.15s, transform 0.1s;
+  }
+  .card:hover, .card.selected { box-shadow: 0 4px 18px rgba(46,125,50,0.25); transform: translateX(2px); }
+  .card.selected { border-left-color: var(--accent); }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+  .card-name { font-size: 0.95rem; font-weight: 700; color: var(--green-dark); line-height: 1.3; flex: 1; }
+  .rank-badge {
+    min-width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; font-size: 0.75rem; font-weight: 700; color: #fff; flex-shrink: 0;
+  }
+  .rank-top    { background: var(--green); }
+  .rank-user   { background: var(--blue); }
+  .rank-other  { background: var(--gray); }
+  .card-type { font-size: 0.74rem; color: var(--gray); margin: 3px 0; }
+  .card-area { font-size: 0.74rem; color: var(--green); font-weight: 600; }
+  .ratings { display: flex; gap: 10px; margin: 5px 0; flex-wrap: wrap; }
+  .rating-pill {
+    display: flex; align-items: center; gap: 4px;
+    border-radius: 12px; padding: 2px 8px; font-size: 0.75rem; font-weight: 700;
+  }
+  .hc-pill  { background: #FFF3E0; color: #E65100; }
+  .g-pill   { background: #E8F5E9; color: var(--green); }
+  .card-hours { font-size: 0.74rem; color: #444; margin-top: 4px; }
+  .card-dishes { font-size: 0.73rem; color: #555; margin-top: 3px; line-height: 1.4; }
+  .flag-tag {
+    display: inline-block; background: #FFF3E0; color: var(--accent);
+    border-radius: 8px; padding: 1px 7px; font-size: 0.7rem; font-weight: 700; margin-top: 4px;
+  }
+  .card-links { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+  .link-btn {
+    text-decoration: none; border-radius: 6px; padding: 4px 10px; font-size: 0.72rem; font-weight: 600;
+    display: inline-flex; align-items: center; gap: 4px; transition: opacity 0.15s;
+  }
+  .link-btn:hover { opacity: 0.82; }
+  .btn-gmap  { background: #4285F4; color: #fff; }
+  .btn-hours { background: #34A853; color: #fff; }
+  .btn-hc    { background: #FF6B35; color: #fff; }
+
+  /* ── Detail panel (popup below map) ── */
+  #detail-panel {
+    display: none; position: absolute; bottom: 0; left: 0; right: 0; z-index: 1000;
+    background: var(--white); border-top: 3px solid var(--green); box-shadow: 0 -4px 16px rgba(0,0,0,0.15);
+    padding: 14px 18px; max-height: 42%;
+  }
+  #detail-panel.show { display: flex; gap: 16px; flex-wrap: wrap; }
+  #detail-panel .dp-close {
+    position: absolute; top: 8px; right: 12px; cursor: pointer; font-size: 1.2rem; color: var(--gray);
+  }
+  #detail-panel .dp-map-embed { flex: 0 0 300px; height: 160px; border-radius: 8px; overflow: hidden; border: 1px solid #ddd; }
+  #detail-panel .dp-map-embed iframe { width: 100%; height: 100%; border: none; }
+  .dp-info { flex: 1; min-width: 220px; }
+  .dp-title { font-size: 1rem; font-weight: 700; color: var(--green-dark); margin-bottom: 6px; }
+  .dp-row { font-size: 0.8rem; color: #444; margin-bottom: 3px; }
+  .dp-row strong { color: #222; }
+  .dp-note { font-size: 0.76rem; color: var(--blue); font-style: italic; margin-top: 5px; }
+
+  /* ── Leaflet popup custom ── */
+  .leaflet-popup-content-wrapper { border-radius: 10px; box-shadow: var(--shadow); }
+  .popup-inner { max-width: 250px; }
+  .popup-title { font-weight: 700; color: var(--green-dark); font-size: 0.9rem; margin-bottom: 4px; }
+  .popup-type  { font-size: 0.73rem; color: var(--gray); margin-bottom: 4px; }
+  .popup-hours { font-size: 0.73rem; margin-bottom: 6px; }
+  .popup-btns  { display: flex; gap: 5px; flex-wrap: wrap; }
+  .popup-btn {
+    text-decoration: none; border-radius: 5px; padding: 3px 8px; font-size: 0.7rem; font-weight: 600; color: #fff;
+  }
+  .popup-btn.g { background: #4285F4; }
+  .popup-btn.h { background: #FF6B35; }
+  .popup-btn.t { background: #34A853; }
+
+  /* ── Tips panel ── */
+  #tips-panel {
+    background: linear-gradient(135deg, #FFF8E1 0%, #FFF3E0 100%);
+    border: 1.5px solid #FFB300; border-radius: 10px;
+    padding: 10px 13px; font-size: 0.78rem; color: #333;
+    box-shadow: 0 2px 8px rgba(255,179,0,0.12);
+  }
+  #tips-panel .tips-title {
+    font-weight: 700; color: #E65100; font-size: 0.88rem;
+    display: flex; align-items: center; justify-content: space-between; cursor: pointer;
+    user-select: none;
+  }
+  #tips-body { margin-top: 8px; display: flex; flex-direction: column; gap: 5px; }
+  #tips-body.hidden { display: none; }
+  .tip-row {
+    display: flex; gap: 7px; align-items: flex-start;
+    padding: 4px 7px; border-radius: 6px; background: rgba(255,255,255,0.65); line-height: 1.45;
+  }
+  .tip-num { font-weight: 700; color: #E65100; flex-shrink: 0; min-width: 18px; }
+  .tip-text a { color: #1565C0; text-decoration: none; font-weight: 600; }
+  .tip-text a:hover { text-decoration: underline; }
+
+  /* ── Card photo ── */
+  .card-content { display: flex; gap: 10px; align-items: flex-start; }
+  .card-photo {
+    width: 82px; height: 78px; object-fit: cover;
+    border-radius: 7px; flex-shrink: 0;
+    background: #eee;
+  }
+  .card-body { flex: 1; min-width: 0; }
+
+  /* ── Scrollbar ── */
+  #sidebar::-webkit-scrollbar { width: 5px; }
+  #sidebar::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+
+  @media (max-width: 768px) {
+    #main { flex-direction: column; height: auto; }
+    #map { flex: none; height: 45vh; }
+    #sidebar { max-height: 55vh; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div style="font-size:2rem;">🌿</div>
+  <div>
+    <h1>大阪素食餐廳互動地圖</h1>
+    <p>HappyCow 精選 × 大阪觀光局推薦　點擊地圖或卡片查看詳情、Google 評分與營業時間</p>
+  </div>
+  <div style="margin-left:auto; display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;">
+    <span class="badge">共 25 家</span>
+    <span class="badge" style="background:#1565C0;">2026 更新</span>
+  </div>
+</header>
+
+<div id="filter-bar">
+  <span>篩選：</span>
+  <button class="filter-btn active" onclick="filterCards('all',this)">全部</button>
+  <button class="filter-btn" onclick="filterCards('vegan',this)">🌱 全素 Vegan</button>
+  <button class="filter-btn" onclick="filterCards('gf',this)">🌾 無麩質 GF</button>
+  <button class="filter-btn" onclick="filterCards('top10',this)">🏆 Top 10</button>
+  <button class="filter-btn" onclick="filterCards('user',this)">⭐ 使用者清單</button>
+  <button class="filter-btn" onclick="filterCards('takeout',this)">🥡 外帶/外送</button>
+  <button class="filter-btn" onclick="filterCards('latenite',this)">🌙 深夜</button>
+  <input type="text" id="search-input" placeholder="🔍 搜尋餐廳名稱…" oninput="searchCards(this.value)">
+</div>
+
+<div id="main">
+  <div id="map" style="position:relative;">
+    <div id="detail-panel">
+      <span class="dp-close" onclick="closeDetail()">✕</span>
+      <div class="dp-map-embed"><iframe id="dp-iframe" src="" allowfullscreen loading="lazy"></iframe></div>
+      <div class="dp-info" id="dp-info"></div>
+    </div>
+  </div>
+  <div id="sidebar">
+    <!-- 旅遊小提醒 -->
+    <div id="tips-panel">
+      <div class="tips-title" onclick="toggleTips()">
+        <span>📌 旅遊小提醒（點擊展開／收起）</span>
+        <span id="tips-toggle">▼</span>
+      </div>
+      <div id="tips-body">
+        <div class="tip-row">
+          <span class="tip-num">①</span>
+          <span class="tip-text"><b>🧊 可帶冷凍食品回飯店微波：</b>
+            <a href="#" onclick="selectCard(15,true);return false;">#15 The Second Room Cafe（梅田）</a>
+            有販售冷凍素食品可外帶，地下街超方便！</span>
+        </div>
+        <div class="tip-row">
+          <span class="tip-num">②</span>
+          <span class="tip-text"><b>📍 道頓堀觀光必訪：</b>
+            <a href="#" onclick="selectCard(13,true);return false;">#13 Pivot BASE @Dotonbori</a>
+            就在喰い倒れビル，純素版章魚燒・御好燒・炸串一次嚐。⚠️ 僅刷卡／PayPay。</span>
+        </div>
+        <div class="tip-row">
+          <span class="tip-num">③</span>
+          <span class="tip-text"><b>⚠️ 新世界通天閣：</b>
+            <a href="#" onclick="selectCard(11,true);return false;">#11 Paprika Shokudo</a>
+            位在新世界老街，截至2025年4月疑臨時休業，請先查 Instagram @shinsekai.paprika_vegan。</span>
+        </div>
+        <div class="tip-row">
+          <span class="tip-num">④</span>
+          <span class="tip-text"><b>🌙 深夜美食：</b>
+            <a href="#" onclick="selectCard(12,true);return false;">#12 The Fire Bar</a>
+            深夜至凌晨2點仍營業，夜遊後吃純素拉麵的首選！</span>
+        </div>
+        <div class="tip-row">
+          <span class="tip-num">⑤</span>
+          <span class="tip-text"><b>🌾 無麩質需求：</b>
+            <a href="#" onclick="selectCard(3,true);return false;">#3 Shojin Sushi Minamo</a>、
+            <a href="#" onclick="selectCard(8,true);return false;">#8 OKO Takoyaki</a>、
+            <a href="#" onclick="selectCard(5,true);return false;">#5 Folksaka</a>、
+            <a href="#" onclick="selectCard(7,true);return false;">#7 Brown Rice Sushi TEC</a>、
+            <a href="#" onclick="selectCard(11,true);return false;">#11 Paprika Shokudo</a>、
+            <a href="#" onclick="selectCard(15,true);return false;">#15 Second Room Cafe</a>
+            均有無麩質選項。</span>
+        </div>
+        <div class="tip-row">
+          <span class="tip-num">⑥</span>
+          <span class="tip-text"><b>🥡 外帶或外送：</b>
+            <a href="#" onclick="selectCard(7,true);return false;">#7 Brown Rice Sushi TEC</a>
+            可 Uber Eats 外送到飯店；
+            <a href="#" onclick="selectCard(16,true);return false;">#16 Taiwan Rakuzen</a>
+            可預訂便當外帶。</span>
+        </div>
+        <div class="tip-row">
+          <span class="tip-num">⑦</span>
+          <span class="tip-text"><b>🏆 HappyCow 最高評分：</b>
+            <a href="#" onclick="selectCard(1,true);return false;">#1 MERCY Vegan Factory</a>、
+            <a href="#" onclick="selectCard(2,true);return false;">#2 TW Vegan Night Market</a>、
+            <a href="#" onclick="selectCard(3,true);return false;">#3 Unique Pizzeria SUKHASANA</a>
+            均為5.0滿分（288/96/112則評論）！</span>
+        </div>
+      </div>
+    </div>
+    <div id="count-label"></div>
+  </div>
+</div>
+
+<script>
+// ── Restaurant photos (from HappyCow CDN) ─────────────────────────────────
+const photos = {
+  1:  'https://images.happycow.net/venues/500/29/61/hcmp296196_1832896.jpeg',
+  2:  'https://images.happycow.net/venues/500/33/76/hcmp337692_1996263.jpeg',
+  3:  'https://images.happycow.net/venues/500/23/63/hcmp236386_1282935.jpeg',
+  4:  'https://images.happycow.net/venues/500/42/47/hcmp424766_2994947.jpeg',
+  5:  'https://images.happycow.net/venues/500/42/47/hcmp424768_2975099.jpeg',
+  6:  'https://images.happycow.net/venues/500/11/77/hcmp117777_579868.jpeg',
+  7:  'https://images.happycow.net/venues/500/34/39/hcmp343926_2058255.jpeg',
+  8:  'https://images.happycow.net/venues/500/36/39/hcmp363992_2423707.jpeg',
+  9:  'https://images.happycow.net/venues/500/00/85/hcmp85_1863994.jpeg',
+  10: 'https://images.happycow.net/venues/500/16/27/hcmp162789_1085250.jpeg',
+  11: 'https://images.happycow.net/venues/500/37/49/hcmp374914_2657327.jpeg',
+  12: 'https://images.happycow.net/venues/500/40/95/hcmp409592_2799785.jpeg',
+  13: 'https://images.happycow.net/venues/500/40/92/hcmp409245_2809571.jpeg',
+  14: 'https://images.happycow.net/venues/500/50/31/hcmp503124_3823042.jpeg',
+  15: 'https://images.happycow.net/venues/500/38/41/hcmp384115_2500966.jpeg',
+  16: 'https://images.happycow.net/venues/500/36/71/hcmp367199_2318958.jpeg',
+  17: 'https://images.happycow.net/venues/500/36/27/hcmp362747_2260359.jpeg',
+  18: 'https://images.happycow.net/venues/500/39/33/hcmp393305_2643139.jpeg',
+  19: 'https://images.happycow.net/venues/500/14/72/hcmp14727_641579.jpeg',
+  20: 'https://images.happycow.net/venues/500/33/49/hcmp334922_1962933.jpeg',
+  21: 'https://images.happycow.net/venues/500/34/61/hcmp346158_2442860.jpeg',
+  22: 'https://images.happycow.net/venues/500/23/22/hcmp232243_1428347.jpeg',
+  23: 'https://images.happycow.net/venues/500/83/12/hcmp83128_2999903.jpeg',
+  24: 'https://images.happycow.net/venues/500/22/65/hcmp226558_1407241.jpeg',
+  25: 'https://images.happycow.net/venues/500/11/91/hcmp119162_976709.jpeg',
+};
+
+// ── Restaurant data ────────────────────────────────────────────────────────
+const restaurants = [
+  {
+    id:1, rank:1, group:'top10',
+    name:'MERCY Vegan Factory',
+    nameJa:'マーシーヴィーガンファクトリー',
+    type:'全素 Vegan｜烘焙坊・咖啡廳',
+    tags:['vegan','top10'],
+    area:'谷町九丁目・中央區',
+    address:'大阪市中央区瓦屋町 2-4-15',
+    lat:34.670015, lng:135.513484,
+    hours:'早餐 8:00-10:30　午餐 10:30-17:00（LO16:00）\n晚餐 18:00-21:00（LO20:00）　週六公休',
+    dishes:'韓式紫菜飯捲・炸素雞・純素奶油麵包・純素蛋三明治・塔甜點・布丁・咖哩飯',
+    notes:'JAS認證純素烘焙坊。HappyCow大阪 #1！',
+    flag:'',
+    hcStars:'5.0 ⭐ (288)', gStars:'4.9',
+    gmap:'https://www.google.com/maps/search/MERCY+Vegan+Factory+Osaka/@34.670015,135.513484,17z',
+    ghours:'https://www.google.com/maps/search/MERCY+Vegan+Factory+Osaka/@34.670015,135.513484,17z',
+    hcUrl:'https://www.happycow.net/reviews/mercy-vegan-factory-osaka-296196',
+    phone:'+81-667185846'
+  },
+  {
+    id:2, rank:2, group:'top10',
+    name:'TW Vegan Night Market',
+    nameJa:'台湾素食夜市',
+    type:'全素 Vegan｜台灣料理・自助餐',
+    tags:['vegan','top10'],
+    area:'天王寺・西成區',
+    address:'大阪市西成区山王 1-1-10 天王寺公園ヴィラ 105号',
+    lat:34.64824, lng:135.507634,
+    hours:'※請查 Instagram / Google Maps 確認最新時間',
+    dishes:'水餃・湯麵・春捲・刈包・小籠包・炸餛飩・煎餃・台灣素炸雞',
+    notes:'台灣夜市風格，觸控螢幕點餐。IG: @tw_vegan_night_market_20251201',
+    flag:'',
+    hcStars:'5.0 ⭐ (96)', gStars:'4.7',
+    gmap:'https://www.google.com/maps/search/TW+Vegan+Night+Market+Osaka+Tennoji/@34.64824,135.507634,17z',
+    ghours:'https://www.google.com/maps/search/TW+Vegan+Night+Market+Osaka/@34.64824,135.507634,17z',
+    hcUrl:'https://www.happycow.net/reviews/tw-vegan-night-market-osaka-337692',
+    phone:'+81-665857481'
+  },
+  {
+    id:3, rank:3, group:'top10',
+    name:'Unique (V) Pizzeria SUKHASANA',
+    nameJa:'スカサナヴィーガンピッツェリア',
+    type:'全素 Vegan｜義式料理',
+    tags:['vegan','top10'],
+    area:'松屋町・中央區',
+    address:'大阪市中央区松屋町住吉 5-24 ハイツ澤 1F',
+    lat:34.679003, lng:135.511812,
+    hours:'11:30-14:30　17:30-22:00　週二公休',
+    dishes:'那不勒斯純素披薩・素起司 Marmellata・素肉醬義大利麵・Zeppolini・蘿蔔牛排',
+    notes:'全日本唯一100%植物性拿坡里披薩！建議提早，常售罄。',
+    flag:'',
+    hcStars:'5.0 ⭐ (112)', gStars:'4.8',
+    gmap:'https://www.google.com/maps/search/Sukhasana+Vegan+Pizzeria+Osaka/@34.679003,135.511812,17z',
+    ghours:'https://www.google.com/maps/search/Sukhasana+Vegan+Pizzeria+Osaka/@34.679003,135.511812,17z',
+    hcUrl:'https://www.happycow.net/reviews/unique-pizzeria-sukhasana-osaka-236386',
+    phone:''
+  },
+  {
+    id:4, rank:4, group:'top10',
+    name:'Shojin Sushi Minamo 精進寿司みなも',
+    nameJa:'精進寿司みなも',
+    type:'全素+無麩質 Vegan & GF｜壽司',
+    tags:['vegan','gf','top10'],
+    area:'心齋橋・中央區',
+    address:'大阪市中央区西心斎橋 1-10-4 Ace Building B1F',
+    lat:34.67398, lng:135.499325,
+    hours:'週五至週二 17:30-21:00（LO）　週三・四公休',
+    dishes:'全素無麩質壽司套餐（依季節更換）',
+    notes:'由 Paprika Shokudo 店主 2024/9 新開。有包廂可預約。',
+    flag:'🆕 2024新店',
+    hcStars:'5.0 ⭐ (96)', gStars:'4.9',
+    gmap:'https://www.google.com/maps/search/Shojin+Sushi+Minamo+Osaka+Shinsaibashi/@34.67398,135.499325,17z',
+    ghours:'https://www.google.com/maps/search/Shojin+Sushi+Minamo+Osaka/@34.67398,135.499325,17z',
+    hcUrl:'https://www.happycow.net/reviews/shojin-sushi-minamo-osaka-424766',
+    phone:'+81-642563662'
+  },
+  {
+    id:5, rank:5, group:'top10',
+    name:'Folksaka',
+    nameJa:'フォルクサカ',
+    type:'全素+無麩質 Vegan & GF｜烘焙坊',
+    tags:['vegan','gf','top10'],
+    area:'大阪市北部',
+    address:'（請查 Google Maps 確認地址）',
+    lat:34.695223, lng:135.488093,
+    hours:'請查 Google Maps 確認最新時間',
+    dishes:'鹹甜烘焙品・三明治・季節限定甜點',
+    notes:'評分極高的新純素烘焙坊，注重無麩質選項。',
+    flag:'🆕 新店',
+    hcStars:'5.0 ⭐ (48)', gStars:'5.0',
+    gmap:'https://www.google.com/maps/search/Folksaka+vegan+Osaka/@34.695223,135.488093,17z',
+    ghours:'https://www.google.com/maps/search/Folksaka+vegan+bakery+Osaka/@34.695223,135.488093,17z',
+    hcUrl:'https://www.happycow.net/reviews/folksaka-osaka-424768',
+    phone:''
+  },
+  {
+    id:6, rank:6, group:'top10',
+    name:'Rocca',
+    nameJa:'ロッカ',
+    type:'全素 Vegan｜日本料理・有機・宏觀生物',
+    tags:['vegan','top10'],
+    area:'東住吉（Higashisumiyoshi）',
+    address:'大阪市東住吉区田辺 3-26-5',
+    lat:34.623617, lng:135.523797,
+    hours:'請查 Facebook / Google Maps 確認（不定期）',
+    dishes:'每日更換套餐 ¥1,300・有機米飯蔬菜・清酒・咖啡',
+    notes:'不使用人工調味料或砂糖，每天菜單不同。',
+    flag:'',
+    hcStars:'5.0 ⭐ (43)', gStars:'4.7',
+    gmap:'https://www.google.com/maps/search/Rocca+vegetarian+Osaka+Higashisumiyoshi/@34.623617,135.523797,17z',
+    ghours:'https://www.google.com/maps/search/Rocca+vegan+Osaka/@34.623617,135.523797,17z',
+    hcUrl:'https://www.happycow.net/reviews/rocca-osaka-117777',
+    phone:'+81-666218335'
+  },
+  {
+    id:7, rank:7, group:'top10',
+    name:'Brown Rice Sushi TEC 玄米のおすしテック',
+    nameJa:'玄米のおすしテック',
+    type:'全素+無麩質 Vegan & GF｜壽司・外帶・外送',
+    tags:['vegan','gf','top10','takeout'],
+    area:'新大阪（Shin-Osaka）・淀川區',
+    address:'大阪市淀川区西中島 6-8-23 B Plus Building 102',
+    lat:34.728088, lng:135.494912,
+    hours:'請查官網 genmaisushi.jp 或 Uber Eats 確認',
+    dishes:'純素壽司捲・便當盒・無麩質沙拉碗・味噌湯・果昔・純素甜點',
+    notes:'可 Uber Eats 外送！非常適合帶回飯店享用。',
+    flag:'🥡 可外帶外送',
+    hcStars:'5.0 ⭐ (38)', gStars:'4.8',
+    gmap:'https://www.google.com/maps/search/Brown+Rice+Sushi+TEC+Osaka+Shin-Osaka/@34.728088,135.494912,17z',
+    ghours:'https://www.google.com/maps/search/Brown+Rice+Sushi+TEC+Osaka/@34.728088,135.494912,17z',
+    hcUrl:'https://www.happycow.net/reviews/brown-rice-sushi-tec-osaka-343926',
+    phone:'+81-661057724'
+  },
+  {
+    id:8, rank:8, group:'top10',
+    name:'OKO Takoyaki',
+    nameJa:'OKO タコヤキ',
+    type:'全素+無麩質 Vegan & GF｜章魚燒・炸串',
+    tags:['vegan','gf','top10'],
+    area:'心齋橋（Shinsaibashi）・中央區',
+    address:'大阪市中央区東心斎橋 1-13-9 2F',
+    lat:34.672548, lng:135.503439,
+    hours:'每日 17:45-23:00',
+    dishes:'純素章魚燒（大豆粉，¥740套組）・炸串（串カツ）各式',
+    notes:'近道頓堀5分鐘步行。座位有限，建議提早到。',
+    flag:'',
+    hcStars:'4.5 ⭐ (281)', gStars:'4.6',
+    gmap:'https://www.google.com/maps/search/OKO+Takoyaki+vegan+Osaka+Shinsaibashi/@34.672548,135.503439,17z',
+    ghours:'https://www.google.com/maps/search/OKO+Takoyaki+Osaka/@34.672548,135.503439,17z',
+    hcUrl:'https://www.happycow.net/reviews/oko-takoyaki-osaka-363992',
+    phone:'+81-9075718939'
+  },
+  {
+    id:9, rank:9, group:'top10',
+    name:'Green Earth',
+    nameJa:'グリーンアース',
+    type:'全素 Vegan｜日本料理・義式・西洋料理',
+    tags:['vegan','top10'],
+    area:'本町（Honmachi）・中央區',
+    address:'大阪市中央区北久宝寺町 4-2-2 久宝ビル 1F',
+    lat:34.67979, lng:135.49928,
+    hours:'週一至六 11:30-17:00（LO16:30）　週日・假日公休',
+    dishes:'每日午餐套餐・大豆肉咖哩・素披薩・義大利麵・沙拉・素漢堡・自製餅乾',
+    notes:'大阪最老素食餐廳（1991年創立，2019年轉型全素）！',
+    flag:'🏛 歷史老店',
+    hcStars:'4.5 ⭐ (213)', gStars:'4.5',
+    gmap:'https://www.google.com/maps/search/Green+Earth+vegan+restaurant+Osaka+Honmachi/@34.67979,135.49928,17z',
+    ghours:'https://www.google.com/maps/search/Green+Earth+vegetarian+Osaka/@34.67979,135.49928,17z',
+    hcUrl:'https://www.happycow.net/reviews/green-earth-osaka-85',
+    phone:'+81-662511245'
+  },
+  {
+    id:10, rank:10, group:'top10',
+    name:'Neu Cat Cafe（shelter cat & VEGAN café neu）',
+    nameJa:'ねうヴィーガンカフェ',
+    type:'全素 Vegan｜貓咖啡廳・日式家常菜',
+    tags:['vegan','top10'],
+    area:'谷町（Tanimachi）・中央區',
+    address:'大阪市中央区谷町 6-17-5',
+    lat:34.674764, lng:135.513591,
+    hours:'平日 13:00-21:00　週末 12:00-20:00　週三公休\n（週末供應餐點，平日僅供應飲品）',
+    dishes:'日式素食家常菜（¥600-1,200）・善哉紅豆湯・咖啡・茶',
+    notes:'純素認領貓咪咖啡廳，可與流浪貓互動。貓迷必訪！',
+    flag:'🐱 貓咪咖啡廳',
+    hcStars:'4.5 ⭐ (97)', gStars:'4.6',
+    gmap:'https://www.google.com/maps/search/Neu+Cat+Cafe+vegan+Osaka+Tanimachi/@34.674764,135.513591,17z',
+    ghours:'https://www.google.com/maps/search/Neu+Cat+Cafe+Osaka/@34.674764,135.513591,17z',
+    hcUrl:'https://www.happycow.net/reviews/neu-cat-cafe-osaka-162789',
+    phone:'+81-643053584'
+  },
+  // ── 使用者清單 ────────────────────────────────────────────────
+  {
+    id:11, rank:11, group:'user',
+    name:'Shinsekai Paprika Shokudo Vegan 新世界パプリカ食堂',
+    nameJa:'新世界パプリカ食堂 vegan&glutenfree',
+    type:'全素+無麩質 Vegan & GF｜大阪B級美食',
+    tags:['vegan','gf','user'],
+    area:'新世界（Shinsekai）・浪速區・通天閣旁',
+    address:'大阪市浪速区恵比寿東 3-4-5（じゃんじゃん横丁の奥）',
+    lat:34.6515, lng:135.5065,
+    hours:'12:00-14:30　17:30-21:00　週三公休（另有不定期休）',
+    dishes:'純素章魚燒（¥740）・純素炸串（¥140-370/串）・純素拉麵・飯食',
+    notes:'⚠️ 截至2025年4月疑似臨時休業，請先查 Instagram @shinsekai.paprika_vegan。',
+    flag:'⚠️ 請先確認營業',
+    hcStars:'4.5 ⭐ (90)', gStars:'4.5',
+    gmap:'https://www.google.com/maps/search/Paprika+Shokudo+Vegan+Osaka+Shinsekai+Tsutenkaku/@34.6515,135.5065,17z',
+    ghours:'https://www.google.com/maps/search/Shinsekai+Paprika+Shokudo+Osaka/@34.6515,135.5065,17z',
+    hcUrl:'https://www.happycow.net/reviews/shinsekai-paprika-shokudo-vegan-osaka-374914',
+    phone:''
+  },
+  {
+    id:12, rank:12, group:'user',
+    name:'The Fire Bar（The Fire Vegan Ramen Bar）',
+    nameJa:'ザ・ファイア',
+    type:'全素 Vegan｜拉麵吧・調酒',
+    tags:['vegan','user','latenite'],
+    area:'心齋橋（Shinsaibashi）・中央區',
+    address:'大阪市中央区西心斎橋 2-9-36 Casadomart Building 2F',
+    lat:34.6698, lng:135.4985,
+    hours:'11:30-15:00　20:00-02:00（翌日）　週一公休',
+    dishes:'純素豚骨拉麵・純素番茄拉麵・純素煎餃（¥600）・純素炒飯・調酒・威士忌',
+    notes:'深夜至凌晨2點！英文菜單，接受信用卡。',
+    flag:'🍺 深夜至 02:00',
+    hcStars:'4.5 ⭐ (83)', gStars:'4.6',
+    gmap:'https://www.google.com/maps/search/The+Fire+vegan+ramen+bar+Osaka+Shinsaibashi/@34.6698,135.4985,17z',
+    ghours:'https://www.google.com/maps/search/The+Fire+Osaka+vegan/@34.6698,135.4985,17z',
+    hcUrl:'https://www.happycow.net/reviews/the-fire-osaka-409592',
+    phone:''
+  },
+  {
+    id:13, rank:13, group:'user',
+    name:'Pivot BASE Cafe & Bar @Dotonbori',
+    nameJa:'ピボットベース道頓堀',
+    type:'全素 Vegan｜大阪B級美食・咖啡・酒吧',
+    tags:['vegan','user'],
+    area:'道頓堀（Dotonbori）・中央區',
+    address:'大阪市中央区道頓堀 1-7-21（喰い倒れビル 1F）',
+    lat:34.6692, lng:135.5024,
+    hours:'每日 11:30-22:30',
+    dishes:'純素章魚燒・純素御好燒・純素炸串・純素焼きそば・純素拉麵・純素炸豆腐蓋飯',
+    notes:'道頓堀核心！英文菜單完整。⚠️ 僅接受無現金付款（刷卡/PayPay）。',
+    flag:'📍 觀光必訪',
+    hcStars:'推薦', gStars:'4.4',
+    gmap:'https://www.google.com/maps/search/Pivot+BASE+Cafe+Bar+Dotonbori+Osaka/@34.6692,135.5024,17z',
+    ghours:'https://www.google.com/maps/search/Pivot+BASE+Cafe+Dotonbori+Osaka/@34.6692,135.5024,17z',
+    hcUrl:'https://www.happycow.net/reviews/pivot-base-cafe-and-bar-at-dotonbori-osaka-409245',
+    phone:''
+  },
+  {
+    id:14, rank:14, group:'user',
+    name:'Koisus Vegan Curry & Tempura（梅田店）',
+    nameJa:'コイスズ ヴィーガンカレー＆天ぷら',
+    type:'全素 Vegan｜咖哩・天婦羅',
+    tags:['vegan','user'],
+    area:'中崎町（Nakazakicho）・北區',
+    address:'大阪市北区中崎西（近中崎町站，詳見 Tabelog）',
+    lat:34.7040, lng:135.5080,
+    hours:'請查 Tabelog 或 Google Maps 確認（週三公休）',
+    dishes:'香料咖哩（¥1,980）・香料咖哩+現炸天婦羅（¥2,585）・附京都醃菜・高湯',
+    notes:'原京都 Gion 名店的梅田分店。咖哩盛於木桶，視覺獨特。',
+    flag:'',
+    hcStars:'推薦', gStars:'4.5',
+    gmap:'https://www.google.com/maps/search/Koisus+vegan+curry+tempura+Umeda+Nakazakicho+Osaka/@34.7040,135.5080,17z',
+    ghours:'https://www.google.com/maps/search/Koisus+curry+tempura+Osaka+Umeda/@34.7040,135.5080,17z',
+    hcUrl:'https://www.happycow.net/reviews/koisus-vegan-curry-tempura-osaka-503124',
+    phone:''
+  },
+  {
+    id:15, rank:15, group:'user',
+    name:'Vegan & GF Osaka — The Second Room Cafe',
+    nameJa:'ヴィーガン＆グルテンフリー大阪',
+    type:'全素+無麩質 Vegan & GF｜咖啡廳',
+    tags:['vegan','gf','user','takeout'],
+    area:'梅田（Umeda）・北區（大阪駅前第4ビル地下）',
+    address:'大阪市北区梅田 1-11-4 大阪駅前第4ビル B1F-14号',
+    lat:34.6996, lng:135.4963,
+    hours:'11:00-22:00（LO21:30）　週三公休　1/1-1/3 公休',
+    dishes:'全素無麩質餐點（詳見官網 veganandglutenfree-osaka.com）',
+    notes:'梅田地下街，不接受預約。★可外帶冷凍食品回飯店微波★',
+    flag:'🧊 可外帶冷凍食品',
+    hcStars:'推薦', gStars:'4.7',
+    gmap:'https://www.google.com/maps/search/Vegan+Gluten+Free+Osaka+Second+Room+Cafe+Umeda/@34.6996,135.4963,17z',
+    ghours:'https://www.google.com/maps/search/Vegan+Gluten+Free+Osaka+Umeda+Station/@34.6996,135.4963,17z',
+    hcUrl:'https://www.happycow.net/reviews/vegan-and-glutenfree-osaka-384115',
+    phone:''
+  },
+  // ── 大使推薦 ────────────────────────────────────────────────
+  {
+    id:16, rank:16, group:'other',
+    name:'Taiwan Rakuzen 台湾ベジキッチン楽膳',
+    nameJa:'台湾蔬食 楽膳',
+    type:'全素 Vegan｜台灣料理・便當・外送',
+    tags:['vegan','takeout'],
+    area:'東三国（Higashimikuni）・淀川區',
+    address:'近 Higashimikuni Station（步行1分鐘）',
+    lat:34.7400, lng:135.4980,
+    hours:'週三至日 11:30-15:00　17:00-21:00（晚餐需預約）　週一・二公休',
+    dishes:'素豬排便當（¥2,160）・素糖醋丸子・台灣藥膳・二段式便當',
+    notes:'不使用五辛。LINE/Instagram 可預約便當外帶。',
+    flag:'🥡 可外帶便當',
+    hcStars:'5.0 ⭐ (12)', gStars:'4.8',
+    gmap:'https://www.google.com/maps/search/Taiwan+Rakuzen+vegan+Osaka+Higashimikuni/@34.7400,135.4980,17z',
+    ghours:'https://www.google.com/maps/search/台湾蔬食楽膳+Osaka/@34.7400,135.4980,17z',
+    hcUrl:'https://www.happycow.net/reviews/taiwan-rakuzen-osaka-367199',
+    phone:''
+  },
+  {
+    id:17, rank:17, group:'other',
+    name:'HI-RI-N 飛輪',
+    nameJa:'飛輪',
+    type:'素食 Vegetarian（含蛋奶）',
+    tags:[],
+    area:'大阪市',
+    address:'請查 HappyCow / Google Maps 確認',
+    lat:34.6750, lng:135.5050,
+    hours:'請查 Google Maps 確認',
+    dishes:'素食料理（含蛋奶製品）',
+    notes:'大使 AnitaDollar 推薦，高評分。適合蛋奶素食者。',
+    flag:'',
+    hcStars:'4.5 ⭐ (21)', gStars:'4.7',
+    gmap:'https://www.google.com/maps/search/HI-RI-N+飛輪+vegan+Osaka',
+    ghours:'https://www.google.com/maps/search/HI-RI-N+飛輪+Osaka',
+    hcUrl:'https://www.happycow.net/reviews/hi-ri-n-osaka-362747',
+    phone:''
+  },
+  {
+    id:18, rank:18, group:'other',
+    name:'Ramen Kiou ラーメン貴王（JR 新大阪站）',
+    nameJa:'ラーメン貴王 新大阪駅',
+    type:'部分素食 Veg-options｜拉麵',
+    tags:['takeout'],
+    area:'新大阪站（Shin-Osaka）・淀川區',
+    address:'JR 新大阪站內（月台附近）',
+    lat:34.7332, lng:135.5000,
+    hours:'依車站營業時間',
+    dishes:'純素拉麵（⚠️ 點餐時請確認指明純素）',
+    notes:'搭新幹線前後的好選擇！大使 Vegeiko 推薦。',
+    flag:'🚄 車站內',
+    hcStars:'4.0 ⭐ (48)', gStars:'4.2',
+    gmap:'https://www.google.com/maps/search/Ramen+Kiou+JR+Shin+Osaka+Station/@34.7332,135.5000,17z',
+    ghours:'https://www.google.com/maps/search/Ramen+Kiou+Shin-Osaka/@34.7332,135.5000,17z',
+    hcUrl:'https://www.happycow.net/reviews/ramen-kiou-osaka-393305',
+    phone:''
+  },
+  {
+    id:19, rank:19, group:'other',
+    name:'Sawa',
+    nameJa:'サワ',
+    type:'部分素食 Veg-options',
+    tags:[],
+    area:'大阪市',
+    address:'請查 HappyCow / Google Maps 確認',
+    lat:34.6730, lng:135.5100,
+    hours:'請查 Google Maps 確認',
+    dishes:'（含素食選項，點餐時請確認）',
+    notes:'大使 VictoriaGarafola 推薦，評論數多（44則）。',
+    flag:'',
+    hcStars:'4.0 ⭐ (44)', gStars:'4.3',
+    gmap:'https://www.google.com/maps/search/Sawa+restaurant+vegan+Osaka',
+    ghours:'https://www.google.com/maps/search/Sawa+veg+Osaka',
+    hcUrl:'https://www.happycow.net/reviews/sawa-osaka-14727',
+    phone:''
+  },
+  {
+    id:20, rank:20, group:'other',
+    name:'Asakara Good Store',
+    nameJa:'アサカラグッドストア',
+    type:'部分素食 Veg-options',
+    tags:[],
+    area:'大阪市',
+    address:'請查 HappyCow / Google Maps 確認',
+    lat:34.6760, lng:135.5080,
+    hours:'請查 Google Maps 確認',
+    dishes:'（含素食選項）',
+    notes:'大使 VictoriaGarafola 推薦。',
+    flag:'',
+    hcStars:'4.0 ⭐ (25)', gStars:'4.3',
+    gmap:'https://www.google.com/maps/search/Asakara+Good+Store+Osaka',
+    ghours:'https://www.google.com/maps/search/Asakara+Good+Store+Osaka',
+    hcUrl:'https://www.happycow.net/reviews/asakara-good-store-osaka-334922',
+    phone:''
+  },
+  {
+    id:21, rank:21, group:'other',
+    name:'W Holistic Cafe',
+    nameJa:'Wホリスティックカフェ',
+    type:'部分素食 Veg-options｜健康餐廳',
+    tags:[],
+    area:'大阪市',
+    address:'請查 HappyCow / Google Maps 確認',
+    lat:34.6770, lng:135.5030,
+    hours:'請查 Google Maps 確認',
+    dishes:'健康全食料理，含多種素食選項',
+    notes:'大使 AnitaDollar 推薦，健康飲食概念。',
+    flag:'',
+    hcStars:'4.0 ⭐ (17)', gStars:'4.4',
+    gmap:'https://www.google.com/maps/search/W+Holistic+Cafe+Osaka',
+    ghours:'https://www.google.com/maps/search/W+Holistic+Cafe+Osaka',
+    hcUrl:'https://www.happycow.net/reviews/w-holistic-cafe-osaka-346158',
+    phone:''
+  },
+  {
+    id:22, rank:22, group:'other',
+    name:'Sasanohapan',
+    nameJa:'ササノハパン',
+    type:'素食烘焙坊 Vegetarian Bakery',
+    tags:[],
+    area:'大阪市',
+    address:'請查 HappyCow / Google Maps 確認',
+    lat:34.6780, lng:135.5140,
+    hours:'請查 Google Maps 確認',
+    dishes:'素食麵包・烘焙品',
+    notes:'大使 VictoriaGarafola 推薦，素食麵包坊。',
+    flag:'',
+    hcStars:'4.0 ⭐ (7)', gStars:'4.3',
+    gmap:'https://www.google.com/maps/search/Sasanohapan+bakery+Osaka',
+    ghours:'https://www.google.com/maps/search/Sasanohapan+Osaka',
+    hcUrl:'https://www.happycow.net/reviews/sasanohapan-osaka-232243',
+    phone:''
+  },
+  {
+    id:23, rank:23, group:'other',
+    name:'Kirschblute キルシュブルーテ',
+    nameJa:'キルシュブルーテ',
+    type:'素食烘焙坊 Vegetarian Bakery',
+    tags:[],
+    area:'大阪市',
+    address:'請查 HappyCow / Google Maps 確認',
+    lat:34.6800, lng:135.5060,
+    hours:'請查 Google Maps 確認',
+    dishes:'素食麵包・德式烘焙品',
+    notes:'大使 VictoriaGarafola 推薦，德式風格素食烘焙坊。',
+    flag:'',
+    hcStars:'4.0 ⭐ (5)', gStars:'4.2',
+    gmap:'https://www.google.com/maps/search/Kirschblute+bakery+Osaka',
+    ghours:'https://www.google.com/maps/search/Kirschblute+Osaka',
+    hcUrl:'https://www.happycow.net/reviews/kirschblute-osaka-83128',
+    phone:''
+  },
+  {
+    id:24, rank:24, group:'other',
+    name:'Ododo Falafel Sandwich おどどファラフェル',
+    nameJa:'おどどファラフェルサンドイッチ',
+    type:'部分素食 Veg-options｜中東料理',
+    tags:[],
+    area:'大阪市',
+    address:'請查 HappyCow / Google Maps 確認',
+    lat:34.6790, lng:135.5020,
+    hours:'請查 Google Maps 確認',
+    dishes:'法拉費爾三明治（Falafel）・中東素食料理',
+    notes:'大使 VictoriaGarafola 推薦，少見中東素食。',
+    flag:'',
+    hcStars:'4.0 ⭐ (6)', gStars:'4.3',
+    gmap:'https://www.google.com/maps/search/Ododo+Falafel+Sandwich+Osaka',
+    ghours:'https://www.google.com/maps/search/Ododo+Falafel+Osaka',
+    hcUrl:'https://www.happycow.net/reviews/ododo-falafel-sandwich-osaka-226558',
+    phone:''
+  },
+  {
+    id:25, rank:25, group:'other',
+    name:'Life Shimodera ライフ下寺店',
+    nameJa:'ライフ下寺',
+    type:'健康食品店 Health Store',
+    tags:['takeout'],
+    area:'難波（Namba）附近・浪速區',
+    address:'請查 HappyCow / Google Maps 確認',
+    lat:34.6560, lng:135.5100,
+    hours:'請查 Google Maps 確認',
+    dishes:'天然食品・有機蔬果・維他命・素食便當',
+    notes:'大使 VictoriaGarafola 推薦。採購旅行零食的好地方。',
+    flag:'🛒 購物',
+    hcStars:'3.5 ⭐ (12)', gStars:'4.0',
+    gmap:'https://www.google.com/maps/search/Life+Shimodera+Osaka+health+store',
+    ghours:'https://www.google.com/maps/search/Life+Shimodera+Osaka',
+    hcUrl:'https://www.happycow.net/reviews/life-shimodera-osaka-119162',
+    phone:''
+  },
+];
+
+// ── Map init ───────────────────────────────────────────────────────────────
+const map = L.map('map', { center: [34.680, 135.502], zoom: 13 });
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+// Custom marker icons
+function makeIcon(color) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="38" viewBox="0 0 28 38">
+    <path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 24 14 24S28 24.5 28 14C28 6.27 21.73 0 14 0z" fill="${color}" stroke="white" stroke-width="2"/>
+    <circle cx="14" cy="14" r="6" fill="white"/>
+  </svg>`;
+  return L.divIcon({ html: svg, iconSize:[28,38], iconAnchor:[14,38], popupAnchor:[0,-38], className:'' });
+}
+const iconTop  = makeIcon('#2E7D32');
+const iconUser = makeIcon('#1565C0');
+const iconOther= makeIcon('#78909C');
+
+let markers = {};
+let selectedId = null;
+
+restaurants.forEach(r => {
+  const icon = r.group==='top10' ? iconTop : r.group==='user' ? iconUser : iconOther;
+  const m = L.marker([r.lat, r.lng], { icon, title: r.name }).addTo(map);
+  const popup = L.popup({ maxWidth: 260 }).setContent(`
+    <div class="popup-inner">
+      <div class="popup-title">#${r.rank} ${r.name}</div>
+      <div class="popup-type">${r.type}</div>
+      <div class="popup-hours" style="color:#333;"><b>📍</b> ${r.area}</div>
+      <div class="popup-hours"><b>🕐</b> ${r.hours.split('\n')[0]}</div>
+      <div style="margin-top:6px; display:flex; gap:4px;">
+        <span style="background:#FFF3E0;color:#E65100;border-radius:10px;padding:2px 7px;font-size:0.72rem;font-weight:700;">HC: ${r.hcStars}</span>
+        <span style="background:#E8F5E9;color:#2E7D32;border-radius:10px;padding:2px 7px;font-size:0.72rem;font-weight:700;">G: ${r.gStars}★</span>
+      </div>
+      <div class="popup-btns" style="margin-top:8px;">
+        <a class="popup-btn g" href="${r.gmap}" target="_blank">🗺 Google Maps</a>
+        <a class="popup-btn t" href="${r.ghours}" target="_blank">🕐 營業時間</a>
+        <a class="popup-btn h" href="${r.hcUrl}" target="_blank">🌱 HappyCow</a>
+      </div>
+    </div>
+  `);
+  m.bindPopup(popup);
+  m.on('click', () => selectCard(r.id, false));
+  markers[r.id] = m;
+});
+
+// ── Cards ──────────────────────────────────────────────────────────────────
+const sidebar = document.getElementById('sidebar');
+const countLabel = document.getElementById('count-label');
+
+function buildCards(list) {
+  // Remove old cards
+  sidebar.querySelectorAll('.card').forEach(el => el.remove());
+  countLabel.textContent = `顯示 ${list.length} / ${restaurants.length} 家`;
+  list.forEach(r => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = `card-${r.id}`;
+    const rankClass = r.group==='top10' ? 'rank-top' : r.group==='user' ? 'rank-user' : 'rank-other';
+    const photoUrl = photos[r.id];
+    card.innerHTML = `
+      <div class="card-content">
+        ${photoUrl ? `<img class="card-photo" src="${photoUrl}" alt="${r.name}" loading="lazy" onerror="this.style.display='none'">` : ''}
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-name">${r.name}</div>
+            <div class="rank-badge ${rankClass}">${r.rank}</div>
+          </div>
+          <div class="card-type">${r.type}</div>
+          <div class="card-area">📍 ${r.area}</div>
+          <div class="ratings">
+            <span class="rating-pill hc-pill">🌱 HC ${r.hcStars}</span>
+            <span class="rating-pill g-pill">⭐ Google ${r.gStars}★</span>
+          </div>
+          <div class="card-hours">🕐 ${r.hours.replace(/\n/g,'　')}</div>
+          <div class="card-dishes">🍽 ${r.dishes}</div>
+          ${r.flag ? `<div class="flag-tag">${r.flag}</div>` : ''}
+          <div class="card-links">
+            <a class="link-btn btn-gmap" href="${r.gmap}" target="_blank">🗺 Google Maps</a>
+            <a class="link-btn btn-hours" href="${r.ghours}" target="_blank">🕐 查看營業時間</a>
+            <a class="link-btn btn-hc"   href="${r.hcUrl}" target="_blank">🌱 HappyCow</a>
+            ${r.phone ? `<a class="link-btn" style="background:#555;color:#fff;" href="tel:${r.phone}">📞 電話</a>` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+    card.addEventListener('click', e => {
+      if (e.target.tagName === 'A') return;
+      selectCard(r.id, true);
+    });
+    sidebar.appendChild(card);
+  });
+}
+
+function selectCard(id, panMap) {
+  // Deselect previous
+  if (selectedId) {
+    const prev = document.getElementById(`card-${selectedId}`);
+    if (prev) prev.classList.remove('selected');
+  }
+  selectedId = id;
+  const card = document.getElementById(`card-${id}`);
+  if (card) { card.classList.add('selected'); card.scrollIntoView({ behavior:'smooth', block:'nearest' }); }
+
+  const r = restaurants.find(x => x.id === id);
+  if (!r) return;
+
+  if (panMap) { map.setView([r.lat, r.lng], 16); markers[id].openPopup(); }
+
+  // Detail panel
+  const embed = `https://maps.google.com/maps?q=${encodeURIComponent(r.name+' Osaka')}&t=m&z=16&output=embed&iwloc=near`;
+  document.getElementById('dp-iframe').src = embed;
+  document.getElementById('dp-info').innerHTML = `
+    <div class="dp-title">#${r.rank} ${r.name}</div>
+    <div class="dp-row"><strong>地址：</strong>${r.address}</div>
+    <div class="dp-row"><strong>地區：</strong>${r.area}</div>
+    <div class="dp-row"><strong>類型：</strong>${r.type}</div>
+    <div class="dp-row"><strong>🕐 時間：</strong>${r.hours.replace(/\n/g,' | ')}</div>
+    <div class="dp-row"><strong>🍽 菜色：</strong>${r.dishes}</div>
+    <div class="dp-row"><strong>HappyCow：</strong>${r.hcStars} &nbsp; <strong>Google：</strong>${r.gStars}★</div>
+    ${r.notes ? `<div class="dp-note">💬 ${r.notes}</div>` : ''}
+    <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
+      <a class="link-btn btn-gmap" href="${r.gmap}" target="_blank">🗺 Google Maps</a>
+      <a class="link-btn btn-hours" href="${r.ghours}" target="_blank">🕐 查看即時營業時間</a>
+      <a class="link-btn btn-hc" href="${r.hcUrl}" target="_blank">🌱 HappyCow 頁面</a>
+    </div>
+  `;
+  const panel = document.getElementById('detail-panel');
+  panel.classList.add('show');
+  // Prevent map resize issues
+  setTimeout(() => map.invalidateSize(), 300);
+}
+
+function closeDetail() {
+  document.getElementById('detail-panel').classList.remove('show');
+  if (selectedId) {
+    const prev = document.getElementById(`card-${selectedId}`);
+    if (prev) prev.classList.remove('selected');
+    selectedId = null;
+  }
+  setTimeout(() => map.invalidateSize(), 300);
+}
+
+// ── Filter logic ───────────────────────────────────────────────────────────
+let activeFilter = 'all';
+let searchVal = '';
+
+function getFiltered() {
+  return restaurants.filter(r => {
+    const matchFilter =
+      activeFilter === 'all'     ? true :
+      activeFilter === 'top10'   ? r.group === 'top10' :
+      activeFilter === 'user'    ? r.group === 'user'  :
+      r.tags.includes(activeFilter);
+    const matchSearch = !searchVal || r.name.toLowerCase().includes(searchVal) ||
+      r.nameJa.includes(searchVal) || r.area.includes(searchVal) || r.dishes.includes(searchVal);
+    return matchFilter && matchSearch;
+  });
+}
+
+function updateView() {
+  const list = getFiltered();
+  buildCards(list);
+  // Show/hide markers
+  restaurants.forEach(r => {
+    const inList = list.some(x => x.id === r.id);
+    if (inList) markers[r.id].addTo(map);
+    else map.removeLayer(markers[r.id]);
+  });
+}
+
+function filterCards(type, btn) {
+  activeFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  updateView();
+}
+
+function searchCards(val) {
+  searchVal = val.toLowerCase().trim();
+  updateView();
+}
+
+// ── Tips toggle ───────────────────────────────────────────────────────────
+function toggleTips() {
+  const body = document.getElementById('tips-body');
+  const toggle = document.getElementById('tips-toggle');
+  body.classList.toggle('hidden');
+  toggle.textContent = body.classList.contains('hidden') ? '▶' : '▼';
+}
+
+// ── Init ───────────────────────────────────────────────────────────────────
+buildCards(restaurants);
+countLabel.textContent = `顯示 ${restaurants.length} / ${restaurants.length} 家`;
+
+// Add legend to map
+const legend = L.control({ position: 'bottomleft' });
+legend.onAdd = () => {
+  const d = L.DomUtil.create('div');
+  d.style.cssText = 'background:white;padding:10px 14px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.2);font-size:0.78rem;line-height:1.8;';
+  d.innerHTML = `
+    <b>圖例</b><br>
+    <span style="color:#2E7D32;">●</span> HappyCow Top 10<br>
+    <span style="color:#1565C0;">●</span> 旅遊推薦（使用者清單）<br>
+    <span style="color:#78909C;">●</span> 大使推薦備選
+  `;
+  return d;
+};
+legend.addTo(map);
+</script>
+</body>
+</html>
