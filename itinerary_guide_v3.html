@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🎙️ 導遊版行程手冊 v3 · Fox 家 2026 關西之旅</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   :root {
     --green: #2d7d46; --green-dark: #1a3a1a;
@@ -15,66 +17,50 @@
   html, body { width: 100%; overflow-x: hidden; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Noto Sans TC', 'PingFang TC', sans-serif;
-    background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.7;
+    background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.7;
     -webkit-text-size-adjust: 100%;
   }
-  /* 所有文字防溢出 */
   h1, p, div, span, td, th, li, a { overflow-wrap: break-word; word-break: break-word; }
 
   /* Header */
   header {
     background: linear-gradient(135deg, #1a3a1a 0%, #2d7d46 60%, #3a9960 100%);
-    color: #fff; padding: 16px 20px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    color: #fff; padding: 15px 20px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   }
-  header .logo { font-size: 2rem; flex-shrink: 0; }
+  header .logo { font-size: 1.9rem; flex-shrink: 0; }
   header .htitle { flex: 1; min-width: 200px; }
-  header h1 { font-size: 1.35rem; font-weight: 800; }
-  header p { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
+  header h1 { font-size: 1.3rem; font-weight: 800; }
+  header p { font-size: 0.82rem; opacity: 0.9; margin-top: 4px; }
   header .right { display: flex; gap: 8px; flex-wrap: wrap; }
   .hbadge { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4);
-    color: #fff; border-radius: 20px; padding: 6px 14px; font-size: 0.85rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+    color: #fff; border-radius: 20px; padding: 6px 13px; font-size: 0.82rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
   .hbadge:hover { background: rgba(255,255,255,0.34); }
 
   /* Filter bar */
   #filter-bar {
-    background: #fff; border-bottom: 1px solid #ddd; padding: 10px 16px;
+    background: #fff; border-bottom: 1px solid #ddd; padding: 9px 16px;
     display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    position: sticky; top: 0; z-index: 600;
   }
-  #filter-bar .lbl { font-size: 0.9rem; color: var(--sub); font-weight: 700; }
+  #filter-bar .lbl { font-size: 0.85rem; color: var(--sub); font-weight: 700; }
   .filter-btn {
     border: 1.5px solid #ccc; background: #fff; border-radius: 22px;
-    padding: 7px 15px; font-size: 0.9rem; cursor: pointer; transition: all 0.15s; color: #333; font-weight: 600;
+    padding: 6px 14px; font-size: 0.85rem; cursor: pointer; transition: all 0.15s; color: #333; font-weight: 600;
   }
   .filter-btn.active, .filter-btn:hover { color: #fff; }
 
-  /* Main two-pane */
-  #main { display: flex; height: calc(100vh - 130px); min-height: 460px; }
-  #map-pane { flex: 0 0 50%; position: relative; background: #e9eae6; }
-  #bigmap { width: 100%; height: 100%; border: 0; display: block; }
-  /* 左圖上方資訊條 */
-  #map-bar {
-    position: absolute; top: 12px; left: 12px; right: 12px; z-index: 5;
-    background: rgba(255,255,255,0.97); border-radius: 10px; box-shadow: var(--shadow);
-    padding: 10px 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-  }
-  #map-bar .mb-name { font-weight: 800; font-size: 0.95rem; color: var(--text); flex: 1; min-width: 120px; }
-  #map-bar .mb-open {
-    background: #4285F4; color: #fff; text-decoration: none; border-radius: 8px;
-    padding: 7px 13px; font-size: 0.85rem; font-weight: 700; white-space: nowrap;
-  }
-  #map-bar .mb-open:hover { opacity: 0.88; }
-
-  #sidebar {
-    flex: 1; overflow-y: auto; padding: 14px; background: var(--bg);
-    display: flex; flex-direction: column; gap: 14px;
-  }
-  #count-label { font-size: 0.88rem; color: var(--sub); padding: 0 2px; font-weight: 600; }
+  /* Two-pane：地圖 sticky 釘住，整頁自然捲動（避免內層捲動把內容藏住） */
+  #main { display: flex; align-items: flex-start; }
+  #map-pane { flex: 0 0 48%; position: sticky; top: 41px; height: calc(100vh - 41px); }
+  #map { width: 100%; height: 100%; }
+  #sidebar { flex: 1; padding: 14px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  #count-label { font-size: 0.85rem; color: var(--sub); padding: 0 2px; font-weight: 600; }
 
   /* Day section header */
   .day-head {
-    color: #fff; border-radius: 10px; padding: 11px 15px; font-weight: 800;
-    font-size: 1.02rem; box-shadow: var(--shadow);
+    color: #fff; border-radius: 10px; padding: 10px 15px; font-weight: 800;
+    font-size: 1rem; box-shadow: var(--shadow);
   }
 
   /* Spot card */
@@ -83,33 +69,32 @@
     overflow: hidden; border-left: 5px solid #ccc; transition: box-shadow 0.15s;
   }
   .card.selected { box-shadow: 0 6px 22px rgba(0,0,0,0.22); }
-  .card-head { display: flex; gap: 13px; padding: 13px; cursor: pointer; align-items: flex-start; }
+  .card-head { display: flex; gap: 12px; padding: 12px; cursor: pointer; align-items: flex-start; }
   .photo-wrap {
-    width: 116px; height: 96px; border-radius: 10px; flex-shrink: 0; overflow: hidden;
+    width: 108px; height: 90px; border-radius: 10px; flex-shrink: 0; overflow: hidden;
     position: relative; display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, #e8efe9, #d7e3da); color: #9aa; font-size: 2.1rem;
+    background: linear-gradient(135deg, #e8efe9, #d7e3da); color: #9aa; font-size: 2rem;
   }
-  .photo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .card-body { flex: 1; min-width: 0; }
-  .card-name { font-size: 1.08rem; font-weight: 800; color: var(--text); line-height: 1.35; }
-  .card-type { font-size: 0.85rem; color: var(--sub); margin-top: 3px; }
-  .card-meta { font-size: 0.88rem; color: #444; margin-top: 6px; line-height: 1.6; }
+  .card-name { font-size: 1.02rem; font-weight: 800; color: var(--text); line-height: 1.35; }
+  .card-type { font-size: 0.8rem; color: var(--sub); margin-top: 3px; }
+  .card-meta { font-size: 0.84rem; color: #444; margin-top: 5px; line-height: 1.6; }
   .card-meta a { color: var(--osaka); text-decoration: none; font-weight: 700; }
   .card-meta a:hover { text-decoration: underline; }
   .flag-tag {
     display: inline-block; background: #fff3e0; color: #e65100;
-    border-radius: 8px; padding: 2px 9px; font-size: 0.78rem; font-weight: 700; margin-top: 6px;
+    border-radius: 8px; padding: 2px 9px; font-size: 0.76rem; font-weight: 700; margin-top: 6px;
   }
-  .card-toggle { font-size: 0.82rem; color: #fff; background: var(--green); border-radius: 16px;
+  .card-toggle { font-size: 0.78rem; color: #fff; background: var(--green); border-radius: 16px;
     padding: 4px 10px; flex-shrink: 0; align-self: center; font-weight: 700; white-space: nowrap; }
 
-  /* Expandable body */
-  .card-detail { display: none; padding: 0 13px 14px; }
+  .card-detail { display: none; padding: 0 12px 13px; }
   .card.open .card-detail { display: block; }
   .guide {
     position: relative; background: var(--mic-bg); border-left: 4px solid var(--mic);
-    border-radius: 0 10px 10px 0; padding: 13px 15px 13px 16px; margin: 6px 0 12px;
-    font-size: 0.95rem; line-height: 1.78; color: #352c4d;
+    border-radius: 0 10px 10px 0; padding: 12px 14px 12px 16px; margin: 6px 0 12px;
+    font-size: 0.9rem; line-height: 1.78; color: #352c4d;
   }
   .guide::before {
     content: "🎙️"; position: absolute; top: -11px; left: -2px; font-size: 16px;
@@ -118,50 +103,42 @@
   .guide p { margin: 0 0 10px; }
   .guide p:last-child { margin-bottom: 0; }
   .guide strong { color: var(--mic); }
-  .embed-map { width: 100%; height: 220px; border: 0; border-radius: 10px; background: #eee; display: block; }
+  .embed-map { width: 100%; height: 210px; border: 0; border-radius: 10px; background: #eee; display: block; }
   .card-links { display: flex; gap: 8px; margin-top: 11px; flex-wrap: wrap; }
   .link-btn {
-    text-decoration: none; border-radius: 8px; padding: 8px 14px; font-size: 0.86rem;
+    text-decoration: none; border-radius: 8px; padding: 8px 13px; font-size: 0.83rem;
     font-weight: 700; color: #fff; display: inline-flex; align-items: center; gap: 5px;
   }
   .link-btn:hover { opacity: 0.86; }
   .btn-gmap { background: #4285F4; } .btn-dir { background: #34A853; }
   .btn-wiki { background: #777; }
 
-  /* Lower sections */
-  .lower { max-width: 880px; margin: 0 auto; padding: 26px 16px 50px; }
-  .panel { background: #fff; border-radius: 14px; box-shadow: var(--shadow); padding: 6px 18px 18px; margin-bottom: 22px; }
-  .sec-h { font-size: 1rem; font-weight: 800; letter-spacing: 0.3px; color: var(--green); padding-top: 15px; margin-bottom: 6px; }
-  table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 0.9rem; }
-  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  /* 資訊面板（放在 sidebar 末端） */
+  .panel { background: #fff; border-radius: 12px; box-shadow: var(--shadow); padding: 4px 16px 14px; }
+  .sec-h { font-size: 0.96rem; font-weight: 800; color: var(--green); padding-top: 13px; margin-bottom: 5px; }
+  table { width: 100%; border-collapse: collapse; margin: 7px 0; font-size: 0.85rem; }
+  th, td { border: 1px solid var(--border); padding: 7px 9px; text-align: left; vertical-align: top; }
   th { background: #f4f1ee; font-weight: 700; color: #444; }
   td a { color: var(--osaka); text-decoration: none; font-weight: 700; }
-  .meal-day { font-weight: 800; color: var(--osaka); margin-top: 12px; font-size: 0.92rem; }
-  .meal-row { font-size: 0.9rem; color: #444; margin: 3px 0 3px 4px; line-height: 1.6; }
+  .meal-day { font-weight: 800; color: var(--osaka); margin-top: 11px; font-size: 0.88rem; }
+  .meal-row { font-size: 0.85rem; color: #444; margin: 3px 0 3px 4px; line-height: 1.6; }
   .meal-row a { color: var(--osaka); text-decoration: none; font-weight: 700; }
   .checklist { list-style: none; padding: 0; }
-  .checklist li { padding: 8px 0 8px 30px; position: relative; font-size: 0.92rem; border-bottom: 1px solid #f0f0f0; line-height: 1.6; }
-  .checklist li::before { content: "☐"; position: absolute; left: 4px; top: 6px; color: var(--green); font-size: 1.1rem; }
-  .note { font-size: 0.8rem; color: #999; text-align: center; line-height: 1.9; padding: 8px 0 0; }
-  .footer { text-align: center; color: #aaa; font-size: 0.8rem; padding: 8px 0 40px; }
+  .checklist li { padding: 7px 0 7px 28px; position: relative; font-size: 0.86rem; border-bottom: 1px solid #f0f0f0; line-height: 1.6; }
+  .checklist li::before { content: "☐"; position: absolute; left: 4px; top: 6px; color: var(--green); font-size: 1.05rem; }
+  .note { font-size: 0.78rem; color: #999; text-align: center; line-height: 1.9; padding: 6px 4px 0; }
+  .footer { text-align: center; color: #aaa; font-size: 0.8rem; padding: 14px 0 40px; }
 
-  #sidebar::-webkit-scrollbar { width: 7px; }
-  #sidebar::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
-
-  /* ── 手機版：上下排列，不變形 ── */
+  /* ── 手機版：上下排列，地圖在上方 sticky，整頁捲動 ── */
   @media (max-width: 820px) {
-    body { font-size: 16px; }
-    #main { flex-direction: column; height: auto; min-height: 0; }
-    #map-pane { flex: none; width: 100%; height: 52vh; min-height: 320px; position: sticky; top: 0; z-index: 10; }
-    #sidebar { flex: none; width: 100%; overflow-y: visible; }
-    .photo-wrap { width: 100px; height: 88px; font-size: 1.9rem; }
-    .card-name { font-size: 1.05rem; }
+    #main { flex-direction: column; }
+    #map-pane { flex: none; width: 100%; position: sticky; top: 41px; height: 44vh; min-height: 280px; z-index: 500; box-shadow: 0 3px 10px rgba(0,0,0,0.18); }
+    #sidebar { width: 100%; }
   }
-  @media (max-width: 420px) {
-    header h1 { font-size: 1.2rem; }
-    .card-head { gap: 10px; padding: 11px; }
-    .photo-wrap { width: 84px; height: 78px; }
-    .embed-map { height: 200px; }
+  @media (max-width: 430px) {
+    header h1 { font-size: 1.18rem; }
+    .photo-wrap { width: 92px; height: 82px; }
+    .embed-map { height: 190px; }
   }
 </style>
 </head>
@@ -171,7 +148,7 @@
   <div class="logo">🎙️</div>
   <div class="htitle">
     <h1>導遊版行程手冊 v3</h1>
-    <p>Fox 家 2026 關西之旅 ｜ 7/13–7/18 · 6天5夜 ｜ 點卡片看照片・導遊解說，左側地圖同步顯示位置</p>
+    <p>Fox 家 2026 關西之旅 ｜ 7/13–7/18 · 6天5夜 ｜ 點地圖標記或卡片，看照片・導遊解說・嵌入地圖</p>
   </div>
   <div class="right">
     <a class="hbadge" href="index.html">← 回首頁</a>
@@ -190,88 +167,11 @@
 </div>
 
 <div id="main">
-  <div id="map-pane">
-    <div id="map-bar">
-      <span class="mb-name" id="mb-name">📍 關西全區地圖</span>
-      <a class="mb-open" id="mb-open" href="https://www.google.com/maps/search/?api=1&query=34.686,135.520" target="_blank">在 Google Maps 開啟</a>
-    </div>
-    <iframe id="bigmap" loading="lazy" allowfullscreen
-      src="https://www.google.com/maps?q=34.686,135.520&z=9&output=embed"></iframe>
-  </div>
+  <div id="map-pane"><div id="map"></div></div>
   <div id="sidebar">
     <div id="count-label"></div>
-  </div>
-</div>
-
-<div class="lower">
-  <!-- 訂單資訊 -->
-  <div class="panel">
-    <div class="sec-h">📋 訂單資訊</div>
-    <table>
-      <tr><th>項目</th><th>詳細</th></tr>
-      <tr><td>✈️ 去程</td><td><b>中華航空 CI 172</b>｜TPE 14:20 → KIX 18:05（7/13 Mon）</td></tr>
-      <tr><td>✈️ 回程</td><td><b>中華航空 CI 153</b>｜KIX 14:00 → TPE（7/18 Sat）</td></tr>
-      <tr><td>🎫 訂位代碼</td><td><b>DVZMGY</b></td></tr>
-      <tr><td>🏨 飯店</td><td><b>Swissôtel Nankai Osaka</b>｜📞 <a href="tel:0666461111">06-6646-1111</a>（訂位 QLRSGZRT）</td></tr>
-      <tr><td>🛏️ 房型</td><td>Swiss Select Twin × 2（連通房）</td></tr>
-    </table>
-  </div>
-
-  <!-- 每日素食餐廳速查 -->
-  <div class="panel">
-    <div class="sec-h">🍽️ 每日素食餐廳速查（蛋奶素・無五辛友善）</div>
-    <div class="meal-day">Day 1 · 京都</div>
-    <div class="meal-row">🍱 午餐：嵐山 Shigetsu 精進料理（天龍寺）📞 <a href="tel:0758829725">075-882-9725</a>（需預約）</div>
-    <div class="meal-row">🌙 晚餐：Vegetarian Indian Shama（心齋橋）📞 <a href="tel:0662125688">06-6212-5688</a>｜備：PRANA Macrobiotic 📞 <a href="tel:0662417776">06-6241-7776</a></div>
-    <div class="meal-day">Day 2 · 奈良</div>
-    <div class="meal-row">🍱 午餐：Kinatei 喜菜亭 📞 <a href="tel:0742206188">0742-20-6188</a>（週二-六 11:30-14:30）｜備：Ramuna 📞 <a href="tel:0742249192">0742-24-9192</a></div>
-    <div class="meal-row">🌙 晚餐：susuru_susuran（難波，乾式麻婆豆腐拉麵）｜備：The Fire Vegan Ramen Bar（深夜至 02:00）</div>
-    <div class="meal-day">Day 3 · 大阪南</div>
-    <div class="meal-row">🍱 午餐：Pivot BASE Cafe @Dotonbori（純素）｜備：Falafel Sababa</div>
-    <div class="meal-row">🌙 晚餐：CHIBO Diversity 道頓堀（素食大阪燒）📞 <a href="tel:05018090649">050-18090649</a>｜備：Shama 📞 <a href="tel:0662125688">06-6212-5688</a></div>
-    <div class="meal-day">Day 4 · 大阪北 / USJ</div>
-    <div class="meal-row">🌙 方案A：CHIBO Diversity 📞 <a href="tel:05018090649">050-18090649</a>｜方案B（USJ）：園區內 Three Broomsticks（哈利波特，素食選項）</div>
-  </div>
-
-  <!-- 電話總表 -->
-  <div class="panel">
-    <div class="sec-h">📞 重要電話號碼總表</div>
-    <table>
-      <tr><th>場所</th><th>電話</th><th>類別</th></tr>
-      <tr><td>Swissôtel Nankai Osaka</td><td><a href="tel:0666461111">06-6646-1111</a></td><td>飯店</td></tr>
-      <tr><td>伏見稻荷大社</td><td><a href="tel:0756417331">075-641-7331</a></td><td>景點</td></tr>
-      <tr><td>清水寺</td><td><a href="tel:0755511234">075-551-1234</a></td><td>景點</td></tr>
-      <tr><td>天龍寺（精進料理 Shigetsu）</td><td><a href="tel:0758829725">075-882-9725</a></td><td>景點/餐廳</td></tr>
-      <tr><td>東大寺</td><td><a href="tel:0742225511">0742-22-5511</a></td><td>景點</td></tr>
-      <tr><td>春日大社</td><td><a href="tel:0742227788">0742-22-7788</a></td><td>景點</td></tr>
-      <tr><td>奈良公園事務所</td><td><a href="tel:0742220375">0742-22-0375</a></td><td>景點</td></tr>
-      <tr><td>Kinatei 喜菜亭（奈良）</td><td><a href="tel:0742206188">0742-20-6188</a></td><td>餐廳</td></tr>
-      <tr><td>大阪城天守閣</td><td><a href="tel:0669413044">06-6941-3044</a></td><td>景點</td></tr>
-      <tr><td>通天閣</td><td><a href="tel:0666419555">06-6641-9555</a></td><td>景點</td></tr>
-      <tr><td>梅田空中庭園</td><td><a href="tel:0664403899">06-6440-3899</a></td><td>景點</td></tr>
-      <tr><td>USJ 環球影城</td><td><a href="tel:0570200606">0570-20-0606</a></td><td>景點</td></tr>
-      <tr><td>OCAT 利木津巴士（KATE）</td><td><a href="tel:0120670110">0120-670-110</a></td><td>交通</td></tr>
-    </table>
-  </div>
-
-  <!-- Checklist -->
-  <div class="panel">
-    <div class="sec-h">📝 行前 Checklist</div>
-    <ul class="checklist">
-      <li>Visit Japan Web 填完（快速入境通道）</li>
-      <li>每人 ICOCA（¥2,000，機場購買）</li>
-      <li><b>周遊卡 2 日券</b>購買決定（選 USJ → 只買 1 日；選梅田 → 買 2 日）</li>
-      <li><b>7/17 方案確認</b>：USJ 🎡 或 梅田大阪城 🏯？</li>
-      <li>USJ Express Pass 提前購買（若選方案 B）</li>
-      <li>Shigetsu 精進料理預約：📞 075-882-9725</li>
-      <li>Kinatei 確認週四開業：📞 0742-20-6188</li>
-      <li>Swissôtel 連通房再確認：📞 06-6646-1111（訂位 QLRSGZRT）</li>
-    </ul>
-  </div>
-
-  <div class="note">
-    資料來源：NotebookLM 50 篇旅遊筆記 + 官方網站 + 歷史資料整合｜照片來源：Wikipedia / Wikimedia Commons（動態載入）｜地圖：Google Maps<br>
-    景點歷史：伏見稻荷（711 年）、清水寺（778 年）、春日大社（768 年）、東大寺（743-752 年）、大阪城（1583 年）、通天閣（1912/1956 年）、道頓堀（1615 年）
+    <!-- 卡片由 JS 產生，資訊面板插在最後 -->
+    <div id="info-panels"></div>
   </div>
 </div>
 
@@ -286,6 +186,29 @@ const DAYS = {
   3: { label: 'Day 3 · 7/16（四）大阪南部', color: '#d04040' },
   4: { label: 'Day 4 · 7/17（五）大阪北部 / USJ', color: '#e07b39' },
   5: { label: 'Day 5 · 7/18（六）出發日', color: '#a05a18' },
+};
+
+// ── 真實照片（Wikimedia Commons，已驗證可用） ────────────────
+const PHOTOS = {
+  hotel:    'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Namba_20150531.JPG/500px-Namba_20150531.JPG',
+  fushimi:  'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Fushimiinari-taisha%2C_gehaiden-1.jpg/500px-Fushimiinari-taisha%2C_gehaiden-1.jpg',
+  kiyomizu: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Kiyomizu-dera%2C_Kyoto%2C_November_2016_-02.jpg/500px-Kiyomizu-dera%2C_Kyoto%2C_November_2016_-02.jpg',
+  tenryuji: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Tenryuji_Kyoto.jpg/500px-Tenryuji_Kyoto.jpg',
+  bamboo:   'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Arashiyama_%288741759830%29.jpg/500px-Arashiyama_%288741759830%29.jpg',
+  'uniqlo-kyoto': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Uniqlo_Ginza_2018.jpg/500px-Uniqlo_Ginza_2018.jpg',
+  kasuga:   'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Kasuga-taisha%2C_chumon-1.jpg/500px-Kasuga-taisha%2C_chumon-1.jpg',
+  narapark: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Five-storied_Pagoda%2C_Kofuku-ji_-_Nara%2C_Japan_-_DSC07497.jpg/500px-Five-storied_Pagoda%2C_Kofuku-ji_-_Nara%2C_Japan_-_DSC07497.jpg',
+  todaiji:  'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/%E6%9D%B1%E5%A4%A7%E5%AF%BA_%E5%A4%A7%E4%BB%8F%E6%AE%BF%EF%BC%882024%E5%B9%B4%EF%BC%89.jpg/500px-%E6%9D%B1%E5%A4%A7%E5%AF%BA_%E5%A4%A7%E4%BB%8F%E6%AE%BF%EF%BC%882024%E5%B9%B4%EF%BC%89.jpg',
+  dotonbori:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Dotonburi_River_Namba_Japan_by_Don_Ramey_Logan.jpg/500px-Dotonburi_River_Namba_Japan_by_Don_Ramey_Logan.jpg',
+  'uniqlo-osaka': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Uniqlo_Ginza_2018.jpg/500px-Uniqlo_Ginza_2018.jpg',
+  parco:    'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Shinsaibashi_Osaka_Japan01-r.jpg/500px-Shinsaibashi_Osaka_Japan01-r.jpg',
+  tsutenkaku:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Tsutenkaku_108m.jpg/500px-Tsutenkaku_108m.jpg',
+  osakajo:  'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Osaka_Castle_and_Osaka_Business_Park_20260610.jpg/500px-Osaka_Castle_and_Osaka_Business_Park_20260610.jpg',
+  'umeda-sky':'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/2018_Umeda_Sky_Building.jpg/500px-2018_Umeda_Sky_Building.jpg',
+  usj:      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Universal_Studios_Japan_2019%2C08.jpg/500px-Universal_Studios_Japan_2019%2C08.jpg',
+  ocat:     'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Namba_20150531.JPG/500px-Namba_20150531.JPG',
+  kix:      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Kix_aerial_photo.jpg/500px-Kix_aerial_photo.jpg',
+  // kinatei / muji 無合適真實照片 → 保留 emoji 底圖
 };
 
 // ── 景點資料 ──────────────────────────────────────────────
@@ -427,24 +350,53 @@ const SPOTS = [
           `機場餐廳（出境前 T1 2F）：神座拉麵、LE PAN 神戶北野麵包坊（淡路島鹽麵包 ✅ 素）、千房大阪燒、7-11 / LAWSON 素食飯糰。上機前最後採買！`] },
 ];
 
+// ── 地圖（Leaflet，所有景點一次標示） ───────────────────────
+const map = L.map('map', { center: [34.78, 135.62], zoom: 10, scrollWheelZoom: true });
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: 19
+}).addTo(map);
+
+function makeIcon(color, emoji) {
+  const html = `<div style="position:relative;width:30px;height:40px;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" viewBox="0 0 28 38" style="position:absolute;top:0;left:0;">
+      <path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 24 14 24S28 24.5 28 14C28 6.27 21.73 0 14 0z" fill="${color}" stroke="white" stroke-width="2"/>
+    </svg>
+    <span style="position:absolute;top:2px;left:0;width:30px;text-align:center;font-size:13px;">${emoji}</span>
+  </div>`;
+  return L.divIcon({ html, iconSize:[30,40], iconAnchor:[15,40], popupAnchor:[0,-38], className:'' });
+}
+
+const markers = {};
+let selectedId = null;
+
+SPOTS.forEach(s => {
+  const color = DAYS[s.day].color;
+  const m = L.marker([s.lat, s.lng], { icon: makeIcon(color, s.emoji), title: s.name }).addTo(map);
+  m.bindPopup(`<div style="min-width:170px;">
+    <div style="font-weight:800;color:${color};margin-bottom:3px;font-size:0.92rem;">${s.emoji} ${s.name}</div>
+    <div style="font-size:0.74rem;color:#666;margin-bottom:5px;">${DAYS[s.day].label}</div>
+    <div style="font-size:0.74rem;">${s.type}</div>
+    <a href="javascript:void(0)" onclick="openFromMap('${s.id}')" style="display:inline-block;margin-top:7px;color:#4285F4;font-size:0.76rem;font-weight:700;text-decoration:none;">▸ 看照片與導遊解說</a>
+  </div>`);
+  m.on('click', () => focusSpot(s.id, false));
+  markers[s.id] = m;
+});
+
 // ── 連結與嵌入 ──────────────────────────────────────────────
 function gmapLink(s){ return `https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lng}`; }
 function dirLink(s){ return `https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}`; }
-function embedSrc(s){ return `https://www.google.com/maps?q=${s.lat},${s.lng}&z=16&hl=zh-TW&output=embed`; }
-
-const bigmap = document.getElementById('bigmap');
-const mbName = document.getElementById('mb-name');
-const mbOpen = document.getElementById('mb-open');
-const sidebar = document.getElementById('sidebar');
-const countLabel = document.getElementById('count-label');
-let selectedId = null;
+function embedSrc(s){ return `https://maps.google.com/maps?q=${s.lat},${s.lng}&t=m&z=16&hl=zh-TW&output=embed&iwloc=near`; }
 
 // ── 卡片建立 ──────────────────────────────────────────────
+const sidebar = document.getElementById('sidebar');
+const infoPanels = document.getElementById('info-panels');
+const countLabel = document.getElementById('count-label');
+
 function buildCards(filterDayVal) {
   sidebar.querySelectorAll('.card, .day-head').forEach(el => el.remove());
   const list = SPOTS.filter(s => filterDayVal==='all' ? true :
     filterDayVal==='5' ? (s.day===0 || s.day===5) : String(s.day)===filterDayVal);
-  countLabel.textContent = `顯示 ${list.length} 個景點　·　點卡片展開照片・導遊解說・嵌入地圖`;
+  countLabel.textContent = `顯示 ${list.length} 個景點　·　點卡片或地圖標記看照片・導遊解說・嵌入地圖`;
 
   let lastDay = null;
   list.forEach(s => {
@@ -453,10 +405,11 @@ function buildCards(filterDayVal) {
       dh.className = 'day-head';
       dh.style.background = DAYS[s.day].color;
       dh.textContent = DAYS[s.day].label;
-      sidebar.appendChild(dh);
+      infoPanels.before(dh);
       lastDay = s.day;
     }
     const color = DAYS[s.day].color;
+    const photo = PHOTOS[s.id];
     const card = document.createElement('div');
     card.className = 'card';
     card.id = `card-${s.id}`;
@@ -464,7 +417,7 @@ function buildCards(filterDayVal) {
     const guideHtml = s.guide.map(p => `<p>${p}</p>`).join('');
     card.innerHTML = `
       <div class="card-head" onclick="toggleCard('${s.id}')">
-        <div class="photo-wrap" data-wiki="${s.wiki}" data-lang="${s.wikiLang}">${s.emoji}</div>
+        <div class="photo-wrap">${s.emoji}${photo ? `<img src="${photo}" alt="${s.name}" loading="lazy" onerror="this.remove()">` : ''}</div>
         <div class="card-body">
           <div class="card-name">${s.emoji} ${s.name}</div>
           <div class="card-type">${s.type}</div>
@@ -475,39 +428,28 @@ function buildCards(filterDayVal) {
       </div>
       <div class="card-detail">
         <div class="guide">${guideHtml}</div>
-        <iframe class="embed-map" loading="lazy" data-src="${embedSrc(s)}" src="" allowfullscreen></iframe>
+        <iframe class="embed-map" loading="lazy" data-src="${embedSrc(s)}" allowfullscreen></iframe>
         <div class="card-links">
           <a class="link-btn btn-gmap" href="${gmapLink(s)}" target="_blank" rel="noopener">📍 在 Google Maps 開啟</a>
           <a class="link-btn btn-dir" href="${dirLink(s)}" target="_blank" rel="noopener">🧭 導航路線</a>
           ${s.wiki ? `<a class="link-btn btn-wiki" href="https://${s.wikiLang}.wikipedia.org/wiki/${encodeURIComponent(s.wiki)}" target="_blank" rel="noopener">📖 維基</a>` : ''}
         </div>
       </div>`;
-    sidebar.appendChild(card);
+    infoPanels.before(card);
   });
 
-  sidebar.querySelectorAll('.photo-wrap[data-wiki]').forEach(loadPhoto);
+  // 篩選時只顯示對應標記
+  SPOTS.forEach(s => {
+    const inList = list.some(x => x.id === s.id);
+    if (inList) markers[s.id].addTo(map); else map.removeLayer(markers[s.id]);
+  });
+  if (list.length) {
+    const b = L.latLngBounds(list.map(s => [s.lat, s.lng]));
+    map.fitBounds(b, { padding: [40, 40], maxZoom: 14 });
+  }
 }
 
-// ── Wikipedia 照片載入 ──────────────────────────────────────
-async function loadPhoto(el) {
-  const title = el.getAttribute('data-wiki');
-  const lang = el.getAttribute('data-lang') || 'ja';
-  if (!title) return;
-  try {
-    const res = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`);
-    if (!res.ok) return;
-    const data = await res.json();
-    const src = (data.thumbnail && data.thumbnail.source) || (data.originalimage && data.originalimage.source);
-    if (src) {
-      const img = new Image();
-      img.alt = title; img.loading = 'lazy';
-      img.onload = () => { el.innerHTML = ''; el.appendChild(img); };
-      img.src = src;
-    }
-  } catch (e) { /* 保留 emoji 底 */ }
-}
-
-// ── 卡片互動：展開 + 左側 Google 地圖同步 ───────────────────
+// ── 卡片互動 ──────────────────────────────────────────────
 function toggleCard(id) {
   const card = document.getElementById(`card-${id}`);
   if (!card) return;
@@ -517,23 +459,36 @@ function toggleCard(id) {
   if (tog) tog.textContent = opening ? '收起 ▴' : '展開 ▾';
   if (opening) {
     const iframe = card.querySelector('.embed-map');
-    if (iframe && !iframe.src) iframe.src = iframe.getAttribute('data-src');
+    if (iframe && !iframe.dataset.loaded) {
+      iframe.src = iframe.getAttribute('data-src');
+      iframe.dataset.loaded = '1';
+    }
   }
-  focusSpot(id);
+  panTo(id);
 }
 
-function focusSpot(id) {
+function panTo(id) {
   if (selectedId && document.getElementById(`card-${selectedId}`))
     document.getElementById(`card-${selectedId}`).classList.remove('selected');
   selectedId = id;
   const card = document.getElementById(`card-${id}`);
   if (card) card.classList.add('selected');
   const s = SPOTS.find(x => x.id === id);
-  if (!s) return;
-  // 更新左側大地圖（Google Maps）
-  bigmap.src = embedSrc(s);
-  mbName.textContent = `${s.emoji} ${s.name}`;
-  mbOpen.href = gmapLink(s);
+  if (s && markers[id]) { map.setView([s.lat, s.lng], 15, { animate: true }); markers[id].openPopup(); }
+}
+
+// 點地圖標記：選取卡片並捲到它
+function focusSpot(id, scroll) {
+  panTo(id);
+}
+// 點 popup 連結：展開卡片並捲動到它
+function openFromMap(id) {
+  const card = document.getElementById(`card-${id}`);
+  if (!card) { filterDay('all', document.querySelector('.filter-btn[data-day="all"]')); }
+  const c = document.getElementById(`card-${id}`);
+  if (!c) return;
+  if (!c.classList.contains('open')) toggleCard(id);
+  c.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // ── 天數篩選 ──────────────────────────────────────────────
@@ -549,10 +504,90 @@ function filterDay(val, btn) {
   buildCards(val);
 }
 
+// ── 資訊面板（餐廳速查／電話／checklist） ───────────────────
+infoPanels.innerHTML = `
+  <div class="panel">
+    <div class="sec-h">🍽️ 每日素食餐廳速查（蛋奶素・無五辛友善）</div>
+    <div class="meal-day">Day 1 · 京都</div>
+    <div class="meal-row">🍱 午餐：嵐山 Shigetsu 精進料理（天龍寺）📞 <a href="tel:0758829725">075-882-9725</a>（需預約）</div>
+    <div class="meal-row">🌙 晚餐：Vegetarian Indian Shama（心齋橋）📞 <a href="tel:0662125688">06-6212-5688</a>｜備：PRANA 📞 <a href="tel:0662417776">06-6241-7776</a></div>
+    <div class="meal-day">Day 2 · 奈良</div>
+    <div class="meal-row">🍱 午餐：Kinatei 喜菜亭 📞 <a href="tel:0742206188">0742-20-6188</a>｜備：Ramuna 📞 <a href="tel:0742249192">0742-24-9192</a></div>
+    <div class="meal-row">🌙 晚餐：susuru_susuran（難波）｜備：The Fire Vegan Ramen Bar（深夜至 02:00）</div>
+    <div class="meal-day">Day 3 · 大阪南</div>
+    <div class="meal-row">🍱 午餐：Pivot BASE Cafe @Dotonbori（純素）｜備：Falafel Sababa</div>
+    <div class="meal-row">🌙 晚餐：CHIBO Diversity 道頓堀 📞 <a href="tel:05018090649">050-18090649</a>｜備：Shama 📞 <a href="tel:0662125688">06-6212-5688</a></div>
+    <div class="meal-day">Day 4 · 大阪北 / USJ</div>
+    <div class="meal-row">🌙 方案A：CHIBO Diversity 📞 <a href="tel:05018090649">050-18090649</a>｜方案B（USJ）：園區內 Three Broomsticks</div>
+  </div>
+  <div class="panel">
+    <div class="sec-h">📋 訂單資訊</div>
+    <table>
+      <tr><th>項目</th><th>詳細</th></tr>
+      <tr><td>✈️ 去程</td><td><b>CI 172</b>｜TPE 14:20 → KIX 18:05（7/13）</td></tr>
+      <tr><td>✈️ 回程</td><td><b>CI 153</b>｜KIX 14:00 → TPE（7/18）</td></tr>
+      <tr><td>🎫 訂位</td><td><b>DVZMGY</b></td></tr>
+      <tr><td>🏨 飯店</td><td>Swissôtel Nankai 📞 <a href="tel:0666461111">06-6646-1111</a>（QLRSGZRT）</td></tr>
+    </table>
+  </div>
+  <div class="panel">
+    <div class="sec-h">📞 重要電話總表</div>
+    <table>
+      <tr><th>場所</th><th>電話</th></tr>
+      <tr><td>伏見稻荷大社</td><td><a href="tel:0756417331">075-641-7331</a></td></tr>
+      <tr><td>清水寺</td><td><a href="tel:0755511234">075-551-1234</a></td></tr>
+      <tr><td>天龍寺 精進料理</td><td><a href="tel:0758829725">075-882-9725</a></td></tr>
+      <tr><td>東大寺</td><td><a href="tel:0742225511">0742-22-5511</a></td></tr>
+      <tr><td>春日大社</td><td><a href="tel:0742227788">0742-22-7788</a></td></tr>
+      <tr><td>Kinatei 喜菜亭</td><td><a href="tel:0742206188">0742-20-6188</a></td></tr>
+      <tr><td>大阪城天守閣</td><td><a href="tel:0669413044">06-6941-3044</a></td></tr>
+      <tr><td>通天閣</td><td><a href="tel:0666419555">06-6641-9555</a></td></tr>
+      <tr><td>梅田空中庭園</td><td><a href="tel:0664403899">06-6440-3899</a></td></tr>
+      <tr><td>USJ 環球影城</td><td><a href="tel:0570200606">0570-20-0606</a></td></tr>
+      <tr><td>OCAT 利木津巴士</td><td><a href="tel:0120670110">0120-670-110</a></td></tr>
+    </table>
+  </div>
+  <div class="panel">
+    <div class="sec-h">📝 行前 Checklist</div>
+    <ul class="checklist">
+      <li>Visit Japan Web 填完（快速入境）</li>
+      <li>每人 ICOCA（¥2,000，機場購買）</li>
+      <li><b>周遊卡 2 日券</b>購買決定（USJ→1日；梅田→2日）</li>
+      <li><b>7/17 方案確認</b>：USJ 🎡 或 梅田大阪城 🏯</li>
+      <li>USJ Express Pass 提前購買（若選方案 B）</li>
+      <li>Shigetsu 精進料理預約：📞 075-882-9725</li>
+      <li>Kinatei 確認週四開業：📞 0742-20-6188</li>
+      <li>Swissôtel 連通房再確認：📞 06-6646-1111</li>
+    </ul>
+  </div>
+  <div class="note">
+    資料來源：NotebookLM 50 篇旅遊筆記 + 官方網站｜照片：Wikimedia Commons｜地圖：Leaflet / OpenStreetMap<br>
+    景點歷史：伏見稻荷（711）、清水寺（778）、春日大社（768）、東大寺（743-752）、大阪城（1583）、通天閣（1912/1956）、道頓堀（1615）
+  </div>`;
+
 // ── 初始化 ──────────────────────────────────────────────
 const allBtn = document.querySelector('.filter-btn[data-day="all"]');
 allBtn.style.background = '#2d7d46'; allBtn.style.borderColor = '#2d7d46'; allBtn.style.color = '#fff';
 buildCards('all');
+
+const legend = L.control({ position: 'bottomleft' });
+legend.onAdd = () => {
+  const d = L.DomUtil.create('div');
+  d.style.cssText = 'background:white;padding:8px 11px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.2);font-size:0.72rem;line-height:1.7;';
+  d.innerHTML = `<b>天數圖例</b><br>
+    <span style="color:${DAYS[1].color};">●</span> Day1 京都
+    <span style="color:${DAYS[2].color};">●</span> Day2 奈良<br>
+    <span style="color:${DAYS[3].color};">●</span> Day3 大阪南
+    <span style="color:${DAYS[4].color};">●</span> Day4 大阪北/USJ<br>
+    <span style="color:${DAYS[0].color};">●</span> Day0 飯店
+    <span style="color:${DAYS[5].color};">●</span> Day5 機場`;
+  return d;
+};
+legend.addTo(map);
+
+// 修正地圖尺寸（sticky 容器）
+window.addEventListener('load', () => setTimeout(() => map.invalidateSize(), 200));
+window.addEventListener('resize', () => map.invalidateSize());
 </script>
 </body>
 </html>
