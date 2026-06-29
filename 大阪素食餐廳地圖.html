@@ -74,6 +74,7 @@
   .rank-user   { background: var(--blue); }
   .rank-other  { background: var(--gray); }
   .rank-hotel  { background: #8E24AA; }
+  .rank-social { background: #E91E63; }
   .card-type { font-size: 0.74rem; color: var(--gray); margin: 3px 0; }
   .card-area { font-size: 0.74rem; color: var(--green); font-weight: 600; }
   .ratings { display: flex; gap: 10px; margin: 5px 0; flex-wrap: wrap; }
@@ -85,6 +86,7 @@
   .g-pill   { background: #E8F5E9; color: var(--green); }
   .card-hours { font-size: 0.74rem; color: #444; margin-top: 4px; }
   .card-dishes { font-size: 0.73rem; color: #555; margin-top: 3px; line-height: 1.4; }
+  .card-price { font-size: 0.76rem; color: #1565C0; font-weight: 700; margin-top: 4px; }
   .flag-tag {
     display: inline-block; background: #FFF3E0; color: var(--accent);
     border-radius: 8px; padding: 1px 7px; font-size: 0.7rem; font-weight: 700; margin-top: 4px;
@@ -182,7 +184,7 @@
     <p>HappyCow 精選 × 大阪觀光局推薦　點擊地圖或卡片查看詳情、Google 評分與營業時間</p>
   </div>
   <div style="margin-left:auto; display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;">
-    <span class="badge">共 37 家</span>
+    <span class="badge">共 51 家</span>
     <span class="badge" style="background:#1565C0;">2026 更新</span>
   </div>
 </header>
@@ -195,6 +197,7 @@
   <button class="filter-btn" onclick="filterCards('top10',this)">🏆 Top 10</button>
   <button class="filter-btn" onclick="filterCards('user',this)">⭐ 使用者清單</button>
   <button class="filter-btn" onclick="filterCards('hotel',this)">🏨 飯店推薦</button>
+  <button class="filter-btn" onclick="filterCards('social',this)">🔥 社群推薦</button>
   <button class="filter-btn" onclick="filterCards('takeout',this)">🥡 外帶/外送</button>
   <button class="filter-btn" onclick="filterCards('latenite',this)">🌙 深夜</button>
   <input type="text" id="search-input" placeholder="🔍 搜尋餐廳名稱…" oninput="searchCards(this.value)">
@@ -309,6 +312,61 @@ const photos = {
   35: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Namba_Station.JPG/500px-Namba_Station.JPG',
   36: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Namba_Station.JPG/500px-Namba_Station.JPG',
   37: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Namba_Station.JPG/500px-Namba_Station.JPG',
+};
+
+// ── 每人大約價位（日圓，參考 Tabelog / Google / 官網菜單） ──────
+const PRICES = {
+  1:'約 ¥1,500／午・¥2,000／晚（每人）',
+  2:'約 ¥2,000–2,700／人（秤重自助）',
+  3:'約 ¥1,800–2,500／人',
+  4:'約 ¥2,800–4,000／人（套餐 ¥2,780・建議預約）',
+  5:'約 ¥1,500–2,500／人',
+  6:'約 ¥1,300／人（午晚套餐）',
+  7:'約 ¥800–1,500／人（外帶・玄米丼 ¥780 起）',
+  8:'約 ¥1,500–2,000／人',
+  9:'約 ¥1,000–1,300／人（午套餐 ¥1,100）',
+  10:'入場 ¥1,800／時（會員 ¥1,500）＋餐飲另計',
+  11:'約 ¥1,500–2,500／人',
+  12:'約 ¥1,000–1,500／人',
+  13:'約 ¥1,500–2,500／人',
+  14:'約 ¥1,300–1,800／人',
+  15:'約 ¥1,500–2,500／人',
+  16:'約 ¥1,000–2,000／人（便當 ¥864 起）',
+  17:'約 ¥1,600–2,000／人（建議預約）',
+  18:'約 ¥1,000–1,500／人',
+  19:'約 ¥1,000–2,000／人',
+  20:'約 ¥1,000–2,000／人',
+  21:'約 ¥2,000–3,000／人',
+  22:'約 ¥500–1,500／人（依採購）',
+  23:'約 ¥800–1,500／人（依採購）',
+  24:'約 ¥870–1,300／人',
+  25:'超市・依採購',
+  26:'約 ¥900–1,500／人',
+  27:'約 ¥1,500–3,000／人',
+  28:'午 ¥5,000–7,000／晚 ¥11,000 起／人（需預約）',
+  29:'午 ¥1,650–1,950／晚約 ¥3,000／人',
+  30:'超市・依採購',
+  31:'超市・依採購',
+  32:'百貨美食街・各店不一',
+  33:'超市・依採購',
+  34:'百貨・各店不一',
+  35:'午約 ¥9,000／晚約 ¥15,000／人（需預約）',
+  36:'午 ¥5,500 起／晚 ¥8,500–12,500／人',
+  37:'午自助 ¥5,900／週末早午餐 ¥6,900／人',
+  38:'約 ¥800–1,500／人（甜點＋飲品）',
+  39:'約 ¥1,000–2,000／人',
+  40:'約 ¥1,200–1,800／人',
+  41:'約 ¥900–1,500／人',
+  42:'午 ¥650–970／晚套餐 ¥1,800 起',
+  43:'約 ¥1,000–2,000／人',
+  44:'約 ¥1,000–2,000／人',
+  45:'約 ¥2,000–3,000／人',
+  46:'午約 ¥1,000–1,500／人',
+  47:'約 ¥1,000–2,000／人（定食約 ¥1,300）',
+  48:'約 ¥1,000–2,000／人（Buddha Bowl 約 ¥1,800）',
+  49:'人均 ¥800–1,500（甜點 ¥380–500）',
+  50:'約 ¥600–900／人',
+  51:'午 ¥1,000–1,500／晚 ¥2,000–3,000／人',
 };
 
 // ── Restaurant data ────────────────────────────────────────────────────────
@@ -1019,6 +1077,231 @@ const restaurants = [
     hcUrl:'https://swissotelnankaiosaka.com/restaurants-and-bars/table36/',
     phone:'+81-666465125'
   },
+  // ── 社群推薦（IG/FB/Threads 蒐集，Google/HappyCow 近期評論核實營業中） ──
+  {
+    id:38, rank:38, group:'social',
+    name:'Naki Vegan Sweets', nameJa:'ナキ ヴィーガンスイーツ（焼き菓子ナキ）',
+    type:'純素 Vegan｜咖啡・甜點・烘焙', tags:['social','vegan','gf','takeout'],
+    area:'難波・中央區（獨立小店・約 4 席）',
+    address:'大阪市中央区難波 1-5-5',
+    lat:34.66751, lng:135.50222,
+    hours:'13:00-21:00；週三公休',
+    dishes:'抹茶白巧克力蛋糕・季節水果塔・巧克力慕斯・貓造型餅乾・抹茶拿鐵',
+    notes:'全品項純素＋無麩質。母女檔經營、可外帶，店面極小。2024-04 開幕。',
+    flag:'🔥 社群推薦・全素 GF',
+    hcStars:'—', gStars:'HappyCow 4.5（53 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Naki+Vegan+Sweets+Namba+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Naki+Vegan+Sweets+Namba+Osaka',
+    hcUrl:'https://www.instagram.com/naki.vegansweets/', phone:'+81-8062175050'
+  },
+  {
+    id:39, rank:39, group:'social',
+    name:'Vegan Cafe Tsukineko', nameJa:'ヴィーガンカフェ月猫（つきねこ）',
+    type:'純素 Vegan｜咖啡・輕食', tags:['social','vegan','gf'],
+    area:'難波・浪速區（エベンエゼルビル 1F・7 席）',
+    address:'大阪市浪速区難波中 1-14-12 エベンエゼルビル 1F',
+    lat:34.66301, lng:135.49951,
+    hours:'平日 11:00-19:00／週末 10:00-19:00（建議查 IG）',
+    dishes:'純素乾咖哩配天婦羅・純素鹽味拉麵・純素煎餃・米粉鬆餅・抹茶拿鐵',
+    notes:'全菜單純素＋無麩質。貓主題、僅 7 席；收信用卡，建議線上預約。2024-09 開幕。',
+    flag:'🔥 社群推薦・全素 GF',
+    hcStars:'—', gStars:'Tripadvisor 5.0（HappyCow 65 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Vegan+Cafe+Tsukineko+Namba+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Vegan+Cafe+Tsukineko+Namba+Osaka',
+    hcUrl:'https://www.instagram.com/vegancafe_tsukineko/', phone:'+81-644003987'
+  },
+  {
+    id:40, rank:40, group:'social',
+    name:'Vegan Ramen by Playpen Friends', nameJa:'ヴィーガンラーメン（Playpen Friends）',
+    type:'純素 Vegan｜拉麵', tags:['social','vegan'],
+    area:'北堀江・西區（大樓 2F・近四橋/心齋橋）',
+    address:'大阪市西区北堀江 1-14-20 2F',
+    lat:34.67326, lng:135.49440,
+    hours:'週一 12:00-20:00；週二三・週五~日 11:30-22:00；週四公休',
+    dishes:'六款純素拉麵（番茄・醬油・味噌・豚骨風・辣味）・北海道小麥麵・純素煎餃',
+    notes:'有英文菜單。四橋站約 3 分。註：2025-10 起部分甜點含乳製品/蜂蜜，純素者建議只點拉麵/煎餃。',
+    flag:'🔥 社群推薦・全素拉麵',
+    hcStars:'—', gStars:'HappyCow 4.5（90 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Vegan+Ramen+by+Playpen+Friends+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Vegan+Ramen+by+Playpen+Friends+Osaka',
+    hcUrl:'https://www.instagram.com/veganramen_by_playpenfriends/', phone:'+81-8032751954'
+  },
+  {
+    id:41, rank:41, group:'social',
+    name:'Re-Public by Base Island Kitchen', nameJa:'RE-public by BASE ISLAND KITCHEN',
+    type:'蔬食友善｜日式 × 牙買加無麩質 Tapas', tags:['social','gf'],
+    area:'北堀江・西區（獨立小店・四橋站 2 分）',
+    address:'大阪市西区北堀江 1-16-27',
+    lat:34.67403, lng:135.49525,
+    hours:'週三四 11:00-18:00／週五 11:00-20:00／週六日 12:00-18:00；週一二公休',
+    dishes:'純素 tapas（酪梨海苔塊・jerk 炸豆腐・山藥薯餅）・純素漢堡・自製布朗尼',
+    notes:'全店無麩質，多數可調為全素。女主人經營，對素食/過敏友善。',
+    flag:'🔥 社群推薦・GF 可全素',
+    hcStars:'—', gStars:'4.6 ★（約 68 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Re-Public+by+Base+Island+Kitchen+Kitahorie+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Re-Public+by+Base+Island+Kitchen+Kitahorie+Osaka',
+    hcUrl:'https://www.instagram.com/base_islandkitchen/', phone:'+81-8070135231'
+  },
+  {
+    id:42, rank:42, group:'social',
+    name:'Shama Vegetarian Indian（北堀江）', nameJa:'インドレストラン シャマ',
+    type:'蔬食友善｜印度素食', tags:['social','gf'],
+    area:'北堀江・西區（倉商ビル B1F・四橋站 6 號出口）',
+    address:'大阪市西区北堀江 1-3-7 倉商ビル B1F',
+    lat:34.67273, lng:135.49644,
+    hours:'週二-日 11:00-15:00 / 17:00-22:00；週一僅 11:00-15:00',
+    dishes:'純素菠菜饢・大豆 tikka masala・綜合蔬菜咖哩・samosa・Vegan Accha 套餐',
+    notes:'不含肉魚蛋、無洋蔥大蒜韭蔥，有無麩質選項。ISKCON 信徒經營，僅收現金。',
+    flag:'🔥 社群推薦・無五辛',
+    hcStars:'—', gStars:'Tabelog 3.20／TripAdvisor 4.5',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Indian+Restaurant+Shama+Kitahorie+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Indian+Restaurant+Shama+Kitahorie+Osaka',
+    hcUrl:'https://tabelog.com/en/osaka/A2701/A270201/27004449/', phone:'+81-665366669'
+  },
+  {
+    id:43, rank:43, group:'social',
+    name:'Smile Kitchen（立売堀）', nameJa:'スマイルキッチン',
+    type:'蔬食友善｜印度・尼泊爾料理', tags:['social'],
+    area:'立売堀・西區（大樓 2F・本町站 22-23 出口）',
+    address:'大阪市西区立売堀 1-6-2 2F',
+    lat:34.68022, lng:135.49670,
+    hours:'週一-六 11:00-15:00 / 17:00-23:00；週日公休',
+    dishes:'印度/尼泊爾咖哩・素食與純素套餐（近期評論盛讚純素）',
+    notes:'設專屬素食/純素菜單（饢非全素）。老闆說英語、親切。注意大阪有多家同名店，本筆為本町立売堀店。',
+    flag:'🔥 社群推薦・有純素菜單',
+    hcStars:'—', gStars:'Tabelog 3.09／TripAdvisor 4.1',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Smile+Kitchen+Honmachi+Itachibori+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Smile+Kitchen+Honmachi+Itachibori+Osaka',
+    hcUrl:'https://tabelog.com/en/osaka/A2701/A270106/27075404/', phone:'+81-665362588'
+  },
+  {
+    id:44, rank:44, group:'social',
+    name:'Hana no Ki 花の木（黑門市場）', nameJa:'花の木（はなのき）',
+    type:'蔬食友善｜大阪鐵板燒（大阪燒/炒麵）', tags:['social'],
+    area:'日本橋・中央區（黑門市場內）',
+    address:'大阪市中央区日本橋 1-21-33',
+    lat:34.66624, lng:135.50685,
+    hours:'週一-六 10:30-18:00；週日及國定假日公休',
+    dishes:'大阪燒・炒麵・章魚燒・鯛魚燒・飯糰・刨冰（素食版需詢問）',
+    notes:'開業逾 30 年老店；主打葷食，純素須主動客製告知。黑門市場內。',
+    flag:'🔥 社群推薦・需客製',
+    hcStars:'—', gStars:'3.9 ★（97 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Hananoki+Kuromon+Market+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Hananoki+Kuromon+Market+Osaka',
+    hcUrl:'https://tabelog.com/en/osaka/A2701/A270202/27033892/', phone:'+81-666411069'
+  },
+  {
+    id:45, rank:45, group:'social',
+    name:'Cosme Kitchen Adaptation 阪神梅田', nameJa:'コスメキッチン アダプテーション 阪神梅田本店',
+    type:'蔬食友善｜自然系咖啡餐廳', tags:['social','vegan','gf'],
+    area:'梅田・北區（阪神百貨梅田本店 3F）',
+    address:'大阪市北区梅田 1-13-13 阪神百貨店梅田本店 3F',
+    lat:34.70116, lng:135.49861,
+    hours:'每日 10:00-20:00（LO 19:30），公休依百貨',
+    dishes:'Vegan 餐盤・植物肉漢堡排・Vegan/無麩質甜點・有機飲品',
+    notes:'明確標示 Vegan/GF（非純素店）。阪神梅田站步行 2 分，交通方便。',
+    flag:'🔥 社群推薦・有 Vegan/GF',
+    hcStars:'—', gStars:'Tabelog 3.48／Yahoo 4.04',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Cosme+Kitchen+Adaptation+阪神梅田本店',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Cosme+Kitchen+Adaptation+阪神梅田本店',
+    hcUrl:'https://www.instagram.com/cosmekitchen_adaptation/', phone:'+81-5055956691'
+  },
+  {
+    id:46, rank:46, group:'social',
+    name:'natural kitchen めだか 2号店', nameJa:'natural kitchen めだか 2号店',
+    type:'蔬食友善｜玄米自然食・マクロビ', tags:['social'],
+    area:'兎我野町・北區（雁木ビル 1F・東梅田/お初天神）',
+    address:'大阪市北区兎我野町 3-20 雁木ビル 1F',
+    lat:34.70103, lng:135.50564,
+    hours:'平日 11:00-20:30；週末假日 11:00-20:00（不定休）',
+    dishes:'玄米沙拉碗・季節蔬菜咖哩・每日替わり定食・無蛋奶甜點',
+    notes:'可指定無動物性、無蛋奶、無麵粉之全素。全面禁菸 32 席。',
+    flag:'🔥 社群推薦・可全素',
+    hcStars:'—', gStars:'LINE PLACE 4.2',
+    gmap:'https://www.google.com/maps/search/?api=1&query=natural+kitchen+めだか+2号店+兎我野町',
+    ghours:'https://www.google.com/maps/search/?api=1&query=natural+kitchen+めだか+2号店+兎我野町',
+    hcUrl:'https://shin-medaka.com/', phone:'+81-663647108'
+  },
+  {
+    id:47, rank:47, group:'social',
+    name:'Mealthy メルシー（福島）', nameJa:'メルシー（Mealthy）',
+    type:'蔬食友善｜健康定食・拼盤', tags:['social','takeout'],
+    area:'福島・福島區（アイミーハウス 1F・福島站）',
+    address:'大阪市福島区福島 6-8-21 アイミーハウス 1F',
+    lat:34.69944, lng:135.48813,
+    hours:'平日 11:00-14:30 / 17:00-20:00；週末假日原則公休（每月 1-2 次特別營業，依 IG）',
+    dishes:'每日替わりプレート・Vegan 拼盤・玄米/雜糧飯・味噌湯（可外帶外送）',
+    notes:'營養師監修，含全素拼盤/蛋奶素/部分無麩質。重點：原則僅平日營業。',
+    flag:'🔥 社群推薦・平日限定',
+    hcStars:'—', gStars:'Tabelog 3.26（42 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Mealthy+メルシー+福島',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Mealthy+メルシー+福島',
+    hcUrl:'https://www.instagram.com/mealthy0706/', phone:'+81-677102990'
+  },
+  {
+    id:48, rank:48, group:'social',
+    name:'bee9 cafe & studio', nameJa:'bee9（ビーナイン）',
+    type:'純素 Vegan｜咖啡 & studio', tags:['social','vegan','gf'],
+    area:'松ケ枝町・北區（グロウビル 1F・南森町/天滿宮）',
+    address:'大阪市北区松ケ枝町 6-1 グロウビル 1F',
+    lat:34.69840, lng:135.51547,
+    hours:'週二-四 11:00-17:00；週五六 11:00-17:00 / 18:00-23:00（Bar）；週一日公休',
+    dishes:'無農藥玄米 Buddha Bowl・大豆肉料理・無麩質點心・Vegan 日本酒/葡萄酒',
+    notes:'真正純素廚房。南森町站/JR 大阪天滿宮站步行約 3 分。',
+    flag:'🔥 社群推薦・全素',
+    hcStars:'—', gStars:'Tabelog 3.12（26 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=bee9+南森町',
+    ghours:'https://www.google.com/maps/search/?api=1&query=bee9+南森町',
+    hcUrl:'https://bee9-osaka.com/', phone:'+81-663588089'
+  },
+  {
+    id:49, rank:49, group:'social',
+    name:'Canelita Sweets（南堀江）', nameJa:'カネリータ スイーツ',
+    type:'純素 Vegan｜甜點（甜甜圈/蛋糕）', tags:['social','vegan'],
+    area:'南堀江・西區（獨立店面・近美國村/四橋）',
+    address:'大阪市西区南堀江 1-14-22',
+    lat:34.67179, lng:135.49440,
+    hours:'11:00-19:00（售完為止）；週一公休',
+    dishes:'純素甜甜圈（肉桂糖/Oreo 巧克力）・胡蘿蔔蛋糕・布朗尼・客製蛋糕',
+    notes:'加州甜點師主理、色彩繽紛。堀江公園旁、四橋站 5 號出口步行約 4 分。',
+    flag:'🔥 社群推薦・全素甜點',
+    hcStars:'—', gStars:'Tabelog 3.30／HappyCow 4.5',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Canelita+Sweets+Minami+Horie',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Canelita+Sweets+Minami+Horie',
+    hcUrl:'https://www.instagram.com/canelita_sweets/', phone:'+81-665359710'
+  },
+  {
+    id:50, rank:50, group:'social',
+    name:'Sari Sari Store（by Cocowell）', nameJa:'サリサリストア（ココウェル直營店）',
+    type:'純素 Vegan｜椰子冰淇淋・咖啡', tags:['social','vegan','gf'],
+    area:'幸町・浪速區（ココウェル本社 1F・近桜川站）',
+    address:'大阪市浪速区幸町 2-2-2 ココウェル本社 1F',
+    lat:34.66901, lng:135.49175,
+    hours:'9:00-19:00（LO 18:30）；週三公休',
+    dishes:'椰子冰淇淋（8 種＋季節限定）・椰奶咖啡・raw cake',
+    notes:'全素，甜筒無麩質。前身「ココウェルカフェ」，2022 改裝重開。',
+    flag:'🔥 社群推薦・全素',
+    hcStars:'—', gStars:'HappyCow 4.0（12 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=sari+sari+store+cocowell+Naniwa+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=sari+sari+store+cocowell+Naniwa+Osaka',
+    hcUrl:'https://www.instagram.com/sarisari_cocowell/', phone:'+81-665685577'
+  },
+  {
+    id:51, rank:51, group:'social',
+    name:'素食 江南（日本橋）', nameJa:'素食 江南（すいしょく こうなん）',
+    type:'蔬食友善｜中華料理', tags:['social'],
+    area:'日本橋・中央區（日本橋ビル38番街 2F）',
+    address:'大阪市中央区日本橋 1-3-7 日本橋ビル38番街 2F',
+    lat:34.66740, lng:135.50585,
+    hours:'11:30-15:00 / 17:30-22:30，年中無休',
+    dishes:'麻婆豆腐・上海炒麵・糖醋馬鈴薯・蔥油餅・各式豆腐料理',
+    notes:'全店素食，蛋奶素為主、可去蛋全素、提供五辛素（無蔥蒜）。近鐵日本橋站 2 號出口 1 分，建議預約。',
+    flag:'🔥 社群推薦・全店素食',
+    hcStars:'—', gStars:'HappyCow 4.0（18 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=素食江南+日本橋+大阪',
+    ghours:'https://www.google.com/maps/search/?api=1&query=素食江南+日本橋+大阪',
+    hcUrl:'https://www.happycow.net/reviews/vegetarian-suishoku-konan-osaka-346007', phone:'+81-662135580'
+  },
 ];
 
 // ── Map init ───────────────────────────────────────────────────────────────
@@ -1039,12 +1322,13 @@ const iconTop  = makeIcon('#2E7D32');
 const iconUser = makeIcon('#1565C0');
 const iconOther= makeIcon('#78909C');
 const iconHotel= makeIcon('#8E24AA');
+const iconSocial=makeIcon('#E91E63');
 
 let markers = {};
 let selectedId = null;
 
 restaurants.forEach(r => {
-  const icon = r.group==='top10' ? iconTop : r.group==='user' ? iconUser : r.group==='hotel' ? iconHotel : iconOther;
+  const icon = r.group==='top10' ? iconTop : r.group==='user' ? iconUser : r.group==='hotel' ? iconHotel : r.group==='social' ? iconSocial : iconOther;
   const m = L.marker([r.lat, r.lng], { icon, title: r.name }).addTo(map);
   const popup = L.popup({ maxWidth: 260 }).setContent(`
     <div class="popup-inner">
@@ -1053,13 +1337,13 @@ restaurants.forEach(r => {
       <div class="popup-hours" style="color:#333;"><b>📍</b> ${r.area}</div>
       <div class="popup-hours"><b>🕐</b> ${r.hours.split('\n')[0]}</div>
       <div style="margin-top:6px; display:flex; gap:4px; flex-wrap:wrap;">
-        ${r.group!=='hotel' ? `<span style="background:#FFF3E0;color:#E65100;border-radius:10px;padding:2px 7px;font-size:0.72rem;font-weight:700;">HC: ${r.hcStars}</span>` : ''}
-        <span style="background:#E8F5E9;color:#2E7D32;border-radius:10px;padding:2px 7px;font-size:0.72rem;font-weight:700;">G: ${r.gStars}${r.group!=='hotel' ? '★' : ''}</span>
+        ${(r.group!=='hotel'&&r.group!=='social') ? `<span style="background:#FFF3E0;color:#E65100;border-radius:10px;padding:2px 7px;font-size:0.72rem;font-weight:700;">HC: ${r.hcStars}</span>` : ''}
+        <span style="background:#E8F5E9;color:#2E7D32;border-radius:10px;padding:2px 7px;font-size:0.72rem;font-weight:700;">${(r.group==='hotel'||r.group==='social') ? '評分' : 'G'}: ${r.gStars}${(r.group!=='hotel'&&r.group!=='social') ? '★' : ''}</span>
       </div>
       <div class="popup-btns" style="margin-top:8px;">
         <a class="popup-btn g" href="${r.gmap}" target="_blank">🗺 Google Maps</a>
         <a class="popup-btn t" href="${r.ghours}" target="_blank">🕐 營業時間</a>
-        <a class="popup-btn h" href="${r.hcUrl}" target="_blank">${r.group==='hotel' ? '🔗 官網' : '🌱 HappyCow'}</a>
+        <a class="popup-btn h" href="${r.hcUrl}" target="_blank">${r.group==='social' ? '🔗 IG' : r.group==='hotel' ? '🔗 官網' : '🌱 HappyCow'}</a>
       </div>
     </div>
   `);
@@ -1080,7 +1364,7 @@ function buildCards(list) {
     const card = document.createElement('div');
     card.className = 'card';
     card.id = `card-${r.id}`;
-    const rankClass = r.group==='top10' ? 'rank-top' : r.group==='user' ? 'rank-user' : r.group==='hotel' ? 'rank-hotel' : 'rank-other';
+    const rankClass = r.group==='top10' ? 'rank-top' : r.group==='user' ? 'rank-user' : r.group==='hotel' ? 'rank-hotel' : r.group==='social' ? 'rank-social' : 'rank-other';
     const photoUrl = photos[r.id];
     card.innerHTML = `
       <div class="card-content">
@@ -1093,16 +1377,17 @@ function buildCards(list) {
           <div class="card-type">${r.type}</div>
           <div class="card-area">📍 ${r.area}</div>
           <div class="ratings">
-            ${r.group!=='hotel' ? `<span class="rating-pill hc-pill">🌱 HC ${r.hcStars}</span>` : ''}
-            <span class="rating-pill g-pill">⭐ Google ${r.gStars}${r.group!=='hotel' ? '★' : ''}</span>
+            ${(r.group!=='hotel'&&r.group!=='social') ? `<span class="rating-pill hc-pill">🌱 HC ${r.hcStars}</span>` : ''}
+            <span class="rating-pill g-pill">⭐ ${(r.group==='hotel'||r.group==='social') ? '評分' : 'Google'} ${r.gStars}${(r.group!=='hotel'&&r.group!=='social') ? '★' : ''}</span>
           </div>
           <div class="card-hours">🕐 ${r.hours.replace(/\n/g,'　')}</div>
           <div class="card-dishes">🍽 ${r.dishes}</div>
+          ${PRICES[r.id] ? `<div class="card-price">💰 ${PRICES[r.id]}</div>` : ''}
           ${r.flag ? `<div class="flag-tag">${r.flag}</div>` : ''}
           <div class="card-links">
             <a class="link-btn btn-gmap" href="${r.gmap}" target="_blank">🗺 Google Maps</a>
             <a class="link-btn btn-hours" href="${r.ghours}" target="_blank">🕐 查看營業時間</a>
-            <a class="link-btn btn-hc"   href="${r.hcUrl}" target="_blank">${r.group==='hotel' ? '🔗 官網/資訊' : '🌱 HappyCow'}</a>
+            <a class="link-btn btn-hc"   href="${r.hcUrl}" target="_blank">${r.group==='social' ? '🔗 IG/資訊' : r.group==='hotel' ? '🔗 官網/資訊' : '🌱 HappyCow'}</a>
             ${r.phone ? `<a class="link-btn" style="background:#555;color:#fff;" href="tel:${r.phone}">📞 電話</a>` : ''}
           </div>
         </div>
@@ -1141,12 +1426,13 @@ function selectCard(id, panMap) {
     <div class="dp-row"><strong>類型：</strong>${r.type}</div>
     <div class="dp-row"><strong>🕐 時間：</strong>${r.hours.replace(/\n/g,' | ')}</div>
     <div class="dp-row"><strong>🍽 菜色：</strong>${r.dishes}</div>
-    <div class="dp-row">${r.group!=='hotel' ? `<strong>HappyCow：</strong>${r.hcStars} &nbsp; ` : ''}<strong>Google：</strong>${r.gStars}${r.group!=='hotel' ? '★' : ''}</div>
+    ${PRICES[r.id] ? `<div class="dp-row"><strong>💰 價位：</strong>${PRICES[r.id]}</div>` : ''}
+    <div class="dp-row">${(r.group!=='hotel'&&r.group!=='social') ? `<strong>HappyCow：</strong>${r.hcStars} &nbsp; ` : ''}<strong>${(r.group==='hotel'||r.group==='social') ? '評分：' : 'Google：'}</strong>${r.gStars}${(r.group!=='hotel'&&r.group!=='social') ? '★' : ''}</div>
     ${r.notes ? `<div class="dp-note">💬 ${r.notes}</div>` : ''}
     <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
       <a class="link-btn btn-gmap" href="${r.gmap}" target="_blank">🗺 Google Maps</a>
       <a class="link-btn btn-hours" href="${r.ghours}" target="_blank">🕐 查看即時營業時間</a>
-      <a class="link-btn btn-hc" href="${r.hcUrl}" target="_blank">${r.group==='hotel' ? '🔗 官網/資訊' : '🌱 HappyCow 頁面'}</a>
+      <a class="link-btn btn-hc" href="${r.hcUrl}" target="_blank">${r.group==='social' ? '🔗 IG/資訊' : r.group==='hotel' ? '🔗 官網/資訊' : '🌱 HappyCow 頁面'}</a>
     </div>
   `;
   const panel = document.getElementById('detail-panel');
@@ -1176,6 +1462,7 @@ function getFiltered() {
       activeFilter === 'top10'   ? r.group === 'top10' :
       activeFilter === 'user'    ? r.group === 'user'  :
       activeFilter === 'hotel'   ? r.group === 'hotel' :
+      activeFilter === 'social'  ? r.group === 'social' :
       r.tags.includes(activeFilter);
     const matchSearch = !searchVal || r.name.toLowerCase().includes(searchVal) ||
       r.nameJa.includes(searchVal) || r.area.includes(searchVal) || r.dishes.includes(searchVal);
@@ -1228,7 +1515,8 @@ legend.onAdd = () => {
     <span style="color:#2E7D32;">●</span> HappyCow Top 10<br>
     <span style="color:#1565C0;">●</span> 旅遊推薦（使用者清單）<br>
     <span style="color:#78909C;">●</span> 大使推薦備選<br>
-    <span style="color:#8E24AA;">●</span> 飯店推薦（餐廳・超市・百貨）
+    <span style="color:#8E24AA;">●</span> 飯店推薦（餐廳・超市・百貨）<br>
+    <span style="color:#E91E63;">●</span> 社群推薦（IG/FB 蒐集・核實營業）
   `;
   return d;
 };
