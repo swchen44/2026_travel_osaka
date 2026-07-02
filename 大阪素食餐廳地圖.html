@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌿 大阪素食餐廳地圖</title>
+<title>🌿 關西素食餐廳地圖（大阪・京都・奈良）</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -25,6 +25,18 @@
   header h1 { font-size: 1.5rem; font-weight: 700; }
   header p  { font-size: 0.82rem; opacity: 0.85; margin-top: 3px; }
   .badge { background: var(--accent); color: #fff; border-radius: 20px; padding: 3px 10px; font-size: 0.78rem; font-weight: 700; }
+
+  /* ── Region bar ── */
+  #region-bar {
+    background: #F0F7F0; border-bottom: 1px solid #d8e5d8;
+    padding: 8px 18px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+  }
+  #region-bar span { font-size: 0.82rem; color: var(--gray); font-weight: 700; }
+  .region-btn {
+    border: 1.5px solid #bbb; background: #fff; border-radius: 20px;
+    padding: 5px 16px; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 0.15s;
+  }
+  .region-btn.active, .region-btn:hover { background: var(--green-dark); color: #fff; border-color: var(--green-dark); }
 
   /* ── Filter bar ── */
   #filter-bar {
@@ -180,14 +192,22 @@
 <header>
   <div style="font-size:2rem;">🌿</div>
   <div>
-    <h1>大阪素食餐廳互動地圖</h1>
-    <p>HappyCow 精選 × 大阪觀光局推薦　點擊地圖或卡片查看詳情、Google 評分與營業時間</p>
+    <h1>關西素食餐廳互動地圖（大阪・京都・奈良）</h1>
+    <p>HappyCow／社群精選　點擊地圖或卡片查看照片、評分、營業時間與每人價位</p>
   </div>
   <div style="margin-left:auto; display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;">
-    <span class="badge">共 51 家</span>
+    <span class="badge">共 89 家</span>
     <span class="badge" style="background:#1565C0;">2026 更新</span>
   </div>
 </header>
+
+<div id="region-bar">
+  <span>地區：</span>
+  <button class="region-btn active" onclick="filterRegion('all',this)">🗾 全部</button>
+  <button class="region-btn" onclick="filterRegion('osaka',this)">🟠 大阪</button>
+  <button class="region-btn" onclick="filterRegion('kyoto',this)">🟣 京都</button>
+  <button class="region-btn" onclick="filterRegion('nara',this)">🟢 奈良</button>
+</div>
 
 <div id="filter-bar">
   <span>篩選：</span>
@@ -312,6 +332,49 @@ const photos = {
   35: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Namba_Station.JPG/500px-Namba_Station.JPG',
   36: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Namba_Station.JPG/500px-Namba_Station.JPG',
   37: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Namba_Station.JPG/500px-Namba_Station.JPG',
+  // ── 社群推薦（HappyCow 實照，已驗證 200） ──
+  29: 'https://images.happycow.net/venues/500/45/73/hcmp45738_693533.jpeg',
+  38: 'https://images.happycow.net/venues/500/42/59/hcmp425959_2990549.jpeg',
+  39: 'https://images.happycow.net/venues/500/42/62/hcmp426260_2999881.jpeg',
+  40: 'https://images.happycow.net/venues/500/38/72/hcmp387294_2559773.jpeg',
+  41: 'https://images.happycow.net/venues/500/44/61/hcmp44611_265257.jpeg',
+  42: 'https://images.happycow.net/venues/500/25/72/hcmp25725_1444580.jpeg',
+  43: 'https://images.happycow.net/venues/500/42/18/hcmp421804_3625418.jpeg',
+  44: 'https://images.happycow.net/venues/500/38/87/hcmp388752_2720797.jpeg',
+  45: 'https://images.happycow.net/venues/500/13/27/hcmp132759_898094.jpeg',
+  46: 'https://images.happycow.net/venues/500/10/52/hcmp105282_337227.jpeg',
+  48: 'https://images.happycow.net/venues/500/34/03/hcmp340309_2188730.jpeg',
+  49: 'https://images.happycow.net/venues/500/29/20/hcmp292020_1558150.jpeg',
+  50: 'https://images.happycow.net/venues/500/32/77/hcmp327700_1982315.jpeg',
+  51: 'https://images.happycow.net/venues/500/34/60/hcmp346007_3003038.jpeg',
+  // ── 大阪追加 ──
+  52: 'https://images.happycow.net/venues/500/16/10/hcmp161067_1344596.jpeg',
+  53: 'https://images.happycow.net/venues/500/12/04/hcmp120483_712951.jpeg',
+  54: 'https://images.happycow.net/venues/500/40/35/hcmp403525_3088900.jpeg',
+  55: 'https://images.happycow.net/venues/500/17/35/hcmp17355_391643.jpeg',
+  // ── 京都（HappyCow 實照，已驗證 200） ──
+  65: 'https://images.happycow.net/venues/500/42/32/hcmp42327_1329961.jpeg',
+  66: 'https://images.happycow.net/venues/500/15/81/hcmp15812_3560444.jpeg',
+  67: 'https://images.happycow.net/venues/500/63/99/hcmp63991_609974.jpeg',
+  68: 'https://images.happycow.net/venues/500/11/13/hcmp111394_2668917.jpeg',
+  70: 'https://images.happycow.net/venues/500/45/22/hcmp452212_3301153.jpeg',
+  71: 'https://images.happycow.net/venues/500/42/70/hcmp427087_3017290.jpeg',
+  72: 'https://images.happycow.net/venues/500/96/34/hcmp96348_281622.jpeg',
+  73: 'https://images.happycow.net/venues/500/20/27/hcmp202777_1368741.jpeg',
+  74: 'https://images.happycow.net/venues/500/12/71/hcmp127119_485157.jpeg',
+  76: 'https://images.happycow.net/venues/500/76/99/hcmp76999_734404.jpeg',
+  // ── 奈良（HappyCow 實照，已驗證 200） ──
+  79: 'https://images.happycow.net/venues/500/26/32/hcmp263288_2350029.jpeg',
+  80: 'https://images.happycow.net/venues/500/10/96/hcmp109696_1347041.jpeg',
+  81: 'https://images.happycow.net/venues/500/20/87/hcmp208766_3699795.jpeg',
+  82: 'https://images.happycow.net/venues/500/96/80/hcmp96808_582838.jpeg',
+  83: 'https://images.happycow.net/venues/500/13/71/hcmp137187_471002.jpeg',
+  84: 'https://images.happycow.net/venues/500/45/77/hcmp457774_3415565.jpeg',
+  85: 'https://images.happycow.net/venues/500/65/06/hcmp65065_575262.jpeg',
+  86: 'https://images.happycow.net/venues/500/98/18/hcmp98186_495729.jpeg',
+  87: 'https://images.happycow.net/venues/500/18/63/hcmp18634_334584.jpeg',
+  88: 'https://images.happycow.net/venues/500/35/00/hcmp350049_2151867.jpeg',
+  89: 'https://images.happycow.net/venues/500/42/15/hcmp421570_2951222.jpeg',
 };
 
 // ── 每人大約價位（日圓，參考 Tabelog / Google / 官網菜單） ──────
@@ -367,6 +430,22 @@ const PRICES = {
   49:'人均 ¥800–1,500（甜點 ¥380–500）',
   50:'約 ¥600–900／人',
   51:'午 ¥1,000–1,500／晚 ¥2,000–3,000／人',
+  // 大阪追加
+  52:'約 ¥1,500–2,500／人', 53:'約 ¥2,000–2,700／人', 54:'約 ¥1,200–2,000／人',
+  55:'¥850–1,100／人（吃到飽）', 56:'約 ¥1,500–2,500／人', 57:'約 ¥400–800／件',
+  58:'約 ¥1,000–1,600／人', 59:'約 ¥500–900／件', 60:'約 ¥600–900／份',
+  // 京都
+  61:'約 ¥3,300–8,000／人（雪3300/月5500/花8000）', 62:'約 ¥3,800–6,500／人', 63:'約 ¥4,000–8,000／人',
+  64:'約 ¥4,000–10,000／人', 65:'約 ¥1,500–2,500／人', 66:'約 ¥1,300–2,000／人',
+  67:'約 ¥1,200–2,000／人', 68:'約 ¥1,500–2,500／人', 69:'約 ¥1,200–2,000／人',
+  70:'約 ¥1,500–2,500／人', 71:'約 ¥1,200–2,500／人', 72:'約 ¥500–900／人',
+  73:'約 ¥1,800–3,000／人', 74:'約 ¥1,800–2,200／人', 75:'約 ¥1,000–1,800／人',
+  76:'約 ¥1,200–2,000／人', 77:'約 ¥1,000–1,800／人', 78:'午 ¥1,180／晚 ¥1,560 起（buffet）',
+  // 奈良
+  79:'約 ¥1,300–2,000／人', 80:'約 ¥1,000–1,999／人', 81:'無麩質午餐（現場確認）',
+  82:'偏高價位（需預約）', 83:'甜點單品 ¥400–800', 84:'そば定食 ¥1,650',
+  85:'約 ¥600–999／人', 86:'午 ¥1,000–1,999／純素套餐 ¥3,300', 87:'約 ¥1,000–2,000／人',
+  88:'午餐套餐約 ¥1,200／人', 89:'約 ¥1,000–2,000／人（拉麵約 ¥2,000）',
 };
 
 // ── Restaurant data ────────────────────────────────────────────────────────
@@ -1302,6 +1381,588 @@ const restaurants = [
     ghours:'https://www.google.com/maps/search/?api=1&query=素食江南+日本橋+大阪',
     hcUrl:'https://www.happycow.net/reviews/vegetarian-suishoku-konan-osaka-346007', phone:'+81-662135580'
   },
+  // ── 社群推薦・大阪追加（HappyCow/研究核實營業） ──
+  {
+    id:52, rank:52, group:'social', region:'osaka',
+    name:'OKO – Fun Okonomiyaki Bar', nameJa:'遊べるお好み焼き屋 OKO',
+    type:'純素 Vegan・無麩質｜大阪燒居酒屋', tags:['social','vegan','gf'],
+    area:'難波・西心齋橋・中央區（獨立店面）',
+    address:'大阪市中央区西心斎橋（近難波）',
+    lat:34.66878, lng:135.49815,
+    hours:'18:00-24:00（售完為止）；公休查 IG',
+    dishes:'純素無麩質大阪燒（5 種配料）・純素炒麵・純素餃子・自助飲料吧',
+    notes:'大豆粉麵糊、全無麩質。與已收錄 OKO Takoyaki 同品牌不同店（本店為大阪燒）。使用者指定加入。',
+    flag:'🔥 社群推薦・全素 GF',
+    hcStars:'—', gStars:'HappyCow 4.0（334 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66878,135.49815',
+    ghours:'https://www.google.com/maps/search/?api=1&query=34.66878,135.49815',
+    hcUrl:'https://www.happycow.net/reviews/oko-okonomiyaki-osaka-161067', phone:'+81-9058973366'
+  },
+  {
+    id:53, rank:53, group:'social', region:'osaka',
+    name:'Matsuri 松（three-peace）', nameJa:'松（three-peace 松）',
+    type:'蔬食友善｜純素大阪燒・鐵板', tags:['social'],
+    area:'福島區・吉野（獨立店面）',
+    address:'大阪市福島区吉野 3-27-17',
+    lat:34.69280, lng:135.47440,
+    hours:'週一二・週五六日 11:00-14:00 / 17:00-21:00；週三四公休',
+    dishes:'純素大阪燒・純素章魚燒・純素拉麵（咖哩/山葵）・純素壽喜燒',
+    notes:'三兄弟經營，有明確純素菜單、可做全素。',
+    flag:'🔥 社群推薦・可全素',
+    hcStars:'—', gStars:'HappyCow 3.5（44 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.69280,135.47440',
+    ghours:'https://www.google.com/maps/search/?api=1&query=34.69280,135.47440',
+    hcUrl:'https://www.happycow.net/reviews/matsuri-osaka-120483', phone:'+81-669406633'
+  },
+  {
+    id:54, rank:54, group:'social', region:'osaka',
+    name:'Avocados Mexican Cafe', nameJa:'アボカドス',
+    type:'蔬食友善｜墨西哥料理', tags:['social'],
+    area:'中央區・上町（マルソウアパレル 1F・谷町六丁目）',
+    address:'大阪市中央区上町 1-1-22',
+    lat:34.67810, lng:135.52559,
+    hours:'週一四日 10:30-17:00；週二三五六 10:30-21:00',
+    dishes:'純素 taco・純素 burrito・酪梨醬・沙拉',
+    notes:'新開墨西哥蔬食，純素選項標示清楚。',
+    flag:'🔥 社群推薦・有純素',
+    hcStars:'—', gStars:'HappyCow 4.0（6 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67810,135.52559',
+    ghours:'https://www.google.com/maps/search/?api=1&query=34.67810,135.52559',
+    hcUrl:'https://www.instagram.com/avocados.osaka/', phone:'+81-7090458901'
+  },
+  {
+    id:55, rank:55, group:'social', region:'osaka',
+    name:'Greens Vegetarian Dishes', nameJa:'グリーンズ（菜食ビュッフェ）',
+    type:'蔬食｜日式自助餐 buffet', tags:['social'],
+    area:'港區・築港（近大阪港站/海遊館・獨立店面）',
+    address:'大阪市港区築港 3-10-7',
+    lat:34.65644, lng:135.43191,
+    hours:'週一-五 12:00-14:00（僅午餐）；國定假日公休',
+    dishes:'沙拉吧・蔬菜天婦羅・豆腐・咖哩・現烤麵包・湯・甜點（吃到飽）',
+    notes:'平價蔬食自助餐，海遊館觀光順路。部分菜含柴魚高湯，全素者需避開。',
+    flag:'🔥 社群推薦・吃到飽',
+    hcStars:'—', gStars:'HappyCow 4.5（26 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.65644,135.43191',
+    ghours:'https://www.google.com/maps/search/?api=1&query=34.65644,135.43191',
+    hcUrl:'https://www.happycow.net/reviews/greens-vegetarian-dishes-osaka-17355', phone:'+81-665742930'
+  },
+  {
+    id:56, rank:56, group:'social', region:'osaka',
+    name:'Gyozaoh! 餃子王 道頓堀本店', nameJa:'餃子王 道頓堀本店',
+    type:'蔬食友善｜餃子居酒屋', tags:['social'],
+    area:'道頓堀・中央區（難波站步行 3 分）',
+    address:'大阪市中央区道頓堀 1-9-9',
+    lat:34.66860, lng:135.50150,
+    hours:'每日 17:00-23:00',
+    dishes:'蔬菜餃（煎/炸）・小黃瓜・茄子等蔬菜小菜',
+    notes:'逾 50 年老店，英文菜單標示蔬食/純素，逛道頓堀順路。座標約略，建議現場定位。',
+    flag:'🔥 社群推薦・有素選項',
+    hcStars:'—', gStars:'Tabelog 登錄（查無 Google）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Gyozaoh+Dotonbori+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Gyozaoh+Dotonbori+Osaka',
+    hcUrl:'https://www.happycow.net/reviews/gyozaoh-dotonbori-osaka-185730', phone:''
+  },
+  {
+    id:57, rank:57, group:'social', region:'osaka',
+    name:'Nanahako 七箱（純素甜點）', nameJa:'七箱（Musubi Garden 內）',
+    type:'純素 Vegan・長壽飲食｜甜點', tags:['social','vegan'],
+    area:'中央區・大手通（Musubi Garden 自然食品店內・谷町四丁目）',
+    address:'大阪市中央区大手通 2-2-7',
+    lat:34.68450, lng:135.51700,
+    hours:'週一-六 10:00-19:00；週日 10:00-18:00',
+    dishes:'純素蛋糕・生機蛋糕 raw cake・餅乾・塔',
+    notes:'店面小、評價高的長壽飲食系純素甜點。座標約略，建議現場定位。',
+    flag:'🔥 社群推薦・全素甜點',
+    hcStars:'—', gStars:'專文推薦（查無 Google）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Nanahako+Musubi+Garden+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Nanahako+Musubi+Garden+Osaka',
+    hcUrl:'https://osakahacks.com/articles/plant-based-restaurants-osaka-vegan-foodies/', phone:''
+  },
+  {
+    id:58, rank:58, group:'social', region:'osaka',
+    name:'Mauloa Acai and Cafe', nameJa:'マウロア アサイー アンド カフェ',
+    type:'蔬食友善｜巴西莓 açaí 咖啡', tags:['social'],
+    area:'北區・大淀南（梅田 Sky Building 旁・獨立店面）',
+    address:'大阪市北区大淀南 1-3-19',
+    lat:34.70520, lng:135.49050,
+    hours:'週二-日 11:30-19:00（採預約制）；週一公休',
+    dishes:'巴西莓碗・紅龍果碗・綠拿鐵果昔碗',
+    notes:'梅田空中庭園旁，IG 打卡熱點；可改豆奶、去蜂蜜。座標約略。',
+    flag:'🔥 社群推薦・預約制',
+    hcStars:'—', gStars:'HappyCow/Tabelog（查無 Google）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Mauloa+Acai+Cafe+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Mauloa+Acai+Cafe+Osaka',
+    hcUrl:'https://www.instagram.com/mauloaacaiandcafe/', phone:'+81-664534441'
+  },
+  {
+    id:59, rank:59, group:'social', region:'osaka',
+    name:'VeganCafe sister', nameJa:'ヴィーガンカフェ シスター',
+    type:'純素 Vegan｜甜點咖啡', tags:['social','vegan'],
+    area:'中央區・博労町（浪速ビル 102・近本町/堺筋本町）',
+    address:'大阪市中央区博労町 1-5-15 浪速ビル 102',
+    lat:34.68050, lng:135.50600,
+    hours:'營業時間不定（每月更換甜點，請查 FB/IG）',
+    dishes:'每月更換的純素小蛋糕與塔（季節水果）',
+    notes:'小型純素甜點店，有戶外小露台，時間不定。座標約略。',
+    flag:'🔥 社群推薦・全素甜點',
+    hcStars:'—', gStars:'專文推薦（查無 Google）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Vegan+Cafe+sister+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Vegan+Cafe+sister+Osaka',
+    hcUrl:'https://www.facebook.com/Vegan-Cafe-sister', phone:''
+  },
+  {
+    id:60, rank:60, group:'social', region:'osaka',
+    name:"Coconut Glen's 北浜", nameJa:'ココナッツグレンズ 北浜',
+    type:'純素 Vegan｜夏威夷椰子冰淇淋', tags:['social','vegan'],
+    area:'中央區・安土町（北浜/堺筋本町・獨立店面）',
+    address:'大阪市中央区安土町 1-4-5',
+    lat:34.68520, lng:135.50400,
+    hours:'請查官網/IG（建議先確認）',
+    dishes:'椰子冰淇淋（多口味）・椰奶果昔・咖啡・限定鬆餅',
+    notes:'夏威夷 Maui 名廚 Glen 的 100% 純素椰子冰淇淋關西首店，台港社群熱門打卡。座標約略。',
+    flag:'🔥 社群推薦・全素',
+    hcStars:'—', gStars:'Vegewel 推薦（查無 Google）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Coconut+Glens+Kitahama+Osaka',
+    ghours:'https://www.google.com/maps/search/?api=1&query=Coconut+Glens+Kitahama+Osaka',
+    hcUrl:'https://vegewel.com/en/restaurant/2567', phone:''
+  },
+  // ── 京都（社群/研究核實營業） ──────────────────────────────
+  {
+    id:61, rank:61, group:'social', region:'kyoto',
+    name:'天龍寺 篩月 Shigetsu', nameJa:'天龍寺 篩月（しげつ）',
+    type:'精進料理｜全素 Vegan', tags:['social','vegan'],
+    area:'嵐山・右京區（天龍寺境內・世界遺產）',
+    address:'京都市右京区嵯峨天龍寺芒ノ馬場町 68',
+    lat:35.01560, lng:135.67350,
+    hours:'11:00-14:00（LO）；另付庭園入園料 ¥500',
+    dishes:'一汁五菜/六菜/七菜・湯葉・豆腐（寺院精進）',
+    notes:'嵐山精進料理首選，米其林 2026 收錄。月/花套餐需預約。即 v3 行程午餐。',
+    flag:'⛩️ 京都・精進料理',
+    hcStars:'—', gStars:'米其林 2026 Bib＋綠星',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.01560,135.67350',
+    ghours:'https://www.tenryuji.com/shigetsu/', hcUrl:'https://www.tenryuji.com/shigetsu/', phone:'+81-758829725'
+  },
+  {
+    id:62, rank:62, group:'social', region:'kyoto',
+    name:'泉仙 大慈院店 Izusen', nameJa:'京の精進料理 泉仙 大慈院店',
+    type:'精進料理（鐵鉢料理）｜全素 Vegan', tags:['social','vegan'],
+    area:'紫野・北區（大德寺 大慈院內）',
+    address:'京都市北区紫野大徳寺町 4 大慈院内',
+    lat:35.04380, lng:135.74560,
+    hours:'11:00-16:00（LO）',
+    dishes:'鐵鉢精進料理・茶懷石',
+    notes:'1963 創業，大德寺塔頭內；配大德寺行程。',
+    flag:'⛩️ 京都・精進料理',
+    hcStars:'—', gStars:'精進料理名店（Tabelog）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.04380,135.74560',
+    ghours:'https://kyoto-izusen.com/html2/restrant_daijiin.html', hcUrl:'https://kyoto-izusen.com/html2/restrant_daijiin.html', phone:'+81-754916665'
+  },
+  {
+    id:63, rank:63, group:'social', region:'kyoto',
+    name:'精進料理 阿じろ 本店 Ajiro', nameJa:'精進料理 阿じろ 本店',
+    type:'精進料理｜全素 Vegan', tags:['social','vegan'],
+    area:'花園・右京區（妙心寺門前・獨立店面）',
+    address:'京都市右京区花園寺ノ中町 28',
+    lat:35.02350, lng:135.72100,
+    hours:'約 11:00-19:00（多為預約制）',
+    dishes:'精進懷石・季節野菜',
+    notes:'昭和 37 年創業，妙心寺門前老店。建議預約。',
+    flag:'⛩️ 京都・精進料理',
+    hcStars:'—', gStars:'昭和 37 年老店（Tabelog）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.02350,135.72100',
+    ghours:'https://tabelog.com/en/kyoto/A2601/A260402/26000112/', hcUrl:'https://tabelog.com/en/kyoto/A2601/A260402/26000112/', phone:'+81-754630221'
+  },
+  {
+    id:64, rank:64, group:'social', region:'kyoto',
+    name:'松籟庵 Shoraian', nameJa:'松籟庵（しょうらいあん）',
+    type:'豆腐懷石｜蔬食友善', tags:['social'],
+    area:'嵐山・右京區（渡月橋上游・獨立店面）',
+    address:'京都市右京区嵯峨亀ノ尾町官有地内',
+    lat:35.01000, lng:135.67060,
+    hours:'週一-四 11:00-17:00；週五-日假日 11:00-20:00；週三公休（紅葉季除外）',
+    dishes:'嵯峨豆腐湯豆腐・揚げ出し豆腐・生湯葉',
+    notes:'嵐山隱藏名店，可眺保津川；懷石部分菜含魚出汁，需確認。國中以下不接待。',
+    flag:'⛩️ 京都・豆腐懷石',
+    hcStars:'—', gStars:'嵐山豆腐懷石（官網）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.01000,135.67060',
+    ghours:'https://www.shoraian.jp/', hcUrl:'https://www.shoraian.jp/', phone:'+81-758610123'
+  },
+  {
+    id:65, rank:65, group:'social', region:'kyoto',
+    name:'Choice', nameJa:'チョイス（CHOICE）',
+    type:'純素 Vegan・無麩質｜咖啡・鬆餅', tags:['social','vegan','gf'],
+    area:'三條・東山區（三条京阪・鈴木形成外科ビル 1F）',
+    address:'京都市東山区大橋町 89-1 鈴木形成外科ビル 1F',
+    lat:35.00920, lng:135.77340,
+    hours:'9:30-21:00（LO 20:00）；週三公休',
+    dishes:'純素起司・無麩質鬆餅・Vegan 定食',
+    notes:'京都少數早上就供餐的 Vegan 店，醫師開設。',
+    flag:'⛩️ 京都・全素 GF',
+    hcStars:'—', gStars:'HappyCow 高評（查無 Google）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.00920,135.77340',
+    ghours:'https://hs-choice.com/', hcUrl:'https://www.instagram.com/vegan_glutenfree_choice/', phone:'+81-757621233'
+  },
+  {
+    id:66, rank:66, group:'social', region:'kyoto',
+    name:'mumokuteki cafe Kyoto', nameJa:'ムモクテキカフェ キョウト',
+    type:'純素 Vegan｜咖啡・定食', tags:['social','vegan'],
+    area:'寺町・中京區（四条河原町・ヒューマンフォーラムビル 2F）',
+    address:'京都市中京区伊勢屋町 351 ヒューマンフォーラムビル 2F',
+    lat:35.00560, lng:135.76650,
+    hours:'11:30-20:00（LO 19:00）；週三公休',
+    dishes:'大豆唐揚定食・蔬食漢堡排・素食甜點',
+    notes:'寺町商店街內，觀光動線便利、親子友善。',
+    flag:'⛩️ 京都・全素',
+    hcStars:'—', gStars:'人氣純素定食（查無 Google）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.00560,135.76650',
+    ghours:'https://mumokuteki.com/cafe/en/', hcUrl:'https://www.instagram.com/mumokutekicafe/', phone:''
+  },
+  {
+    id:67, rank:67, group:'social', region:'kyoto',
+    name:'Veg Out', nameJa:'ベグアウト（Veg Out vegan cafe）',
+    type:'純素 Vegan｜咖啡・早午餐', tags:['social','vegan'],
+    area:'七條・下京區（鴨川沿・鴨川ビル 1F）',
+    address:'京都市下京区七条通加茂川筋西入ル稲荷町 448 鴨川ビル 1F',
+    lat:34.99230, lng:135.76870,
+    hours:'早餐 9:00-10:30 LO／午餐 11:30-15:00／咖啡 -18:00（LO 17:00）',
+    dishes:'Vegan 早午餐盤・有機京野菜料理',
+    notes:'京阪七条站步行 2 分，可眺鴨川。',
+    flag:'⛩️ 京都・全素',
+    hcStars:'—', gStars:'IG 8,200 追蹤（查無 Google）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.99230,135.76870',
+    ghours:'https://tamisa-yoga.com/cafe/veg-out/index.html', hcUrl:'https://www.instagram.com/vegout_kyoto/', phone:''
+  },
+  {
+    id:68, rank:68, group:'social', region:'kyoto',
+    name:'Ain Soph. Journey Kyoto', nameJa:'アインソフ ジャーニー 京都',
+    type:'純素 Vegan｜咖啡・漢堡・甜點', tags:['social','vegan'],
+    area:'河原町・中京區（新京極・獨立店面）',
+    address:'京都市中京区新京極通四条上ル中之町 538-6',
+    lat:35.00420, lng:135.76740,
+    hours:'約 11:30-20:00（晚間常不定休，建議看 IG/電話確認）',
+    dishes:'Vegan 漢堡・鬆餅・天使奶昔',
+    notes:'前身 Cafe Matsuontoko；近錦市場、四条河原町。',
+    flag:'⛩️ 京都・全素',
+    hcStars:'—', gStars:'AIN SOPH 集團（查無 Google）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.00420,135.76740',
+    ghours:'https://en.ain-soph.jp/journey-kyoto', hcUrl:'https://en.ain-soph.jp/journey-kyoto', phone:''
+  },
+  {
+    id:69, rank:69, group:'social', region:'kyoto',
+    name:'VEGANS KYOTO', nameJa:'ヴィーガンズ キョウト',
+    type:'純素 Vegan｜日式定食', tags:['social','vegan'],
+    area:'祇園・東山區（Zizi Hotel 旁）',
+    address:'京都市東山区（祇園，完整地番建議 Google 定位）',
+    lat:35.00380, lng:135.77500,
+    hours:'週三-日假日 12:00-18:00（LO 17:30）；週一二公休',
+    dishes:'咖哩・素排丼（ベジ焼肉丼/カツ丼）・聖代',
+    notes:'原伏見 Vegans Cafe 主廚祇園再開。座標約略，建議現場定位。',
+    flag:'⛩️ 京都・全素',
+    hcStars:'—', gStars:'HotPepper 可預約（查無 Google）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=VEGANS+KYOTO+祇園',
+    ghours:'https://www.hotpepper.jp/strJ001295042/', hcUrl:'https://www.hotpepper.jp/strJ001295042/', phone:''
+  },
+  {
+    id:70, rank:70, group:'social', region:'kyoto',
+    name:'VOG Kyoto（Vegan Indian）', nameJa:'ヴォグ キョウト',
+    type:'純素 Vegan・無麩質｜印度料理', tags:['social','vegan','gf'],
+    area:'河原町・中京區（四条河原町徒步圈）',
+    address:'京都市中京区（四条河原町 downtown，建議 Google 定位）',
+    lat:35.00450, lng:135.76800,
+    hours:'週一-四 12:00-15:30 / 17:30-22:30；週六日 11:30-15:30 / 17:30-22:30；週一公休',
+    dishes:'咖哩・無麩質 Naan・素餃子・豆漿 Lassi・京野菜',
+    notes:'京都唯一 100% 蔬食印度菜，店主可英語。座標約略。',
+    flag:'⛩️ 京都・全素 GF',
+    hcStars:'—', gStars:'Tripadvisor 2024-25（查無 Google）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=VOG+Kyoto+vegan+indian',
+    ghours:'https://vogkyoto.com/', hcUrl:'https://www.instagram.com/vogkyoto/', phone:''
+  },
+  {
+    id:71, rank:71, group:'social', region:'kyoto',
+    name:'MERCY Vegan Factory 京都駅店', nameJa:'メーシー ヴィーガン ファクトリー 京都駅店',
+    type:'純素 Vegan｜餐酒館・定食', tags:['social','vegan'],
+    area:'京都車站・下京區（ホテルエリートイン京都駅 B1F）',
+    address:'京都市下京区東堀川通下魚棚下る鎌屋町 3 B1F',
+    lat:34.98720, lng:135.75350,
+    hours:'週一・三-日 8:30-17:00 / 18:00-22:00；週二公休',
+    dishes:'Vegan 定食・大豆料理・素食甜點',
+    notes:'大阪 MERCY 加盟 1 號店；JR 京都站西洞院口步行約 10 分，早餐即營業。',
+    flag:'⛩️ 京都・全素',
+    hcStars:'—', gStars:'2024 開幕・IG 活躍',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.98720,135.75350',
+    ghours:'https://www.mercy-vegan.jp/', hcUrl:'https://www.instagram.com/kyotostation_mercyvegan/', phone:''
+  },
+  {
+    id:72, rank:72, group:'social', region:'kyoto',
+    name:'Premarché Gelateria 三条本店', nameJa:'プレマルシェ・ジェラテリア 京都三条本店',
+    type:'義式冰淇淋｜含純素選項', tags:['social'],
+    area:'三条・中京區（二条城近・獨立店面）',
+    address:'京都市中京区三条通猪熊西入 御供町 308',
+    lat:35.01130, lng:135.74560,
+    hours:'週一二四 12:00-18:00；週五六日 12:00-20:00；週三公休',
+    dishes:'Vegan 義式冰淇淋（逾 40 種、含無乳品）',
+    notes:'世界第 3 名冰淇淋師；甜點補給站。部分口味含奶，選 Vegan 款。',
+    flag:'⛩️ 京都・有純素',
+    hcStars:'—', gStars:'Yelp 2026/5（查無 Google）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.01130,135.74560',
+    ghours:'https://www.binchoutan.com/premarche-gelateria/index.html', hcUrl:'https://www.instagram.com/premagelato/', phone:'+81-756002846'
+  },
+  {
+    id:73, rank:73, group:'social', region:'kyoto',
+    name:'Vegan Ramen UZU Kyoto', nameJa:'ヴィーガンラーメン ウズ 京都',
+    type:'純素 Vegan｜拉麵（teamLab 藝術空間）', tags:['social','vegan'],
+    area:'御所南・中京區（獨立店面）',
+    address:'京都市中京区梅之木町 146',
+    lat:35.01660, lng:135.76090,
+    hours:'需事前預約入場（時段見官網）',
+    dishes:'昆布香菇蔬菜 12 小時熬湯 Vegan 拉麵',
+    notes:'teamLab 打造藝術空間，米其林 2024 收錄，需線上預約。',
+    flag:'⛩️ 京都・全素',
+    hcStars:'—', gStars:'米其林 2024 收錄',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.01660,135.76090',
+    ghours:'https://vegan-uzu.com/pages/uzu-kyoto', hcUrl:'https://vegan-uzu.com/pages/uzu-kyoto', phone:''
+  },
+  {
+    id:74, rank:74, group:'social', region:'kyoto',
+    name:'Kyoto Engine Ramen 京都炎神', nameJa:'京都炎神（KYOTO ENGINE RAMEN）',
+    type:'純素 Vegan・無麩質｜拉麵', tags:['social','vegan','gf'],
+    area:'河原町・中京區（新京極・獨立店面）',
+    address:'京都市中京区新京極（河原町商圈）',
+    lat:35.00500, lng:135.76730,
+    hours:'12:00-22:00（LO 前 30 分）；週二三公休',
+    dishes:'Vegan 醬油拉麵・辛味噌拉麵・毛豆湯拉麵（大豆麵/蒟蒻麵）',
+    notes:'售票機點餐、可英語。FB 社團常推薦。座標約略。',
+    flag:'⛩️ 京都・全素 GF',
+    hcStars:'—', gStars:'Tripadvisor 2024（查無 Google）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=Kyoto+Engine+Ramen',
+    ghours:'https://www.tablecheck.com/en/kyotoengine', hcUrl:'https://www.instagram.com/kyotoengine/', phone:''
+  },
+  {
+    id:75, rank:75, group:'social', region:'kyoto',
+    name:'らーめん千の風 Sen no Kaze', nameJa:'らーめん千の風 京都',
+    type:'蔬食友善｜拉麵（含 Vegan/清真）', tags:['social'],
+    area:'河原町・中京區（新京極・獨立店面）',
+    address:'京都市中京区新京極通四条上ル中之町 580',
+    lat:35.00430, lng:135.76750,
+    hours:'11:30-21:00；週二三公休（現金限定）',
+    dishes:'Vegan 拉麵・一般醬油拉麵',
+    notes:'新京極內、觀光動線便利。',
+    flag:'⛩️ 京都・有 Vegan',
+    hcStars:'—', gStars:'Yelp 147 則（查無 Google）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.00430,135.76750',
+    ghours:'https://ramensennokazekyoto.com/?lang=en', hcUrl:'https://ramensennokazekyoto.com/?lang=en', phone:'+81-752550181'
+  },
+  {
+    id:76, rank:76, group:'social', region:'kyoto',
+    name:'Vegan Ramen Towzen とうぜん', nameJa:'とうぜん（豆乳ラーメン）',
+    type:'純素 Vegan｜豆乳拉麵・壽司', tags:['social','vegan'],
+    area:'下鴨・左京區（獨立店面）',
+    address:'京都市左京区下鴨東高木町 13-4',
+    lat:35.04370, lng:135.77260,
+    hours:'11:30-15:00 / 18:00-22:00；週四公休',
+    dishes:'豆乳拉麵・Vegan 壽司',
+    notes:'2004 創業，日本最老 Vegan 拉麵店之一；下鴨神社附近。',
+    flag:'⛩️ 京都・全素',
+    hcStars:'—', gStars:'2004 老店（查無 Google）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.04370,135.77260',
+    ghours:'https://towzenramen.com/', hcUrl:'https://towzenramen.com/', phone:''
+  },
+  {
+    id:77, rank:77, group:'social', region:'kyoto',
+    name:'Falafel Garden', nameJa:'ファラフェルガーデン',
+    type:'蔬食友善｜中東・以色列料理', tags:['social'],
+    area:'出町柳・左京區（獨立店面）',
+    address:'京都市左京区田中上柳町 15-2',
+    lat:35.02940, lng:135.77120,
+    hours:'平日 11:30-15:00 / 17:30-21:00（LO 20:30）；週末 11:30-21:00；週三公休',
+    dishes:'Falafel・Hummus・蔬菜 Pita',
+    notes:'出町柳站近，可清楚指定 Vegan 品項（約半數菜為全素）。',
+    flag:'⛩️ 京都・有純素',
+    hcStars:'—', gStars:'Tabelog／Inside Kyoto',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.02940,135.77120',
+    ghours:'https://tabelog.com/en/kyoto/A2601/A260302/26002350/', hcUrl:'https://tabelog.com/en/kyoto/A2601/A260302/26002350/', phone:''
+  },
+  {
+    id:78, rank:78, group:'social', region:'kyoto',
+    name:'都野菜 賀茂 烏丸店 Yasai Kamo', nameJa:'都野菜 賀茂 烏丸店',
+    type:'蔬食友善｜京野菜自助餐 Buffet', tags:['social'],
+    area:'京都車站・下京區（大宮通・MINISTOP 建物 2F）',
+    address:'京都市下京区大宮通り木津屋橋上る上之町 439-1',
+    lat:34.98800, lng:135.74980,
+    hours:'8:00-16:00 / 17:00-22:00（料理 LO 前 30 分）；元旦・1 月第二週二公休',
+    dishes:'京野菜吃到飽・沙拉・惣菜・咖哩・飲料吧',
+    notes:'FB 社團常推薦；平價京野菜 buffet，含蛋奶及少數葷菜需自選，蔬食者可挑。',
+    flag:'⛩️ 京都・吃到飽',
+    hcStars:'—', gStars:'午 ¥1,180起（Tabelog）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.98800,135.74980',
+    ghours:'https://nasukamo.net/karasuma', hcUrl:'https://nasukamo.net/karasuma', phone:''
+  },
+  // ── 奈良（社群/研究核實營業） ──────────────────────────────
+  {
+    id:79, rank:79, group:'social', region:'nara',
+    name:"LUU's BAO 純素刈包", nameJa:"LUU's BAO（ルーズバオ）",
+    type:'純素 Vegan｜台式刈包專門店', tags:['social','vegan','takeout'],
+    area:'奈良町（ならまち）・中新屋町（獨立店面）',
+    address:'奈良市中新屋町 17-2',
+    lat:34.67802, lng:135.83043,
+    hours:'週三-日 11:00-16:30；週一二公休',
+    dishes:'植物肉刈包・舞茸刈包・Falafel 刈包・純素冰淇淋・純素薯條・抹茶飲',
+    notes:'2026-03 由大阪人氣店移至奈良町，英語可通，可 Wolt/Uber Eats 外送。使用者指定加入。',
+    flag:'🦌 奈良・全素',
+    hcStars:'—', gStars:'HappyCow 4.5（149 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67802,135.83043',
+    ghours:'https://www.instagram.com/luus_bao/', hcUrl:'https://www.instagram.com/luus_bao/', phone:'+81-742426196'
+  },
+  {
+    id:80, rank:80, group:'social', region:'nara',
+    name:'onwa オンワ', nameJa:'onwa（オンワ）',
+    type:'純素 Vegan・無麩質｜咖啡・餐廳', tags:['social','vegan','gf'],
+    area:'三条大宮町・JR 奈良站周邊（獨立町家）',
+    address:'奈良市三条大宮町 3-23',
+    lat:34.67856, lng:135.81614,
+    hours:'週一-五・日 11:00-17:00；週六 11:00-20:00（不定休）',
+    dishes:'沙拉・炸大豆肉丼・季節純素餐盤・純素塔',
+    notes:'全菜單 100% 植物性＋無麩質，有英文菜單。JR 奈良站步行約 7 分。',
+    flag:'🦌 奈良・全素 GF',
+    hcStars:'—', gStars:'Tripadvisor 4.9（41）／Tabelog 3.30',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67856,135.81614',
+    ghours:'https://onwashop.com/', hcUrl:'https://www.instagram.com/onwa_cafe/', phone:'+81-742552534'
+  },
+  {
+    id:81, rank:81, group:'social', region:'nara',
+    name:'Naramachi Vegan Nabi 菜美', nameJa:'ならまちヴィーガン 菜美',
+    type:'純素 Vegan・無麩質｜日式蔬食（需預約）', tags:['social','vegan','gf'],
+    area:'奈良町（ならまち）・東城戸町',
+    address:'奈良市東城戸町 14-1',
+    lat:34.67856, lng:135.82781,
+    hours:'週一・週五-日 12:00-17:00（電話/表單預約）；週二三四公休；售完為止',
+    dishes:'傳統日式純素料理・和風高湯・發酵食・無麩質馬芬・布丁（無五辛）',
+    notes:'全素＋無麩質＋無堅果。前身 K&M Vegan Kitchen，2023 移至此址。',
+    flag:'🦌 奈良・全素 GF',
+    hcStars:'—', gStars:'HappyCow 5.0（66 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67856,135.82781',
+    ghours:'https://vegan-nara.com/', hcUrl:'https://www.instagram.com/km_vegan_kitchen/', phone:'+81-9050192518'
+  },
+  {
+    id:82, rank:82, group:'social', region:'nara',
+    name:'Kururu 樞（くるる）', nameJa:'樞（くるる）',
+    type:'純素 Vegan｜自然派食療咖啡（需預約）', tags:['social','vegan'],
+    area:'東向南町・近鐵奈良站（井上ビル 2F）',
+    address:'奈良市東向南町 5-1 井上ビル 2F',
+    lat:34.68247, lng:135.82899,
+    hours:'需事前預約；現金限定（官網 10:00-18:00；不定休）',
+    dishes:'食療套餐（依當日，無魚肉乳麥）',
+    notes:'2004 創業的食療系純素咖啡，近鐵奈良站步行 3 分，務必先預約。',
+    flag:'🦌 奈良・全素',
+    hcStars:'—', gStars:'Tabelog 3.04（HappyCow 高評）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68247,135.82899',
+    ghours:'https://www.instagram.com/kururu2004/', hcUrl:'https://www.instagram.com/kururu2004/', phone:'+81-742247156'
+  },
+  {
+    id:83, rank:83, group:'social', region:'nara',
+    name:'Somi sweets & coffee 素味', nameJa:'素味 スイーツ&コーヒー',
+    type:'純素 Vegan・無麩質｜甜點・咖啡（外帶）', tags:['social','vegan','gf','takeout'],
+    area:'法蓮町・北町（獨立町家）',
+    address:'奈良市法蓮町 1232',
+    lat:34.69212, lng:135.82796,
+    hours:'11:00-18:00（外帶為主，不定休；建議查 IG）',
+    dishes:'純素/無麩質烘焙・司康・蛋糕・精品咖啡（有機食材）',
+    notes:'全素＋無麩質。已遷至法蓮町現址（HappyCow 舊頁標 CLOSED 為舊址，實際營業中）。',
+    flag:'🦌 奈良・全素 GF',
+    hcStars:'—', gStars:'Tabelog 3.02',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.69212,135.82796',
+    ghours:'https://www.somisweetsandcoffee.com/', hcUrl:'https://www.instagram.com/somi_narakitamachi/', phone:'+81-742426157'
+  },
+  {
+    id:84, rank:84, group:'social', region:'nara',
+    name:'Vegan Soba Ramusa 楽夢咲', nameJa:'ヴィーガンそば 楽夢咲（らむさ）',
+    type:'純素 Vegan｜手打蕎麥（週末限定）', tags:['social','vegan'],
+    area:'奈良町（ならまち）・中院町',
+    address:'奈良市中院町 27-1',
+    lat:34.67884, lng:135.83128,
+    hours:'週六日 12:00-16:00；平日公休',
+    dishes:'手打蕎麥定食（ざる/かけ）・天婦羅・小菜・醃菜',
+    notes:'2025-09 開幕，Vegan Cafe 楽夢菜（Ramuna）姊妹店，僅週末營業。',
+    flag:'🦌 奈良・全素',
+    hcStars:'—', gStars:'5.0 ★（27 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67884,135.83128',
+    ghours:'https://www.instagram.com/vegan_soba_ramusa/', hcUrl:'https://www.instagram.com/vegan_soba_ramusa/', phone:''
+  },
+  {
+    id:85, rank:85, group:'social', region:'nara',
+    name:'鹿鳴園 Rokumeien', nameJa:'鹿鳴園（ろくめいえん）',
+    type:'蔬食友善｜奈良公園茶屋（素選項有限）', tags:['social'],
+    area:'雑司町・奈良公園（東大寺大佛殿往二月堂路上）',
+    address:'奈良市雑司町 407-4',
+    lat:34.68835, lng:135.84265,
+    hours:'09:00-17:00（不定休）',
+    dishes:'純素蕎麥・Mix 素麵・香菇烏龍・豆腐料理（部分含柴魚高湯）',
+    notes:'東大寺旁茶屋，主打葷食，僅約一款明確純素蕎麥；全素者需留意交叉污染。',
+    flag:'🦌 奈良・素選項有限',
+    hcStars:'—', gStars:'3.9 ★（278 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68835,135.84265',
+    ghours:'https://www.google.com/maps/search/?api=1&query=34.68835,135.84265', hcUrl:'https://www.happycow.net/reviews/rokumeien-nara-65065', phone:'+81-742226137'
+  },
+  {
+    id:86, rank:86, group:'social', region:'nara',
+    name:'China Dining 飛天 Hiten', nameJa:'チャイナダイニング飛天',
+    type:'蔬食友善｜中華料理（有純素套餐）', tags:['social'],
+    area:'東向南町・東向商店街（近鐵奈良站 3 分）',
+    address:'奈良市東向南町 26',
+    lat:34.68271, lng:135.82869,
+    hours:'11:00-15:30 / 17:30-21:30；年中無休',
+    dishes:'純素套餐（大豆肉黑醋糖醋・湯葉・沙拉，¥3,300 起／2 名~）・一般中華',
+    notes:'東向商店街內（FB 社團常提到的素食館）；設專屬 Vegan course，無動物性/乳/海鮮。',
+    flag:'🦌 奈良・有純素套餐',
+    hcStars:'—', gStars:'4.2 ★（495 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68271,135.82869',
+    ghours:'https://www.instagram.com/chinadininghiten/', hcUrl:'https://www.instagram.com/chinadininghiten/', phone:'+81-742261777'
+  },
+  {
+    id:87, rank:87, group:'social', region:'nara',
+    name:'Ashura アシュラ', nameJa:'アシュラ（あしゅーら）',
+    type:'蔬食友善｜印度・亞洲蔬食', tags:['social'],
+    area:'北方町（近奈良町/京終）',
+    address:'奈良市北方町 18-3',
+    lat:34.67429, lng:135.83173,
+    hours:'週五-二 12:00-20:00；週三四公休',
+    dishes:'印度/亞洲蔬食（菜量可客製）',
+    notes:'老夫妻經營，不吃五辛者建議提前 2 天預約。',
+    flag:'🦌 奈良・蔬食',
+    hcStars:'—', gStars:'4.1 ★（73 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67429,135.83173',
+    ghours:'https://www.google.com/maps/search/?api=1&query=34.67429,135.83173', hcUrl:'https://www.happycow.net/reviews/ashura-nara-18634', phone:'+81-742240890'
+  },
+  {
+    id:88, rank:88, group:'social', region:'nara',
+    name:'Koyomi カフェこよみ', nameJa:'カフェこよみ',
+    type:'純素 Vegan・無麩質｜自家菜午餐・甜點', tags:['social','vegan','gf'],
+    area:'船橋町・近鐵奈良站（約 644m）',
+    address:'奈良市船橋町 22-2',
+    lat:34.68797, lng:135.82197,
+    hours:'週三-五 11:30-15:00（LO 14:00）；週一二六日公休（營業日不定，建議先確認）',
+    dishes:'自家栽培蔬菜的全素午餐套餐・純素甜點（無蛋奶白糖）',
+    notes:'全素＋無麩質。營業日不定期，Google 有時標「暫時關閉」但實際仍營運，前往前務必確認當週営業予定。',
+    flag:'🦌 奈良・全素 GF',
+    hcStars:'—', gStars:'4.3 ★（21 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68797,135.82197',
+    ghours:'https://www.instagram.com/cafekoyomi/', hcUrl:'https://www.instagram.com/cafekoyomi/', phone:'+81-742236487'
+  },
+  {
+    id:89, rank:89, group:'social', region:'nara',
+    name:'Vegan Friendly Ramen by Playpen Friends（奈良）', nameJa:'ヴィーガンフレンドリーラーメン（奈良）',
+    type:'純素 Vegan｜拉麵', tags:['social','vegan'],
+    area:'登大路町・奈良公園對面（大樓 2F）',
+    address:'奈良市登大路町 59-12 2F',
+    lat:34.68434, lng:135.83708,
+    hours:'週一・週三-日 11:00-17:00；週二公休',
+    dishes:'6 種明確標示純素拉麵（醬油/味噌/番茄/純素豚骨）',
+    notes:'大阪 Playpen Friends 的奈良店，奈良公園對面，看完寺廟鹿群順路。FB 社團推薦。',
+    flag:'🦌 奈良・全素拉麵',
+    hcStars:'—', gStars:'4.5 ★（277 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68434,135.83708',
+    ghours:'https://www.instagram.com/vegan_friendly_ramen/', hcUrl:'https://www.instagram.com/vegan_friendly_ramen/', phone:''
+  },
 ];
 
 // ── Map init ───────────────────────────────────────────────────────────────
@@ -1453,10 +2114,13 @@ function closeDetail() {
 
 // ── Filter logic ───────────────────────────────────────────────────────────
 let activeFilter = 'all';
+let activeRegion = 'all';
 let searchVal = '';
 
 function getFiltered() {
   return restaurants.filter(r => {
+    const reg = r.region || 'osaka';
+    const matchRegion = activeRegion === 'all' || reg === activeRegion;
     const matchFilter =
       activeFilter === 'all'     ? true :
       activeFilter === 'top10'   ? r.group === 'top10' :
@@ -1466,11 +2130,17 @@ function getFiltered() {
       r.tags.includes(activeFilter);
     const matchSearch = !searchVal || r.name.toLowerCase().includes(searchVal) ||
       r.nameJa.includes(searchVal) || r.area.includes(searchVal) || r.dishes.includes(searchVal);
-    return matchFilter && matchSearch;
+    return matchRegion && matchFilter && matchSearch;
   });
 }
 
-function updateView() {
+function fitToList(list) {
+  if (!list.length) return;
+  const b = L.latLngBounds(list.map(r => [r.lat, r.lng]));
+  map.fitBounds(b, { padding: [40, 40], maxZoom: 15 });
+}
+
+function updateView(refit) {
   const list = getFiltered();
   buildCards(list);
   // Show/hide markers
@@ -1479,18 +2149,26 @@ function updateView() {
     if (inList) markers[r.id].addTo(map);
     else map.removeLayer(markers[r.id]);
   });
+  if (refit) fitToList(list);
 }
 
 function filterCards(type, btn) {
   activeFilter = type;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  updateView();
+  updateView(false);
+}
+
+function filterRegion(region, btn) {
+  activeRegion = region;
+  document.querySelectorAll('.region-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  updateView(true);
 }
 
 function searchCards(val) {
   searchVal = val.toLowerCase().trim();
-  updateView();
+  updateView(false);
 }
 
 // ── Tips toggle ───────────────────────────────────────────────────────────
@@ -1504,6 +2182,7 @@ function toggleTips() {
 // ── Init ───────────────────────────────────────────────────────────────────
 buildCards(restaurants);
 countLabel.textContent = `顯示 ${restaurants.length} / ${restaurants.length} 家`;
+fitToList(restaurants);  // 初始框住整個關西（大阪・京都・奈良）
 
 // Add legend to map
 const legend = L.control({ position: 'bottomleft' });
@@ -1511,12 +2190,13 @@ legend.onAdd = () => {
   const d = L.DomUtil.create('div');
   d.style.cssText = 'background:white;padding:10px 14px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.2);font-size:0.78rem;line-height:1.8;';
   d.innerHTML = `
-    <b>圖例</b><br>
+    <b>圖例（顏色＝來源分類）</b><br>
     <span style="color:#2E7D32;">●</span> HappyCow Top 10<br>
     <span style="color:#1565C0;">●</span> 旅遊推薦（使用者清單）<br>
     <span style="color:#78909C;">●</span> 大使推薦備選<br>
     <span style="color:#8E24AA;">●</span> 飯店推薦（餐廳・超市・百貨）<br>
-    <span style="color:#E91E63;">●</span> 社群推薦（IG/FB 蒐集・核實營業）
+    <span style="color:#E91E63;">●</span> 社群推薦（IG/FB・核實營業）<br>
+    <span style="color:#999;">🗾 地區（大阪/京都/奈良）請用上方按鈕切換</span>
   `;
   return d;
 };
