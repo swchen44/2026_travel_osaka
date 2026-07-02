@@ -363,6 +363,11 @@ const photos = {
   73: 'https://images.happycow.net/venues/500/20/27/hcmp202777_1368741.jpeg',
   74: 'https://images.happycow.net/venues/500/12/71/hcmp127119_485157.jpeg',
   76: 'https://images.happycow.net/venues/500/76/99/hcmp76999_734404.jpeg',
+  // 京都精進料理（寺院代表照・Wikimedia）
+  61: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Tenryuji_Kyoto.jpg/500px-Tenryuji_Kyoto.jpg',
+  62: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/090228_Daitoku-ji_Kyoto_Japan03s5.jpg/500px-090228_Daitoku-ji_Kyoto_Japan03s5.jpg',
+  63: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Myoshinji-temple.jpg/500px-Myoshinji-temple.jpg',
+  64: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Arashiyama_%288741759830%29.jpg/500px-Arashiyama_%288741759830%29.jpg',
   // ── 奈良（HappyCow 實照，已驗證 200） ──
   79: 'https://images.happycow.net/venues/500/26/32/hcmp263288_2350029.jpeg',
   80: 'https://images.happycow.net/venues/500/10/96/hcmp109696_1347041.jpeg',
@@ -375,6 +380,16 @@ const photos = {
   87: 'https://images.happycow.net/venues/500/18/63/hcmp18634_334584.jpeg',
   88: 'https://images.happycow.net/venues/500/35/00/hcmp350049_2151867.jpeg',
   89: 'https://images.happycow.net/venues/500/42/15/hcmp421570_2951222.jpeg',
+  // ── 補充照片：HappyCow 熱連 ──
+  26: 'https://images.happycow.net/venues/500/31/85/hcmp318562_2024351.jpeg',
+  27: 'https://images.happycow.net/venues/500/46/07/hcmp460730_3406071.jpeg',
+  56: 'https://images.happycow.net/venues/500/18/57/hcmp185730_889499.jpeg',
+  58: 'https://images.happycow.net/venues/500/60/24/hcmp60244_570821.jpeg',
+  69: 'https://images.happycow.net/venues/500/25/28/hcmp252860_1319866.jpeg',
+  77: 'https://images.happycow.net/venues/500/26/25/hcmp26257_813524.jpeg',
+  // ── 補充照片：Tabelog/官網 og:image → 存本地 images/（避免 token 失效） ──
+  47: 'images/47.jpg', 57: 'images/57.png', 59: 'images/59.png',
+  60: 'images/60.jpg', 75: 'images/75.jpg', 78: 'images/78.jpg',
 };
 
 // ── 每人大約價位（日圓，參考 Tabelog / Google / 官網菜單） ──────
@@ -1503,7 +1518,7 @@ const restaurants = [
     lat:34.68050, lng:135.50600,
     hours:'營業時間不定（每月更換甜點，請查 FB/IG）',
     dishes:'每月更換的純素小蛋糕與塔（季節水果）',
-    notes:'小型純素甜點店，有戶外小露台，時間不定。座標約略。',
+    notes:'小型純素甜點店，有戶外小露台，時間不定。⚠️ IG 顯示可能已停業，前往前務必先確認。座標約略。',
     flag:'🔥 社群推薦・全素甜點',
     hcStars:'—', gStars:'專文推薦（查無 Google）',
     gmap:'https://www.google.com/maps/search/?api=1&query=Vegan+Cafe+sister+Osaka',
@@ -1656,7 +1671,7 @@ const restaurants = [
     lat:35.00380, lng:135.77500,
     hours:'週三-日假日 12:00-18:00（LO 17:30）；週一二公休',
     dishes:'咖哩・素排丼（ベジ焼肉丼/カツ丼）・聖代',
-    notes:'原伏見 Vegans Cafe 主廚祇園再開。座標約略，建議現場定位。',
+    notes:'原伏見 Vegans Cafe 主廚祇園再開。⚠️ 部分平台標示歇業、HotPepper 仍可預約，前往前務必查電話/IG 確認。座標約略。',
     flag:'⛩️ 京都・全素',
     hcStars:'—', gStars:'HotPepper 可預約（查無 Google）',
     gmap:'https://www.google.com/maps/search/?api=1&query=VEGANS+KYOTO+祇園',
