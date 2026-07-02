@@ -99,6 +99,7 @@
   .card-hours { font-size: 0.74rem; color: #444; margin-top: 4px; }
   .card-dishes { font-size: 0.73rem; color: #555; margin-top: 3px; line-height: 1.4; }
   .card-price { font-size: 0.76rem; color: #1565C0; font-weight: 700; margin-top: 4px; }
+  .card-checked { font-size: 0.7rem; color: #999; margin-top: 3px; }
   .flag-tag {
     display: inline-block; background: #FFF3E0; color: var(--accent);
     border-radius: 8px; padding: 1px 7px; font-size: 0.7rem; font-weight: 700; margin-top: 4px;
@@ -2032,6 +2033,14 @@ restaurants.forEach(r => {
 const sidebar = document.getElementById('sidebar');
 const countLabel = document.getElementById('count-label');
 
+// 檢查日期＝該批資料最後於 Google 地圖核實/更新的日期（＝各批提交日）
+function checkedDate(id) {
+  if (id <= 25) return '2026-06-28';
+  if (id <= 37) return '2026-06-29';
+  if (id <= 51) return '2026-06-30';
+  return '2026-07-03';
+}
+
 function buildCards(list) {
   // Remove old cards
   sidebar.querySelectorAll('.card').forEach(el => el.remove());
@@ -2059,6 +2068,7 @@ function buildCards(list) {
           <div class="card-hours">🕐 ${r.hours.replace(/\n/g,'　')}</div>
           <div class="card-dishes">🍽 ${r.dishes}</div>
           ${PRICES[r.id] ? `<div class="card-price">💰 ${PRICES[r.id]}</div>` : ''}
+          <div class="card-checked">🔎 檢查日期 ${checkedDate(r.id)}</div>
           ${r.flag ? `<div class="flag-tag">${r.flag}</div>` : ''}
           <div class="card-links">
             <a class="link-btn btn-gmap" href="${r.gmap}" target="_blank">🗺 Google Maps</a>
@@ -2103,6 +2113,7 @@ function selectCard(id, panMap) {
     <div class="dp-row"><strong>🕐 時間：</strong>${r.hours.replace(/\n/g,' | ')}</div>
     <div class="dp-row"><strong>🍽 菜色：</strong>${r.dishes}</div>
     ${PRICES[r.id] ? `<div class="dp-row"><strong>💰 價位：</strong>${PRICES[r.id]}</div>` : ''}
+    <div class="dp-row"><strong>🔎 檢查日期：</strong>${checkedDate(r.id)}（該資訊最後於 Google 地圖核實日）</div>
     <div class="dp-row">${(r.group!=='hotel'&&r.group!=='social') ? `<strong>HappyCow：</strong>${r.hcStars} &nbsp; ` : ''}<strong>${(r.group==='hotel'||r.group==='social') ? '評分：' : 'Google：'}</strong>${r.gStars}${(r.group!=='hotel'&&r.group!=='social') ? '★' : ''}</div>
     ${r.notes ? `<div class="dp-note">💬 ${r.notes}</div>` : ''}
     <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
