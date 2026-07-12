@@ -465,6 +465,9 @@ const photos = {
   // ── 天王寺/阿倍野/新世界 ──
   127:'images/127.jpg', 128:'images/128.jpg', 129:'images/129.jpg', 130:'images/130.jpg',
   131:'images/131.jpg', 132:'images/132.jpg', 133:'images/133.jpg', 134:'images/134.jpg',
+  // ── 大阪城周邊 ──
+  135:'images/135.jpg', 136:'images/136.jpg', 137:'images/137.jpg', 138:'images/138.jpg',
+  139:'images/139.jpg', 140:'images/140.jpg', 141:'images/141.jpg',
 };
 
 // ── 每人大約價位（日圓，參考 Tabelog / Google / 官網菜單） ──────
@@ -557,6 +560,10 @@ const PRICES = {
   127:'約 ¥1,200–1,600／人', 128:'約 ¥1,000–1,999／人', 129:'午 ¥2,400／晚 ¥2,900（吃到飽）',
   130:'約 ¥1,000–1,500／人', 131:'約 ¥1,000–1,999／人', 132:'約 ¥1,000–2,999／人',
   133:'約 ¥1,000–1,999／人', 134:'約 ¥500–1,000／人',
+  // 大阪城周邊
+  135:'約 ¥1,000–2,000／人', 136:'約 ¥1,000–2,000／人', 137:'午 ¥999–2,000／晚 ¥2,000–3,000（吃到飽）',
+  138:'午 ¥1,000–2,000／晚 ¥2,000–3,000', 139:'約 ¥1,000–3,000／人', 140:'約 ¥1,000–2,000／人',
+  141:'約 ¥999 以內',
 };
 
 // ── Restaurant data ────────────────────────────────────────────────────────
@@ -2753,6 +2760,112 @@ const restaurants = [
     hcStars:'—', gStars:'Tabelog 3.62',
     gmap:'https://www.google.com/maps/search/?api=1&query=34.62517,135.50381',
     ghours:'https://tabelog.com/osaka/A2701/A270203/27062806/', hcUrl:'https://www.instagram.com/soleil_organic/', phone:'+81-666561623'
+  },
+  // ── 大阪城周邊（森ノ宮/京橋/大手前/谷町/天満橋）蛋奶素 ──────
+  {
+    id:135, rank:135, group:'social', region:'osaka',
+    name:'Buddha ブッダ（全素）', nameJa:'Buddha（ブッダ）',
+    type:'純素 Vegan・無麩質｜咖啡・Buddha bowl', tags:['social','vegan','gf'],
+    area:'森ノ宮・東成區（金井ビル 1F・近玉造）',
+    address:'大阪市東成区中道 1-8-15 金井ビル 1F',
+    lat:34.67781, lng:135.53631,
+    hours:'平日 10:30-15:30；六日假日 11:00-15:00；週日公休・週六不定休',
+    dishes:'Buddha Bowl(玄米+15 種蔬菜)・純素塔可・玄米貝果午餐・純素提拉米蘇/馬芬',
+    notes:'全植物性・無蛋奶蜂蜜白糖・無麩質，日本ヴィーガン協会認定。大阪城東側最安心的一家，使用者可全食。',
+    flag:'📍 森ノ宮・全素 GF',
+    hcStars:'—', gStars:'Tabelog 3.19（38 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67781,135.53631',
+    ghours:'https://buddha-online.site/', hcUrl:'https://www.instagram.com/buddha.osaka/', phone:'+81-667537797'
+  },
+  {
+    id:136, rank:136, group:'social', region:'osaka',
+    name:'玄米カフェ 実身美 京橋店', nameJa:'玄米カフェ 実身美 sangmi 京橋店',
+    type:'有機玄米定食・咖啡｜蔬食友善', tags:['social'],
+    area:'京橋・都島區（京阪高架下「Kぶらっと」内）',
+    address:'大阪市都島区東野田町 1-6-1',
+    lat:34.69613, lng:135.53039,
+    hours:'週一-六假日 11:00-21:00；週日 11:00-15:00；第1・3・5 週日公休',
+    dishes:'日替玄米定食(可指定蔬食版)・椰奶煮副菜・味噌汁',
+    notes:'⚠️ 預設主菜常為雞/魚，務必點/告知「ベジタリアン仕様(肉魚抜き)」，並確認味噌汁高湯非柴魚。',
+    flag:'📍 京橋・可要求蔬食版',
+    hcStars:'—', gStars:'Tabelog 3.45（261 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.69613,135.53039',
+    ghours:'https://sangmi.jp/shop/kyobashi/', hcUrl:'https://sangmi.jp/shop/kyobashi/', phone:'+81-663539333'
+  },
+  {
+    id:137, rank:137, group:'social', region:'osaka',
+    name:'スパイスバル JAY 京橋店', nameJa:'スパイスバル ジャイ JAY 京橋店',
+    type:'印度咖哩（吃到飽）｜蔬食友善', tags:['social'],
+    area:'京橋・城東區（獨立店面・大阪城公園近）',
+    address:'大阪市城東区鴫野西 2-9-2',
+    lat:34.69221, lng:135.53714,
+    hours:'11:00-14:30 / 17:00-22:30；無休（1/1 除外）',
+    dishes:'蔬菜咖哩・豆類 dal・pakora・naan（35 種咖哩吃到飽，請指定 veg curry）',
+    notes:'⚠️ 一般咖哩恐含肉/雞高湯，務必指定素食咖哩並確認無肉魚高湯；奶製品(paneer/ghee)可食。官網稱可對應無蔥蒜(耆那教)。',
+    flag:'📍 京橋・印度咖哩吃到飽',
+    hcStars:'—', gStars:'Tabelog 3.25（74 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.69221,135.53714',
+    ghours:'https://jay.foodre.jp/', hcUrl:'https://jay.foodre.jp/', phone:'+81-669693379'
+  },
+  {
+    id:138, rank:138, group:'social', region:'osaka',
+    name:'MICASADECO THE PARK 鬆餅', nameJa:'MICASADECO THE PARK',
+    type:'咖啡・鬆餅（早午餐）｜蔬食友善', tags:['social'],
+    area:'大手前・馬場町・中央區（なノにわ C-2・大阪城南/難波宮跡旁）',
+    address:'大阪市中央区馬場町 3-65 なノにわ内 C-2',
+    lat:34.68209, lng:135.52203,
+    hours:'9:00-20:00（LO19:00，鬆餅供應至 17:00）',
+    dishes:'鬆軟 ricotta 鬆餅(3 層)・抹茶/起司鬆餅',
+    notes:'鬆餅為蛋奶素可食(最安全)；鹹食/主餐可能含培根等肉，點甜鬆餅較保險。逛大阪城順路。',
+    flag:'📍 大阪城南・鬆餅',
+    hcStars:'—', gStars:'Tabelog 3.36（84 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68209,135.52203',
+    ghours:'https://micasadecoandcafe.com/thepark.html', hcUrl:'https://www.instagram.com/micasadecothepark/', phone:'+81-643974944'
+  },
+  {
+    id:139, rank:139, group:'social', region:'osaka',
+    name:'THE PORT on the green', nameJa:'THE PORT -on the Green-',
+    type:'咖啡・早午餐（有機/發酵/超級食物）｜蔬食友善', tags:['social'],
+    area:'大手前・馬場町・中央區（なノにわ B-3・大阪城旁）',
+    address:'大阪市中央区馬場町 3-65 なノにわ B-3',
+    lat:34.68238, lng:135.52195,
+    hours:'8:00-22:00（LO21:00）',
+    dishes:'貝果/鬆餅早餐盤・açaí bowl・素食三明治・湯品(有 vegan 版)',
+    notes:'⚠️ 同時供肉料理，點餐請選 vegan/veg 品項；沙拉醬/湯底確認無柴魚。大阪城旁 morning 好選擇(與 MICASADECO 同設施)。',
+    flag:'📍 大阪城旁・有 vegan',
+    hcStars:'—', gStars:'Tabelog 3.41',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68238,135.52195',
+    ghours:'https://theport-onthegreen.com/index-jp.php', hcUrl:'https://www.instagram.com/theportonthegreen/', phone:'+81-667554110'
+  },
+  {
+    id:140, rank:140, group:'social', region:'osaka',
+    name:'VEGGIE ISM 沙拉碗', nameJa:'VEGGIE ISM ベジーイズム',
+    type:'沙拉碗・冷湯專門（外帶/內用）｜蔬食友善', tags:['social','takeout'],
+    area:'天満橋・北浜東・中央區（ART AJITO 1961 1F・大川南岸）',
+    address:'大阪市中央区北浜東 2-17 ART AJITO 1961 1F',
+    lat:34.68973, lng:135.51410,
+    hours:'平日 8:00-15:00；六日假日 10:00-15:00',
+    dishes:'時蔬沙拉碗・冷製 potage 濃湯',
+    notes:'⚠️ 確認沙拉醬/湯底無柴魚・鯷魚；部分濃湯可能含奶(使用者可食)。2026 新開。',
+    flag:'📍 天満橋・沙拉碗',
+    hcStars:'—', gStars:'Tabelog 3.00（6 則・新開）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68973,135.51410',
+    ghours:'https://tabelog.com/osaka/A2701/A270104/27156210/', hcUrl:'https://tabelog.com/osaka/A2701/A270104/27156210/', phone:'+81-677772766'
+  },
+  {
+    id:141, rank:141, group:'social', region:'osaka',
+    name:'vege eats +plus', nameJa:'vege eats +plus ベジイーツ プラス',
+    type:'沙拉・三明治・飯糰（自種萵苣・外帶）｜蔬食友善', tags:['social','takeout'],
+    area:'谷町四丁目・中央區（獨立店面 1F・近大手前）',
+    address:'大阪市中央区谷町 3-4-9 1F',
+    lat:34.68234, lng:135.51698,
+    hours:'週一-五 8:00-20:00；週六日假日公休',
+    dishes:'自種無農藥萵苣沙拉・佛卡夏・副菜麵包・原創咖啡',
+    notes:'⚠️ 部分三明治可能含火腿/鮪魚，選蔬菜款並確認。谷町四丁目近大阪城。',
+    flag:'📍 谷町四丁目・沙拉三明治',
+    hcStars:'—', gStars:'Tabelog 3.00（5 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68234,135.51698',
+    ghours:'https://tabelog.com/osaka/A2701/A270104/27146745/', hcUrl:'https://www.instagram.com/vege__eats/', phone:'+81-664505460'
   },
 ];
 
