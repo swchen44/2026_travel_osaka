@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🍽️ 蛋奶素・餐廳溝通卡（日／英／中）</title>
+<style>
+  :root{
+    --green:#2d7d46; --green-dark:#1a3a1a; --ok:#2e7d32; --ok-bg:#eaf6ec;
+    --no:#c62828; --no-bg:#fdecea; --ask:#1565C0; --ask-bg:#eaf1fb;
+    --text:#1f1f1f; --sub:#666; --border:#e2e2e2; --bg:#f6f5f3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:-apple-system,'Hiragino Sans','Noto Sans TC','Noto Sans JP',sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.6; font-size:16px;}
+
+  header{background:linear-gradient(135deg,#1a3a1a 0%,#2d7d46 60%,#3a9960 100%);
+    color:#fff; padding:20px; text-align:center;}
+  header h1{font-size:1.5rem; font-weight:800;}
+  header p{font-size:.85rem; opacity:.9; margin-top:6px;}
+  .toolbar{margin-top:12px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .btn{background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.45); color:#fff;
+    border-radius:22px; padding:8px 18px; font-size:.9rem; font-weight:700; cursor:pointer; text-decoration:none;}
+  .btn:hover{background:rgba(255,255,255,.3);}
+
+  .wrap{max-width:820px; margin:0 auto; padding:20px 16px 50px;}
+
+  .card{background:#fff; border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,.08);
+    padding:18px 20px; margin-bottom:16px; break-inside:avoid;}
+
+  /* 主聲明 */
+  .statement{border-left:6px solid var(--green);}
+  .statement .jp{font-size:1.55rem; font-weight:800; line-height:1.5; color:#111;}
+  .statement .ro{font-size:.9rem; color:var(--sub); margin-top:8px; font-style:italic;}
+  .statement .en{font-size:1.05rem; margin-top:8px; color:#333;}
+  .statement .zh{font-size:1.05rem; margin-top:4px; color:#333;}
+
+  .sec-title{font-size:1.05rem; font-weight:800; margin:6px 0 10px; display:flex; align-items:center; gap:8px;}
+
+  /* 可以/不能 兩欄 */
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .food-card{padding:16px 18px;}
+  .food-card.ok{background:var(--ok-bg); border-left:6px solid var(--ok);}
+  .food-card.no{background:var(--no-bg); border-left:6px solid var(--no);}
+  .food-card h2{font-size:1.15rem; margin-bottom:10px;}
+  .food-card.ok h2{color:var(--ok);}
+  .food-card.no h2{color:var(--no);}
+  .food-row{padding:6px 0; border-bottom:1px dashed rgba(0,0,0,.1);}
+  .food-row:last-child{border-bottom:none;}
+  .food-row .fjp{font-size:1.1rem; font-weight:700;}
+  .food-row .fzh{font-size:.85rem; color:var(--sub);}
+
+  /* 問句 */
+  .ask-card{background:var(--ask-bg); border-left:6px solid var(--ask); padding:14px 18px; margin-bottom:12px; break-inside:avoid;}
+  .ask-card .num{display:inline-block; background:var(--ask); color:#fff; border-radius:50%;
+    width:26px; height:26px; text-align:center; line-height:26px; font-size:.85rem; font-weight:700; margin-right:8px;}
+  .ask-card .jp{font-size:1.45rem; font-weight:800; line-height:1.5; color:#0d1b2a; display:inline;}
+  .ask-card .ro{font-size:.9rem; color:var(--sub); font-style:italic; margin-top:6px;}
+  .ask-card .en{font-size:1rem; margin-top:5px; color:#222;}
+  .ask-card .zh{font-size:1.05rem; font-weight:700; margin-top:2px; color:var(--ask);}
+
+  /* 是非指指 */
+  .yesno{display:flex; gap:14px; justify-content:center; margin-top:6px;}
+  .yn{flex:1; text-align:center; border-radius:12px; padding:16px; break-inside:avoid;}
+  .yn.y{background:var(--ok-bg); border:2px solid var(--ok);}
+  .yn.n{background:var(--no-bg); border:2px solid var(--no);}
+  .yn .big{font-size:2rem; font-weight:800;}
+  .yn.y .big{color:var(--ok);} .yn.n .big{color:var(--no);}
+  .yn .small{font-size:.9rem; color:var(--sub); margin-top:4px;}
+
+  .note{font-size:.85rem; color:var(--sub); text-align:center; line-height:1.9; padding:10px 0;}
+  .footer{text-align:center; color:#aaa; font-size:.8rem; padding:10px 0 30px;}
+
+  @media (max-width:560px){ .grid{grid-template-columns:1fr;} .statement .jp{font-size:1.35rem;} .ask-card .jp{font-size:1.25rem;} }
+
+  /* ── 列印 ── */
+  @media print{
+    body{background:#fff; font-size:12pt;}
+    header{background:#fff!important; color:#111; padding:0 0 8px; border-bottom:2px solid var(--green); text-align:left;}
+    header h1{font-size:16pt; color:var(--green-dark);}
+    header p{color:#555;}
+    .no-print{display:none!important;}
+    .wrap{padding:0; max-width:100%;}
+    .card,.ask-card,.food-card{box-shadow:none; border:1px solid #ccc; margin-bottom:8px;}
+    .statement .jp{font-size:15pt;} .ask-card .jp{font-size:14pt;}
+    .grid{gap:8px;}
+    a[href]:after{content:"";}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🍽️ 蛋奶素・餐廳溝通卡</h1>
+  <p>用指的問店家｜日本語 ・ English ・ 中文</p>
+  <div class="toolbar no-print">
+    <button class="btn" onclick="window.print()">🖨 列印 / 存 PDF</button>
+    <a class="btn" href="index.html">← 回首頁</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- 主聲明 -->
+  <div class="card statement">
+    <div class="jp">私は ベジタリアン です。<br>卵・乳製品は 食べられますが、<br>お肉・お魚・魚介類・魚のだし は 食べられません。</div>
+    <div class="ro">Watashi wa bejitarian desu. Tamago・nyūseihin wa taberaremasu ga, oniku・osakana・gyokairui・sakana no dashi wa taberaremasen.</div>
+    <div class="en">🇬🇧 I'm an ovo-lacto vegetarian. I can eat <b>eggs and dairy</b>, but <b>NOT meat, fish, seafood, or fish/meat broth (dashi)</b>.</div>
+    <div class="zh">🇹🇼 我吃蛋奶素。可以吃<b>蛋和乳製品</b>，但不吃<b>肉、魚、海鮮，以及柴魚／肉類高湯（だし）</b>。</div>
+  </div>
+
+  <!-- 可以 / 不能 -->
+  <div class="grid">
+    <div class="card food-card ok">
+      <h2>✅ 食べられます／可以吃</h2>
+      <div class="food-row"><span class="fjp">卵（たまご）</span> <span class="fzh">蛋・Egg</span></div>
+      <div class="food-row"><span class="fjp">乳製品・チーズ・牛乳</span> <span class="fzh">乳製品・Dairy</span></div>
+      <div class="food-row"><span class="fjp">野菜・きのこ</span> <span class="fzh">蔬菜・菇類</span></div>
+      <div class="food-row"><span class="fjp">豆腐・大豆製品</span> <span class="fzh">豆腐・豆製品</span></div>
+      <div class="food-row"><span class="fjp">ご飯・パン・麺</span> <span class="fzh">飯・麵包・麵</span></div>
+      <div class="food-row"><span class="fjp">昆布だし</span> <span class="fzh">昆布(海帶)高湯 OK</span></div>
+      <div class="food-row"><span class="fjp">ねぎ・にんにく・にら</span> <span class="fzh">蔥・蒜・韭 也可以 👍</span></div>
+    </div>
+    <div class="card food-card no">
+      <h2>❌ 食べられません／不能吃</h2>
+      <div class="food-row"><span class="fjp">肉（牛・豚・鶏）</span> <span class="fzh">肉（牛豬雞）</span></div>
+      <div class="food-row"><span class="fjp">魚・魚介類（エビ・カニ・貝）</span> <span class="fzh">魚・海鮮</span></div>
+      <div class="food-row"><span class="fjp">かつおだし・煮干し</span> <span class="fzh">柴魚／小魚高湯</span></div>
+      <div class="food-row"><span class="fjp">肉のスープ・鶏がら・豚骨</span> <span class="fzh">肉／雞／豚骨湯</span></div>
+      <div class="food-row"><span class="fjp">ハム・ベーコン・ソーセージ</span> <span class="fzh">火腿・培根・香腸</span></div>
+      <div class="food-row"><span class="fjp">ラード・ゼラチン</span> <span class="fzh">豬油・明膠</span></div>
+      <div class="food-row"><span class="fjp">かつお節・魚醤・オイスターソース</span> <span class="fzh">柴魚片・魚露・蠔油</span></div>
+    </div>
+  </div>
+
+  <!-- 常用問句 -->
+  <div class="card">
+    <div class="sec-title">💬 常用問句（指給店家看）／Point to ask</div>
+
+    <div class="ask-card">
+      <div><span class="num">1</span><span class="jp">これに お肉 や お魚 は 入っていますか？</span></div>
+      <div class="ro">Kore ni oniku ya osakana wa haitte imasu ka?</div>
+      <div class="en">Does this contain meat or fish?</div>
+      <div class="zh">這裡面有肉或魚嗎？</div>
+    </div>
+
+    <div class="ask-card">
+      <div><span class="num">2</span><span class="jp">スープは かつおだし や 肉のだし ですか？</span></div>
+      <div class="ro">Sūpu wa katsuo-dashi ya niku no dashi desu ka?</div>
+      <div class="en">Is the soup made with fish or meat broth?</div>
+      <div class="zh">湯是用柴魚或肉類高湯嗎？</div>
+    </div>
+
+    <div class="ask-card">
+      <div><span class="num">3</span><span class="jp">お肉・お魚・だし 抜き で 作れますか？</span></div>
+      <div class="ro">Oniku・osakana・dashi nuki de tsukuremasu ka?</div>
+      <div class="en">Can you make it without meat, fish, and dashi?</div>
+      <div class="zh">可以做成不加肉、魚、高湯的嗎？</div>
+    </div>
+
+    <div class="ask-card">
+      <div><span class="num">4</span><span class="jp">ベジタリアン の メニュー は ありますか？</span></div>
+      <div class="ro">Bejitarian no menyū wa arimasu ka?</div>
+      <div class="en">Do you have a vegetarian menu?</div>
+      <div class="zh">有素食餐點嗎？</div>
+    </div>
+
+    <div class="ask-card">
+      <div><span class="num">5</span><span class="jp">持ち帰り（テイクアウト）は できますか？</span></div>
+      <div class="ro">Mochikaeri (teikuauto) wa dekimasu ka?</div>
+      <div class="en">Can I get this to take out?</div>
+      <div class="zh">可以外帶嗎？</div>
+    </div>
+
+    <div class="ask-card">
+      <div><span class="num">6</span><span class="jp">卵 と 乳製品 は 大丈夫です。</span></div>
+      <div class="ro">Tamago to nyūseihin wa daijōbu desu.</div>
+      <div class="en">Eggs and dairy are OK for me.</div>
+      <div class="zh">蛋和乳製品我可以吃。</div>
+    </div>
+
+    <div class="ask-card">
+      <div><span class="num">7</span><span class="jp">ねぎ・にんにく も 食べられます。</span></div>
+      <div class="ro">Negi・ninniku mo taberaremasu.</div>
+      <div class="en">Onion and garlic are fine for me too.</div>
+      <div class="zh">蔥、蒜我也可以吃。</div>
+    </div>
+
+    <div class="ask-card">
+      <div><span class="num">8</span><span class="jp">ありがとうございます。お願いします。</span></div>
+      <div class="ro">Arigatō gozaimasu. Onegai shimasu.</div>
+      <div class="en">Thank you. / Please.</div>
+      <div class="zh">謝謝、麻煩你了。</div>
+    </div>
+  </div>
+
+  <!-- 是非指指 -->
+  <div class="card">
+    <div class="sec-title">👆 請店家指這裡回答／Please point to answer</div>
+    <div class="yesno">
+      <div class="yn y"><div class="big">はい</div><div class="small">Yes ・ 是／可以</div></div>
+      <div class="yn n"><div class="big">いいえ</div><div class="small">No ・ 不是／不行</div></div>
+    </div>
+  </div>
+
+  <div class="note">
+    💡 小提醒：日本料理常用 <b>かつおだし（柴魚高湯）</b>，看似素食的味噌湯、烏龍麵、天婦羅醬汁常含魚高湯，記得用第 1、2 句確認。<br>
+    離線也能用：把這頁「列印 / 存 PDF」帶著，或手機加入書籤。
+  </div>
+</div>
+
+<div class="footer">Fox 家旅遊計劃 · 用 Claude 整理</div>
+
+</body>
+</html>
