@@ -455,6 +455,9 @@ const photos = {
   94:'images/94.jpg', 95:'images/95.jpg', 96:'images/96.jpg', 97:'images/97.jpg',
   98:'images/98.jpg', 99:'images/99.jpg', 100:'images/100.jpg', 101:'images/101.jpg',
   102:'images/102.jpg', 103:'images/103.jpg', 104:'images/104.jpg',
+  // ── 梅田百貨各店（Tabelog 實照，存本地；111 無圖） ──
+  106:'images/106.jpg', 107:'images/107.jpg', 108:'images/108.jpg', 109:'images/109.jpg',
+  110:'images/110.jpg', 112:'images/112.jpg', 113:'images/113.jpg', 114:'images/114.jpg',
 };
 
 // ── 每人大約價位（日圓，參考 Tabelog / Google / 官網菜單） ──────
@@ -534,6 +537,10 @@ const PRICES = {
   98:'午 ¥2,000–2,999／晚 ¥3,000–3,999', 99:'午 ¥6,000 起／晚 ¥10,000–15,000（高價）', 100:'約 ¥1,000–2,999／人',
   101:'約 ¥1,000–1,999／人', 102:'約 ¥1,000–2,500／人', 103:'約 ¥500–1,000／人',
   104:'整模約 ¥965（每人 ¥300–1,000）', 105:'每份約 ¥500–1,500',
+  // 梅田百貨各店
+  106:'午 ¥1,000–1,999／晚 ¥3,000–3,999', 107:'惣菜約 ¥500–1,200／品', 108:'午 ¥1,000–1,999／晚 ¥2,000–2,999',
+  109:'午 ¥1,000–1,999／晚 ¥4,000–4,999', 110:'約 ¥2,000–2,999／人', 111:'約 ¥1,000–1,999／人',
+  112:'約 ¥1,000–1,999／人', 113:'午 ¥1,000–1,999／晚 ¥2,000–2,999', 114:'依採購（¥300–1,000）',
 };
 
 // ── Restaurant data ────────────────────────────────────────────────────────
@@ -2292,6 +2299,142 @@ const restaurants = [
     hcStars:'—', gStars:'查無（分店無獨立評分）',
     gmap:'https://www.google.com/maps/search/?api=1&query=34.67392,135.50096',
     ghours:'https://www.daimaru.co.jp/shinsaibashi/', hcUrl:'https://www.rf-one.com/', phone:''
+  },
+  // ── 梅田/大阪站周邊百貨 內部各店（蛋奶素） ──────────────
+  {
+    id:106, rank:106, group:'social', region:'osaka',
+    name:'阪急 13F｜おやさいガーデン TIERRA', nameJa:'おやさいガーデン TIERRA 阪急梅田店',
+    type:'野菜創作料理・蔬食定食（阪急 13F）', tags:['social'],
+    area:'阪急うめだ本店 13F・梅田',
+    address:'大阪市北区角田町 8-7 阪急うめだ本店 13F',
+    lat:34.70280, lng:135.49849,
+    hours:'11:00-22:00（LO21:00）；1/1-1/2 公休',
+    dishes:'蔬菜盤(大量時蔬+沙拉+酪梨 dip+蔬菜濃湯+雜穀米可續)・酪梨碗・季節烤時蔬・Açaí bowl',
+    notes:'⚠️ 非純素店，另有漢堡排/烤豬肉，點餐避開；蔬菜濃湯/小菜可能含柴魚或雞高湯，請確認「無かつお・無肉」。梅田最推薦的蔬食創作。',
+    flag:'🏬 阪急 13F・蔬食創作',
+    hcStars:'—', gStars:'Tabelog 3.47（499 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.70280,135.49849',
+    ghours:'https://tabelog.com/osaka/A2701/A270101/27083896/', hcUrl:'https://tabelog.com/osaka/A2701/A270101/27083896/', phone:''
+  },
+  {
+    id:107, rank:107, group:'social', region:'osaka',
+    name:'大丸梅田 B1｜V PALETTE 蔬食熟食', nameJa:'ヴィ パレット V PALETTE 大丸梅田店',
+    type:'蔬菜系熟食・便當外帶（大丸梅田 B1）', tags:['social','takeout'],
+    area:'大丸梅田店 B1・梅田',
+    address:'大阪市北区梅田 3-1-1 大丸梅田店 B1',
+    lat:34.70193, lng:135.49663,
+    hours:'10:00-20:00（依百貨，不定休）',
+    dishes:'約 40 種健康菜色，挑純蔬菜品項（蔬菜煮/沙拉/根菜/豆類惣菜）',
+    notes:'⚠️ 主打「健康」非「素」，暢銷多含雞/鮭/唐揚，須逐品看標示挑無肉無魚者；醬汁可能含高湯。外帶方便。',
+    flag:'🏬 大丸梅田 B1・外帶',
+    hcStars:'—', gStars:'Tabelog 3.00（僅 1 則・參考）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.70193,135.49663',
+    ghours:'https://tabelog.com/osaka/A2701/A270101/27140394/', hcUrl:'https://tabelog.com/osaka/A2701/A270101/27140394/', phone:''
+  },
+  {
+    id:108, rank:108, group:'social', region:'osaka',
+    name:'LUCUA 10F｜ラヴァーニャ 義式', nameJa:'イタリアンレストラン ラヴァーニャ ルクア大阪',
+    type:'義式・Pizza/Pasta（LUCUA 10F）', tags:['social'],
+    area:'LUCUA 大阪 10F・梅田（大阪站直結）',
+    address:'大阪市北区梅田 3-1-3 LUCUA 大阪 10F',
+    lat:34.70327, lng:135.49626,
+    hours:'午 11:00-15:30／晚 17:00-23:00（LO22:00）',
+    dishes:'瑪格麗特披薩(番茄+起司)・番茄/蔬菜系義大利麵・前菜沙拉・甜點',
+    notes:'⚠️ 吃到飽/菜單含培根卡波納拉、肉醬，自取或點餐避開；確認番茄底未加鯷魚/肉汁。披薩最好操作。',
+    flag:'🏬 LUCUA 10F・披薩最穩',
+    hcStars:'—', gStars:'Tabelog 3.38（235 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.70327,135.49626',
+    ghours:'https://tabelog.com/osaka/A2701/A270101/27056875/', hcUrl:'https://tabelog.com/osaka/A2701/A270101/27056875/', phone:''
+  },
+  {
+    id:109, rank:109, group:'social', region:'osaka',
+    name:'LUCUA SOUTH 14F｜燦 Grill&Bar', nameJa:'GRILL＆BAR DINING 燦 ルクアサウス店',
+    type:'燒烤＆野菜・義式グリル（LUCUA SOUTH 14F）', tags:['social'],
+    area:'LUCUA SOUTH 14F・梅田',
+    address:'大阪市北区梅田 3-1-3 ルクアサウス 14F',
+    lat:34.70290, lng:135.49650,
+    hours:'11:00-16:00（LO15:00）／17:00-23:00（LO22:00）',
+    dishes:'午間常有蔬菜盤/雜穀飯・沙拉・湯型套餐；烤時蔬、沙拉可挑',
+    notes:'⚠️ 本質是 grill(肉/牛排為主)，晚間套餐為主；午間蔬菜盤內容會變，需確認有無雞肉、湯底是否肉/柴魚高湯。',
+    flag:'🏬 LUCUA SOUTH 14F',
+    hcStars:'—', gStars:'Tabelog 3.45（411 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.70290,135.49650',
+    ghours:'https://tabelog.com/osaka/A2701/A270101/27056732/', hcUrl:'https://tabelog.com/osaka/A2701/A270101/27056732/', phone:''
+  },
+  {
+    id:110, rank:110, group:'social', region:'osaka',
+    name:'阪神 9F｜一六茶寮 一汁六菜', nameJa:'一六茶寮（いちろくさりょう）阪神梅田本店',
+    type:'和食・一汁六菜定食（阪神 9F）', tags:['social'],
+    area:'阪神梅田本店 9F・梅田',
+    address:'大阪市北区梅田 1-13-13 阪神梅田本店 9F',
+    lat:34.70116, lng:135.49861,
+    hours:'11:00-22:00（LO21:00，不定休）',
+    dishes:'主菜可改「野菜せいろ蒸し」或「土鍋おぼろ豆腐」・鮮蔬果昔・蔬菜小菜・十六穀米',
+    notes:'⚠️ 陷阱多：定食主菜預設西京燒銀鱈(魚)、固定附豚汁、小菜/高湯可能含柴魚。蛋奶素須指定改野菜/豆腐主菜、撤豚汁、逐項確認(與難波 ON THE SQUARE 同系)。',
+    flag:'🏬 阪神 9F・⚠️需大改',
+    hcStars:'—', gStars:'Tabelog 3.44（197 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.70116,135.49861',
+    ghours:'https://tabelog.com/osaka/A2701/A270101/27125135/', hcUrl:'https://tabelog.com/osaka/A2701/A270101/27125135/', phone:''
+  },
+  {
+    id:111, rank:111, group:'social', region:'osaka',
+    name:'阪神 9F｜タブロ ラチェルバ 義麵', nameJa:'タブロ ∈ ラチェルバ 阪神梅田',
+    type:'義式パスタ・甜點（阪神 9F フードホール）', tags:['social'],
+    area:'阪神梅田本店 9F フードホール・梅田',
+    address:'大阪市北区梅田 1-13-13 阪神梅田本店 9F',
+    lat:34.70116, lng:135.49861,
+    hours:'11:00-22:00（LO 約 21:00）',
+    dishes:'番茄/蔬菜系義大利麵(可請無肉版)・甜點；食堂可同桌點其他攤位素項',
+    notes:'⚠️ 招牌是牛肉茄子肉醬麵與漢堡，肉料理為主；點麵指定番茄/蔬菜底、無肉無鯷魚。適合甜點＋一盤蔬菜義麵。',
+    flag:'🏬 阪神 9F・甜點+蔬菜麵',
+    hcStars:'—', gStars:'Tabelog 3.36（81 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.70116,135.49861',
+    ghours:'https://tabelog.com/osaka/A2701/A270101/27125707/', hcUrl:'https://tabelog.com/osaka/A2701/A270101/27125707/', phone:''
+  },
+  {
+    id:112, rank:112, group:'social', region:'osaka',
+    name:'Grand Front B1｜ERICK SOUTH 南印度', nameJa:'エリックサウス グランフロント大阪店',
+    type:'南印度料理・ミールス thali（Grand Front 南館 B1）', tags:['social'],
+    area:'Grand Front 大阪 南館 B1・梅田',
+    address:'大阪市北区大深町 3-1 グランフロント大阪 南館 B1',
+    lat:34.70430, lng:135.49555,
+    hours:'11:00-22:00（LO21:00，全年無休）',
+    dishes:'ベジミールス(蔬食 thali)＝豆/菠菜咖哩・sambar・rasam・raita・basmati 米・papad(可續)・蔬菜 biryani',
+    notes:'南印 ミールス 以蔬食為主較安全；仍請確認 sambar/rasam 未加肉高湯，避開葷 biryani/咖哩。梅田很推薦的蔬食選擇。',
+    flag:'🏬 Grand Front B1・蔬食thali',
+    hcStars:'—', gStars:'Tabelog 3.32（272 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.70430,135.49555',
+    ghours:'https://tabelog.com/osaka/A2701/A270101/27127074/', hcUrl:'https://tabelog.com/osaka/A2701/A270101/27127074/', phone:''
+  },
+  {
+    id:113, rank:113, group:'social', region:'osaka',
+    name:'Grand Front 7F｜BINDU 印度', nameJa:'インディアンタンドリー BINDU グランフロント大阪店',
+    type:'印度料理・咖哩/烤餅（Grand Front 南館 7F）', tags:['social'],
+    area:'Grand Front 大阪 南館 7F・梅田',
+    address:'大阪市北区大深町 3-1 グランフロント大阪 南館 7F',
+    lat:34.70430, lng:135.49555,
+    hours:'平日 11:00-15:30 / 17:00-23:00；六日祝 11:00-23:00',
+    dishes:'蔬菜咖哩(綜合野菜/菠菜起司/豆 dal)・起司烤餅・多款 naan・蔬菜 pakora',
+    notes:'⚠️ 本店為 Tandoori/居酒屋風，招牌坦都里烤肉；點蔬菜咖哩須確認底湯非雞/肉高湯。與難波高島屋 BINDU 同集團。',
+    flag:'🏬 Grand Front 7F・印度',
+    hcStars:'—', gStars:'Tabelog 3.36（113 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.70430,135.49555',
+    ghours:'https://tabelog.com/osaka/A2701/A270101/27130296/', hcUrl:'https://tabelog.com/osaka/A2701/A270101/27130296/', phone:''
+  },
+  {
+    id:114, rank:114, group:'social', region:'osaka',
+    name:'Grand Front｜Natural House 有機熟食', nameJa:'ナチュラルハウス グランフロント大阪店',
+    type:'有機超市・蔬食熟食デリ・果汁 bar（うめきた広場 B1）', tags:['social','takeout'],
+    area:'Grand Front 大阪 うめきた広場 B1・梅田',
+    address:'大阪市北区大深町 4-1 グランフロント大阪 うめきた広場 B1',
+    lat:34.70490, lng:135.49505,
+    hours:'10:00-22:00（不定休）',
+    dishes:'有機蔬菜熟食/惣菜・蔬菜冰淇淋・無麩質品・有機麵包・現榨青汁・Açaí',
+    notes:'超市/デリ形式，熟食輪替，挑純蔬菜/蛋奶製品、看標示避開肉魚與柴魚高湯。適合外帶。',
+    flag:'🏬 Grand Front B1・有機外帶',
+    hcStars:'—', gStars:'Tabelog 3.01（7 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.70490,135.49505',
+    ghours:'https://tabelog.com/osaka/A2701/A270101/27072558/', hcUrl:'https://tabelog.com/osaka/A2701/A270101/27072558/', phone:''
   },
 ];
 
