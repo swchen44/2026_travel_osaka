@@ -12,7 +12,10 @@ js = re.findall(r'<script>(.*?)</script>', html, re.S)[-1]
 pblock = re.search(r'const PRICES = \{(.*?)\n\};', js, re.S).group(1)
 prices = {int(k): v for k, v in re.findall(r"(\d+)\s*:\s*'([^']*)'", pblock)}
 
+CHECK_OVERRIDE = {32: '2026-07-12'}  # 個別重新查證過的店家
 def checked(i):
+    if i in CHECK_OVERRIDE:
+        return CHECK_OVERRIDE[i]
     return '2026-06-28' if i <= 25 else '2026-06-29' if i <= 37 else '2026-06-30' if i <= 51 else '2026-07-03'
 
 regionmap = {'': '大阪', 'osaka': '大阪', 'kyoto': '京都', 'nara': '奈良'}

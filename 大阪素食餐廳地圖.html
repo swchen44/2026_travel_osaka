@@ -457,7 +457,7 @@ const PRICES = {
   29:'午 ¥1,650–1,950／晚約 ¥3,000／人',
   30:'超市・依採購',
   31:'超市・依採購',
-  32:'百貨美食街・各店不一',
+  32:'餐廳樓層 約 ¥1,500–3,000／B1 外帶 ¥500–1,500',
   33:'超市・依採購',
   34:'百貨・各店不一',
   35:'午約 ¥9,000／晚約 ¥15,000／人（需預約）',
@@ -1099,9 +1099,9 @@ const restaurants = [
     address:'大阪市中央区難波 5-1-5',
     lat:34.66466, lng:135.50089,
     hours:'本館 10:00-20:00｜餐廳 7-9F 11:00-23:00｜1/1・1/2 公休',
-    dishes:'デパ地下美食（B1/B2）＋餐廳樓層 7-9F（多店，建議個別確認素食）',
-    notes:'南海・御堂筋線難波站直結；與 Swissôtel 同為南海ビル。',
-    flag:'🏨 飯店推薦・百貨',
+    dishes:'蛋奶素可挑：8F ビンドゥ印度(蔬菜咖哩+チーズナン)・8F ON THE SQUARE(野菜せいろ蒸し定食)・7F 一凛堂(番茄/蒜辣義大利麵・甜點)；B1 外帶：豆狸稻荷壽司(純款)・越後屋飯糰(梅/昆布)・泉北堂甜麵包・赤福和菓子・洋菓子布丁',
+    notes:'【蛋奶素快速挑選】想坐下最零踩雷→8F 印度 ビンドゥ 點蔬菜咖哩+起司烤餅；或 8F ON THE SQUARE 蔬食定食(把附的豚汁換掉)；義麵→7F 一凛堂古典款。想邊逛邊吃→直奔 B1(豆狸純稻荷+越後屋梅/昆布飯糰+泉北堂甜麵包+和菓子)。⚠️ 日本「看似素」常暗藏柴魚/小魚高湯(味噌湯・うどんつゆ・天つゆ・滷豆皮・和風パスタ)，點餐先問「魚のだし 入っていますか？」。南海・御堂筋難波站直結，與 Swissôtel 同為南海ビル。',
+    flag:'🏨 飯店推薦・百貨(蛋奶素選項多)',
     hcStars:'—', gStars:'查無（參考 Yahoo 4.36・738 則）',
     gmap:'https://www.google.com/maps/search/?api=1&query=34.66466,135.50089',
     ghours:'https://www.diningmaison.jp/',
@@ -2065,7 +2065,10 @@ const sidebar = document.getElementById('sidebar');
 const countLabel = document.getElementById('count-label');
 
 // 核實日期＝該批資料最後於 Google 地圖核實/更新的日期（＝各批提交日）
+// CHECK_OVERRIDE：個別重新查證過的店家，覆蓋批次日期
+const CHECK_OVERRIDE = { 32: '2026-07-12' }; // 高島屋難波：素食選項重新查證
 function checkedDate(id) {
+  if (CHECK_OVERRIDE[id]) return CHECK_OVERRIDE[id];
   if (id <= 25) return '2026-06-28';
   if (id <= 37) return '2026-06-29';
   if (id <= 51) return '2026-06-30';
