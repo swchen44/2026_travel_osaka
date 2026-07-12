@@ -3083,7 +3083,7 @@ function getFiltered() {
       activeFilter === 'user'    ? r.group === 'user'  :
       activeFilter === 'hotel'   ? r.group === 'hotel' :
       activeFilter === 'social'  ? r.group === 'social' :
-      activeFilter === 'depa'    ? (r.id >= 90 || r.id === 32 || r.id === 34) :
+      activeFilter === 'depa'    ? ((r.id >= 90 && r.id <= 126) || r.id === 32 || r.id === 34) :
       r.tags.includes(activeFilter);
     const matchSearch = !searchVal || r.name.toLowerCase().includes(searchVal) ||
       r.nameJa.includes(searchVal) || r.area.includes(searchVal) || r.dishes.includes(searchVal);
