@@ -53,6 +53,24 @@
   .nb-status { font-size:0.8rem; color:#1565C0; font-weight:700; }
   .card-dist { font-size:0.8rem; color:#1565C0; font-weight:800; margin-top:2px; }
 
+  /* 確定素/需詢問 標籤 */
+  .veg-badge { display:inline-block; font-size:0.68rem; font-weight:800; border-radius:6px; padding:1px 7px; margin-left:6px; vertical-align:middle; white-space:nowrap; }
+  .vb-ok  { background:#e8f5e9; color:#2e7d32; }
+  .vb-ask { background:#fff3e0; color:#e65100; }
+  .card-src { font-size:0.7rem; color:#999; margin-top:2px; }
+
+  /* 手機篩選浮動鈕 + 覆蓋層 */
+  #filters-fab { display:none; position:fixed; right:14px; bottom:16px; z-index:3500;
+    background:var(--green); color:#fff; border:none; border-radius:26px; padding:12px 18px;
+    font-size:0.95rem; font-weight:800; box-shadow:0 4px 14px rgba(0,0,0,.35); cursor:pointer; }
+  #filters-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:3300; }
+  body.filters-open #filters-backdrop { display:block; }
+  @media (max-width:768px){
+    #filters-fab { display:inline-flex; align-items:center; gap:5px; }
+    body.filters-open #filters { position:fixed; top:0; left:0; right:0; z-index:3400;
+      max-height:84vh; overflow-y:auto; box-shadow:0 6px 24px rgba(0,0,0,.35); }
+  }
+
   /* ── Filter bar ── */
   #filter-bar {
     background: var(--white); border-bottom: 1px solid #ddd;
@@ -70,7 +88,7 @@
   }
 
   /* ── Main layout ── */
-  #main { display: flex; height: calc(100vh - 232px); }
+  #main { display: flex; height: calc(100vh - 200px); }
 
   /* ── Map ── */
   #map { flex: 0 0 55%; height: 100%; position: relative; }
@@ -219,6 +237,7 @@
   </div>
 </header>
 
+<div id="filters">
 <div id="region-bar">
   <span>地區：</span>
   <button class="region-btn active" onclick="filterRegion('all',this)">🗾 全部</button>
@@ -255,10 +274,10 @@
   <button class="nb-btn nb-clear" id="nb-clear" onclick="nearbyClear()" style="display:none;">✖ 清除附近</button>
   <span id="nb-status" class="nb-status"></span>
 </div>
+</div><!-- /#filters -->
 
-<div id="src-note" style="background:#fffdf3;border-bottom:1px solid #eee;padding:6px 18px;font-size:0.74rem;color:#8a6d3b;line-height:1.5;">
-  ℹ️ 資料整理自各店<b>官方菜單・Tabelog・HappyCow・素食社群網友心得</b>＋日本料理常識（如高湯多為柴魚），非憑空想像；但標「⚠️／可客製／需詢問」者<b>不保證店家一定接受</b>，以現場為準。要最安心，優先選「🌱 全素」的素食專門店。
-</div>
+<div id="filters-backdrop" onclick="toggleFilters()"></div>
+<button id="filters-fab" onclick="toggleFilters()"><span id="fab-icon">🔍</span> <span id="fab-txt">篩選</span></button>
 
 <div id="main">
   <div id="map" style="position:relative;">
@@ -276,6 +295,10 @@
         <span id="tips-toggle">▼</span>
       </div>
       <div id="tips-body">
+        <div class="tip-row" style="background:#fff8e1;">
+          <span class="tip-num">⚠️</span>
+          <span class="tip-text"><b>資料來源與客製提醒：</b>各店資料整理自<b>官方菜單・Tabelog・HappyCow・素食社群網友心得</b>＋日本料理常識（如高湯多為柴魚），非憑空想像。但標「⚠️／可客製／需詢問」者<b>不保證店家一定接受，以現場為準</b>；要最安心請優先選卡片標「✅ 確定素」的素食專門店。</span>
+        </div>
         <div class="tip-row">
           <span class="tip-num">①</span>
           <span class="tip-text"><b>🧊 可帶冷凍食品回飯店微波：</b>
@@ -2336,6 +2359,38 @@ function checkedDate(id) {
   return '2026-07-03';
 }
 
+// 確定素（素食專門/全素菜單，不用溝通）vs 需詢問（需確認/客製，不保證接受）
+const CERTAIN_OVERRIDE = new Set([42, 51, 104]); // Shama印度素、江南全店素、りくろー起司蛋糕
+const ASK_OVERRIDE = new Set([]);
+function certainVeg(r) {
+  if (CERTAIN_OVERRIDE.has(r.id)) return true;
+  if (ASK_OVERRIDE.has(r.id)) return false;
+  const t = r.type || '';
+  if (/友善|選項|部分素食|有素食|素食菜單|素食套餐|Veg-options/i.test(t)) return false;
+  return /全素|純素|精進|素食|蛋奶素/.test(t);
+}
+function vegBadge(r) {
+  return certainVeg(r)
+    ? '<span class="veg-badge vb-ok">✅ 確定素</span>'
+    : '<span class="veg-badge vb-ask">❓ 需詢問</span>';
+}
+function sourceLabel(r) {
+  const u = (r.hcUrl || '') + ' ' + (r.ghours || '');
+  if (/happycow/.test(u)) return 'HappyCow';
+  if (/tabelog/.test(u)) return 'Tabelog';
+  if (/instagram/.test(u)) return 'Instagram';
+  if (/facebook/.test(u)) return 'Facebook';
+  if (/diningmaison|daimaru|takashimaya|swissotel|hankyu|hanshin|nasukamo|tenryuji|shoraian|mercy-vegan|ain-soph|vegan-uzu|towzen|onwashop|vegan-nara|somisweets|bee9|canelita|cocowell|daiei|ikarisuper|lifecorp|mumokuteki|hs-choice|vogkyoto/.test(u)) return '官方網站';
+  if (u.trim()) return '官方/部落格';
+  return '綜合整理';
+}
+function toggleFilters() {
+  const open = document.body.classList.toggle('filters-open');
+  const t = document.getElementById('fab-txt'), i = document.getElementById('fab-icon');
+  if (t) t.textContent = open ? '關閉' : '篩選';
+  if (i) i.textContent = open ? '✖' : '🔍';
+}
+
 function buildCards(list) {
   // Remove old cards
   sidebar.querySelectorAll('.card').forEach(el => el.remove());
@@ -2351,7 +2406,7 @@ function buildCards(list) {
         ${photoUrl ? `<img class="card-photo" src="${photoUrl}" alt="${r.name}" loading="lazy" onerror="this.style.display='none'">` : ''}
         <div class="card-body">
           <div class="card-top">
-            <div class="card-name">${r.name}</div>
+            <div class="card-name">${r.name} ${vegBadge(r)}</div>
             <div class="rank-badge ${rankClass}">${r.rank}</div>
           </div>
           <div class="card-type">${r.type}</div>
@@ -2365,6 +2420,7 @@ function buildCards(list) {
           <div class="card-dishes">🍽 ${r.dishes}</div>
           ${PRICES[r.id] ? `<div class="card-price">💰 ${PRICES[r.id]}</div>` : ''}
           <div class="card-checked">🔎 核實日期 ${checkedDate(r.id)}</div>
+          <div class="card-src">📄 資料來源：${sourceLabel(r)}（多方交叉整理）</div>
           ${r.flag ? `<div class="flag-tag">${r.flag}</div>` : ''}
           <div class="card-links">
             <a class="link-btn btn-gmap" href="${r.gmap}" target="_blank">🗺 Google Maps</a>
@@ -2402,7 +2458,7 @@ function selectCard(id, panMap) {
   const embed = `https://maps.google.com/maps?q=${encodeURIComponent(r.name+' Osaka')}&t=m&z=16&output=embed&iwloc=near`;
   document.getElementById('dp-iframe').src = embed;
   document.getElementById('dp-info').innerHTML = `
-    <div class="dp-title">#${r.rank} ${r.name}</div>
+    <div class="dp-title">#${r.rank} ${r.name} ${vegBadge(r)}</div>
     <div class="dp-row"><strong>地址：</strong>${r.address}</div>
     <div class="dp-row"><strong>地區：</strong>${r.area}</div>
     <div class="dp-row"><strong>類型：</strong>${r.type}</div>
@@ -2410,6 +2466,8 @@ function selectCard(id, panMap) {
     <div class="dp-row"><strong>🍽 菜色：</strong>${r.dishes}</div>
     ${PRICES[r.id] ? `<div class="dp-row"><strong>💰 價位：</strong>${PRICES[r.id]}</div>` : ''}
     <div class="dp-row"><strong>🔎 核實日期：</strong>${checkedDate(r.id)}（該資訊最後於 Google 地圖核實日）</div>
+    <div class="dp-row"><strong>📄 資料來源：</strong>${sourceLabel(r)}（官方菜單/Tabelog/HappyCow/網友心得多方整理）</div>
+    <div class="dp-row"><strong>${certainVeg(r) ? '✅ 確定素：' : '❓ 需詢問：'}</strong>${certainVeg(r) ? '素食專門/全素菜單，基本不用溝通。' : '葷店有素選項或需客製，點餐請用溝通卡確認、不保證店家接受。'}</div>
     <div class="dp-row">${(r.group!=='hotel'&&r.group!=='social') ? `<strong>HappyCow：</strong>${r.hcStars} &nbsp; ` : ''}<strong>${(r.group==='hotel'||r.group==='social') ? '評分：' : 'Google：'}</strong>${r.gStars}${(r.group!=='hotel'&&r.group!=='social') ? '★' : ''}</div>
     ${r.notes ? `<div class="dp-note">💬 ${r.notes}</div>` : ''}
     <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
