@@ -70,7 +70,7 @@
   }
 
   /* ── Main layout ── */
-  #main { display: flex; height: calc(100vh - 200px); }
+  #main { display: flex; height: calc(100vh - 232px); }
 
   /* ── Map ── */
   #map { flex: 0 0 55%; height: 100%; position: relative; }
@@ -236,6 +236,7 @@
   <button class="filter-btn" onclick="filterCards('user',this)">⭐ 使用者清單</button>
   <button class="filter-btn" onclick="filterCards('hotel',this)">🏨 飯店推薦</button>
   <button class="filter-btn" onclick="filterCards('social',this)">🔥 社群推薦</button>
+  <button class="filter-btn" onclick="filterCards('depa',this)">🏬 百貨美食</button>
   <button class="filter-btn" onclick="filterCards('takeout',this)">🥡 外帶/外送</button>
   <button class="filter-btn" onclick="filterCards('latenite',this)">🌙 深夜</button>
   <input type="text" id="search-input" placeholder="🔍 搜尋餐廳名稱…" oninput="searchCards(this.value)">
@@ -253,6 +254,10 @@
   <span>家</span>
   <button class="nb-btn nb-clear" id="nb-clear" onclick="nearbyClear()" style="display:none;">✖ 清除附近</button>
   <span id="nb-status" class="nb-status"></span>
+</div>
+
+<div id="src-note" style="background:#fffdf3;border-bottom:1px solid #eee;padding:6px 18px;font-size:0.74rem;color:#8a6d3b;line-height:1.5;">
+  ℹ️ 資料整理自各店<b>官方菜單・Tabelog・HappyCow・素食社群網友心得</b>＋日本料理常識（如高湯多為柴魚），非憑空想像；但標「⚠️／可客製／需詢問」者<b>不保證店家一定接受</b>，以現場為準。要最安心，優先選「🌱 全素」的素食專門店。
 </div>
 
 <div id="main">
@@ -2446,6 +2451,7 @@ function getFiltered() {
       activeFilter === 'user'    ? r.group === 'user'  :
       activeFilter === 'hotel'   ? r.group === 'hotel' :
       activeFilter === 'social'  ? r.group === 'social' :
+      activeFilter === 'depa'    ? (r.id >= 90 || r.id === 32 || r.id === 34) :
       r.tags.includes(activeFilter);
     const matchSearch = !searchVal || r.name.toLowerCase().includes(searchVal) ||
       r.nameJa.includes(searchVal) || r.area.includes(searchVal) || r.dishes.includes(searchVal);
