@@ -422,6 +422,11 @@ const photos = {
   // ── 補充照片：Tabelog/官網 og:image → 存本地 images/（避免 token 失效） ──
   47: 'images/47.jpg', 57: 'images/57.png', 59: 'images/59.png',
   60: 'images/60.jpg', 75: 'images/75.jpg', 78: 'images/78.jpg',
+  // ── 高島屋/大丸 內部各店（Tabelog 實照，存本地） ──
+  90:'images/90.jpg', 91:'images/91.jpg', 92:'images/92.jpg', 93:'images/93.jpg',
+  94:'images/94.jpg', 95:'images/95.jpg', 96:'images/96.jpg', 97:'images/97.jpg',
+  98:'images/98.jpg', 99:'images/99.jpg', 100:'images/100.jpg', 101:'images/101.jpg',
+  102:'images/102.jpg', 103:'images/103.jpg', 104:'images/104.jpg',
 };
 
 // ── 每人大約價位（日圓，參考 Tabelog / Google / 官網菜單） ──────
@@ -459,7 +464,7 @@ const PRICES = {
   31:'超市・依採購',
   32:'餐廳樓層 約 ¥1,500–3,000／B1 外帶 ¥500–1,500',
   33:'超市・依採購',
-  34:'百貨・各店不一',
+  34:'10F 餐廳 約 ¥2,000–4,000／B1-B2 甜點/外帶 ¥300–2,000',
   35:'午約 ¥9,000／晚約 ¥15,000／人（需預約）',
   36:'午 ¥5,500 起／晚 ¥8,500–12,500／人',
   37:'午自助 ¥5,900／週末早午餐 ¥6,900／人',
@@ -493,6 +498,14 @@ const PRICES = {
   82:'偏高價位（需預約）', 83:'甜點單品 ¥400–800', 84:'そば定食 ¥1,650',
   85:'約 ¥600–999／人', 86:'午 ¥1,000–1,999／純素套餐 ¥3,300', 87:'約 ¥1,000–2,000／人',
   88:'午餐套餐約 ¥1,200／人', 89:'約 ¥1,000–2,000／人（拉麵約 ¥2,000）',
+  // 高島屋內部各店
+  90:'午 ¥1,000–1,999／晚 ¥2,000–2,999', 91:'約 ¥2,000–2,999／人', 92:'約 ¥1,000–1,999／人',
+  93:'約 ¥999 以下', 94:'約 ¥999 以下', 95:'單品約數百円',
+  96:'午 ¥2,000–2,999／晚 ¥3,000–3,999', 97:'約 ¥1,000–2,999／人',
+  // 大丸內部各店
+  98:'午 ¥2,000–2,999／晚 ¥3,000–3,999', 99:'午 ¥6,000 起／晚 ¥10,000–15,000（高價）', 100:'約 ¥1,000–2,999／人',
+  101:'約 ¥1,000–1,999／人', 102:'約 ¥1,000–2,500／人', 103:'約 ¥500–1,000／人',
+  104:'整模約 ¥965（每人 ¥300–1,000）', 105:'每份約 ¥500–1,500',
 };
 
 // ── Restaurant data ────────────────────────────────────────────────────────
@@ -1137,9 +1150,9 @@ const restaurants = [
     address:'大阪市中央区心斎橋筋 1-7-1',
     lat:34.67392, lng:135.50096,
     hours:'本館 10:00-20:00｜B2 心斎橋フードホール 11:00-22:00｜10F 餐廳 11:00-22:00',
-    dishes:'B1F 食品・B2F 美食街・10F 餐廳（多店，建議個別確認素食）',
-    notes:'御堂筋線心斎橋站直結。',
-    flag:'🏨 飯店推薦・百貨',
+    dishes:'蛋奶素可挑：10F タントタント(瑪格麗特披薩/蔬菜義麵)・圓堂(野菜天婦羅沾鹽)・近江榮(甜點芭菲)；B1/B2：りくろー現烤起司蛋糕・PAINDUCE麵包・Café de Paris/Fruits Belle 水果甜點・RF1蔬菜沙拉（各店已獨立成卡片）',
+    notes:'【蛋奶素快速挑選】想吃正餐→10F タントタント可做無肉義麵/披薩；想吃甜點/外帶→B1 りくろー起司蛋糕最安心、B2 Café de Paris/Fruits Belle 水果甜點。⚠️ 和食/天婦羅/惣菜常含柴魚高湯(だし)，點餐先問「魚のだし・かつお 入っていますか？」。御堂筋線心斎橋站直結。',
+    flag:'🏨 飯店推薦・百貨(蛋奶素選項多)',
     hcStars:'—', gStars:'約 4.0',
     gmap:'https://www.google.com/maps/search/?api=1&query=34.67392,135.50096',
     ghours:'https://www.daimaru.co.jp/shinsaibashi/',
@@ -2010,6 +2023,248 @@ const restaurants = [
     gmap:'https://www.google.com/maps/search/?api=1&query=34.68434,135.83708',
     ghours:'https://www.instagram.com/vegan_friendly_ramen/', hcUrl:'https://www.instagram.com/vegan_friendly_ramen/', phone:''
   },
+  // ── 高島屋大阪店（難波）內部個別店家（蛋奶素） ──────────────
+  {
+    id:90, rank:90, group:'social', region:'osaka',
+    name:'高島屋 8F｜印度 BINDU ビンドゥ', nameJa:'インドダイニング ビンドゥ なんば店',
+    type:'印度料理（8F）', tags:['social'],
+    area:'高島屋大阪店 8F・難波（南海ビル）',
+    address:'大阪市中央区難波 5-1-5 高島屋大阪店 8F',
+    lat:34.66506, lng:135.50089,
+    hours:'平日 11:00-15:30 / 17:00-22:30；六日祝 11:00-22:30',
+    dishes:'蔬菜咖哩(綜合野菜/豆 dal/鷹嘴豆/菠菜起司/茄子)・野菜ビリヤニ・蔬菜天婦羅 pakora・samosa・チーズナン・Lassi',
+    notes:'蛋奶素在高島屋最可靠的一家。點餐確認咖哩底非肉/雞高湯，避開坦都里雞等肉類。南海・御堂筋難波站直結。',
+    flag:'🏬 高島屋 8F・最推薦',
+    hcStars:'—', gStars:'Tabelog 3.41（131 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66466,135.50089',
+    ghours:'https://tabelog.com/osaka/A2701/A270202/27120271/', hcUrl:'https://tabelog.com/osaka/A2701/A270202/27120271/', phone:''
+  },
+  {
+    id:91, rank:91, group:'social', region:'osaka',
+    name:'高島屋 8F｜ON THE SQUARE', nameJa:'ON THE SQUARE（オンザスクエア）',
+    type:'一汁六菜定食・健康蔬食（8F）', tags:['social'],
+    area:'高島屋大阪店 8F・難波',
+    address:'大阪市中央区難波 5-1-5 高島屋大阪店 8F',
+    lat:34.66494, lng:135.50117,
+    hours:'平日 11:00-15:30 / 17:00-22:00；六日祝 11:00-22:00',
+    dishes:'定食附餐可選 土鍋おぼろ豆ふ(現做嫩豆腐) 或 野菜せいろ蒸し・餐前鮮蔬果昔・六樣小菜(多為蔬菜)',
+    notes:'⚠️ 定食固定附「豚汁(豬肉味噌湯)」、無純蔬菜主菜、小菜/高湯可能含柴魚。蛋奶素須請店家撤換豚汁並逐項確認，實際較難全避，謹慎選。',
+    flag:'🏬 高島屋 8F・⚠️需換豚汁',
+    hcStars:'—', gStars:'Tabelog 3.39（168 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66466,135.50089',
+    ghours:'https://tabelog.com/osaka/A2701/A270202/27046904/', hcUrl:'https://tabelog.com/osaka/A2701/A270202/27046904/', phone:''
+  },
+  {
+    id:92, rank:92, group:'social', region:'osaka',
+    name:'高島屋 7F｜一凛堂', nameJa:'一凛堂 なんばダイニングメゾン店',
+    type:'義大利麵・喫茶・甜點（7F）', tags:['social'],
+    area:'高島屋大阪店 7F・難波',
+    address:'大阪市中央区難波 5-1-5 高島屋大阪店 7F',
+    lat:34.66466, lng:135.50129,
+    hours:'11:00-22:00（LO21:00）',
+    dishes:'手作宇治抹茶提拉米蘇・抹茶芭菲・咖啡抹茶飲品(蛋奶素可)；番茄/起司系義大利麵(需確認無肉)',
+    notes:'⚠️ 招牌和風義大利麵用酒粕+和風高湯(多含柴魚)、部分含培根。最保險是甜點+飲品，點麵務必確認高湯與配料。',
+    flag:'🏬 高島屋 7F・甜點最穩',
+    hcStars:'—', gStars:'Tabelog 3.36（124 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66466,135.50089',
+    ghours:'https://tabelog.com/osaka/A2701/A270202/27103072/', hcUrl:'https://tabelog.com/osaka/A2701/A270202/27103072/', phone:''
+  },
+  {
+    id:93, rank:93, group:'social', region:'osaka',
+    name:'高島屋 B1｜豆狸 稻荷壽司', nameJa:'豆狸（まめだ）高島屋大阪店',
+    type:'稻荷壽司・外帶（B1）', tags:['social','takeout'],
+    area:'高島屋大阪店 B1・難波',
+    address:'大阪市中央区難波 5-1-5 高島屋大阪店 B1',
+    lat:34.66438, lng:135.50117,
+    hours:'10:00-20:00',
+    dishes:'稻荷壽司(豆皮包醋飯，本體無肉)・招牌わさびいなり(山葵稻荷)',
+    notes:'⚠️ 豆皮多以柴魚高湯滷製；部分口味含小魚(ちりめん)/五目餡。挑純款、購買前確認醬汁與內餡。外帶方便。',
+    flag:'🏬 高島屋 B1・外帶',
+    hcStars:'—', gStars:'Tabelog 3.06（51 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66466,135.50089',
+    ghours:'https://tabelog.com/osaka/A2701/A270202/27040285/', hcUrl:'https://tabelog.com/osaka/A2701/A270202/27040285/', phone:''
+  },
+  {
+    id:94, rank:94, group:'social', region:'osaka',
+    name:'高島屋 B1｜越後屋甚兵衛 飯糰', nameJa:'越後屋 甚兵衛 難波高島屋店',
+    type:'飯糰・外帶（B1）', tags:['social','takeout'],
+    area:'高島屋大阪店 B1・難波',
+    address:'大阪市中央区難波 5-1-5 高島屋大阪店 B1',
+    lat:34.66426, lng:135.50089,
+    hours:'約 10:00-20:00（依百貨）',
+    dishes:'飯糰可挑 梅(梅干)・昆布・鹽・玉子(蛋) 等無肉魚口味',
+    notes:'⚠️ 避開鮭・おかか(柴魚)・明太子・鮪魚等；部分調味飯可能用高湯，購買前確認。外帶方便。',
+    flag:'🏬 高島屋 B1・外帶',
+    hcStars:'—', gStars:'Tabelog 3.04（10 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66466,135.50089',
+    ghours:'https://tabelog.com/osaka/A2701/A270202/27092922/', hcUrl:'https://tabelog.com/osaka/A2701/A270202/27092922/', phone:''
+  },
+  {
+    id:95, rank:95, group:'social', region:'osaka',
+    name:'高島屋 B1｜泉北堂 石窯麵包', nameJa:'泉北堂 大阪高島屋店',
+    type:'麵包・外帶（B1）', tags:['social','takeout'],
+    area:'高島屋大阪店 B1・難波',
+    address:'大阪市中央区難波 5-1-5 高島屋大阪店 B1',
+    lat:34.66438, lng:135.50061,
+    hours:'10:00-20:00',
+    dishes:'極食パン 土司・甜麵包(紅豆/奶油/波蘿等，多為蛋奶素可食)',
+    notes:'⚠️ 避開火腿/培根/香腸/咖哩肉等鹹味惣菜麵包；少數餡料可能含肉汁或魚漿，選購前確認。',
+    flag:'🏬 高島屋 B1・外帶',
+    hcStars:'—', gStars:'Tabelog 3.27（36 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66466,135.50089',
+    ghours:'https://tabelog.com/osaka/A2701/A270202/27132038/', hcUrl:'https://tabelog.com/osaka/A2701/A270202/27132038/', phone:''
+  },
+  {
+    id:96, rank:96, group:'social', region:'osaka',
+    name:'高島屋 7F｜鼎泰豐', nameJa:'鼎泰豐 なんばダイニングメゾン店',
+    type:'中華・點心（7F，部分素選項）', tags:['social'],
+    area:'高島屋大阪店 7F・難波',
+    address:'大阪市中央区難波 5-1-5 高島屋大阪店 7F',
+    lat:34.66466, lng:135.50049,
+    hours:'11:00-22:00（週五六祝 -22:30）',
+    dishes:'可吃：炒青菜(蒜炒)・素菜包(菜まん)・純蛋炒飯(指定不加肉蝦)',
+    notes:'⚠️ 小籠包/餃類含豬肉或蝦、湯品多為雞豬骨高湯，皆避開；炒飯要指定純蛋。青菜蒜炒可吃。',
+    flag:'🏬 高島屋 7F・有素選項',
+    hcStars:'—', gStars:'Tabelog 3.31（499 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66466,135.50089',
+    ghours:'https://tabelog.com/osaka/A2701/A270202/27002760/', hcUrl:'https://tabelog.com/osaka/A2701/A270202/27002760/', phone:''
+  },
+  {
+    id:97, rank:97, group:'social', region:'osaka',
+    name:'高島屋 7F｜糖朝 港式甜點', nameJa:'糖朝 なんばダイニングメゾン店',
+    type:'港式甜點・飲茶（7F）', tags:['social'],
+    area:'高島屋大阪店 7F・難波',
+    address:'大阪市中央区難波 5-1-5 高島屋大阪店 7F',
+    lat:34.66494, lng:135.50061,
+    hours:'11:00-22:00',
+    dishes:'招牌心形芒果布丁・豆腐花(豆花)・杏仁豆腐等甜品(蛋奶素可)',
+    notes:'⚠️ 飲茶點心多含豬肉/蝦/海鮮、粥品用雞高湯，請只點甜品。芒果布丁多含吉利丁(動物性凝膠)，忌者另問。',
+    flag:'🏬 高島屋 7F・甜點',
+    hcStars:'—', gStars:'Tabelog 3.17（149 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66466,135.50089',
+    ghours:'https://tabelog.com/osaka/A2701/A270202/27046854/', hcUrl:'https://tabelog.com/osaka/A2701/A270202/27046854/', phone:''
+  },
+  // ── 大丸心斎橋店（本館）內部個別店家（蛋奶素） ──────────────
+  {
+    id:98, rank:98, group:'social', region:'osaka',
+    name:'大丸 10F｜タントタント 義式', nameJa:'イタリア料理 タントタント',
+    type:'義大利料理（10F）', tags:['social'],
+    area:'大丸心斎橋店 10F・心齋橋',
+    address:'大阪市中央区心斎橋筋 1-7-1 大丸心斎橋店 10F',
+    lat:34.67432, lng:135.50096,
+    hours:'11:00-15:30 / 17:00-22:00（依百貨）',
+    dishes:'瑪格麗特披薩(番茄+起司+羅勒)・番茄/蔬菜系義大利麵(可請做無肉)・沙拉・甜點',
+    notes:'⚠️ 部分醬汁/清湯 consommé 含肉或鯷魚；點餐指定「肉・魚介抜き、野菜のみ」。麵體含蛋無妨。御堂筋線心斎橋站直結。',
+    flag:'🏬 大丸 10F・可做無肉',
+    hcStars:'—', gStars:'Tabelog 3.31（142 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67392,135.50096',
+    ghours:'https://tabelog.com/osaka/A2701/A270201/27113175/', hcUrl:'https://tabelog.com/osaka/A2701/A270201/27113175/', phone:''
+  },
+  {
+    id:99, rank:99, group:'social', region:'osaka',
+    name:'大丸 10F｜天婦羅圓堂', nameJa:'京都祇園 天ぷら圓堂 大丸心斎橋店',
+    type:'天婦羅・京割烹（10F，高價）', tags:['social'],
+    area:'大丸心斎橋店 10F・心齋橋',
+    address:'大阪市中央区心斎橋筋 1-7-1 大丸心斎橋店 10F',
+    lat:34.67420, lng:135.50124,
+    hours:'11:00-22:00（LO21:00）',
+    dishes:'野菜天婦羅(京野菜)，可請配「野菜のみ」，沾抹茶鹽/鹽食用',
+    notes:'⚠️ 天つゆ以柴魚昆布高湯製(改用鹽)、同油鍋與海鮮共炸。高價割烹(晚 ¥1 萬起)，可吃野菜天婦羅但需主動溝通。',
+    flag:'🏬 大丸 10F・高價・沾鹽',
+    hcStars:'—', gStars:'Tabelog 3.39（131 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67392,135.50096',
+    ghours:'https://tabelog.com/osaka/A2701/A270201/27113487/', hcUrl:'https://tabelog.com/osaka/A2701/A270201/27113487/', phone:''
+  },
+  {
+    id:100, rank:100, group:'social', region:'osaka',
+    name:'大丸 10F｜お茶屋バー 近江榮', nameJa:'お茶屋バー 近江榮',
+    type:'京都茶屋風咖啡・甘味（10F）', tags:['social'],
+    area:'大丸心斎橋店 10F・心齋橋',
+    address:'大阪市中央区心斎橋筋 1-7-1 大丸心斎橋店 10F',
+    lat:34.67392, lng:135.50136,
+    hours:'11:00-22:00',
+    dishes:'舞妓芭菲(水果+冰淇淋)・抹茶甜點・現烤麻糬・蕨餅・虹吸咖啡/煎茶(蛋奶素甜點飲品皆宜)',
+    notes:'以甜點・飲品為主最穩，點芭菲確認無非素配料(一般為水果/奶油)。亦供酒。天ぷら圓堂系列。',
+    flag:'🏬 大丸 10F・甜點',
+    hcStars:'—', gStars:'Tabelog 3.26（35 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67392,135.50096',
+    ghours:'https://tabelog.com/osaka/A2701/A270201/27113547/', hcUrl:'https://tabelog.com/osaka/A2701/A270201/27113547/', phone:''
+  },
+  {
+    id:101, rank:101, group:'social', region:'osaka',
+    name:'大丸 B2｜Café de Paris', nameJa:'カフェ ド パリ（Cafe de paris）',
+    type:'韓系水果甜點咖啡（B2 フードホール）', tags:['social'],
+    area:'大丸心斎橋店 B2 心斎橋フードホール・心齋橋',
+    address:'大阪市中央区心斎橋筋 1-7-1 大丸心斎橋店 B2',
+    lat:34.67364, lng:135.50124,
+    hours:'約 11:00-20:00（B2 フードホール整體最晚 23:00）',
+    dishes:'招牌 Bonbon 水果芭菲(大量鮮果+鮮奶油)・牛奶冰 Bingsu・水果茶(蛋奶素甜點飲品可)',
+    notes:'以甜點/飲品為主、安全度高。座席為食品街共用。',
+    flag:'🏬 大丸 B2・甜點',
+    hcStars:'—', gStars:'Tabelog 3.24（44 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67392,135.50096',
+    ghours:'https://tabelog.com/osaka/A2701/A270201/27124306/', hcUrl:'https://tabelog.com/osaka/A2701/A270201/27124306/', phone:''
+  },
+  {
+    id:102, rank:102, group:'social', region:'osaka',
+    name:'大丸 B2｜Fruits Belle 水果甜點', nameJa:'フルーツベル（Fruits Belle）',
+    type:'現做水果甜點（B2，2026 新開）', tags:['social'],
+    area:'大丸心斎橋店 B2 心斎橋フードホール・心齋橋',
+    address:'大阪市中央区心斎橋筋 1-7-1 大丸心斎橋店 B2',
+    lat:34.67352, lng:135.50096,
+    hours:'11:00-22:00（芭菲/可麗餅 LO21:00）',
+    dishes:'逾 20cm 水果芭菲・水果三明治(吐司+鮮奶油+水果)・可麗餅・鮮榨果汁(蛋奶素皆可)',
+    notes:'2026-02 新開幕。可麗餅選水果/奶油口味；三明治麵包含蛋奶無妨。',
+    flag:'🏬 大丸 B2・新開甜點',
+    hcStars:'—', gStars:'查無（2026-02 新開，尚無評分）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67392,135.50096',
+    ghours:'https://www.daimaru.co.jp/shinsaibashi/', hcUrl:'https://www.daimaru.co.jp/shinsaibashi/', phone:''
+  },
+  {
+    id:103, rank:103, group:'social', region:'osaka',
+    name:'大丸 B2｜PAINDUCE Park 麵包', nameJa:'PAINDUCE Park（パンデュースパーク）',
+    type:'大阪名店麵包坊（B2，可外帶/現吃）', tags:['social','takeout'],
+    area:'大丸心斎橋店 B2 心斎橋フードホール・心齋橋',
+    address:'大阪市中央区心斎橋筋 1-7-1 大丸心斎橋店 B2',
+    lat:34.67364, lng:135.50068,
+    hours:'約 10:00-20:00（イートイン較長）',
+    dishes:'奶油麵包・法式吐司・紅豆/水果類・原味歐包/可頌(含蛋奶)・蔬菜系麵包',
+    notes:'⚠️ 許多鹹麵包含培根/火腿/香腸/鮪魚/肉醬，看標示避開；湯品可能為肉高湯。',
+    flag:'🏬 大丸 B2・麵包外帶',
+    hcStars:'—', gStars:'Tabelog 3.28（66 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67392,135.50096',
+    ghours:'https://tabelog.com/osaka/A2701/A270201/27113485/', hcUrl:'https://tabelog.com/osaka/A2701/A270201/27113485/', phone:''
+  },
+  {
+    id:104, rank:104, group:'social', region:'osaka',
+    name:'大丸 B1｜りくろーおじさん 起司蛋糕', nameJa:'りくろーおじさんの店 大丸心斎橋店',
+    type:'大阪名物・現烤起司蛋糕（B1，外帶）', tags:['social','takeout'],
+    area:'大丸心斎橋店 B1・心齋橋',
+    address:'大阪市中央区心斎橋筋 1-7-1 大丸心斎橋店 B1',
+    lat:34.67392, lng:135.50056,
+    hours:'10:00-20:00',
+    dishes:'招牌現烤起司蛋糕(雞蛋・乳酪・底層葡萄乾)——純蛋奶素，安全度最高之一',
+    notes:'幾乎無陷阱，含蛋奶(蛋奶素可食)。現烤限量常需排隊。整模約 ¥965。',
+    flag:'🏬 大丸 B1・最安心甜點',
+    hcStars:'—', gStars:'Tabelog 3.20（179 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67392,135.50096',
+    ghours:'https://tabelog.com/osaka/A2701/A270201/27113176/', hcUrl:'https://tabelog.com/osaka/A2701/A270201/27113176/', phone:''
+  },
+  {
+    id:105, rank:105, group:'social', region:'osaka',
+    name:'大丸 B1｜RF1 蔬菜沙拉惣菜', nameJa:'RF1（アール・エフ・ワン）',
+    type:'沙拉・熟食惣菜（B1，外帶）', tags:['social','takeout'],
+    area:'大丸心斎橋店 B1・心齋橋',
+    address:'大阪市中央区心斎橋筋 1-7-1 大丸心斎橋店 B1',
+    lat:34.67420, lng:135.50068,
+    hours:'10:00-20:00',
+    dishes:'多款蔬菜沙拉(南瓜/牛蒡/馬鈴薯/溫野菜)・蔬菜惣菜(秤重外帶)',
+    notes:'⚠️ 陷阱多：不少沙拉/惣菜含火腿・培根・雞・蝦・柴魚・鯷魚或雞高湯，沙拉醬也可能含動物性。務必看每盒成分，只選明確「野菜のみ」。',
+    flag:'🏬 大丸 B1・看標示挑',
+    hcStars:'—', gStars:'查無（分店無獨立評分）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67392,135.50096',
+    ghours:'https://www.daimaru.co.jp/shinsaibashi/', hcUrl:'https://www.rf-one.com/', phone:''
+  },
 ];
 
 // ── Map init ───────────────────────────────────────────────────────────────
@@ -2066,9 +2321,10 @@ const countLabel = document.getElementById('count-label');
 
 // 核實日期＝該批資料最後於 Google 地圖核實/更新的日期（＝各批提交日）
 // CHECK_OVERRIDE：個別重新查證過的店家，覆蓋批次日期
-const CHECK_OVERRIDE = { 32: '2026-07-12' }; // 高島屋難波：素食選項重新查證
+const CHECK_OVERRIDE = { 32: '2026-07-12', 34: '2026-07-12' }; // 高島屋/大丸：素食選項重新查證
 function checkedDate(id) {
   if (CHECK_OVERRIDE[id]) return CHECK_OVERRIDE[id];
+  if (id >= 90) return '2026-07-12';   // 高島屋/大丸 內部各店
   if (id <= 25) return '2026-06-28';
   if (id <= 37) return '2026-06-29';
   if (id <= 51) return '2026-06-30';
