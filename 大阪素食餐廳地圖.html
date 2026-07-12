@@ -37,6 +37,21 @@
     padding: 5px 16px; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 0.15s;
   }
   .region-btn.active, .region-btn:hover { background: var(--green-dark); color: #fff; border-color: var(--green-dark); }
+  .region-btn:disabled { cursor: not-allowed; }
+
+  /* ── Nearby bar（找附近） ── */
+  #nearby-bar { background:#eef4fb; border-bottom:1px solid #d5e2f2; padding:8px 18px;
+    display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  #nearby-bar > span { font-size:0.82rem; color:#555; font-weight:700; }
+  .nb-btn { border:1.5px solid #1565C0; background:#fff; color:#1565C0; border-radius:20px;
+    padding:5px 13px; font-size:0.82rem; font-weight:700; cursor:pointer; transition:all .15s; }
+  .nb-btn:hover, .nb-btn.active { background:#1565C0; color:#fff; }
+  .nb-clear { border-color:#c62828; color:#c62828; }
+  .nb-clear:hover { background:#c62828; color:#fff; }
+  .nb-sel, .nb-input { border:1.5px solid #bbb; border-radius:16px; padding:5px 10px; font-size:0.82rem; background:#fff; }
+  .nb-input { width:150px; }
+  .nb-status { font-size:0.8rem; color:#1565C0; font-weight:700; }
+  .card-dist { font-size:0.8rem; color:#1565C0; font-weight:800; margin-top:2px; }
 
   /* ── Filter bar ── */
   #filter-bar {
@@ -55,7 +70,7 @@
   }
 
   /* ── Main layout ── */
-  #main { display: flex; height: calc(100vh - 115px); }
+  #main { display: flex; height: calc(100vh - 200px); }
 
   /* ── Map ── */
   #map { flex: 0 0 55%; height: 100%; position: relative; }
@@ -224,6 +239,20 @@
   <button class="filter-btn" onclick="filterCards('takeout',this)">🥡 外帶/外送</button>
   <button class="filter-btn" onclick="filterCards('latenite',this)">🌙 深夜</button>
   <input type="text" id="search-input" placeholder="🔍 搜尋餐廳名稱…" oninput="searchCards(this.value)">
+</div>
+
+<div id="nearby-bar">
+  <span>🧭 找附近：</span>
+  <button class="nb-btn" onclick="nearbyGPS()">📍 我的位置</button>
+  <button class="nb-btn" id="nb-pick" onclick="nearbyPickToggle()">🖱 地圖點選</button>
+  <select id="nb-landmark" class="nb-sel" onchange="nearbyLandmark(this.value)"><option value="">🏙 地標…</option></select>
+  <input type="text" id="nb-search" class="nb-input" placeholder="輸入地址/地名…" onkeydown="if(event.key==='Enter'){nearbySearch();return false;}">
+  <button class="nb-btn" onclick="nearbySearch()">搜尋</button>
+  <span style="margin-left:4px;">最近</span>
+  <select id="nb-n" class="nb-sel" onchange="nearbySetN(this.value)"><option>5</option><option selected>10</option><option>20</option></select>
+  <span>家</span>
+  <button class="nb-btn nb-clear" id="nb-clear" onclick="nearbyClear()" style="display:none;">✖ 清除附近</button>
+  <span id="nb-status" class="nb-status"></span>
 </div>
 
 <div id="main">
@@ -2063,6 +2092,7 @@ function buildCards(list) {
           </div>
           <div class="card-type">${r.type}</div>
           <div class="card-area">📍 ${r.area}</div>
+          ${nearbyCenter ? `<div class="card-dist">🧭 距中心 ${fmtDist(haversine(nearbyCenter, r))}</div>` : ''}
           <div class="ratings">
             ${(r.group!=='hotel'&&r.group!=='social') ? `<span class="rating-pill hc-pill">🌱 HC ${r.hcStars}</span>` : ''}
             <span class="rating-pill g-pill">⭐ ${(r.group==='hotel'||r.group==='social') ? '評分' : 'Google'} ${r.gStars}${(r.group!=='hotel'&&r.group!=='social') ? '★' : ''}</span>
@@ -2144,6 +2174,8 @@ function closeDetail() {
 let activeFilter = 'all';
 let activeRegion = 'all';
 let searchVal = '';
+// 找附近 狀態
+let nearbyCenter = null, nearbyN = 10, picking = false, centerMarker = null, rangeCircle = null;
 
 function getFiltered() {
   return restaurants.filter(r => {
@@ -2169,7 +2201,17 @@ function fitToList(list) {
 }
 
 function updateView(refit) {
-  const list = getFiltered();
+  let list = getFiltered();
+  if (nearbyCenter) {
+    // 跨地區依直線距離排序，只留最近 N 家
+    list = list.map(r => ({ r, d: haversine(nearbyCenter, r) }))
+               .sort((a, b) => a.d - b.d)
+               .slice(0, nearbyN)
+               .map(x => x.r);
+    drawNearby(list);
+  } else {
+    clearNearbyOverlay();
+  }
   buildCards(list);
   // Show/hide markers
   restaurants.forEach(r => {
@@ -2177,7 +2219,15 @@ function updateView(refit) {
     if (inList) markers[r.id].addTo(map);
     else map.removeLayer(markers[r.id]);
   });
-  if (refit) fitToList(list);
+  if (refit) {
+    if (nearbyCenter) {
+      const pts = list.map(r => [r.lat, r.lng]);
+      pts.push([nearbyCenter.lat, nearbyCenter.lng]);
+      map.fitBounds(L.latLngBounds(pts), { padding: [50, 50], maxZoom: 16 });
+    } else {
+      fitToList(list);
+    }
+  }
 }
 
 function filterCards(type, btn) {
@@ -2198,6 +2248,101 @@ function searchCards(val) {
   searchVal = val.toLowerCase().trim();
   updateView(false);
 }
+
+// ── 找附近（GPS／地圖點選／地標／地址搜尋） ─────────────────────
+const LANDMARKS = [
+  ['難波駅', 34.6627, 135.5022], ['心齋橋', 34.6725, 135.5008], ['道頓堀', 34.6686, 135.5012],
+  ['大阪駅/梅田', 34.7025, 135.4959], ['天王寺', 34.6465, 135.5137], ['新大阪駅', 34.7332, 135.5000],
+  ['京都駅', 34.9858, 135.7588], ['四条河原町', 35.0038, 135.7684], ['祇園', 35.0037, 135.7754],
+  ['嵐山', 35.0175, 135.6710], ['近鉄奈良駅', 34.6837, 135.8288], ['奈良公園', 34.6851, 135.8430],
+  ['関西空港 KIX', 34.4342, 135.2440],
+];
+(function initLandmarks() {
+  const sel = document.getElementById('nb-landmark');
+  LANDMARKS.forEach((l, i) => { const o = document.createElement('option'); o.value = i; o.textContent = l[0]; sel.appendChild(o); });
+})();
+
+const centerIcon = L.divIcon({ html: '<div style="font-size:30px;line-height:30px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6));">🧭</div>', iconSize: [30, 30], iconAnchor: [15, 28], className: '' });
+
+function haversine(a, r) {
+  const toR = x => x * Math.PI / 180, R = 6371000;
+  const dLat = toR(r.lat - a.lat), dLng = toR(r.lng - a.lng);
+  const s = Math.sin(dLat / 2) ** 2 + Math.cos(toR(a.lat)) * Math.cos(toR(r.lat)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(s));
+}
+function fmtDist(m) { return m < 1000 ? `約 ${Math.round(m / 10) * 10} m` : `約 ${(m / 1000).toFixed(1)} km`; }
+function nbStatus(t) { document.getElementById('nb-status').textContent = t || ''; }
+
+function clearNearbyOverlay() {
+  if (centerMarker) { map.removeLayer(centerMarker); centerMarker = null; }
+  if (rangeCircle) { map.removeLayer(rangeCircle); rangeCircle = null; }
+}
+function drawNearby(list) {
+  clearNearbyOverlay();
+  const c = [nearbyCenter.lat, nearbyCenter.lng];
+  centerMarker = L.marker(c, { icon: centerIcon, zIndexOffset: 1000 }).addTo(map)
+    .bindPopup(`🧭 中心：${nearbyCenter.label || '指定位置'}`);
+  const far = list.length ? Math.max(...list.map(r => haversine(nearbyCenter, r))) : 800;
+  rangeCircle = L.circle(c, { radius: far + 60, color: '#1565C0', weight: 2, fillColor: '#1565C0', fillOpacity: 0.06 }).addTo(map);
+}
+
+function setNearbyCenter(lat, lng, label) {
+  nearbyCenter = { lat, lng, label };
+  // 附近模式跨地區：地區設「全部」並暫停用地區鈕
+  activeRegion = 'all';
+  document.querySelectorAll('.region-btn').forEach((b, i) => { b.classList.toggle('active', i === 0); b.disabled = true; b.style.opacity = .45; });
+  document.getElementById('nb-clear').style.display = '';
+  nbStatus(`中心：${label}（最近 ${nearbyN} 家）`);
+  updateView(true);
+}
+function nearbyGPS() {
+  if (!navigator.geolocation) { nbStatus('此瀏覽器不支援定位'); return; }
+  nbStatus('定位中…');
+  navigator.geolocation.getCurrentPosition(
+    p => setNearbyCenter(p.coords.latitude, p.coords.longitude, '我的位置'),
+    () => nbStatus('定位失敗：請允許定位權限，並用 https 網址開啟'),
+    { enableHighAccuracy: true, timeout: 10000, maximumAge: 30000 }
+  );
+}
+function nearbyLandmark(v) { if (v === '') return; const l = LANDMARKS[+v]; setNearbyCenter(l[1], l[2], l[0]); }
+function nearbyPickToggle() {
+  picking = !picking;
+  document.getElementById('nb-pick').classList.toggle('active', picking);
+  map.getContainer().style.cursor = picking ? 'crosshair' : '';
+  nbStatus(picking ? '請在地圖上點一下設為中心' : '');
+}
+async function nearbySearch() {
+  const q = document.getElementById('nb-search').value.trim();
+  if (!q) return;
+  nbStatus('搜尋中…');
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=jp&viewbox=134.7,35.4,136.3,34.1&q=${encodeURIComponent(q)}`;
+    const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    const d = await res.json();
+    if (!d || !d.length) { nbStatus('找不到「' + q + '」，換個關鍵字試試（例如：京都駅）'); return; }
+    setNearbyCenter(+d[0].lat, +d[0].lon, (d[0].display_name || q).split(',')[0]);
+  } catch (e) { nbStatus('搜尋失敗，請稍後再試'); }
+}
+function nearbySetN(v) { nearbyN = +v; if (nearbyCenter) { nbStatus(`中心：${nearbyCenter.label}（最近 ${nearbyN} 家）`); updateView(true); } }
+function nearbyClear() {
+  nearbyCenter = null; picking = false;
+  clearNearbyOverlay();
+  document.getElementById('nb-pick').classList.remove('active');
+  map.getContainer().style.cursor = '';
+  document.getElementById('nb-clear').style.display = 'none';
+  const ls = document.getElementById('nb-landmark'); if (ls) ls.value = '';
+  const ss = document.getElementById('nb-search'); if (ss) ss.value = '';
+  nbStatus('');
+  document.querySelectorAll('.region-btn').forEach((b, i) => { b.disabled = false; b.style.opacity = ''; b.classList.toggle('active', i === 0); });
+  updateView(true);
+}
+map.on('click', e => {
+  if (!picking) return;
+  picking = false;
+  document.getElementById('nb-pick').classList.remove('active');
+  map.getContainer().style.cursor = '';
+  setNearbyCenter(e.latlng.lat, e.latlng.lng, '地圖選點');
+});
 
 // ── Tips toggle ───────────────────────────────────────────────────────────
 function toggleTips() {
