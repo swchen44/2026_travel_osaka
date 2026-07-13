@@ -13,11 +13,15 @@ pblock = re.search(r'const PRICES = \{(.*?)\n\};', js, re.S).group(1)
 prices = {int(k): v for k, v in re.findall(r"(\d+)\s*:\s*'([^']*)'", pblock)}
 
 CHECK_OVERRIDE = {32: '2026-07-12', 34: '2026-07-12'}  # 個別重新查證過的店家
-def checked(i):
+def checked(i, region=''):
     if i in CHECK_OVERRIDE:
         return CHECK_OVERRIDE[i]
+    if region == 'nara':
+        return '2026-07-14'  # 奈良全區出發前重新核實
+    if i >= 152:
+        return '2026-07-14'  # 天保山/港區灣岸新批
     if i >= 90:
-        return '2026-07-12'  # 高島屋/大丸 內部各店
+        return '2026-07-12'
     return '2026-06-28' if i <= 25 else '2026-06-29' if i <= 37 else '2026-06-30' if i <= 51 else '2026-07-03'
 
 regionmap = {'': '大阪', 'osaka': '大阪', 'kyoto': '京都', 'nara': '奈良'}
@@ -32,7 +36,8 @@ for idx, (pos, rid) in enumerate(starts):
         m = re.search(field, b, re.S); return m.group(1).strip() if m else ''
     nm = re.search(r'\bname:\s*([\'"])(.*?)\1', b, re.S)
     name = nm.group(2) if nm else ''
-    region = regionmap.get(g(r"region:'([^']*)'"), '大阪')
+    region_raw = g(r"region:'([^']*)'") or 'osaka'
+    region = regionmap.get(region_raw, '大阪')
     typ = g(r"\btype:\s*'([^']*)'")
     area = g(r"\barea:\s*'([^']*)'")
     address = g(r"\baddress:\s*'([^']*)'")
@@ -41,7 +46,7 @@ for idx, (pos, rid) in enumerate(starts):
     g_st = g(r"\bgStars:\s*'([^']*)'")
     rows.append([rid, name, region, typ, area, address, lat, lng, hours, g_st,
                  prices.get(rid, ''),
-                 f'https://www.google.com/maps/search/?api=1&query={lat},{lng}', checked(rid)])
+                 f'https://www.google.com/maps/search/?api=1&query={lat},{lng}', checked(rid, region_raw)])
 
 with open(OUT, 'w', newline='', encoding='utf-8-sig') as f:
     w = csv.writer(f)

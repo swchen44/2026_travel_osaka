@@ -483,6 +483,11 @@ const photos = {
   142:'images/142.jpg', 143:'images/143.jpg', 144:'images/144.jpg', 145:'images/145.jpg',
   // ── 觀光景點周邊（Tabelog 實照） ──
   148:'images/148.jpg', 149:'images/149.jpg', 150:'images/150.jpg', 151:'images/151.jpg',
+  // ── 天保山/港區灣岸 ──
+  152:'images/152.jpg', 153:'images/153.jpg', 154:'images/154.jpg', 155:'images/155.jpg',
+  156:'images/156.jpg', 157:'images/157.jpg', 158:'images/158.jpg',
+  // ── 奈良新增 ──
+  159:'images/159.jpg', 160:'images/160.jpg', 161:'images/161.jpg', 162:'images/162.jpg', 163:'images/163.jpg',
 };
 
 // ── 每人大約價位（日圓，參考 Tabelog / Google / 官網菜單） ──────
@@ -584,6 +589,12 @@ const PRICES = {
   145:'午餐約 ¥1,000–1,999／人', 146:'需預約確認', 147:'ヴィーガンBAO ¥520／湯 ¥650',
   // 觀光景點周邊
   148:'午/晚 ¥1,501–2,000／人', 149:'素食懷石「六波羅」¥12,000（需預約）', 150:'ベジタリアン御膳 ¥2,180', 151:'甜點套組約 ¥1,030–1,200',
+  // 天保山/港區灣岸
+  152:'午約 ¥1,000／晚 ¥1,000–2,000', 153:'午約 ¥1,000／晚 ¥1,000–2,000', 154:'約 ¥500–1,000／人',
+  155:'約 ¥1,000–2,000／人', 156:'約 ¥150–1,000／人', 157:'約 ¥500–1,000／人', 158:'約 ¥500–800／人',
+  // 奈良新增
+  159:'午約 ¥1,500–2,500（晚懐石較高）', 160:'午約 ¥1,500–2,500', 161:'午約 ¥1,200–1,800',
+  162:'約 ¥1,000–1,500＋飲品', 163:'午 ¥3,000–5,000／晚 ¥4,000–7,000',
 };
 
 // ── Restaurant data ────────────────────────────────────────────────────────
@@ -2020,7 +2031,7 @@ const restaurants = [
     lat:34.67884, lng:135.83128,
     hours:'週六日 12:00-16:00；平日公休',
     dishes:'手打蕎麥定食（ざる/かけ）・天婦羅・小菜・醃菜',
-    notes:'2025-09 開幕，Vegan Cafe 楽夢菜（Ramuna）姊妹店，僅週末營業。',
+    notes:'2025-05 開幕，Vegan Cafe 楽夢菜（Ramuna，平日）姊妹店，僅週末營業。',
     flag:'🦌 奈良・全素',
     hcStars:'—', gStars:'5.0 ★（27 則）',
     gmap:'https://www.google.com/maps/search/?api=1&query=34.67884,135.83128',
@@ -3039,6 +3050,188 @@ const restaurants = [
     gmap:'https://www.google.com/maps/search/?api=1&query=35.01088,135.67772',
     ghours:'https://tabelog.com/kyoto/A2601/A260403/26038453/', hcUrl:'https://www.instagram.com/kyoto_musubi/', phone:'+81-754681378'
   },
+  // ── 天保山・海遊館・大阪港（港區灣岸，皆蔬食友善需詢問） ──────
+  {
+    id:152, rank:152, group:'social', region:'osaka',
+    name:'サガルマタ Sagarmatha 印度尼泊爾', nameJa:'インド・ネパール料理 サガルマタ',
+    type:'印度/尼泊爾咖哩｜蔬食友善', tags:['social'],
+    area:'天保山・港區（大阪港站步行 2 分・獨立店面）',
+    address:'大阪市港区築港 4-2-31',
+    lat:34.65443, lng:135.43268,
+    hours:'11:00-15:00 / 17:00-23:00（LO22:30）；每月 2 次週二晚公休',
+    dishes:'豆(dal)/菠菜/野菜/鷹嘴豆 咖哩・ナン・蔬菜套餐',
+    notes:'⚠️ 點餐務必說「肉と魚介・チキンなし、野菜だし」；部分咖哩底可能用雞骨/肉高湯。ナン含蛋奶(可食)。海遊館附近最實在的蔬食選擇。',
+    flag:'📍 天保山・印度蔬食',
+    hcStars:'—', gStars:'Google 4.6（637 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.65443,135.43268',
+    ghours:'https://tabelog.com/osaka/A2701/A270402/27097411/', hcUrl:'https://tabelog.com/osaka/A2701/A270402/27097411/', phone:'+81-665763385'
+  },
+  {
+    id:153, rank:153, group:'social', region:'osaka',
+    name:'Pokhara Pacific 尼泊爾料理', nameJa:'ポカラ パシフィック レストラン',
+    type:'尼泊爾/印度料理｜蔬食友善', tags:['social'],
+    area:'弁天町・港區（弁天町站步行 7 分・獨立店面）',
+    address:'大阪市港区磯路 2-11-20',
+    lat:34.66465, lng:135.46113,
+    hours:'11:00-15:00 / 17:00-22:30（LO22:00）；公休去前確認',
+    dishes:'ダルバート(菜食套餐)・野菜/豆/青菜/paneer 咖哩・ナン',
+    notes:'⚠️ 確認高湯/配菜無肉無魚；ダルバート配菜有時含肉，請要求全蔬菜版。',
+    flag:'📍 弁天町・尼泊爾蔬食',
+    hcStars:'—', gStars:'Google 4.2（43 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66465,135.46113',
+    ghours:'https://tabelog.com/osaka/A2701/A270401/27110528/', hcUrl:'https://tabelog.com/osaka/A2701/A270401/27110528/', phone:''
+  },
+  {
+    id:154, rank:154, group:'social', region:'osaka',
+    name:'9 Borden Coffee', nameJa:'9 Borden Coffee ナインボーデン',
+    type:'咖啡・輕食｜蔬食友善', tags:['social'],
+    area:'天保山・港區（港振興ビル 1F・大阪港站 2 分）',
+    address:'大阪市港区築港 3-7-15 港振興ビル 111',
+    lat:34.65469, lng:135.43298,
+    hours:'7:30-18:00；僅元旦休',
+    dishes:'拿鐵/手沖咖啡・Ocean Breeze 蘇打・アサイーボウル・烤吐司/司康',
+    notes:'⚠️ ブリトー有含肉版→選野菜；甜點/飲品蛋奶素可，可問換植物奶。此區最熱門咖啡館。',
+    flag:'📍 天保山・咖啡',
+    hcStars:'—', gStars:'Google 4.6（1,091 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.65469,135.43298',
+    ghours:'https://tabelog.com/osaka/A2701/A270402/27099459/', hcUrl:'https://www.instagram.com/9bordencoffee/', phone:'+81-9066059192'
+  },
+  {
+    id:155, rank:155, group:'social', region:'osaka',
+    name:'Mother Moon Cafe 天保山店', nameJa:'マザームーンカフェ 天保山店',
+    type:'鬆餅・甜點咖啡｜蔬食友善', tags:['social'],
+    area:'天保山・港區（天保山マーケットプレース 2F・海遊館旁）',
+    address:'大阪市港区海岸通 1-1-10 天保山マーケットプレース 2F',
+    lat:34.65583, lng:135.43027,
+    hours:'10:00-21:00（LO20:00）；不定休(隨商場)',
+    dishes:'原味/水果/巧克力鬆餅・クレミア霜淇淋・海洋主題飲品',
+    notes:'⚠️ 菜單有培根/煙燻鮭魚鹹口味→選甜口味；鬆餅粉/奶油含蛋奶(可食)。海遊館旁休息點。',
+    flag:'📍 海遊館旁・鬆餅',
+    hcStars:'—', gStars:'Google 3.6（242 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.65583,135.43027',
+    ghours:'https://tabelog.com/osaka/A2701/A270402/27078470/', hcUrl:'https://tabelog.com/osaka/A2701/A270402/27078470/', phone:'+81-665765716'
+  },
+  {
+    id:156, rank:156, group:'social', region:'osaka',
+    name:'Vie de France 弁天町店', nameJa:'ヴィ・ド・フランス 弁天町店',
+    type:'麵包烘焙＆咖啡｜蔬食友善', tags:['social','takeout'],
+    area:'弁天町・港區（大阪ベイタワーイースト 2F・弁天町站即到）',
+    address:'大阪市港区弁天 1-2-2-200 大阪ベイタワーイースト 2F',
+    lat:34.67016, lng:135.46066,
+    hours:'7:00-20:30（LO20:00）；無休',
+    dishes:'可頌・弁天町あんぱん・菓子パン・咖啡（挑無肉無魚款）',
+    notes:'⚠️ 避開火腿/培根/鮪魚等鹹麵包；部分含蛋奶(可食)。',
+    flag:'📍 弁天町・麵包',
+    hcStars:'—', gStars:'Google 3.9（181 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67016,135.46066',
+    ghours:'https://tabelog.com/osaka/A2701/A270401/27049967/', hcUrl:'https://tabelog.com/osaka/A2701/A270401/27049967/', phone:'+81-665771243'
+  },
+  {
+    id:157, rank:157, group:'social', region:'osaka',
+    name:'good siphon coffee 大阪ベイタワー', nameJa:'good siphon coffee 大阪ベイタワー店',
+    type:'虹吸咖啡（併設書店）｜蔬食友善', tags:['social'],
+    area:'弁天町・港區（大阪ベイタワーイースト 2F・弁天町站直結）',
+    address:'大阪市港区弁天 1-2-2 大阪ベイタワーイースト 2F',
+    lat:34.66974, lng:135.46081,
+    hours:'7:00-21:00（LO20:30）；無休',
+    dishes:'虹吸咖啡・拿鐵・甜點・モーニング吐司套餐（併設書店可久坐）',
+    notes:'⚠️ 早餐/三明治確認無火腿/鮪魚；飲品可問換植物奶。',
+    flag:'📍 弁天町・咖啡書店',
+    hcStars:'—', gStars:'Google 4.3（71 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66974,135.46081',
+    ghours:'https://tabelog.com/osaka/A2701/A270401/27129133/', hcUrl:'https://tabelog.com/osaka/A2701/A270401/27129133/', phone:'+81-666848565'
+  },
+  {
+    id:158, rank:158, group:'social', region:'osaka',
+    name:'Starbucks 海遊館店', nameJa:'スターバックスコーヒー 海遊館店',
+    type:'連鎖咖啡｜蔬食友善', tags:['social'],
+    area:'天保山・港區（海遊館館內・最靠水族館入口）',
+    address:'大阪市港区海岸通 1-1-10 海遊館',
+    lat:34.65498, lng:135.42862,
+    hours:'約 09:00-21:00；不定休(隨海遊館)',
+    dishes:'咖啡(可換豆乳/燕麥奶)・部分無肉三明治/焙果/甜點',
+    notes:'⚠️ 三明治多含肉/魚→挑植物性品項；飲品換植物奶最保險。逛海遊館最方便的咖啡。',
+    flag:'📍 海遊館內・星巴克',
+    hcStars:'—', gStars:'Tabelog 3.06（53 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.65498,135.42862',
+    ghours:'https://tabelog.com/osaka/A2701/A270402/27099281/', hcUrl:'https://tabelog.com/osaka/A2701/A270402/27099281/', phone:'+81-665765688'
+  },
+  // ── 奈良 新增（出發前查證 2026-07-14） ──────────────────
+  {
+    id:159, rank:159, group:'social', region:'nara',
+    name:'喜菜亭 Kinatei（100% 素食）', nameJa:'喜菜亭（きさいてい）',
+    type:'100% 素食｜創作・拉麵/定食/懐石', tags:['social'],
+    area:'JR奈良駅前・杉ヶ町（フェリス駅前ビル 1F）',
+    address:'奈良市杉ヶ町 25-1 フェリス駅前 1F',
+    lat:34.67774, lng:135.82086,
+    hours:'午 週二-日/假日 11:30-14:30；晚 18:00-22:00（需預約）；週一公休(晚可預約)',
+    dishes:'日替午餐套餐(沙拉/蒸野菜/炸物/玄米飯/湯)・素拉麵/烏龍・大豆肉/大豆魚・夜間懐石',
+    notes:'✅ 全店 100% 素，出汁為昆布/野菜系、無柴魚・肉高湯；可對應純素/無麩質/過敏(晚餐與特別對應須預約)。JR奈良駅步行 5 分。',
+    flag:'🦌 JR奈良駅・全素・最推薦',
+    hcStars:'—', gStars:'Tabelog 3.06（9 則）／HappyCow 奈良 #4',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67774,135.82086',
+    ghours:'https://tabelog.com/nara/A2901/A290101/29006519/', hcUrl:'https://tabelog.com/nara/A2901/A290101/29006519/', phone:'+81-8061196105'
+  },
+  {
+    id:160, rank:160, group:'social', region:'nara',
+    name:'Big Mountain Cafe & Farm', nameJa:'ビッグマウンテンカフェ＆ファーム',
+    type:'GF＆Vegan 對應・自家農園咖啡（葷素混合）｜蔬食友善', tags:['social','gf'],
+    area:'近鉄奈良駅・西新在家町（獨立店面・免費停車）',
+    address:'奈良市西新在家町 20-1',
+    lat:34.68835, lng:135.82502,
+    hours:'週二＋每月第 3 週三公休；營業時間常變(前往前建議電話確認)',
+    dishes:'自家農園野菜的 GF/純素餐盤・純素漢堡・咖哩等',
+    notes:'⚠️ 菜單葷素混合→務必指定素/純素品項；營業時間 Google 與實際常不符，請電話確認。近鉄奈良步行 8 分。',
+    flag:'🦌 近鉄奈良・GF可全素',
+    hcStars:'—', gStars:'Tabelog 3.10（23 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68835,135.82502',
+    ghours:'https://tabelog.com/nara/A2901/A290101/29011164/', hcUrl:'https://www.instagram.com/big_mountain_cafe_and_farm/', phone:'+81-742429424'
+  },
+  {
+    id:161, rank:161, group:'social', region:'nara',
+    name:'楽夢菜 Ramuna（純素・平日）', nameJa:'ヴィーガンカフェ 楽夢菜（らむな）',
+    type:'純素 Vegan｜咖啡（拉麵/發酵玄米/漢堡/甜點）', tags:['social'],
+    area:'高畑町・奈良公園南（近新薬師寺・破石町巴士站）',
+    address:'奈良市高畑町 1028-5',
+    lat:34.67828, lng:135.83537,
+    hours:'週一-四 13:00-17:00；週五六日公休；不可預約',
+    dishes:'全品純素：拉麵・發酵玄米午餐盤・漢堡・咖哩・披薩・蛋糕/甜點・天然酵母麵包',
+    notes:'✅ 全品純素(連蛋奶都無)。⚠️ 僅平日、1 人經營、等候可能較長、不接受預約；週末請改去姊妹店「楽夢咲」(#84)。',
+    flag:'🦌 奈良公園南・全素・平日',
+    hcStars:'—', gStars:'Tabelog 3.04（5 則）／HappyCow 奈良 #1',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67828,135.83537',
+    ghours:'https://tabelog.com/nara/A2901/A290101/29011176/', hcUrl:'https://tabelog.com/nara/A2901/A290101/29011176/', phone:'+81-742429395'
+  },
+  {
+    id:162, rank:162, group:'social', region:'nara',
+    name:'Pleased To Meet Me（法拉費喫茶）', nameJa:'プリーズド トゥ ミート ミー',
+    type:'喫茶・falafel｜蔬食友善', tags:['social'],
+    area:'法蓮町・近鉄奈良駅北（獨立町家・やすらぎの道沿）',
+    address:'奈良市法蓮町 1249-1',
+    lat:34.69192, lng:135.82616,
+    hours:'週二三五 15:00-21:00；週六日 14:00-21:00；週一四公休',
+    dishes:'ファラフェルピタサンド(鷹嘴豆可樂餅+炸茄子/番茄/生菜)・falafel 定食・咖啡',
+    notes:'⚠️ 素選項偏少(主要 falafel)，純素版要先講；開店偏晚(15:00 起)、店內賣酒＋復古黑膠雜貨。近鉄奈良北步行 10-12 分。',
+    flag:'🦌 法蓮町・falafel',
+    hcStars:'—', gStars:'Tabelog 3.01（1 則・樣本少）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.69192,135.82616',
+    ghours:'https://tabelog.com/nara/A2901/A290101/29010458/', hcUrl:'https://www.instagram.com/kissa_ptmm/', phone:'+81-742426426'
+  },
+  {
+    id:163, rank:163, group:'social', region:'nara',
+    name:'梅の花 奈良店（湯葉豆腐懐石）', nameJa:'湯葉と豆腐の店 梅の花 奈良店',
+    type:'湯葉・豆腐懐石・和食（需相談）｜蔬食友善', tags:['social'],
+    area:'二名・富雄・西奈良（獨立店・沿富雄川，離觀光核心遠）',
+    address:'奈良市二名 1-2378',
+    lat:34.70550, lng:135.73296,
+    hours:'平日 11:00-15:30 / 17:00-21:30；週末 11:00-16:00 / 17:00-22:00',
+    dishes:'湯葉刺身・豆腐しゅうまい・生麩・季節野菜（需請店家做素食版）',
+    notes:'⚠️ 標準懐石含魚介出汁與部分海鮮/蛋，須訂位時明確要求蛋奶素/無魚介；位西奈良富雄、離ならまち/奈良公園遠，列備案。',
+    flag:'🦌 富雄・湯葉豆腐(需相談)',
+    hcStars:'—', gStars:'Tabelog 3.53（78 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.70550,135.73296',
+    ghours:'https://tabelog.com/nara/A2901/A290102/29005651/', hcUrl:'https://tabelog.com/nara/A2901/A290102/29005651/', phone:'+81-742535501'
+  },
 ];
 
 // ── Map init ───────────────────────────────────────────────────────────────
@@ -3096,9 +3289,11 @@ const countLabel = document.getElementById('count-label');
 // 核實日期＝該批資料最後於 Google 地圖核實/更新的日期（＝各批提交日）
 // CHECK_OVERRIDE：個別重新查證過的店家，覆蓋批次日期
 const CHECK_OVERRIDE = { 32: '2026-07-12', 34: '2026-07-12' }; // 高島屋/大丸：素食選項重新查證
-function checkedDate(id) {
+function checkedDate(id, region) {
   if (CHECK_OVERRIDE[id]) return CHECK_OVERRIDE[id];
-  if (id >= 90) return '2026-07-12';   // 高島屋/大丸 內部各店
+  if (region === 'nara') return '2026-07-14';   // 奈良全區出發前重新核實
+  if (id >= 152) return '2026-07-14';            // 天保山/港區灣岸新批
+  if (id >= 90) return '2026-07-12';             // 高島屋/大丸/梅田/京都百貨等
   if (id <= 25) return '2026-06-28';
   if (id <= 37) return '2026-06-29';
   if (id <= 51) return '2026-06-30';
@@ -3176,7 +3371,7 @@ function buildCards(list) {
           <div class="card-hours">🕐 ${r.hours.replace(/\n/g,'　')}</div>
           <div class="card-dishes">🍽 ${r.dishes}</div>
           ${PRICES[r.id] ? `<div class="card-price">💰 ${PRICES[r.id]}</div>` : ''}
-          <div class="card-checked">🔎 核實日期 ${checkedDate(r.id)}</div>
+          <div class="card-checked">🔎 核實日期 ${checkedDate(r.id, r.region)}</div>
           <div class="card-src">📄 資料來源：${sourceLabel(r)}（多方交叉整理）</div>
           ${r.flag ? `<div class="flag-tag">${r.flag}</div>` : ''}
           <div class="card-links">
@@ -3222,7 +3417,7 @@ function selectCard(id, panMap) {
     <div class="dp-row"><strong>🕐 時間：</strong>${r.hours.replace(/\n/g,' | ')}</div>
     <div class="dp-row"><strong>🍽 菜色：</strong>${r.dishes}</div>
     ${PRICES[r.id] ? `<div class="dp-row"><strong>💰 價位：</strong>${PRICES[r.id]}</div>` : ''}
-    <div class="dp-row"><strong>🔎 核實日期：</strong>${checkedDate(r.id)}（該資訊最後於 Google 地圖核實日）</div>
+    <div class="dp-row"><strong>🔎 核實日期：</strong>${checkedDate(r.id, r.region)}（該資訊最後於 Google 地圖核實日）</div>
     <div class="dp-row"><strong>📄 資料來源：</strong>${sourceLabel(r)}（官方菜單/Tabelog/HappyCow/網友心得多方整理）</div>
     <div class="dp-row"><strong>${certainVeg(r) ? '✅ 確定素：' : '❓ 需詢問：'}</strong>${certainVeg(r) ? '素食專門/全素菜單，基本不用溝通。' : '葷店有素選項或需客製，點餐請用溝通卡確認、不保證店家接受。'}</div>
     <div class="dp-row">${(r.group!=='hotel'&&r.group!=='social') ? `<strong>HappyCow：</strong>${r.hcStars} &nbsp; ` : ''}<strong>${(r.group==='hotel'||r.group==='social') ? '評分：' : 'Google：'}</strong>${r.gStars}${(r.group!=='hotel'&&r.group!=='social') ? '★' : ''}</div>
