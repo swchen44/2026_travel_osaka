@@ -71,6 +71,16 @@
       max-height:84vh; overflow-y:auto; box-shadow:0 6px 24px rgba(0,0,0,.35); }
   }
 
+  /* ── 手機/橫向：地圖可隱藏，需要時再叫出 ── */
+  #map-toggle { display:none; position:fixed; left:14px; bottom:16px; z-index:3500;
+    background:#1565C0; color:#fff; border:none; border-radius:26px; padding:12px 18px;
+    font-size:0.95rem; font-weight:800; box-shadow:0 4px 14px rgba(0,0,0,.35); cursor:pointer; }
+  body.map-collapsed #map { display:none !important; }
+  @media (max-width:950px){
+    #map-toggle { display:inline-flex; align-items:center; gap:5px; }
+    body.map-collapsed #sidebar { max-height:none; }
+  }
+
   /* ── Filter bar ── */
   #filter-bar {
     background: var(--white); border-bottom: 1px solid #ddd;
@@ -278,6 +288,7 @@
 
 <div id="filters-backdrop" onclick="toggleFilters()"></div>
 <button id="filters-fab" onclick="toggleFilters()"><span id="fab-icon">🔍</span> <span id="fab-txt">篩選</span></button>
+<button id="map-toggle" onclick="toggleMap()">🗺 <span id="mt-txt">顯示地圖</span></button>
 
 <div id="main">
   <div id="map" style="position:relative;">
@@ -2964,6 +2975,13 @@ function toggleFilters() {
   if (t) t.textContent = open ? '關閉' : '篩選';
   if (i) i.textContent = open ? '✖' : '🔍';
 }
+// 地圖隱藏/顯示（手機直向與橫向都適用）
+function toggleMap() {
+  const collapsed = document.body.classList.toggle('map-collapsed');
+  const t = document.getElementById('mt-txt');
+  if (t) t.textContent = collapsed ? '顯示地圖' : '收起地圖';
+  if (!collapsed) setTimeout(() => { try { map.invalidateSize(); } catch (e) {} }, 200);
+}
 
 function buildCards(list) {
   // Remove old cards
@@ -3189,6 +3207,8 @@ function setNearbyCenter(lat, lng, label) {
   activeRegion = 'all';
   document.querySelectorAll('.region-btn').forEach((b, i) => { b.classList.toggle('active', i === 0); b.disabled = true; b.style.opacity = .45; });
   document.getElementById('nb-clear').style.display = '';
+  // 找附近時若地圖被收起，自動叫出地圖看範圍圈
+  if (document.body.classList.contains('map-collapsed')) toggleMap();
   nbStatus(`中心：${label}（最近 ${nearbyN} 家）`);
   updateView(true);
 }
@@ -3247,6 +3267,12 @@ function toggleTips() {
   const toggle = document.getElementById('tips-toggle');
   body.classList.toggle('hidden');
   toggle.textContent = body.classList.contains('hidden') ? '▶' : '▼';
+}
+
+// ── 小螢幕（手機直/橫向）預設收起地圖，卡片優先；點「🗺 顯示地圖」再叫出 ──
+if (window.innerWidth <= 950) {
+  document.body.classList.add('map-collapsed');
+  const t = document.getElementById('mt-txt'); if (t) t.textContent = '顯示地圖';
 }
 
 // ── Init ───────────────────────────────────────────────────────────────────
