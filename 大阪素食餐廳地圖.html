@@ -3078,7 +3078,7 @@ restaurants.forEach(r => {
         <span style="background:#E8F5E9;color:#2E7D32;border-radius:10px;padding:2px 7px;font-size:0.72rem;font-weight:700;">${(r.group==='hotel'||r.group==='social') ? '評分' : 'G'}: ${r.gStars}${(r.group!=='hotel'&&r.group!=='social') ? '★' : ''}</span>
       </div>
       <div class="popup-btns" style="margin-top:8px;">
-        <a class="popup-btn g" href="${r.gmap}" target="_blank">🗺 Google Maps</a>
+        <a class="popup-btn g" href="${gmapPlace(r)}" target="_blank">🗺 Google Maps</a>
         <a class="popup-btn t" href="${r.ghours}" target="_blank">🕐 營業時間</a>
         <a class="popup-btn h" href="${r.hcUrl}" target="_blank">${r.group==='social' ? '🔗 IG' : r.group==='hotel' ? '🔗 官網' : '🌱 HappyCow'}</a>
       </div>
@@ -3143,6 +3143,10 @@ function toggleMap() {
   if (t) t.textContent = collapsed ? '顯示地圖' : '收起地圖';
   if (!collapsed) setTimeout(() => { try { map.invalidateSize(); } catch (e) {} }, 200);
 }
+// Google Maps 連結：用「日文店名＋座標」搜尋，開啟該店的資訊卡（營業時間/評論/照片），並以座標消歧義
+function gmapPlace(r) {
+  return `https://www.google.com/maps/search/${encodeURIComponent(r.nameJa || r.name)}/@${r.lat},${r.lng},17z`;
+}
 
 function buildCards(list) {
   // Remove old cards
@@ -3176,7 +3180,7 @@ function buildCards(list) {
           <div class="card-src">📄 資料來源：${sourceLabel(r)}（多方交叉整理）</div>
           ${r.flag ? `<div class="flag-tag">${r.flag}</div>` : ''}
           <div class="card-links">
-            <a class="link-btn btn-gmap" href="${r.gmap}" target="_blank">🗺 Google Maps</a>
+            <a class="link-btn btn-gmap" href="${gmapPlace(r)}" target="_blank">🗺 Google Maps</a>
             <a class="link-btn btn-hours" href="${r.ghours}" target="_blank">🕐 查看營業時間</a>
             <a class="link-btn btn-hc"   href="${r.hcUrl}" target="_blank">${r.group==='social' ? '🔗 IG/資訊' : r.group==='hotel' ? '🔗 官網/資訊' : '🌱 HappyCow'}</a>
             ${r.phone ? `<a class="link-btn" style="background:#555;color:#fff;" href="tel:${r.phone}">📞 電話</a>` : ''}
@@ -3224,7 +3228,7 @@ function selectCard(id, panMap) {
     <div class="dp-row">${(r.group!=='hotel'&&r.group!=='social') ? `<strong>HappyCow：</strong>${r.hcStars} &nbsp; ` : ''}<strong>${(r.group==='hotel'||r.group==='social') ? '評分：' : 'Google：'}</strong>${r.gStars}${(r.group!=='hotel'&&r.group!=='social') ? '★' : ''}</div>
     ${r.notes ? `<div class="dp-note">💬 ${r.notes}</div>` : ''}
     <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
-      <a class="link-btn btn-gmap" href="${r.gmap}" target="_blank">🗺 Google Maps</a>
+      <a class="link-btn btn-gmap" href="${gmapPlace(r)}" target="_blank">🗺 Google Maps</a>
       <a class="link-btn btn-hours" href="${r.ghours}" target="_blank">🕐 查看即時營業時間</a>
       <a class="link-btn btn-hc" href="${r.hcUrl}" target="_blank">${r.group==='social' ? '🔗 IG/資訊' : r.group==='hotel' ? '🔗 官網/資訊' : '🌱 HappyCow 頁面'}</a>
     </div>
