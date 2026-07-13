@@ -481,6 +481,8 @@ const photos = {
   139:'images/139.jpg', 140:'images/140.jpg', 141:'images/141.jpg',
   // ── 難波/日本橋外圍（146 W RETREAT、147 DAYLILY 無圖） ──
   142:'images/142.jpg', 143:'images/143.jpg', 144:'images/144.jpg', 145:'images/145.jpg',
+  // ── 觀光景點周邊（Tabelog 實照） ──
+  148:'images/148.jpg', 149:'images/149.jpg', 150:'images/150.jpg', 151:'images/151.jpg',
 };
 
 // ── 每人大約價位（日圓，參考 Tabelog / Google / 官網菜單） ──────
@@ -581,7 +583,7 @@ const PRICES = {
   142:'約 ¥1,000–1,999／人', 143:'約 ¥600–1,600／人', 144:'約 ¥1,000–1,999／人',
   145:'午餐約 ¥1,000–1,999／人', 146:'需預約確認', 147:'ヴィーガンBAO ¥520／湯 ¥650',
   // 觀光景點周邊
-  148:'約 ¥2,000–4,000／人', 149:'約 ¥3,000–5,000／人', 150:'約 ¥2,000–3,500／人', 151:'約 ¥500–1,200／人',
+  148:'午/晚 ¥1,501–2,000／人', 149:'素食懷石「六波羅」¥12,000（需預約）', 150:'ベジタリアン御膳 ¥2,180', 151:'甜點套組約 ¥1,030–1,200',
 };
 
 // ── Restaurant data ────────────────────────────────────────────────────────
@@ -2983,14 +2985,14 @@ const restaurants = [
     type:'純素 Vegan｜創作料理', tags:['social','vegan'],
     area:'祇園・東山區（近八坂/清水寺一帶）',
     address:'京都市東山区祇園（詳細見預約頁）',
-    lat:35.00330, lng:135.77520,
-    hours:'請查 HotPepper 預約頁',
-    dishes:'純素創作料理（全植物性）',
-    notes:'祇園的純素專門餐廳，逛清水寺/祇園順路。座標約略、照片待補（帳號額度恢復後補精緻資料）。',
+    lat:35.00507, lng:135.77796,
+    hours:'週三-日/假日 12:30-19:00（料理 LO18:30）；週一二公休（售完即打烊）',
+    dishes:'純素創作料理（全植物性，單點為主）',
+    notes:'祇園的純素專門餐廳，逛清水寺/祇園順路。無電話，聯絡走 IG/email。',
     flag:'🍁 祇園・全素',
-    hcStars:'—', gStars:'HotPepper 可預約（詳評待補）',
-    gmap:'https://www.google.com/maps/search/?api=1&query=ZIRAEL+Vegan+祇園+京都',
-    ghours:'https://www.hotpepper.jp/strJ003391003/', hcUrl:'https://www.hotpepper.jp/strJ003391003/', phone:''
+    hcStars:'—', gStars:'TripAdvisor 5.0／Tabelog 3.04（Google 約 4.9 整合站）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.00507,135.77796',
+    ghours:'https://tabelog.com/kyoto/A2601/A260301/26039521/', hcUrl:'https://www.instagram.com/zirael_vegan_restaurant/', phone:''
   },
   {
     id:149, rank:149, group:'social', region:'kyoto',
@@ -2998,29 +3000,29 @@ const restaurants = [
     type:'豆腐料理・京料理（有素食コース）｜蔬食友善', tags:['social'],
     area:'祇園・東山區（築 150 年町家）',
     address:'京都市東山区祇園町（花見小路一帶）',
-    lat:35.00380, lng:135.77450,
-    hours:'午/晚（請查官網預約，公休不定）',
-    dishes:'ベジタリアンコース「六波羅」・自製豆腐・湯葉・京料理',
-    notes:'⚠️ 豆腐懷石高湯多含柴魚，預約時務必要求「精進/昆布だし・無魚」。近清水寺/祇園。座標約略、照片待補。',
-    flag:'🍁 祇園・豆腐懷石',
-    hcStars:'—', gStars:'豆腐料理名店（詳評待補）',
-    gmap:'https://www.google.com/maps/search/?api=1&query=豆水楼+祇園店+京都',
-    ghours:'https://tousuiro.com/gion', hcUrl:'https://tousuiro.com/gion', phone:''
+    lat:34.99980, lng:135.77750,
+    hours:'11:30-15:00 / 17:00-21:00；年中無休（年末年始可能休）',
+    dishes:'素食コース「六波羅」・自製豆腐・湯葉・京料理（需預約）',
+    notes:'✅ 素食懷石「六波羅」明示不用柴魚・煮干高湯，對柴魚敏感也友善；築 150 年町家、包廂需預約。近清水寺/祇園。',
+    flag:'🍁 祇園・豆腐懷石(無柴魚)',
+    hcStars:'—', gStars:'Tabelog 3.40（129 則）／TripAdvisor 4.2',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.99980,135.77750',
+    ghours:'https://tabelog.com/kyoto/A2601/A260301/26001632/', hcUrl:'https://tousuiro.com/gion', phone:'+81-755610035'
   },
   {
     id:150, rank:150, group:'social', region:'kyoto',
-    name:'嵯峨とうふ 稲 ine（嵐山）', nameJa:'嵯峨とうふ 稲 ine',
-    type:'豆腐・湯葉料理（有蔬食定食）｜蔬食友善', tags:['social'],
-    area:'嵐山・嵯峨・右京區（近天龍寺/渡月橋）',
-    address:'京都市右京区嵯峨（嵐山一帶）',
-    lat:35.01550, lng:135.67700,
-    hours:'約 11:00-17:00（請查官網，公休不定）',
-    dishes:'蔬食定食(veg set)・嵯峨豆腐・湯葉・豆乳甜點',
-    notes:'⚠️ 豆腐/湯葉料理，設有蔬食定食；高湯請確認無柴魚。逛嵐山竹林/渡月橋順路。座標約略、照片待補。',
-    flag:'🎋 嵐山・豆腐湯葉',
-    hcStars:'—', gStars:'嵐山豆腐名店（詳評待補）',
-    gmap:'https://www.google.com/maps/search/?api=1&query=嵯峨とうふ+稲+嵐山',
-    ghours:'https://www.kyo-ine.com/tofu/', hcUrl:'https://www.kyo-ine.com/tofu/', phone:''
+    name:'嵯峨とうふ 稲 北店（嵐山）', nameJa:'嵯峨とうふ 稲 北店',
+    type:'豆腐・湯葉料理（有蔬食御膳）｜蔬食友善', tags:['social'],
+    area:'嵐山・嵯峨・右京區（近天龍寺/竹林）',
+    address:'京都市右京区嵯峨天龍寺（北店）',
+    lat:35.01728, lng:135.67690,
+    hours:'11:00-19:00（LO）；年中無休（旺季延長）',
+    dishes:'ベジタリアン御膳(手工胡麻豆腐・汲上湯葉・湯豆腐・生麩田楽・天婦羅・五穀飯・蕨餅)',
+    notes:'⚠️ 豆腐/湯葉料理，有蔬食御膳 ¥2,180；高湯請確認無柴魚。逛嵐山竹林/渡月橋順路。（本店改裝暫停，改用營業中的北店）',
+    flag:'🎋 嵐山・蔬食御膳',
+    hcStars:'—', gStars:'Tabelog 3.39（161 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.01728,135.67690',
+    ghours:'https://tabelog.com/kyoto/A2601/A260403/26019268/', hcUrl:'https://www.kyo-ine.com/tofu/', phone:'+81-758645313'
   },
   {
     id:151, rank:151, group:'social', region:'kyoto',
@@ -3028,14 +3030,14 @@ const restaurants = [
     type:'純素 Vegan・無麩質｜甜點・烘焙', tags:['social','vegan','gf','takeout'],
     area:'嵐山・右京區（渡月橋步行約 45 秒）',
     address:'京都市右京区嵯峨天龍寺（渡月橋北側一帶）',
-    lat:35.01280, lng:135.67750,
-    hours:'請查官方/IG（售完為止）',
-    dishes:'以京都米粉＋豆腐取代蛋奶麵粉的烘焙品/蛋糕（全素＋無麩質）',
-    notes:'渡月橋步行 45 秒的純素＋無麩質甜點，逛嵐山最方便的安心甜點。座標約略、照片待補。',
+    lat:35.01088, lng:135.67772,
+    hours:'10:00-18:00（LO 打烊前 1 小時）；週二不定休（假日照常）',
+    dishes:'以京都米粉＋豆腐取代蛋奶麵粉的烘焙品/蛋糕（全素＋無麩質）；甜點＋飲品套組',
+    notes:'渡月橋南側步行約 45 秒的純素＋無麩質甜點（musubi cafe 品牌），逛嵐山最方便的安心甜點。',
     flag:'🎋 嵐山・全素 GF 甜點',
-    hcStars:'—', gStars:'全素甜點專門（詳評待補）',
-    gmap:'https://www.google.com/maps/search/?api=1&query=Musubi+Sweets+Factory+嵐山',
-    ghours:'https://www.google.com/maps/search/?api=1&query=Musubi+Sweets+Factory+嵐山', hcUrl:'https://www.google.com/maps/search/?api=1&query=Musubi+Sweets+Factory+嵐山', phone:''
+    hcStars:'—', gStars:'Yahoo 4.67／Tabelog 3.08（10 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.01088,135.67772',
+    ghours:'https://tabelog.com/kyoto/A2601/A260403/26038453/', hcUrl:'https://www.instagram.com/kyoto_musubi/', phone:'+81-754681378'
   },
 ];
 
