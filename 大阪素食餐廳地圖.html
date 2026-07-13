@@ -479,6 +479,8 @@ const photos = {
   // ── 大阪城周邊 ──
   135:'images/135.jpg', 136:'images/136.jpg', 137:'images/137.jpg', 138:'images/138.jpg',
   139:'images/139.jpg', 140:'images/140.jpg', 141:'images/141.jpg',
+  // ── 難波/日本橋外圍（146 W RETREAT、147 DAYLILY 無圖） ──
+  142:'images/142.jpg', 143:'images/143.jpg', 144:'images/144.jpg', 145:'images/145.jpg',
 };
 
 // ── 每人大約價位（日圓，參考 Tabelog / Google / 官網菜單） ──────
@@ -575,6 +577,9 @@ const PRICES = {
   135:'約 ¥1,000–2,000／人', 136:'約 ¥1,000–2,000／人', 137:'午 ¥999–2,000／晚 ¥2,000–3,000（吃到飽）',
   138:'午 ¥1,000–2,000／晚 ¥2,000–3,000', 139:'約 ¥1,000–3,000／人', 140:'約 ¥1,000–2,000／人',
   141:'約 ¥999 以內',
+  // 難波/日本橋外圍
+  142:'約 ¥1,000–1,999／人', 143:'約 ¥600–1,600／人', 144:'約 ¥1,000–1,999／人',
+  145:'午餐約 ¥1,000–1,999／人', 146:'需預約確認', 147:'ヴィーガンBAO ¥520／湯 ¥650',
 };
 
 // ── Restaurant data ────────────────────────────────────────────────────────
@@ -2877,6 +2882,97 @@ const restaurants = [
     hcStars:'—', gStars:'Tabelog 3.00（5 則）',
     gmap:'https://www.google.com/maps/search/?api=1&query=34.68234,135.51698',
     ghours:'https://tabelog.com/osaka/A2701/A270104/27146745/', hcUrl:'https://www.instagram.com/vege__eats/', phone:'+81-664505460'
+  },
+  // ── 難波/日本橋 外圍（蛋奶素） ──────────────────────────
+  {
+    id:142, rank:142, group:'social', region:'osaka',
+    name:'aglio-olio 藥膳咖哩（全素）', nameJa:'薬膳カレーの店 aglio-olio',
+    type:'藥膳咖哩・洋食｜全素 Vegan', tags:['social','vegan'],
+    area:'難波千日前・中央區（裏なんば・獨立店面）',
+    address:'大阪市中央区難波千日前 7-4 スターハウスマンション 1F',
+    lat:34.66375, lng:135.50430,
+    hours:'週四-六 11:30-20:00／週日 11:30-15:30；週一二三公休（去前建議確認）',
+    dishes:'野菜ゴロゴロカレー(大量炸時蔬)・米味噌咖哩醬・キーマ風(大豆)',
+    notes:'100% 蔬菜、動物性不使用、無添加。2024 カレー百名店。仍建議點餐說明不吃柴魚/肉高湯。南海難波站約 273m。座標約略。',
+    flag:'📍 裏難波・全素咖哩・首推',
+    hcStars:'—', gStars:'Tabelog 3.56（293 則・百名店）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66375,135.50430',
+    ghours:'https://tabelog.com/osaka/A2701/A270202/27062001/', hcUrl:'https://www.instagram.com/aglio.olio_yakuzen_curry/', phone:'+81-666496626'
+  },
+  {
+    id:143, rank:143, group:'social', region:'osaka',
+    name:'Falafel Sababa', nameJa:'ファラフェル サババ FALAFEL SABABA',
+    type:'中東・以色列料理｜蔬食友善', tags:['social','vegan'],
+    area:'西心斎橋・中央區（アメリカ村・獨立店面）',
+    address:'大阪市中央区西心斎橋 2-17-13 New Corner Bldg',
+    lat:34.67043, lng:135.49734,
+    hours:'週二-四 11:30-20:00；週五-日 11:30-21:00；週一公休',
+    dishes:'Vegan falafel pita・hummus 拼盤・Vegan kebab(大豆)・烤茄子/沙拉/庫斯庫斯',
+    notes:'純蔬料理無魚/柴魚；⚠️ 廚房同時處理雞肉葷食，介意交叉污染者需告知。',
+    flag:'📍 美國村・純素法拉費',
+    hcStars:'—', gStars:'HappyCow 4.0（82 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67043,135.49734',
+    ghours:'https://www.happycow.net/reviews/falafel-sababa-osaka-152654', hcUrl:'https://www.instagram.com/falafelsababaosaka/', phone:'+81-9059714958'
+  },
+  {
+    id:144, rank:144, group:'social', region:'osaka',
+    name:'すするか、すすらんか 麻婆豆腐拉麵', nameJa:'すするか、すすらんか。',
+    type:'拉麵（麻婆豆腐拉麵）｜蔬食友善', tags:['social'],
+    area:'東心斎橋・中央區（第一KSビル B1F・近長堀橋）',
+    address:'大阪市中央区東心斎橋 1-15-22 第一KSビル B1F',
+    lat:34.67230, lng:135.50340,
+    hours:'11:00-15:00 / 18:00-23:00；週二公休',
+    dishes:'素食麻婆豆腐拉麵・素食拉麵・純素對應（另有清真對應）',
+    notes:'⚠️ 務必指定「ベジタリアン/ヴィーガン對応」版本並確認湯底不含柴魚/肉高湯(一般麵款含葷)。座標約略。',
+    flag:'📍 東心斎橋・素食麻婆拉麵',
+    hcStars:'—', gStars:'Tabelog 3.52（511 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67230,135.50340',
+    ghours:'https://susuruka-susuranka.com/', hcUrl:'https://www.instagram.com/susuruka_susuranka/', phone:'+81-676347598'
+  },
+  {
+    id:145, rank:145, group:'social', region:'osaka',
+    name:'発酵美食カフェ PRANA（全素）', nameJa:'発酵美食カフェ PRANA プラーナ',
+    type:'發酵・長壽飲食(マクロビ)咖啡｜全素 Vegan', tags:['social','takeout'],
+    area:'靭本町・西區（ベルアールビル 1F・近本町/四ツ橋・靭公園南）',
+    address:'大阪市西区靭本町 1-18-6 ベルアールビル 1F',
+    lat:34.68320, lng:135.49480,
+    hours:'11:00-18:00（LO17:30）；不定休（建議先確認）',
+    dishes:'發酵定食・味噌/糠漬等發酵料理・有機蔬食・外帶',
+    notes:'全植物性、無動物高湯。距難波約 2.3km(北側外圍最遠一家)。座標約略。即 v3 行程備份的 PRANA Macrobiotic。',
+    flag:'📍 靭本町・全素發酵',
+    hcStars:'—', gStars:'Tabelog 3.14（24 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68320,135.49480',
+    ghours:'https://cafeprana.com/', hcUrl:'https://cafeprana.com/', phone:'+81-7085397367'
+  },
+  {
+    id:146, rank:146, group:'social', region:'osaka',
+    name:'W RETREAT CAFE（腸活純素）', nameJa:'W RETREAT CAFE',
+    type:'純素咖啡（腸活・せいろ蒸し・GF・有機）｜全素 Vegan', tags:['social','gf'],
+    area:'南船場・中央區（ラスターオン心斎橋ビル 10F・心斎橋/長堀）',
+    address:'大阪市中央区南船場 4-5-8 ラスターオン心斎橋ビル 10F',
+    lat:34.67420, lng:135.49880,
+    hours:'查無明確時段（官網有預約行事曆，建議 LINE 預約前確認）',
+    dishes:'せいろ蒸し(蒸蔬菜)・açaí bowl・無麩質蛋糕/塔・有機餐點',
+    notes:'全素、烹調不用動物性，W CLINIC 監修的腸活主題。建議先預約。座標約略。',
+    flag:'📍 南船場・全素 GF',
+    hcStars:'—', gStars:'查無（IG 為主）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67420,135.49880',
+    ghours:'https://wholisticretreat.life/', hcUrl:'https://www.instagram.com/w__retreat__cafe/', phone:'+81-667558347'
+  },
+  {
+    id:147, rank:147, group:'social', region:'osaka',
+    name:'DAYLILY 漢方 STAND（心斎橋PARCO）', nameJa:'DAYLILY KAMPO STAND 心斎橋PARCO店',
+    type:'台灣漢方養生（湯品＋刈包）｜蔬食友善', tags:['social'],
+    area:'心斎橋・中央區（心斎橋PARCO 10F Welpa）',
+    address:'大阪市中央区心斎橋筋 1-8-3 心斎橋PARCO 10F',
+    lat:34.67255, lng:135.50080,
+    hours:'10:00-21:00',
+    dishes:'ヴィーガンBAO(無肉魚蛋奶，3 種)・台漢養生湯「四神湯風」・漢方茶',
+    notes:'⚠️ 純素只保證 BAO；「四神湯風」需確認為蔬食版(傳統四神湯或含豚)，「牛肉麺風」為葷避開。PARCO 內順逛。',
+    flag:'🏬 心斎橋PARCO・純素刈包',
+    hcStars:'—', gStars:'查無（PARCO Welpa）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67255,135.50080',
+    ghours:'https://tabelog.com/osaka/A2701/A270201/27126646/', hcUrl:'https://tabelog.com/osaka/A2701/A270201/27126646/', phone:'+81-662810339'
   },
 ];
 
