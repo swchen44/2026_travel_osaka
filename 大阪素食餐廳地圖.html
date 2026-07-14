@@ -92,13 +92,19 @@
     padding: 4px 12px; font-size: 0.8rem; cursor: pointer; transition: all 0.15s;
   }
   .filter-btn.active, .filter-btn:hover { background: var(--green); color: #fff; border-color: var(--green); }
-  #search-input {
-    margin-left: auto; padding: 5px 12px; border: 1.5px solid #ccc;
-    border-radius: 20px; font-size: 0.82rem; width: 200px;
-  }
+  /* ── 關鍵字搜尋欄（隨時可見） ── */
+  #search-bar { background:#fffdf6; border-bottom:1px solid #e8e2cf; padding:8px 18px;
+    display:flex; gap:8px; align-items:center; }
+  #search-bar > span:first-child { font-size:0.85rem; color:#555; font-weight:700; white-space:nowrap; }
+  #search-input { flex:1; min-width:120px; padding:7px 14px; border:1.5px solid #bbb;
+    border-radius:20px; font-size:0.9rem; background:#fff; }
+  #search-clear { border:1.5px solid #c62828; color:#c62828; background:#fff; border-radius:20px;
+    padding:6px 12px; font-size:0.82rem; font-weight:700; cursor:pointer; white-space:nowrap; }
+  #search-clear:hover { background:#c62828; color:#fff; }
+  .search-count { font-size:0.82rem; color:#2d7d46; font-weight:700; white-space:nowrap; }
 
   /* ── Main layout ── */
-  #main { display: flex; height: calc(100vh - 200px); }
+  #main { display: flex; height: calc(100vh - 244px); }
 
   /* ── Map ── */
   #map { flex: 0 0 55%; height: 100%; position: relative; }
@@ -247,6 +253,13 @@
   </div>
 </header>
 
+<div id="search-bar">
+  <span>🔍 搜尋：</span>
+  <input type="text" id="search-input" placeholder="輸入店名/地區/菜色關鍵字…（例：拉麵、京都、印度、甜點）" oninput="searchCards(this.value)">
+  <button id="search-clear" onclick="clearSearch()">✕ 清除</button>
+  <span id="search-count" class="search-count"></span>
+</div>
+
 <div id="filters">
 <div id="region-bar">
   <span>地區：</span>
@@ -268,7 +281,6 @@
   <button class="filter-btn" onclick="filterCards('depa',this)">🏬 百貨美食</button>
   <button class="filter-btn" onclick="filterCards('takeout',this)">🥡 外帶/外送</button>
   <button class="filter-btn" onclick="filterCards('latenite',this)">🌙 深夜</button>
-  <input type="text" id="search-input" placeholder="🔍 搜尋餐廳名稱…" oninput="searchCards(this.value)">
 </div>
 
 <div id="nearby-bar">
@@ -279,7 +291,7 @@
   <input type="text" id="nb-search" class="nb-input" placeholder="輸入地址/地名…" onkeydown="if(event.key==='Enter'){nearbySearch();return false;}">
   <button class="nb-btn" onclick="nearbySearch()">搜尋</button>
   <span style="margin-left:4px;">最近</span>
-  <select id="nb-n" class="nb-sel" onchange="nearbySetN(this.value)"><option>5</option><option selected>10</option><option>20</option></select>
+  <select id="nb-n" class="nb-sel" onchange="nearbySetN(this.value)"><option>5</option><option selected>10</option><option>20</option><option>30</option><option>40</option></select>
   <span>家</span>
   <button class="nb-btn nb-clear" id="nb-clear" onclick="nearbyClear()" style="display:none;">✖ 清除附近</button>
   <span id="nb-status" class="nb-status"></span>
@@ -3522,6 +3534,13 @@ function filterRegion(region, btn) {
 function searchCards(val) {
   searchVal = val.toLowerCase().trim();
   updateView(false);
+  const el = document.getElementById('search-count');
+  if (el) el.textContent = searchVal ? `顯示 ${document.querySelectorAll('.card').length} 家` : '';
+}
+function clearSearch() {
+  const inp = document.getElementById('search-input');
+  if (inp) inp.value = '';
+  searchCards('');
 }
 
 // ── 找附近（GPS／地圖點選／地標／地址搜尋） ─────────────────────
