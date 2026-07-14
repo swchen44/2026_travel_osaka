@@ -631,6 +631,8 @@ const PRICES = {
   195:'ベジカレー 約 ¥600–1,000／人', 196:'サンド 約 ¥500–900／人', 197:'約 ¥500–900／人', 198:'飲品/輕食 約 ¥500–900／人', 199:'約 ¥500–1,200／人（便宜）',
   200:'ベジカレー 約 ¥600–1,000／人', 201:'飲品/輕食 約 ¥500–900／人', 202:'飲品/輕食 約 ¥500–900／人', 203:'飲品/輕食 約 ¥500–900／人',
   204:'約 ¥500–900／人',
+  // 連鎖備案 追加（大阪城/臨空城/天王寺）
+  205:'飲品/輕食 約 ¥500–900／人', 206:'飲品/輕食 約 ¥500–900／人', 207:'ベジカレー 約 ¥600–1,000／人', 208:'サンド 約 ¥500–900／人', 209:'約 ¥500–900／人',
 };
 
 // ── Restaurant data ────────────────────────────────────────────────────────
@@ -3852,6 +3854,81 @@ const restaurants = [
     hcStars:'—', gStars:'官方',
     gmap:'https://www.google.com/maps/search/?api=1&query=34.68270,135.82887',
     ghours:'https://www.mos.jp/shop/detail/?shop_cd=05361', hcUrl:'https://www.mos.jp/shop/detail/?shop_cd=05361', phone:'0742-25-2033'
+  },
+  {
+    id:205, rank:205, group:'chain', region:'osaka',
+    name:'スターバックス 大阪城公園店（ジョーテラス大阪）', nameJa:'スターバックスコーヒー 大阪城公園店',
+    type:'咖啡連鎖（PLANT BASED 植物性品項）', tags:['chain'],
+    area:'JO-TERRACE OSAKA（大阪城公園駅前）・中央區',
+    address:'大阪市中央区大阪城3-1 JO-TERRACE OSAKA',
+    lat:34.68880, lng:135.53230,
+    hours:'平日 07:00-22:00／六日假 08:00-22:00',
+    dishes:'PLANT BASED 標誌之甜點/輕食・植物奶飲品',
+    notes:'大阪城公園駅前 JO-TERRACE 內、逛大阪城前後的休息點。認「PLANT BASED」葉子標誌(不用肉/魚介/蛋/乳/蜂蜜)。JO-TERRACE 另有多家餐廳可覓食。',
+    flag:'☕ 大阪城・咖啡連鎖',
+    hcStars:'—', gStars:'官方',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68880,135.53230',
+    ghours:'https://store.starbucks.co.jp/detail-1513/', hcUrl:'https://store.starbucks.co.jp/detail-1513/', phone:'06-4790-6161'
+  },
+  {
+    id:206, rank:206, group:'chain', region:'osaka',
+    name:'スターバックス りんくうプレミアム・アウトレット店', nameJa:'スターバックスコーヒー りんくうプレミアム・アウトレット店',
+    type:'咖啡連鎖（PLANT BASED 植物性品項）', tags:['chain'],
+    area:'りんくうプレミアム・アウトレット（りんくうタウン駅・近關西機場）・泉佐野市',
+    address:'大阪府泉佐野市りんくう往来南3-28 りんくうプレミアム・アウトレット',
+    lat:34.41180, lng:135.29650,
+    hours:'約 10:00-20:00（依アウトレット）',
+    dishes:'PLANT BASED 標誌之甜點/輕食・植物奶飲品',
+    notes:'りんくうタウン駅旁 outlets、關西機場前一站，搭機前後好用。認「PLANT BASED」葉子標誌。※ CoCo壱番屋 りんくうシークル店已閉店，此區連鎖以本店最穩。',
+    flag:'☕ 臨空城・咖啡連鎖',
+    hcStars:'—', gStars:'官方',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.41180,135.29650',
+    ghours:'https://store.starbucks.co.jp/detail-187/', hcUrl:'https://store.starbucks.co.jp/detail-187/', phone:'072-463-7524'
+  },
+  {
+    id:207, rank:207, group:'chain', region:'osaka',
+    name:'CoCo壱番屋 JR天王寺駅北口店（可點ベジカレー）', nameJa:'カレーハウスCoCo壱番屋 JR天王寺駅北口店',
+    type:'咖哩連鎖（蔬食咖哩・需客製）', tags:['chain'],
+    area:'JR天王寺駅 北口すぐ・天王寺區',
+    address:'大阪市天王寺区悲田院町8-26',
+    lat:34.64700, lng:135.51400,
+    hours:'11:00-23:00（LO）',
+    dishes:'ベジタリアンカレー（植物性醬底）＋蔬菜配料',
+    notes:'⚠️ 要點「ベジタリアンカレー」、勿點一般「やさいカレー」(醬底或含肉魚高湯)。ベジ醬底植物性、含五辛(洋蔥蒜)、部分配料/炸物含動物性；避五辛者請告知。並非每家都供應、可先詢問。天王寺駅前、逛あべの好找。',
+    flag:'🍛 天王寺・咖哩連鎖',
+    hcStars:'—', gStars:'Tabelog／官方',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.64700,135.51400',
+    ghours:'https://www.ichibanya.co.jp/menu/detail.html?id=1327', hcUrl:'https://www.ichibanya.co.jp/menu/detail.html?id=1327', phone:'06-6774-8558'
+  },
+  {
+    id:208, rank:208, group:'chain', region:'osaka',
+    name:'SUBWAY サブウェイ 天王寺ミオ店', nameJa:'サブウェイ 天王寺ミオ店',
+    type:'三明治連鎖（蔬菜三明治・需客製）', tags:['chain'],
+    area:'天王寺ミオ プラザ館 M2F（JR/近鉄/Metro天王寺駅直結）・天王寺區',
+    address:'大阪市天王寺区悲田院町10-48 天王寺ミオ プラザ館M2F',
+    lat:34.64731, lng:135.51390,
+    hours:'約 10:00-22:00（依ミオ）',
+    dishes:'ベジーデライト（蔬菜三明治）・アボカドベジー（可改沙拉）',
+    notes:'蛋奶素可點「ベジーデライト」或「アボカドベジー」(預設全蔬菜)；麵包含微量乳＝非全素；標準含洋蔥可「オニオン抜き」，醬選橄欖油+鹽胡椒最單純。天王寺駅直結。',
+    flag:'🥪 天王寺・三明治連鎖',
+    hcStars:'—', gStars:'官方',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.64731,135.51390',
+    ghours:'https://www.subway.co.jp/menu/veggie-delight/', hcUrl:'https://www.subway.co.jp/menu/veggie-delight/', phone:'06-6770-2436'
+  },
+  {
+    id:209, rank:209, group:'chain', region:'osaka',
+    name:'モスバーガー あべのキューズモール店', nameJa:'モスバーガー あべのキューズモール店',
+    type:'漢堡連鎖（大豆肉排・需客製）', tags:['chain'],
+    area:'あべのキューズモール 3F（大阪阿部野橋/天王寺駅 徒步3分）・阿倍野區',
+    address:'大阪市阿倍野区阿倍野筋1-6-1 あべのキューズモール3F',
+    lat:34.64480, lng:135.51360,
+    hours:'10:00-22:00',
+    dishes:'米粉バンズ アボカドバジルバーガー(動物性不使用)・ソイモス野菜・ソイハンバーガー',
+    notes:'⚠️ 可素：アボカドバジルバーガー/ソイモス野菜/ソイハンバーガー；★「ソイモスバーガー」肉醬含牛豚肉、不是素！部分醬料含蛋(蛋奶素可)。幾乎無法避洋蔥。あべの/天王寺、逛キューズモール好用。',
+    flag:'🍔 天王寺・漢堡連鎖',
+    hcStars:'—', gStars:'官方',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.64480,135.51360',
+    ghours:'https://www.mos.jp/menu/', hcUrl:'https://www.mos.jp/menu/', phone:'06-6633-6155'
   },
 ];
 
