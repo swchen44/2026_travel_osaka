@@ -136,6 +136,7 @@
   .rank-other  { background: var(--gray); }
   .rank-hotel  { background: #8E24AA; }
   .rank-social { background: #E91E63; }
+  .rank-chain  { background: #FB8C00; }
   .card-type { font-size: 0.74rem; color: var(--gray); margin: 3px 0; }
   .card-area { font-size: 0.74rem; color: var(--green); font-weight: 600; }
   .ratings { display: flex; gap: 10px; margin: 5px 0; flex-wrap: wrap; }
@@ -279,6 +280,7 @@
   <button class="filter-btn" onclick="filterCards('hotel',this)">🏨 飯店推薦</button>
   <button class="filter-btn" onclick="filterCards('social',this)">🔥 社群推薦</button>
   <button class="filter-btn" onclick="filterCards('depa',this)">🏬 百貨美食</button>
+  <button class="filter-btn" onclick="filterCards('chain',this)">🍜 連鎖備案</button>
   <button class="filter-btn" onclick="filterCards('takeout',this)">🥡 外帶/外送</button>
   <button class="filter-btn" onclick="filterCards('latenite',this)">🌙 深夜</button>
 </div>
@@ -625,6 +627,9 @@ const PRICES = {
   // 心齋橋一帶新批
   186:'約 ¥800–1,300／人', 187:'約 ¥1,000–1,800／人', 188:'約 ¥1,000–1,800／人', 189:'午間套餐 ¥1,000–1,500', 190:'約 ¥1,000–1,700／人',
   191:'飲品 約 ¥600–900／人', 192:'約 ¥500–1,200／人', 193:'每個 ¥200–800', 194:'蛋糕＋飲品 約 ¥1,500–2,500／人',
+  // 連鎖備案（旅途好找・需客製）
+  195:'ベジカレー 約 ¥600–1,000／人', 196:'サンド 約 ¥500–900／人', 197:'約 ¥500–900／人', 198:'飲品/輕食 約 ¥500–900／人', 199:'約 ¥500–1,200／人（便宜）',
+  200:'ベジカレー 約 ¥600–1,000／人', 201:'飲品/輕食 約 ¥500–900／人', 202:'飲品/輕食 約 ¥500–900／人', 203:'飲品/輕食 約 ¥500–900／人',
 };
 
 // ── Restaurant data ────────────────────────────────────────────────────────
@@ -3697,6 +3702,141 @@ const restaurants = [
     gmap:'https://www.google.com/maps/search/?api=1&query=34.67386,135.50097',
     ghours:'https://tabelog.com/osaka/A2701/A270201/27120494/', hcUrl:'https://tabelog.com/osaka/A2701/A270201/27120494/', phone:'06-6121-7187'
   },
+  {
+    id:195, rank:195, group:'chain', region:'osaka',
+    name:'CoCo壱番屋 なんば戎橋店（可點ベジカレー）', nameJa:'カレーハウスCoCo壱番屋 なんば戎橋店',
+    type:'咖哩連鎖（蔬食咖哩・需客製）', tags:['chain'],
+    area:'難波・道頓堀（戎橋南すぐ）・中央區',
+    address:'大阪市中央区難波1-6-16',
+    lat:34.66720, lng:135.50130,
+    hours:'11:00-22:00',
+    dishes:'ベジタリアンカレー（植物性醬底）＋番茄/玉米/茄子/秋葵山藥等蔬菜配料',
+    notes:'⚠️ 要明確點「ベジタリアンカレー」——一般「やさいカレー」醬底可能含肉/魚高湯。ベジ醬底為植物性(無肉魚柴魚)，但部分配料/炸物可能含動物性、且含五辛(洋蔥/大蒜)，避五辛者請告知。並非每家分店都供應，先問「ベジタリアンカレーはありますか？」。',
+    flag:'🍛 難波・咖哩連鎖',
+    hcStars:'—', gStars:'Tabelog／官方',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66720,135.50130',
+    ghours:'https://www.ichibanya.co.jp/menu/detail.html?id=1327', hcUrl:'https://www.ichibanya.co.jp/menu/detail.html?id=1327', phone:'06-6210-2555'
+  },
+  {
+    id:196, rank:196, group:'chain', region:'osaka',
+    name:'SUBWAY サブウェイ なんばウォーク一番街店', nameJa:'サブウェイ なんばウォーク一番街店',
+    type:'三明治連鎖（蔬菜三明治・需客製）', tags:['chain'],
+    area:'なんばウォーク地下街（なんば駅直結）・中央區',
+    address:'大阪市中央区難波2 なんばウォーク1番街',
+    lat:34.66620, lng:135.50170,
+    hours:'10:00-21:00',
+    dishes:'ベジーデライト（蔬菜三明治）・アボカドベジー（可改沙拉）',
+    notes:'蛋奶素可點「ベジーデライト」；全素則加「チーズとマヨネーズなしで」。麵包與醬料仍要確認；醬選橄欖油/鹽/胡椒較單純。洋蔥可請不加(五辛)。',
+    flag:'🥪 難波・三明治連鎖',
+    hcStars:'—', gStars:'官方',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66620,135.50170',
+    ghours:'https://www.subway.co.jp/menu/veggie-delight/', hcUrl:'https://www.subway.co.jp/menu/veggie-delight/', phone:'06-4708-3660'
+  },
+  {
+    id:197, rank:197, group:'chain', region:'osaka',
+    name:'モスバーガー NAMBAなんなん店（ソイパティ可換）', nameJa:'モスバーガー NAMBAなんなん店',
+    type:'漢堡連鎖（大豆肉排・需客製）', tags:['chain'],
+    area:'なんなん（南海なんば駅南側地下街）・中央區',
+    address:'大阪市中央区難波 なんなんタウン',
+    lat:34.66380, lng:135.50060,
+    hours:'約 10:00-21:00（依なんなん）',
+    dishes:'グリーンバーガー(動物性不使用)・有ソイパティ標記商品可換大豆排',
+    notes:'⚠️ 有「ソイパティ」標記的商品可把肉排換成大豆排，但醬料/美乃滋可能含蛋奶——蛋奶素可、嚴格全素需逐項確認。2026 新增動物性不使用「アボカドバジルバーガー(米粉バンズ)」。',
+    flag:'🍔 難波・漢堡連鎖',
+    hcStars:'—', gStars:'官方',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66380,135.50060',
+    ghours:'https://www.mos.jp/menu/', hcUrl:'https://www.mos.jp/menu/', phone:'06-6567-8554'
+  },
+  {
+    id:198, rank:198, group:'chain', region:'osaka',
+    name:'スターバックス 道頓堀・戎橋 TSUTAYA EBISUBASHI店', nameJa:'スターバックスコーヒー TSUTAYA EBISUBASHI店',
+    type:'咖啡連鎖（PLANT BASED 植物性品項）', tags:['chain','latenite'],
+    area:'道頓堀・戎橋正面（TSUTAYA內）・中央區',
+    address:'大阪市中央区道頓堀1-8-19',
+    lat:34.66880, lng:135.50090,
+    hours:'08:00-翌04:00',
+    dishes:'PLANT BASED 標誌之三明治/甜點/甜甜圈・豆漿/植物奶飲品',
+    notes:'認店內「PLANT BASED」葉子標誌＝主原料不用肉/魚介/蛋/乳/蜂蜜(工廠門市仍共用動物性)。品項季節更換。此店營業到凌晨、逛道頓堀臨時好用。',
+    flag:'☕ 道頓堀・咖啡連鎖',
+    hcStars:'—', gStars:'官方',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66880,135.50090',
+    ghours:'https://www.starbucks.co.jp/plantbase/', hcUrl:'https://www.starbucks.co.jp/plantbase/', phone:''
+  },
+  {
+    id:199, rank:199, group:'chain', region:'osaka',
+    name:'サイゼリヤ なんばOCAT店', nameJa:'サイゼリヤ なんばOCAT店',
+    type:'義式連鎖（蔬食組合・需逐項查過敏原）', tags:['chain'],
+    area:'OCAT B1F（JR難波駅直結）・浪速區',
+    address:'大阪市浪速区湊町1-4-1 OCAT B1F',
+    lat:34.66650, lng:135.49440,
+    hours:'10:00-23:00',
+    dishes:'沙拉・玉米・無肉義大利麵・起司披薩・麵包・意式布丁(蛋奶素)',
+    notes:'⚠️ 無完整素食分類、器具共用；官方過敏原表可查牛豬雞魚介蛋乳。適合蛋奶素挑組合(部分沙拉/無肉義麵/起司披薩)，嚴格全素不建議當首選。價格便宜、據點多。',
+    flag:'🍝 難波・義式連鎖',
+    hcStars:'—', gStars:'官方過敏原表',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66650,135.49440',
+    ghours:'https://allergy.saizeriya.co.jp/allergy', hcUrl:'https://allergy.saizeriya.co.jp/allergy', phone:''
+  },
+  {
+    id:200, rank:200, group:'chain', region:'kyoto',
+    name:'CoCo壱番屋 中京区河原町三条店（可點ベジカレー）', nameJa:'カレーハウスCoCo壱番屋 中京区河原町三条店',
+    type:'咖哩連鎖（蔬食咖哩・需客製）', tags:['chain'],
+    area:'河原町三条下る（新京極/錦市場近く）・中京區',
+    address:'京都市中京区河原町通三条下る大黒町51 林ビル',
+    lat:35.00870, lng:135.76850,
+    hours:'11:00-24:00（年中無休）',
+    dishes:'ベジタリアンカレー（植物性醬底）＋蔬菜配料',
+    notes:'⚠️ 要點「ベジタリアンカレー」，勿點一般「やさいカレー」(醬底或含肉魚高湯)。ベジ醬底植物性、含五辛(洋蔥蒜)、部分配料/炸物含動物性；避五辛者請告知。並非每家都供應、可先詢問。河原町鬧區、逛街好找。',
+    flag:'🍛 河原町・咖哩連鎖',
+    hcStars:'—', gStars:'Tabelog／官方',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.00870,135.76850',
+    ghours:'https://www.ichibanya.co.jp/menu/detail.html?id=1327', hcUrl:'https://www.ichibanya.co.jp/menu/detail.html?id=1327', phone:'075-254-7551'
+  },
+  {
+    id:201, rank:201, group:'chain', region:'kyoto',
+    name:'スターバックス 京都ポルタ店（京都駅前地下街）', nameJa:'スターバックスコーヒー 京都ポルタ店',
+    type:'咖啡連鎖（PLANT BASED 植物性品項）', tags:['chain'],
+    area:'京都ポルタ B1F 西エリア（京都駅前地下街）・下京區',
+    address:'京都市下京区東塩小路町902 京都ポルタB1F',
+    lat:34.98620, lng:135.75830,
+    hours:'07:30-22:00',
+    dishes:'PLANT BASED 標誌之甜點/三明治・植物奶飲品',
+    notes:'認「PLANT BASED」葉子標誌(不用肉/魚介/蛋/乳/蜂蜜、工廠門市共用)。京都駅一出來即到、早餐或觀光間好用。京都駅一帶另有多家分店。',
+    flag:'☕ 京都駅・咖啡連鎖',
+    hcStars:'—', gStars:'官方',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.98620,135.75830',
+    ghours:'https://store.starbucks.co.jp/detail-225/', hcUrl:'https://store.starbucks.co.jp/detail-225/', phone:'075-343-2377'
+  },
+  {
+    id:202, rank:202, group:'chain', region:'nara',
+    name:'スターバックス JR奈良駅旧駅舎店（歷史建築）', nameJa:'スターバックスコーヒー JR奈良駅旧駅舎店',
+    type:'咖啡連鎖（PLANT BASED 植物性品項）', tags:['chain'],
+    area:'JR奈良駅 旧駅舎（総合観光案内所内）・奈良市',
+    address:'奈良市三条本町1082 JR奈良駅旧駅舎',
+    lat:34.68010, lng:135.82040,
+    hours:'07:00-21:00',
+    dishes:'PLANT BASED 標誌之甜點/輕食・植物奶飲品',
+    notes:'設在 JR奈良駅舊站舍(歷史建築)裡、氣氛特別。認「PLANT BASED」葉子標誌。JR奈良徒步 3 分、往ならまち/猿沢池途中好用。',
+    flag:'☕ JR奈良・咖啡連鎖',
+    hcStars:'—', gStars:'官方',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68010,135.82040',
+    ghours:'https://store.starbucks.co.jp/detail-1377/', hcUrl:'https://store.starbucks.co.jp/detail-1377/', phone:'0742-25-3820'
+  },
+  {
+    id:203, rank:203, group:'chain', region:'nara',
+    name:'スターバックス 奈良公園バスターミナル店（近東大寺）', nameJa:'スターバックスコーヒー 奈良公園バスターミナル店',
+    type:'咖啡連鎖（PLANT BASED 植物性品項）', tags:['chain'],
+    area:'奈良公園バスターミナル 2F（近東大寺/奈良公園）・奈良市',
+    address:'奈良市登大路町76 奈良公園バスターミナル2F',
+    lat:34.68450, lng:135.83480,
+    hours:'07:00-20:00',
+    dishes:'PLANT BASED 標誌之甜點/輕食・植物奶飲品',
+    notes:'緊鄰奈良公園、頂樓可眺東大寺/若草山。逛東大寺/餵鹿累了的休息點。認「PLANT BASED」葉子標誌。近鉄奈良徒步約 13 分。',
+    flag:'☕ 奈良公園・咖啡連鎖',
+    hcStars:'—', gStars:'官方',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68450,135.83480',
+    ghours:'https://store.starbucks.co.jp/detail-1349/', hcUrl:'https://store.starbucks.co.jp/detail-1349/', phone:'0742-81-8405'
+  },
 ];
 
 // ── Map init ───────────────────────────────────────────────────────────────
@@ -3718,12 +3858,13 @@ const iconUser = makeIcon('#1565C0');
 const iconOther= makeIcon('#78909C');
 const iconHotel= makeIcon('#8E24AA');
 const iconSocial=makeIcon('#E91E63');
+const iconChain =makeIcon('#FB8C00');
 
 let markers = {};
 let selectedId = null;
 
 restaurants.forEach(r => {
-  const icon = r.group==='top10' ? iconTop : r.group==='user' ? iconUser : r.group==='hotel' ? iconHotel : r.group==='social' ? iconSocial : iconOther;
+  const icon = r.group==='top10' ? iconTop : r.group==='user' ? iconUser : r.group==='hotel' ? iconHotel : r.group==='social' ? iconSocial : r.group==='chain' ? iconChain : iconOther;
   const m = L.marker([r.lat, r.lng], { icon, title: r.name }).addTo(map);
   const popup = L.popup({ maxWidth: 260 }).setContent(`
     <div class="popup-inner">
@@ -3789,7 +3930,7 @@ function sourceLabel(r) {
   if (/tabelog/.test(u)) return 'Tabelog';
   if (/instagram/.test(u)) return 'Instagram';
   if (/facebook/.test(u)) return 'Facebook';
-  if (/diningmaison|daimaru|takashimaya|swissotel|hankyu|hanshin|nasukamo|tenryuji|shoraian|mercy-vegan|ain-soph|vegan-uzu|towzen|onwashop|vegan-nara|somisweets|bee9|canelita|cocowell|daiei|ikarisuper|lifecorp|mumokuteki|hs-choice|vogkyoto/.test(u)) return '官方網站';
+  if (/diningmaison|daimaru|takashimaya|swissotel|hankyu|hanshin|nasukamo|tenryuji|shoraian|mercy-vegan|ain-soph|vegan-uzu|towzen|onwashop|vegan-nara|somisweets|bee9|canelita|cocowell|daiei|ikarisuper|lifecorp|mumokuteki|hs-choice|vogkyoto|ichibanya|subway|starbucks|saizeriya|mos\.jp/.test(u)) return '官方網站';
   if (u.trim()) return '官方/部落格';
   return '綜合整理';
 }
@@ -3819,7 +3960,7 @@ function buildCards(list) {
     const card = document.createElement('div');
     card.className = 'card';
     card.id = `card-${r.id}`;
-    const rankClass = r.group==='top10' ? 'rank-top' : r.group==='user' ? 'rank-user' : r.group==='hotel' ? 'rank-hotel' : r.group==='social' ? 'rank-social' : 'rank-other';
+    const rankClass = r.group==='top10' ? 'rank-top' : r.group==='user' ? 'rank-user' : r.group==='hotel' ? 'rank-hotel' : r.group==='social' ? 'rank-social' : r.group==='chain' ? 'rank-chain' : 'rank-other';
     const photoUrl = photos[r.id];
     card.innerHTML = `
       <div class="card-content">
@@ -3929,6 +4070,7 @@ function getFiltered() {
       activeFilter === 'user'    ? r.group === 'user'  :
       activeFilter === 'hotel'   ? r.group === 'hotel' :
       activeFilter === 'social'  ? r.group === 'social' :
+      activeFilter === 'chain'   ? r.group === 'chain' :
       activeFilter === 'depa'    ? ((r.id >= 90 && r.id <= 126) || r.id === 32 || r.id === 34 || (r.id >= 164 && r.id <= 172) || [186,192,193,194].includes(r.id)) :
       r.tags.includes(activeFilter);
     const matchSearch = !searchVal || r.name.toLowerCase().includes(searchVal) ||
@@ -4130,6 +4272,7 @@ legend.onAdd = () => {
       <span style="color:#78909C;">●</span> 大使推薦備選<br>
       <span style="color:#8E24AA;">●</span> 飯店推薦（餐廳/超市/百貨）<br>
       <span style="color:#E91E63;">●</span> 社群推薦（核實營業）<br>
+      <span style="color:#FB8C00;">●</span> 連鎖備案（旅途好找）<br>
       <span style="color:#999;">🗾 地區用上方按鈕切換</span>
     </div>`;
   L.DomEvent.disableClickPropagation(d);
