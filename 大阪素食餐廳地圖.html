@@ -500,6 +500,15 @@ const photos = {
   156:'images/156.jpg', 157:'images/157.jpg', 158:'images/158.jpg',
   // ── 奈良新增 ──
   159:'images/159.jpg', 160:'images/160.jpg', 161:'images/161.jpg', 162:'images/162.jpg', 163:'images/163.jpg',
+  // ── 京都車站/百貨・街邊新批（出發前 2026-07-14 核實） ──
+  164:'images/164.jpg', 165:'images/165.jpg', 166:'images/166.jpg', 167:'images/167.jpg', 168:'images/168.jpg',
+  169:'images/169.jpg', 170:'images/170.jpg', 171:'images/171.jpg', 172:'images/172.jpg',
+  173:'images/173.jpg', 174:'images/174.jpg', 175:'images/175.jpg', 176:'images/176.jpg', 177:'images/177.jpg',
+  178:'images/178.jpg', 179:'images/179.jpg', 180:'images/180.jpg', 181:'images/181.jpg', 182:'images/182.jpg',
+  183:'images/183.jpg', 184:'images/184.jpg', 185:'images/185.jpg',
+  // ── 心齋橋一帶新批（出發前 2026-07-14 核實；190 GENMAI 無照片、用 emoji 底圖） ──
+  186:'images/186.jpg', 187:'images/187.jpg', 188:'images/188.jpg', 189:'images/189.jpg',
+  191:'images/191.jpg', 192:'images/192.jpg', 193:'images/193.jpg', 194:'images/194.jpg',
 };
 
 // ── 每人大約價位（日圓，參考 Tabelog / Google / 官網菜單） ──────
@@ -607,6 +616,15 @@ const PRICES = {
   // 奈良新增
   159:'午約 ¥1,500–2,500（晚懐石較高）', 160:'午約 ¥1,500–2,500', 161:'午約 ¥1,200–1,800',
   162:'約 ¥1,000–1,500＋飲品', 163:'午 ¥3,000–5,000／晚 ¥4,000–7,000',
+  // 京都車站/百貨・街邊新批
+  164:'約 ¥1,300–2,300／人（【花】¥2,310）', 165:'約 ¥1,000–1,600／人', 166:'咖啡/點心 約 ¥600–1,200／人', 167:'午餐 約 ¥1,500–2,500／人', 168:'甜點＋飲品 約 ¥1,200–2,000／人',
+  169:'約 ¥1,000–1,800／人', 170:'抹茶パフェ 約 ¥1,300–2,000／人', 171:'約 ¥1,000–1,800／人', 172:'咖啡/輕食 約 ¥500–1,200／人',
+  173:'約 ¥1,300–2,300／人', 174:'約 ¥1,000–1,800／人', 175:'午 ¥1,200–1,800／晚 ¥2,000–3,000', 176:'約 ¥1,500–2,500／人', 177:'約 ¥1,500–2,500／人',
+  178:'麵包 ¥300–600／午餐 ¥1,000–1,500', 179:'約 ¥1,500–2,500／人', 180:'套餐約 ¥5,000+／人（預約制）', 181:'冰 ¥600–900／咖啡 約 ¥500', 182:'麵包 ¥300–600／個',
+  183:'午 ¥2,000–3,000／晚 ¥5,000–6,000', 184:'約 ¥1,000–1,999／人', 185:'約 ¥2,000–2,999／人',
+  // 心齋橋一帶新批
+  186:'約 ¥800–1,300／人', 187:'約 ¥1,000–1,800／人', 188:'約 ¥1,000–1,800／人', 189:'午間套餐 ¥1,000–1,500', 190:'約 ¥1,000–1,700／人',
+  191:'飲品 約 ¥600–900／人', 192:'約 ¥500–1,200／人', 193:'每個 ¥200–800', 194:'蛋糕＋飲品 約 ¥1,500–2,500／人',
 };
 
 // ── Restaurant data ────────────────────────────────────────────────────────
@@ -1809,21 +1827,6 @@ const restaurants = [
     ghours:'https://en.ain-soph.jp/journey-kyoto', hcUrl:'https://en.ain-soph.jp/journey-kyoto', phone:''
   },
   {
-    id:69, rank:69, group:'social', region:'kyoto',
-    name:'VEGANS KYOTO', nameJa:'ヴィーガンズ キョウト',
-    type:'純素 Vegan｜日式定食', tags:['social','vegan'],
-    area:'祇園・東山區（Zizi Hotel 旁）',
-    address:'京都市東山区（祇園，完整地番建議 Google 定位）',
-    lat:35.00380, lng:135.77500,
-    hours:'週三-日假日 12:00-18:00（LO 17:30）；週一二公休',
-    dishes:'咖哩・素排丼（ベジ焼肉丼/カツ丼）・聖代',
-    notes:'原伏見 Vegans Cafe 主廚祇園再開。⚠️ 部分平台標示歇業、HotPepper 仍可預約，前往前務必查電話/IG 確認。座標約略。',
-    flag:'⛩️ 京都・全素',
-    hcStars:'—', gStars:'HotPepper 可預約（查無 Google）',
-    gmap:'https://www.google.com/maps/search/?api=1&query=VEGANS+KYOTO+祇園',
-    ghours:'https://www.hotpepper.jp/strJ001295042/', hcUrl:'https://www.hotpepper.jp/strJ001295042/', phone:''
-  },
-  {
     id:70, rank:70, group:'social', region:'kyoto',
     name:'VOG Kyoto（Vegan Indian）', nameJa:'ヴォグ キョウト',
     type:'純素 Vegan・無麩質｜印度料理', tags:['social','vegan','gf'],
@@ -2550,14 +2553,14 @@ const restaurants = [
   },
   {
     id:118, rank:118, group:'social', region:'kyoto',
-    name:'京都駅ビル｜中村藤吉 抹茶甜點', nameJa:'中村藤吉本店 京都駅店',
+    name:'京都駅ビル｜中村藤吉 抹茶甜點', nameJa:'中村藤吉 京都店（旧・京都駅店）',
     type:'宇治茶甜點喫茶（京都駅ビル）', tags:['social'],
     area:'京都駅ビル（西/The CUBE 一帶）・京都駅',
     address:'京都市下京区烏丸通塩小路下ル 京都駅ビル',
     lat:34.98565, lng:135.75897,
     hours:'約 11:00-22:00',
     dishes:'抹茶パフェ・抹茶ゼリイ・蕨餅・抹茶蛋糕/冰淇淋（蛋奶素友善）',
-    notes:'甜點類蛋奶素 OK；若點茶そば等餐食需確認高湯(含柴魚)。パフェ內白玉/寒天為植物性。',
+    notes:'甜點類蛋奶素 OK；若點茶そば等餐食需確認高湯(含柴魚)。パフェ內白玉/寒天為植物性。2026-03-20 整修重開、更名「中村藤吉 京都店」。',
     flag:'🏬 京都駅ビル・抹茶甜點',
     hcStars:'—', gStars:'Tabelog 3.55（1,437 則）',
     gmap:'https://www.google.com/maps/search/?api=1&query=34.98565,135.75897',
@@ -2565,15 +2568,15 @@ const restaurants = [
   },
   {
     id:119, rank:119, group:'social', region:'kyoto',
-    name:'JR伊勢丹 B1｜ベジテリア 蔬果汁', nameJa:'ベジテリア JR京都伊勢丹店',
+    name:'JR伊勢丹 B2F｜ベジテリア 蔬果汁', nameJa:'ベジテリア JR京都伊勢丹店',
     type:'現打蔬果汁・湯・沙拉（JR伊勢丹 地下食品街）', tags:['social','takeout'],
-    area:'JR京都伊勢丹 B1 食品街・京都駅',
-    address:'京都市下京区烏丸通塩小路下ル JR京都伊勢丹 B1',
+    area:'JR京都伊勢丹 B2F 食品街・京都駅',
+    address:'京都市下京区烏丸通塩小路下ル JR京都伊勢丹 B2F',
     lat:34.98555, lng:135.75877,
     hours:'約 10:00-20:00（依伊勢丹）',
     dishes:'蔬果汁・蔬菜濃湯・沙拉（蛋奶素友善）',
     notes:'湯品須確認是否用雞/魚高湯；多為蔬菜基底。外帶方便。',
-    flag:'🏬 JR伊勢丹 B1・蔬果汁',
+    flag:'🏬 JR伊勢丹 B2F・蔬果汁',
     hcStars:'—', gStars:'Tabelog 3.05（18 則）',
     gmap:'https://www.google.com/maps/search/?api=1&query=34.98555,135.75877',
     ghours:'https://tabelog.com/kyoto/A2601/A260101/26018798/', hcUrl:'https://tabelog.com/kyoto/A2601/A260101/26018798/', phone:''
@@ -2986,21 +2989,6 @@ const restaurants = [
     gmap:'https://www.google.com/maps/search/?api=1&query=34.67420,135.49880',
     ghours:'https://wholisticretreat.life/', hcUrl:'https://www.instagram.com/w__retreat__cafe/', phone:'+81-667558347'
   },
-  {
-    id:147, rank:147, group:'social', region:'osaka',
-    name:'DAYLILY 漢方 STAND（心斎橋PARCO）', nameJa:'DAYLILY KAMPO STAND 心斎橋PARCO店',
-    type:'台灣漢方養生（湯品＋刈包）｜蔬食友善', tags:['social'],
-    area:'心斎橋・中央區（心斎橋PARCO 10F Welpa）',
-    address:'大阪市中央区心斎橋筋 1-8-3 心斎橋PARCO 10F',
-    lat:34.67255, lng:135.50080,
-    hours:'10:00-21:00',
-    dishes:'ヴィーガンBAO(無肉魚蛋奶，3 種)・台漢養生湯「四神湯風」・漢方茶',
-    notes:'⚠️ 純素只保證 BAO；「四神湯風」需確認為蔬食版(傳統四神湯或含豚)，「牛肉麺風」為葷避開。PARCO 內順逛。',
-    flag:'🏬 心斎橋PARCO・純素刈包',
-    hcStars:'—', gStars:'查無（PARCO Welpa）',
-    gmap:'https://www.google.com/maps/search/?api=1&query=34.67255,135.50080',
-    ghours:'https://tabelog.com/osaka/A2701/A270201/27126646/', hcUrl:'https://tabelog.com/osaka/A2701/A270201/27126646/', phone:'+81-662810339'
-  },
   // ── 觀光景點周邊（精簡卡片・座標約略・照片待補） ──────────
   {
     id:148, rank:148, group:'social', region:'kyoto',
@@ -3244,6 +3232,471 @@ const restaurants = [
     gmap:'https://www.google.com/maps/search/?api=1&query=34.70550,135.73296',
     ghours:'https://tabelog.com/nara/A2901/A290102/29005651/', hcUrl:'https://tabelog.com/nara/A2901/A290102/29005651/', phone:'+81-742535501'
   },
+  {
+    id:164, rank:164, group:'social', region:'kyoto',
+    name:'京都駅ビル 10F｜UNO RAMEN 純素豆乳拉麵', nameJa:'UNO RAMEN -Kyoto Station-（京都拉麺小路）',
+    type:'純素拉麵（豆乳湯底・無麩質米粉麵）', tags:['social','vegan'],
+    area:'京都駅ビル 10F 京都拉麺小路・京都駅',
+    address:'京都市下京区東塩小路町901 京都駅ビル10F',
+    lat:34.98586, lng:135.75874,
+    hours:'11:00-22:00（LO 21:30）；不定休',
+    dishes:'豆乳クリーミー拉麵・担担麵（米粉麵/無麩質・昆布＋15 種蔬菜＋大豆肉湯底）',
+    notes:'100% 植物性、無柴魚/肉高湯，蛋奶素最安心。京都駅直結、逛街用餐方便；祇園有本店。',
+    flag:'🏬 京都駅・純素拉麵',
+    hcStars:'—', gStars:'Tabelog 3.02',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.98586,135.75874',
+    ghours:'https://tabelog.com/kyoto/A2601/A260101/26044421/', hcUrl:'https://tabelog.com/kyoto/A2601/A260101/26044421/', phone:'075-708-3387'
+  },
+  {
+    id:165, rank:165, group:'social', region:'kyoto',
+    name:'京都BAL 4F｜Café&Meal MUJI 無印食堂', nameJa:'Café&Meal MUJI 京都BAL',
+    type:'無印良品食堂（蔬食友善・選惣菜）', tags:['social'],
+    area:'京都BAL 4F・河原町三条',
+    address:'京都市中京区河原町通三条下ル山崎町251 京都BAL 4F',
+    lat:35.00696, lng:135.76975,
+    hours:'11:00-20:00（依BAL）',
+    dishes:'選 3-4 種デリ惣菜套餐・野菜料理・湯（挑蔬菜品項）',
+    notes:'⚠️ 自助選菜，部分惣菜可能含魚/肉/柴魚高湯，取餐時看標示或詢問；素菜選項多。',
+    flag:'🏬 京都BAL・無印食堂',
+    hcStars:'—', gStars:'Tabelog 3.06',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.00696,135.76975',
+    ghours:'https://tabelog.com/rstLst/?sw=Caf%C3%A9%26Meal%20MUJI%20%E4%BA%AC%E9%83%BDBAL', hcUrl:'https://tabelog.com/rstLst/?sw=Caf%C3%A9%26Meal%20MUJI%20%E4%BA%AC%E9%83%BDBAL', phone:''
+  },
+  {
+    id:166, rank:166, group:'social', region:'kyoto',
+    name:'髙島屋T8 B1F｜カフェ・ヴェルディ', nameJa:'カフェ・ヴェルディ 京都髙島屋T8店',
+    type:'自家焙煎咖啡・烘焙（蔬食友善）', tags:['social'],
+    area:'京都髙島屋 S.C.「T8」B1F・四条河原町',
+    address:'京都市下京区四条通河原町西入真町52 京都髙島屋T8 B1F',
+    lat:35.00353, lng:135.76825,
+    hours:'10:30-20:00（依T8）',
+    dishes:'手沖咖啡・司康・吐司・烘焙點心（挑無肉品項）',
+    notes:'咖啡與烘焙為主；部分餐點含蛋奶（蛋奶素 OK），鹹食避開火腿/肉類。',
+    flag:'🏬 髙島屋T8・咖啡烘焙',
+    hcStars:'—', gStars:'Tabelog（百貨店內）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.00353,135.76825',
+    ghours:'https://tabelog.com/rstLst/?sw=%E3%82%AB%E3%83%95%E3%82%A7%20%E3%83%B4%E3%82%A7%E3%83%AB%E3%83%87%E3%82%A3%20%E4%BA%AC%E9%83%BD%E9%AB%99%E5%B3%B6%E5%B1%8BT8', hcUrl:'https://tabelog.com/rstLst/?sw=%E3%82%AB%E3%83%95%E3%82%A7%20%E3%83%B4%E3%82%A7%E3%83%AB%E3%83%87%E3%82%A3%20%E4%BA%AC%E9%83%BD%E9%AB%99%E5%B3%B6%E5%B1%8BT8', phone:''
+  },
+  {
+    id:167, rank:167, group:'social', region:'kyoto',
+    name:'京都髙島屋 7F｜アルポルトカフェ', nameJa:'アルポルトカフェ 京都髙島屋店',
+    type:'義式咖啡餐廳（蔬食友善）', tags:['social'],
+    area:'京都髙島屋 本館 7F レストラン街・四条河原町',
+    address:'京都市下京区四条通河原町西入真町52 京都髙島屋7F',
+    lat:35.00321, lng:135.76813,
+    hours:'11:00-21:30（依髙島屋）',
+    dishes:'義大利麵（可選蔬菜口味）・沙拉・甜點・咖啡',
+    notes:'⚠️ 義式店，義大利麵高湯/醬料可能含肉/魚，點蔬菜番茄類並確認；甜點蛋奶素 OK。',
+    flag:'🏬 髙島屋7F・義式咖啡',
+    hcStars:'—', gStars:'Tabelog（百貨店內）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.00321,135.76813',
+    ghours:'https://tabelog.com/rstLst/?sw=%E3%82%A2%E3%83%AB%E3%83%9D%E3%83%AB%E3%83%88%E3%82%AB%E3%83%95%E3%82%A7%20%E4%BA%AC%E9%83%BD%E9%AB%99%E5%B3%B6%E5%B1%8B', hcUrl:'https://tabelog.com/rstLst/?sw=%E3%82%A2%E3%83%AB%E3%83%9D%E3%83%AB%E3%83%88%E3%82%AB%E3%83%95%E3%82%A7%20%E4%BA%AC%E9%83%BD%E9%AB%99%E5%B3%B6%E5%B1%8B', phone:''
+  },
+  {
+    id:168, rank:168, group:'social', region:'kyoto',
+    name:'大丸京都 8F｜CAFFÈ TERRACE ISOLA', nameJa:'カフェテラス イソラ 大丸京都店',
+    type:'甜點咖啡（蔬食友善）', tags:['social'],
+    area:'大丸京都店 8F・四条烏丸',
+    address:'京都市下京区四条通高倉西入立売西町79 大丸京都8F',
+    lat:35.00430, lng:135.76203,
+    hours:'10:00-20:00（依大丸）',
+    dishes:'蛋糕・聖代・鬆餅・咖啡（蛋奶素甜點）',
+    notes:'以甜點為主，蛋奶素可食；避開含肉鹹食。逛大丸休息點。',
+    flag:'🏬 大丸京都8F・甜點',
+    hcStars:'—', gStars:'Tabelog（百貨店內）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.00430,135.76203',
+    ghours:'https://tabelog.com/rstLst/?sw=%E3%82%AB%E3%83%95%E3%82%A7%E3%83%86%E3%83%A9%E3%82%B9%20%E3%82%A4%E3%82%BD%E3%83%A9%20%E5%A4%A7%E4%B8%B8%E4%BA%AC%E9%83%BD', hcUrl:'https://tabelog.com/rstLst/?sw=%E3%82%AB%E3%83%95%E3%82%A7%E3%83%86%E3%83%A9%E3%82%B9%20%E3%82%A4%E3%82%BD%E3%83%A9%20%E5%A4%A7%E4%B8%B8%E4%BA%AC%E9%83%BD', phone:''
+  },
+  {
+    id:169, rank:169, group:'social', region:'kyoto',
+    name:'大丸京都 8F｜丸福珈琲店 ザ・パーラー', nameJa:'丸福珈琲店 ザ・パーラー 大丸京都店',
+    type:'復古喫茶・甜點（蔬食友善）', tags:['social'],
+    area:'大丸京都店 8F・四条烏丸',
+    address:'京都市下京区四条通高倉西入立売西町79 大丸京都8F',
+    lat:35.00392, lng:135.76215,
+    hours:'10:00-20:00（依大丸）',
+    dishes:'ホットケーキ・布丁・蛋糕・濃咖啡（蛋奶素甜點）',
+    notes:'老字號喫茶，蛋糕/布丁/鬆餅蛋奶素可食；鹹食（火腿三明治等）避開。',
+    flag:'🏬 大丸京都8F・喫茶',
+    hcStars:'—', gStars:'Tabelog（百貨店內）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.00392,135.76215',
+    ghours:'https://tabelog.com/rstLst/?sw=%E4%B8%B8%E7%A6%8F%E7%8F%88%E7%90%B2%E5%BA%97%20%E5%A4%A7%E4%B8%B8%E4%BA%AC%E9%83%BD', hcUrl:'https://tabelog.com/rstLst/?sw=%E4%B8%B8%E7%A6%8F%E7%8F%88%E7%90%B2%E5%BA%97%20%E5%A4%A7%E4%B8%B8%E4%BA%AC%E9%83%BD', phone:''
+  },
+  {
+    id:170, rank:170, group:'social', region:'kyoto',
+    name:'JR京都伊勢丹 6F｜茶寮都路里', nameJa:'茶寮都路里 京都伊勢丹店',
+    type:'抹茶甜點（蔬食友善）', tags:['social'],
+    area:'JR京都伊勢丹 6F・京都駅',
+    address:'京都市下京区烏丸通塩小路下ル JR京都伊勢丹6F',
+    lat:34.98626, lng:135.75781,
+    hours:'11:00-21:00（LO 20:00・依伊勢丹）',
+    dishes:'抹茶パフェ・抹茶あんみつ・抹茶蛋糕/冰淇淋（蛋奶素）',
+    notes:'祇園辻利直營抹茶甜點；パフェ內白玉/寒天植物性、鮮奶油/冰淇淋含乳（蛋奶素 OK）。人氣店常排隊。',
+    flag:'🏬 伊勢丹6F・抹茶甜點',
+    hcStars:'—', gStars:'Tabelog（百貨店內）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.98626,135.75781',
+    ghours:'https://tabelog.com/rstLst/?sw=%E8%8C%B6%E5%AF%AE%E9%83%BD%E8%B7%AF%E9%87%8C%20%E4%BA%AC%E9%83%BD%E4%BC%8A%E5%8B%A2%E4%B8%B9', hcUrl:'https://tabelog.com/rstLst/?sw=%E8%8C%B6%E5%AF%AE%E9%83%BD%E8%B7%AF%E9%87%8C%20%E4%BA%AC%E9%83%BD%E4%BC%8A%E5%8B%A2%E4%B8%B9', phone:''
+  },
+  {
+    id:171, rank:171, group:'social', region:'kyoto',
+    name:'京都ポルタ｜みのりカフェ', nameJa:'みのりカフェ 京都ポルタ店',
+    type:'自然食咖啡（蔬食友善）', tags:['social'],
+    area:'京都ポルタ（京都駅前地下街）・京都駅',
+    address:'京都市下京区東塩小路町902 京都ポルタ',
+    lat:34.98694, lng:135.75863,
+    hours:'11:00-22:00（依ポルタ）',
+    dishes:'五穀米定食・野菜料理・雑穀甜點・咖啡',
+    notes:'⚠️ 定食可能含魚/柴魚高湯，點餐請確認蔬菜品項與高湯；京都駅地下街、方便。',
+    flag:'🏬 京都ポルタ・自然食',
+    hcStars:'—', gStars:'Tabelog（百貨店內）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.98694,135.75863',
+    ghours:'https://tabelog.com/rstLst/?sw=%E3%81%BF%E3%81%AE%E3%82%8A%E3%82%AB%E3%83%95%E3%82%A7%20%E4%BA%AC%E9%83%BD%E3%83%9D%E3%83%AB%E3%82%BF', hcUrl:'https://tabelog.com/rstLst/?sw=%E3%81%BF%E3%81%AE%E3%82%8A%E3%82%AB%E3%83%95%E3%82%A7%20%E4%BA%AC%E9%83%BD%E3%83%9D%E3%83%AB%E3%82%BF', phone:''
+  },
+  {
+    id:172, rank:172, group:'social', region:'kyoto',
+    name:'ヨドバシ京都 6F｜シアトルズベストコーヒー', nameJa:'シアトルズベストコーヒー ヨドバシ京都店',
+    type:'咖啡連鎖（蔬食友善）', tags:['social'],
+    area:'ヨドバシカメラ京都 6F レストラン街・京都駅',
+    address:'京都市下京区烏丸通七条下ル東塩小路町590-2 ヨドバシ京都6F',
+    lat:34.98814, lng:135.75870,
+    hours:'10:00-22:30（依ヨドバシ）',
+    dishes:'咖啡・拿鐵・貝果/三明治（挑素料）・鬆餅',
+    notes:'連鎖咖啡，飲品與甜點蛋奶素 OK；三明治挑蔬菜/蛋類、避開火腿肉。京都駅北側。',
+    flag:'🏬 ヨドバシ京都6F・咖啡',
+    hcStars:'—', gStars:'Tabelog（百貨店內）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.98814,135.75870',
+    ghours:'https://tabelog.com/rstLst/?sw=%E3%82%B7%E3%82%A2%E3%83%88%E3%83%AB%E3%82%BA%E3%83%99%E3%82%B9%E3%83%88%E3%82%B3%E3%83%BC%E3%83%92%E3%83%BC%20%E3%83%A8%E3%83%89%E3%83%90%E3%82%B7%E4%BA%AC%E9%83%BD', hcUrl:'https://tabelog.com/rstLst/?sw=%E3%82%B7%E3%82%A2%E3%83%88%E3%83%AB%E3%82%BA%E3%83%99%E3%82%B9%E3%83%88%E3%82%B3%E3%83%BC%E3%83%92%E3%83%BC%20%E3%83%A8%E3%83%89%E3%83%90%E3%82%B7%E4%BA%AC%E9%83%BD', phone:''
+  },
+  {
+    id:173, rank:173, group:'social', region:'kyoto',
+    name:'祇園｜UNO RAMEN 純素豆乳拉麵（本店）', nameJa:'ぎをん豆乳ら〜めん うのゆきこ（本店）',
+    type:'純素拉麵（豆乳湯底・無麩質米粉麵）', tags:['social','vegan'],
+    area:'祇園四条・東山區',
+    address:'京都市東山区亀井町40',
+    lat:35.00242, lng:135.77272,
+    hours:'11:00-21:30（LO 21:30）；不定休',
+    dishes:'【花】豆乳らーめん・担担麵・RAMEN CAKE（米粉麵/無麩質・昆布＋蔬菜＋大豆肉）',
+    notes:'100% 植物性、無柴魚/肉高湯。祇園觀光區，逛完八坂/清水可來。京都駅有分店(10F)。',
+    flag:'⛩️ 祇園・純素拉麵',
+    hcStars:'—', gStars:'Tabelog 3.09／IG @unoyukiko.ramen',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.00242,135.77272',
+    ghours:'https://tabelog.com/kyoto/A2601/A260201/26038344/', hcUrl:'https://tabelog.com/kyoto/A2601/A260201/26038344/', phone:'075-551-3954'
+  },
+  {
+    id:174, rank:174, group:'social', region:'kyoto',
+    name:'素食カフェ Ren 四条大宮店（台灣素食）', nameJa:'素食カフェRen 四条大宮店',
+    type:'台灣素食・藥膳｜全素', tags:['social','vegan'],
+    area:'壬生・中京區（四条大宮）',
+    address:'京都市中京区壬生坊城町12-7',
+    lat:35.00445, lng:135.74670,
+    hours:'11:30-20:00；週日公休',
+    dishes:'藥膳台灣素食定食・水餃鍋・滷味',
+    notes:'台灣人經營、全植物、完全無柴魚（對柴魚敏感也安心）。免五辛可先告知。',
+    flag:'⛩️ 京都・台灣全素',
+    hcStars:'—', gStars:'Tabelog 3.18／HappyCow 4.5',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.00445,135.74670',
+    ghours:'https://tabelog.com/kyoto/A2601/A260203/26034274/', hcUrl:'https://tabelog.com/kyoto/A2601/A260203/26034274/', phone:'075-496-8182'
+  },
+  {
+    id:175, rank:175, group:'social', region:'kyoto',
+    name:'菜食インドレストラン Shama 京都店', nameJa:'菜食インドレストランShama 京都店（サマ）',
+    type:'印度蔬食｜蛋奶素', tags:['social','vegan'],
+    area:'東山區（清水五条／東福寺方面）',
+    address:'京都市東山区鐘鋳町391-3',
+    lat:34.99379, lng:135.77409,
+    hours:'11:00-15:00 / 17:00-22:00（公休請電話確認）',
+    dishes:'Paneer 咖哩・茄子 Keema（素）・Aloo Tikki・菠菜 Naan・Thali',
+    notes:'無肉魚蛋、無柴魚；Naan/Paneer 含乳（蛋奶素 OK）。可做免蔥蒜 Jain 風、亦可全素。',
+    flag:'⛩️ 京都・印度蔬食',
+    hcStars:'—', gStars:'HappyCow 5.0／TripAdvisor 4.0',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.99379,135.77409',
+    ghours:'https://tabelog.com/kyoto/A2601/A260301/26043931/', hcUrl:'https://tabelog.com/kyoto/A2601/A260301/26043931/', phone:'070-9022-6669'
+  },
+  {
+    id:176, rank:176, group:'social', region:'kyoto',
+    name:'平和的ごはん パドマ Padma（純素京野菜）', nameJa:'平和的ごはん パドマ',
+    type:'純素京野菜・印度香料料理｜全素', tags:['social','vegan'],
+    area:'神宮丸太町／出町柳・左京區',
+    address:'京都市左京区下堤町82 恵美須ビル2F',
+    lat:35.01705, lng:135.77271,
+    hours:'12:00-19:00（食物 LO18:00）；週一・週四公休',
+    dishes:'京野菜プレート・咖哩盤・純素甜點/聖代',
+    notes:'全植物、無柴魚。已遷新址（上列為現址）。',
+    flag:'⛩️ 京都・純素京野菜',
+    hcStars:'—', gStars:'Tabelog 3.08／HappyCow 4.5',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.01705,135.77271',
+    ghours:'https://tabelog.com/kyoto/A2601/A260302/26032406/', hcUrl:'https://tabelog.com/kyoto/A2601/A260302/26032406/', phone:'075-708-7707'
+  },
+  {
+    id:177, rank:177, group:'social', region:'kyoto',
+    name:'普廻 FUNE（純素未來粥）', nameJa:'普廻／フネ FUNE ethical lifestyle',
+    type:'純素鹹粥定食・選物店｜全素', tags:['social','vegan'],
+    area:'中京區（丸太町・高倉夷川）',
+    address:'京都市中京区高倉通夷川上ル福屋町717-1',
+    lat:35.01570, lng:135.76227,
+    hours:'12:00-18:00；週三公休',
+    dishes:'未来粥膳（鹹粥＋多樣小菜）・raw 甜點',
+    notes:'全植物養生、無柴魚；町家座位少、建議早到。',
+    flag:'⛩️ 京都・純素鹹粥',
+    hcStars:'—', gStars:'Tabelog 3.07／HappyCow 5.0',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.01570,135.76227',
+    ghours:'https://tabelog.com/kyoto/A2601/A260202/26037560/', hcUrl:'https://tabelog.com/kyoto/A2601/A260202/26037560/', phone:'075-746-2067'
+  },
+  {
+    id:178, rank:178, group:'social', region:'kyoto',
+    name:'アペリラ 純素麵包坊（ʼapelila）', nameJa:'ʼapelila（アペリラ）',
+    type:'純素麵包坊・咖啡｜全素', tags:['social','vegan'],
+    area:'高野／下鴨・左京區（近下鴨神社）',
+    address:'京都市左京区高野蓼原町36-3',
+    lat:35.03444, lng:135.77524,
+    hours:'約 10:00-16:00；週一・週二公休（不定休）',
+    dishes:'20+ 款純素麵包・鬆餅・三明治・餅乾罐',
+    notes:'19 年自家天然酵母、全植物無蛋奶、無柴魚。出町柳徒步約 8 分。',
+    flag:'⛩️ 京都・純素麵包',
+    hcStars:'—', gStars:'Tabelog 3.09／HappyCow 4.5',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.03444,135.77524',
+    ghours:'https://tabelog.com/kyoto/A2601/A260302/26026397/', hcUrl:'https://tabelog.com/kyoto/A2601/A260302/26026397/', phone:'075-203-8506'
+  },
+  {
+    id:179, rank:179, group:'social', region:'kyoto',
+    name:'cafe planet（純素・無麩質）', nameJa:'cafe planet（プラネット）',
+    type:'純素・無麩質咖啡｜全素 GF', tags:['social','vegan','gf'],
+    area:'出町柳・上京區（鴨川沿）',
+    address:'京都市上京区梶井町447-5',
+    lat:35.02927, lng:135.77061,
+    hours:'09:00-18:00（LO17:50）；週三公休',
+    dishes:'純素披薩・沙拉盤・甜點',
+    notes:'全植物無蛋奶麥、無柴魚；已收錄 Choice 的姊妹店。寵物友善。',
+    flag:'⛩️ 京都・純素GF',
+    hcStars:'—', gStars:'Tabelog 3.28',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.02927,135.77061',
+    ghours:'https://tabelog.com/kyoto/A2601/A260302/26036681/', hcUrl:'https://tabelog.com/kyoto/A2601/A260302/26036681/', phone:'075-585-4868'
+  },
+  {
+    id:180, rank:180, group:'social', region:'kyoto',
+    name:'Little Heaven（純素創作精進・預約制）', nameJa:'リトルヘブン LITTLE HEAVEN',
+    type:'純素創作/精進套餐｜全素（預約制）', tags:['social','vegan'],
+    area:'嵯峨野・右京區（近嵐山）',
+    address:'京都市右京区嵯峨野開町8-29',
+    lat:35.01455, lng:135.69881,
+    hours:'12:00-22:00・不定休（建議預約；部分為預約制套餐）',
+    dishes:'當季純素多道套餐（擺盤精緻）',
+    notes:'昆布・香菇高湯、無柴魚；務必先訂位。套餐約 ¥5,000+。近嵐山/嵯峨野觀光。',
+    flag:'🎋 嵐山・純素套餐',
+    hcStars:'—', gStars:'HappyCow 5.0',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.01455,135.69881',
+    ghours:'https://tabelog.com/kyoto/A2601/A260402/26024942/', hcUrl:'https://tabelog.com/kyoto/A2601/A260402/26024942/', phone:'075-777-2500'
+  },
+  {
+    id:181, rank:181, group:'social', region:'kyoto',
+    name:'CONTO 純素冰淇淋咖啡（2025 新開）', nameJa:'CONTO（コント）',
+    type:'純素冰淇淋/gelato・咖啡・甜甜圈（蔬食友善）', tags:['social'],
+    area:'烏丸御池・中京區',
+    address:'京都市中京区御池通衣棚西入西横町174-1 1F',
+    lat:35.01112, lng:135.75719,
+    hours:'約 7:30-19:00（不定休；座位少、以外帶為主）',
+    dishes:'ARBOL 無蛋奶純素冰淇淋（酒粕/麹/香料 6 款）・熊本精品咖啡',
+    notes:'冰淇淋全純素、無柴魚；甜甜圈可能含蛋奶（蛋奶素 OK）。',
+    flag:'⛩️ 京都・純素冰淇淋',
+    hcStars:'—', gStars:'Tabelog 3.33／IG @conto_kyoto',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.01112,135.75719',
+    ghours:'https://tabelog.com/kyoto/A2601/A260202/26042890/', hcUrl:'https://tabelog.com/kyoto/A2601/A260202/26042890/', phone:''
+  },
+  {
+    id:182, rank:182, group:'social', region:'kyoto',
+    name:'MERCY Vegan Bakery 東九条（2026 新開）', nameJa:'MERCY Vegan Bakery ホテルエリート京都ステーション店',
+    type:'純素麵包專門｜全素', tags:['social','vegan'],
+    area:'東九条・南區（九条駅徒步 6 分／京都駅徒步 15 分）',
+    address:'京都市南区東九条河西町4 ホテルエリート京都ステーション1F',
+    lat:34.98041, lng:135.76443,
+    hours:'7:00-售完為止；無固定公休',
+    dishes:'每日 30+ 款 100% 植物性麵包/甜甜圈/甜點',
+    notes:'全植物；與已收錄「MERCY京都駅」同集團但為不同店（此為麵包坊）。',
+    flag:'⛩️ 京都・純素麵包',
+    hcStars:'—', gStars:'Tabelog 3.02（新店）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.98041,135.76443',
+    ghours:'https://tabelog.com/kyoto/A2601/A260604/26044404/', hcUrl:'https://tabelog.com/kyoto/A2601/A260604/26044404/', phone:'070-1424-6312'
+  },
+  {
+    id:183, rank:183, group:'social', region:'kyoto',
+    name:'Hyssop（GOOD NATURE STATION 4F）', nameJa:'ヒソップ Hyssop',
+    type:'京野菜料理（蔬食友善・部分純素）', tags:['social'],
+    area:'四条河原町・下京區（GOOD NATURE STATION 4F）',
+    address:'京都市下京区河原町通四条下ル2丁目稲荷町318-6 4F',
+    lat:35.00248, lng:135.76885,
+    hours:'午 11:30-14:30／brunch-16:30／晚 17:30-21:00',
+    dishes:'京野菜拼盤/主餐・純素選項・甜點',
+    notes:'⚠️ 非全素，點餐時確認無柴魚/肉高湯；評價高（Tabelog 3.50）。GOOD NATURE HOTEL 內。',
+    flag:'⛩️ 四条河原町・京野菜',
+    hcStars:'—', gStars:'Tabelog 3.50（238 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.00248,135.76885',
+    ghours:'https://tabelog.com/kyoto/A2601/A260201/26033518/', hcUrl:'https://tabelog.com/kyoto/A2601/A260201/26033518/', phone:'075-352-3728'
+  },
+  {
+    id:184, rank:184, group:'social', region:'kyoto',
+    name:'本と野菜 OyOy（新風館 1F）', nameJa:'本と野菜 OyOy（オイオイ）',
+    type:'蔬食拼盤咖啡（蔬食友善）', tags:['social'],
+    area:'烏丸御池・中京區（新風館 SHINPUH-KAN 1F）',
+    address:'京都市中京区場之町586-2 新風館1F',
+    lat:35.00926, lng:135.76051,
+    hours:'一/三/四 11:00-20:00(LO19:00)；五六日 11:00-21:00(LO20:00)；週二公休',
+    dishes:'季節野菜プレート（全植物）・豆花・胡蘿蔔蛋糕・咖啡',
+    notes:'⚠️ 招牌野菜盤僅週五六日供應，平日只有飲品/甜點；用發酵洋蔥高湯＝無柴魚。坂ノ途中有機蔬菜。',
+    flag:'⛩️ 新風館・蔬食咖啡',
+    hcStars:'—', gStars:'Tabelog 3.37／IG @oyoy.kyoto',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.00926,135.76051',
+    ghours:'https://tabelog.com/kyoto/A2601/A260202/26034482/', hcUrl:'https://tabelog.com/kyoto/A2601/A260202/26034482/', phone:'075-744-1727'
+  },
+  {
+    id:185, rank:185, group:'social', region:'kyoto',
+    name:'Premarché Alternative Diner（窯烤披薩）', nameJa:'プレマルシェ・オルタナティブ・ダイナー',
+    type:'窯烤披薩・餐酒（蔬食友善・有葷）', tags:['social'],
+    area:'二条城前・中京區（三条會商店街）',
+    address:'京都市中京区三条堀川西入橋西町672 プレマヴィレッジ京都堀川三条2F',
+    lat:35.00862, lng:135.75127,
+    hours:'11:30-15:00(LO14:15) / 17:00-22:00(料理LO21:00)；週三公休',
+    dishes:'窯烤披薩・義大利麵・純素定食',
+    notes:'⚠️ 菜單有葷有素，點純蔬菜/純素款並確認無魚/柴魚；不用化學調味。Premarché Gelateria 同集團。',
+    flag:'⛩️ 二条城前・蔬食披薩',
+    hcStars:'—', gStars:'Tabelog 3.08',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.00862,135.75127',
+    ghours:'https://tabelog.com/kyoto/A2601/A260203/26033832/', hcUrl:'https://tabelog.com/kyoto/A2601/A260203/26033832/', phone:'075-600-2233'
+  },
+  {
+    id:186, rank:186, group:'social', region:'osaka',
+    name:'Soup Stock Tokyo 心斎橋PARCO B1F', nameJa:'スープストックトーキョー 心斎橋PARCO店',
+    type:'湯品專門（蔬食友善）', tags:['social','takeout'],
+    area:'心斎橋PARCO B1F・心齋橋',
+    address:'大阪市中央区心斎橋筋1-8-3 心斎橋PARCO B1F',
+    lat:34.67386, lng:135.50097,
+    hours:'約 11:00-20:00（隨 PARCO）',
+    dishes:'每週輪替的ベジタリアン湯（ミネストローネ・野菜ポタージュ等・只選標示ベジタリアン者）',
+    notes:'⚠️ 只有標「ベジタリアン」的湯無肉魚（＝無柴魚）；其他多用雞/魚高湯，務必看當日標示。官方有 vegetarian 頁。',
+    flag:'🏬 心斎橋PARCO・蔬食湯',
+    hcStars:'—', gStars:'Tabelog 3.07',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67386,135.50097',
+    ghours:'https://tabelog.com/osaka/A2701/A270201/27120495/', hcUrl:'https://tabelog.com/osaka/A2701/A270201/27120495/', phone:'06-6241-5011'
+  },
+  {
+    id:187, rank:187, group:'social', region:'osaka',
+    name:'Himalayan Kitchen 心斎橋BIG STEP 3F', nameJa:'ヒマラヤンキッチン 心斎橋ビッグステップ店',
+    type:'尼泊爾/印度料理（蛋奶素友善・共用廚房）', tags:['social'],
+    area:'西心斎橋・アメリカ村（心斎橋ビッグステップ 3F）',
+    address:'大阪市中央区西心斎橋1-6-14 心斎橋ビッグステップ3F',
+    lat:34.67228, lng:135.49875,
+    hours:'11:00-23:00（L.O. 約 22:30・隨 BIG STEP）',
+    dishes:'ベジタブルカレー・ダル・ベジモモ（蔬菜餃）・パニール（乳製）・naan/飯',
+    notes:'⚠️ 與葷共用廚房；點「ベジ・肉/チキンスープ抜き」，確認咖哩底非雞湯；paneer/ghee 乳製蛋奶素可食。印/尼料理無柴魚。',
+    flag:'🍛 アメリカ村・印度蔬食',
+    hcStars:'—', gStars:'Tabelog 3.19',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67228,135.49875',
+    ghours:'https://tabelog.com/osaka/A2701/A270201/27154878/', hcUrl:'https://tabelog.com/osaka/A2701/A270201/27154878/', phone:'06-6575-7454'
+  },
+  {
+    id:188, rank:188, group:'social', region:'osaka',
+    name:'アリーズキッチン（ALI’S KITCHEN・巴基斯坦）', nameJa:'アリーズキッチン ALI’S KITCHEN',
+    type:'巴基斯坦/中東 halal（蛋奶素友善・共用廚房）', tags:['social'],
+    area:'心斎橋筋（トレスビル B1F）',
+    address:'大阪市中央区心斎橋筋1-10-12 トレスビルB1F',
+    lat:34.67481, lng:135.50095,
+    hours:'11:00-15:00 / 17:00-22:00；週四公休',
+    dishes:'ダル・チャナ(chana masala)・ベジタブルカレー・veg biryani・naan/roti・hummus',
+    notes:'⚠️ halal 葷店共用廚房；確認蔬菜咖哩底非肉高湯。此群 Tabelog 評分最高(3.53)。無柴魚。',
+    flag:'🍛 心斎橋筋・巴基斯坦蔬食',
+    hcStars:'—', gStars:'Tabelog 3.53',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67481,135.50095',
+    ghours:'https://tabelog.com/osaka/A2701/A270201/27045608/', hcUrl:'https://tabelog.com/osaka/A2701/A270201/27045608/', phone:'06-4708-5745'
+  },
+  {
+    id:189, rank:189, group:'social', region:'osaka',
+    name:'ゴータマ Gautama（印度料理）', nameJa:'ゴータマ',
+    type:'印度料理（蛋奶素友善・共用廚房）', tags:['social'],
+    area:'西心斎橋・近長堀橋（シエロアズールビル B1F）',
+    address:'大阪市中央区西心斎橋1-1-10 シエロアズールビルB1F',
+    lat:34.67479, lng:135.49948,
+    hours:'平日 11:30-23:00(LO22:30)、日祝 11:30-22:00；無休',
+    dishes:'ベジタブルカレー・ダル・パラクパニール(乳製)・veg samosa・naan/飯',
+    notes:'⚠️ 一般印度葷店、共用廚房；確認蔬菜咖哩無肉/雞底。午間套餐 ¥1,000-1,500。無柴魚。',
+    flag:'🍛 西心斎橋・印度蔬食',
+    hcStars:'—', gStars:'Tabelog 3.13',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67479,135.49948',
+    ghours:'https://tabelog.com/osaka/A2701/A270201/27000822/', hcUrl:'https://tabelog.com/osaka/A2701/A270201/27000822/', phone:'06-6245-1996'
+  },
+  {
+    id:190, rank:190, group:'social', region:'osaka',
+    name:'GENMAI Cafe 玄米カフェ（需電話確認）', nameJa:'GENMAI Cafe（玄米酵素）',
+    type:'玄米自然食咖啡（蔬食友善・需確認無魚）', tags:['social'],
+    area:'心斎橋筋（心斎橋⇄本町之間・第3酵素ビル 2F）',
+    address:'大阪市中央区南久宝寺町3-6-9 第3酵素ビル2F',
+    lat:34.68080, lng:135.50100,
+    hours:'2F Café 11:00-17:00；週四公休（座標約略・去前電話確認營業）',
+    dishes:'玄米スパイスカレー・一汁五菜定食・無蛋奶 GF 甜點/鬆餅',
+    notes:'⚠️ 官方稱不用卵/乳/動物性，但有資料提到「部分魚料理」→ 點餐務必確認該品無魚/柴魚；座標約略、建議先電話確認營業。',
+    flag:'🌾 心斎橋筋・玄米自然食',
+    hcStars:'—', gStars:'Vegewel／官方（Tabelog 舊頁閉店・需再確認）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68080,135.50100',
+    ghours:'https://vegewel.com/ja/restaurant/479', hcUrl:'https://vegewel.com/ja/restaurant/479', phone:'06-4704-4811'
+  },
+  {
+    id:191, rank:191, group:'social', region:'osaka',
+    name:'CHADO 抹茶燕麥拿鐵（有機・南船場）', nameJa:'CHADO 抹茶 ＆ BONSAI',
+    type:'抹茶專門咖啡（純素飲品友善）', tags:['social'],
+    area:'南船場（路面店）',
+    address:'大阪市中央区南船場4-13-15',
+    lat:34.67622, lng:135.49793,
+    hours:'每日 10:00-17:00',
+    dishes:'熱/冰 抹茶・ほうじ茶 拿鐵（可選燕麥奶＝全素）・抹茶檸檬氣泡・抹茶甜點',
+    notes:'點拿鐵指定燕麥奶即全素；冰淇淋含乳/非全素（蛋奶素可食）。無柴魚。',
+    flag:'🍵 南船場・抹茶咖啡',
+    hcStars:'—', gStars:'HappyCow（2024-25 活躍）／IG @chado_jp',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67622,135.49793',
+    ghours:'https://www.happycow.net/reviews/chado-matcha-oats-latte-organic-and-bonsai-osaka-449751', hcUrl:'https://www.happycow.net/reviews/chado-matcha-oats-latte-organic-and-bonsai-osaka-449751', phone:'06-6534-6866'
+  },
+  {
+    id:192, rank:192, group:'social', region:'osaka',
+    name:'お芋スイーツ 芋よし なんばマルイ 1F', nameJa:'おいもスイーツ専門店 芋よし なんばマルイ店',
+    type:'番薯甜點專門（蔬食友善）', tags:['social','takeout'],
+    area:'なんばマルイ(OIOI) 1F・難波（心齋橋南側）',
+    address:'大阪市中央区難波3-8-9 なんばマルイ1F',
+    lat:34.66552, lng:135.50101,
+    hours:'11:00-20:00（隨マルイ）',
+    dishes:'焼き芋・スイートポテト・大学芋・芋パフェ/霜淇淋・芋けんぴ',
+    notes:'植物性為主，部分含奶油/鮮奶油（蛋奶素可食）、霜淇淋含乳；無柴魚顧慮。',
+    flag:'🏬 なんばマルイ・番薯甜點',
+    hcStars:'—', gStars:'Tabelog 3.04／IG @imoyoshi_0109',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66552,135.50101',
+    ghours:'https://tabelog.com/osaka/A2701/A270202/27127212/', hcUrl:'https://tabelog.com/osaka/A2701/A270202/27127212/', phone:'06-6649-3695'
+  },
+  {
+    id:193, rank:193, group:'social', region:'osaka',
+    name:'カスカード CASCADE なんばマルイ B1F', nameJa:'カスカード なんばマルイ店',
+    type:'麵包坊（蛋奶素友善）', tags:['social','takeout'],
+    area:'なんばマルイ(OIOI) B1F・難波',
+    address:'大阪市中央区難波3-8-9 なんばマルイB1F',
+    lat:34.66547, lng:135.50073,
+    hours:'一-六 8:00-21:30、日/假 8:00-21:00',
+    dishes:'塩パン(招牌)・メロンパン・クロワッサン・スコーン・あんぱん',
+    notes:'⚠️ 避開火腿/培根/香腸/肉咖哩麵包；部分日式麵包可能含豬油(ラード)可先問。無柴魚。',
+    flag:'🏬 なんばマルイ・麵包',
+    hcStars:'—', gStars:'Tabelog 3.39（288 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.66547,135.50073',
+    ghours:'https://tabelog.com/osaka/A2701/A270202/27089884/', hcUrl:'https://tabelog.com/osaka/A2701/A270202/27089884/', phone:'06-6647-0505'
+  },
+  {
+    id:194, rank:194, group:'social', region:'osaka',
+    name:'HARBS 心斎橋PARCO 3F（蛋糕）', nameJa:'ハーブス 心斎橋PARCO店',
+    type:'蛋糕咖啡（蛋奶素友善）', tags:['social'],
+    area:'心斎橋PARCO 3F・心齋橋',
+    address:'大阪市中央区心斎橋筋1-8-3 心斎橋PARCO3F',
+    lat:34.67386, lng:135.50097,
+    hours:'約 11:00-20:00（隨 PARCO）',
+    dishes:'ミルクレープ・フルーツ/ストロベリータルト・ケーキセット',
+    notes:'⚠️ 部分慕斯/果凍蛋糕可能含明膠(吉利丁/動物性)→ 選海綿/鮮奶油/水果類(千層・水果塔)最保險。無柴魚。',
+    flag:'🏬 心斎橋PARCO・蛋糕',
+    hcStars:'—', gStars:'Tabelog 3.09（128 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.67386,135.50097',
+    ghours:'https://tabelog.com/osaka/A2701/A270201/27120494/', hcUrl:'https://tabelog.com/osaka/A2701/A270201/27120494/', phone:'06-6121-7187'
+  },
 ];
 
 // ── Map init ───────────────────────────────────────────────────────────────
@@ -3300,12 +3753,15 @@ const countLabel = document.getElementById('count-label');
 
 // 核實日期＝該批資料最後於 Google 地圖核實/更新的日期（＝各批提交日）
 // CHECK_OVERRIDE：個別重新查證過的店家，覆蓋批次日期
-const CHECK_OVERRIDE = { 32: '2026-07-12', 34: '2026-07-12' }; // 高島屋/大丸：素食選項重新查證
+const CHECK_OVERRIDE = { 32: '2026-07-12' }; // 高島屋難波：素食選項重新查證(07-12)
+const SHINSAIBASHI_RECHECK = new Set([3,4,8,12,30,34,52,98,99,100,101,102,103,104,105,143,144,146]); // 心齋橋一帶出發前 2026-07-14 重新核實
 function checkedDate(id, region) {
+  if (SHINSAIBASHI_RECHECK.has(id)) return '2026-07-14'; // 心齋橋一帶出發前重新核實
   if (CHECK_OVERRIDE[id]) return CHECK_OVERRIDE[id];
   if (region === 'nara') return '2026-07-14';   // 奈良全區出發前重新核實
-  if (id >= 152) return '2026-07-14';            // 天保山/港區灣岸新批
-  if (id >= 90) return '2026-07-12';             // 高島屋/大丸/梅田/京都百貨等
+  if (region === 'kyoto') return '2026-07-14';  // 京都全區出發前重新核實
+  if (id >= 152) return '2026-07-14';            // 車站/百貨/街邊新批
+  if (id >= 90) return '2026-07-12';             // 大丸/梅田等百貨（未再核實）
   if (id <= 25) return '2026-06-28';
   if (id <= 37) return '2026-06-29';
   if (id <= 51) return '2026-06-30';
@@ -3473,7 +3929,7 @@ function getFiltered() {
       activeFilter === 'user'    ? r.group === 'user'  :
       activeFilter === 'hotel'   ? r.group === 'hotel' :
       activeFilter === 'social'  ? r.group === 'social' :
-      activeFilter === 'depa'    ? ((r.id >= 90 && r.id <= 126) || r.id === 32 || r.id === 34) :
+      activeFilter === 'depa'    ? ((r.id >= 90 && r.id <= 126) || r.id === 32 || r.id === 34 || (r.id >= 164 && r.id <= 172) || [186,192,193,194].includes(r.id)) :
       r.tags.includes(activeFilter);
     const matchSearch = !searchVal || r.name.toLowerCase().includes(searchVal) ||
       r.nameJa.includes(searchVal) || r.area.includes(searchVal) || r.dishes.includes(searchVal);

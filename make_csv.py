@@ -12,14 +12,19 @@ js = re.findall(r'<script>(.*?)</script>', html, re.S)[-1]
 pblock = re.search(r'const PRICES = \{(.*?)\n\};', js, re.S).group(1)
 prices = {int(k): v for k, v in re.findall(r"(\d+)\s*:\s*'([^']*)'", pblock)}
 
-CHECK_OVERRIDE = {32: '2026-07-12', 34: '2026-07-12'}  # 個別重新查證過的店家
+CHECK_OVERRIDE = {32: '2026-07-12'}  # 個別重新查證過的店家
+SHINSAIBASHI_RECHECK = {3, 4, 8, 12, 30, 34, 52, 98, 99, 100, 101, 102, 103, 104, 105, 143, 144, 146}  # 心齋橋一帶出發前 2026-07-14 重新核實
 def checked(i, region=''):
+    if i in SHINSAIBASHI_RECHECK:
+        return '2026-07-14'  # 心齋橋一帶出發前重新核實
     if i in CHECK_OVERRIDE:
         return CHECK_OVERRIDE[i]
     if region == 'nara':
         return '2026-07-14'  # 奈良全區出發前重新核實
+    if region == 'kyoto':
+        return '2026-07-14'  # 京都全區出發前重新核實
     if i >= 152:
-        return '2026-07-14'  # 天保山/港區灣岸新批
+        return '2026-07-14'  # 車站/百貨/街邊新批
     if i >= 90:
         return '2026-07-12'
     return '2026-06-28' if i <= 25 else '2026-06-29' if i <= 37 else '2026-06-30' if i <= 51 else '2026-07-03'
