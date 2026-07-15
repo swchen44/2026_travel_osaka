@@ -235,6 +235,7 @@
     #main { flex-direction: column; height: auto; }
     #map { flex: none; height: 45vh; }
     #sidebar { max-height: 55vh; }
+    header .header-sub { display: none; }   /* 手機隱藏副標，省畫面 */
   }
 </style>
 </head>
@@ -244,10 +245,10 @@
   <div style="font-size:2rem;">🌿</div>
   <div>
     <h1>關西素食餐廳互動地圖（大阪・京都・奈良）</h1>
-    <p>HappyCow／社群精選　點擊地圖或卡片查看照片、評分、營業時間與每人價位</p>
+    <p class="header-sub">官方菜單／Tabelog／HappyCow／社群整理　點擊地圖或卡片查看照片、評分、營業時間與每人價位</p>
   </div>
   <div style="margin-left:auto; display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; align-items:center;">
-    <span class="badge">共 89 家</span>
+    <span class="badge" id="total-badge">共 207 家</span>
     <span class="badge" style="background:#1565C0;">2026 更新</span>
     <a class="badge" href="https://www.google.com/maps/d/viewer?mid=1i3Don-c9kYY-ohjIRtsUYyzljD0byk0" target="_blank" rel="noopener" style="background:#0F9D58; text-decoration:none;">🗺️ 在 Google 地圖開啟</a>
     <a class="badge" href="vegan_kansai_places.csv" download style="background:#5f6368; text-decoration:none;">⬇️ 下載 CSV</a>
@@ -4348,6 +4349,8 @@ if (window.innerWidth <= 950) {
 // ── Init ───────────────────────────────────────────────────────────────────
 buildCards(restaurants);
 countLabel.textContent = `顯示 ${restaurants.length} / ${restaurants.length} 家`;
+const totalBadge = document.getElementById('total-badge');
+if (totalBadge) totalBadge.textContent = `共 ${restaurants.length} 家`;
 fitToList(restaurants);  // 初始框住整個關西（大阪・京都・奈良）
 
 // Add legend to map
