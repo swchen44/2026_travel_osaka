@@ -294,7 +294,7 @@
     <p class="header-sub">官方菜單／Tabelog／HappyCow／社群整理　點擊地圖或卡片查看照片、評分、營業時間與每人價位</p>
   </div>
   <div style="margin-left:auto; display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; align-items:center;">
-    <span class="badge" id="total-badge">共 207 家</span>
+    <span class="badge" id="total-badge">共 209 家</span>
     <span class="badge" id="badge-year" style="background:#1565C0;">2026 更新</span>
     <a class="badge" href="https://www.google.com/maps/d/viewer?mid=1i3Don-c9kYY-ohjIRtsUYyzljD0byk0" target="_blank" rel="noopener" style="background:#0F9D58; text-decoration:none;">🗺️ 在 Google 地圖開啟</a>
     <a class="badge" href="vegan_kansai_places.csv" download style="background:#5f6368; text-decoration:none;">⬇️ 下載 CSV</a>
@@ -558,6 +558,8 @@ const photos = {
   // ── 心齋橋一帶新批（出發前 2026-07-14 核實；190 GENMAI 無照片、用 emoji 底圖） ──
   186:'images/186.jpg', 187:'images/187.jpg', 188:'images/188.jpg', 189:'images/189.jpg',
   191:'images/191.jpg', 192:'images/192.jpg', 193:'images/193.jpg', 194:'images/194.jpg',
+  // 新世界 恵美須屋（HappyCow 實照）
+  210:'images/210.jpg', 211:'images/211.jpg',
 };
 
 // ── 每人大約價位（日圓，參考 Tabelog / Google / 官網菜單） ──────
@@ -680,6 +682,8 @@ const PRICES = {
   204:'約 ¥500–900／人',
   // 連鎖備案 追加（大阪城/臨空城/天王寺）
   205:'飲品/輕食 約 ¥500–900／人', 206:'飲品/輕食 約 ¥500–900／人', 207:'ベジカレー 約 ¥600–1,000／人', 208:'サンド 約 ¥500–900／人', 209:'約 ¥500–900／人',
+  // 新世界 恵美須屋
+  210:'vegan/野菜うどん 約 ¥1,000–1,400／人', 211:'vegan 拉麵/烏龍 ¥1,380／副菜 ¥440–780',
 };
 
 // ── Restaurant data ────────────────────────────────────────────────────────
@@ -3977,6 +3981,36 @@ const restaurants = [
     gmap:'https://www.google.com/maps/search/?api=1&query=34.64480,135.51360',
     ghours:'https://www.mos.jp/menu/', hcUrl:'https://www.mos.jp/menu/', phone:'06-6633-6155'
   },
+  {
+    id:210, rank:210, group:'social', region:'osaka',
+    name:'新世界かすうどん恵美須屋 本店（有素食/vegan 菜單）', nameJa:'新世界かすうどん恵美須屋 本店',
+    type:'うどん・和食（葷店・有蔬食/vegan 菜單）｜蔬食友善', tags:['social'],
+    area:'新世界・恵美須町（恵美須町駅3番出口すぐ・近通天閣）・浪速區',
+    address:'大阪市浪速区恵美須東1-22-1',
+    lat:34.65409, lng:135.50554,
+    hours:'平日 9:00-15:30 / 17:30-22:30；週末假日 9:00-22:30；週二・週三公休(遇假日營業)',
+    dishes:'野菜うどん・野菜天ぷらうどん・すだちうどん/素麵・湯豆腐・野菜炊いたん・vegan 拉麵/烏龍・大豆唐揚・vegan 霜淇淋(抹茶/米奶)',
+    notes:'⚠️ 本店為かすうどん(牛油かす)葷店，只點官方標示的「ベジタリアン/vegan」品項。一般うどん/かすうどん湯底含柴魚＋牛脂；vegan 品項湯底官方未明確標示是否全植物→點餐務必確認「vegan 湯底無かつお/肉」。可要求不加蔥(五辛)；蛋奶素可吃蛋。',
+    flag:'🗼 新世界・蔬食烏龍(需確認湯底)',
+    hcStars:'—', gStars:'HappyCow（Veg-options）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.65409,135.50554',
+    ghours:'https://www.hirotaka-group.com/ebisuya.html', hcUrl:'https://www.happycow.net/reviews/kasu-udon-ebisuya-main-store-osaka-436744', phone:'06-6556-7871'
+  },
+  {
+    id:211, rank:211, group:'social', region:'osaka',
+    name:'新世界かすうどん恵美須屋 2号店（ジャンジャン横丁・vegan 菜單）', nameJa:'新世界かすうどん恵美須屋 2号店',
+    type:'うどん・和食（葷店・有 vegan 菜單）｜蔬食友善', tags:['social'],
+    area:'新世界・ジャンジャン横丁内（近通天閣/動物園前）・浪速區',
+    address:'大阪市浪速区恵美須東3-4-3',
+    lat:34.65053, lng:135.50625,
+    hours:'平日・週六 9:00-22:30；週日 9:00-21:00；週一公休',
+    dishes:'vegan 拉麵/烏龍 ¥1,380・vegan 餃子 ¥780・大豆唐揚 ¥780・揚げ出し豆腐 ¥520・湯葉 ¥680・豆腐 ¥440・番茄沙拉 ¥580',
+    notes:'⚠️ かすうどん(牛油かす)葷店，只點標示「vegan」品項。有專屬 vegan 菜單、店員會主動問蛋(蛋奶素可吃蛋)、天ぷら可用無蛋麵衣。vegan 湯底官方未明說是否全植物→點餐確認無かつお/肉高湯。位ジャンジャン横丁串炸街內。',
+    flag:'🗼 新世界・vegan 烏龍/拉麵(需確認湯底)',
+    hcStars:'—', gStars:'HappyCow（Veg-options）／abillion',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.65053,135.50625',
+    ghours:'https://www.hirotaka-group.com/ebisuya2.html', hcUrl:'https://www.happycow.net/reviews/kasu-udon-ebisuya-2-go-shop-osaka-392024', phone:'06-6615-9323'
+  },
 ];
 
 // ── Map init ───────────────────────────────────────────────────────────────
@@ -4041,6 +4075,7 @@ function checkedDate(id, region) {
   if (CHECK_OVERRIDE[id]) return CHECK_OVERRIDE[id];
   if (region === 'nara') return '2026-07-14';   // 奈良全區出發前重新核實
   if (region === 'kyoto') return '2026-07-14';  // 京都全區出發前重新核實
+  if (id >= 210) return '2026-07-19';            // 新世界 恵美須屋 出發前查證
   if (id >= 152) return '2026-07-14';            // 車站/百貨/街邊新批
   if (id >= 90) return '2026-07-12';             // 大丸/梅田等百貨（未再核實）
   if (id <= 25) return '2026-06-28';
