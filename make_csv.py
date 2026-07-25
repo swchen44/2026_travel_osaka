@@ -23,6 +23,8 @@ def checked(i, region=''):
         return '2026-07-14'  # 奈良全區出發前重新核實
     if region == 'kyoto':
         return '2026-07-14'  # 京都全區出發前重新核實
+    if i >= 212:
+        return '2026-07-23'  # HappyCow/abillion 盤點補漏
     if i >= 210:
         return '2026-07-19'  # 新世界 恵美須屋 出發前查證
     if i >= 152:
