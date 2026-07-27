@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌿 日本素食餐廳地圖（關西・沖繩・東京）</title>
+<title>🌿 日本素食餐廳地圖（關西・沖繩・東京・北海道）</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -290,7 +290,7 @@
 <header>
   <div style="font-size:2rem;">🌿</div>
   <div>
-    <h1>日本素食餐廳互動地圖（關西・沖繩・東京）</h1>
+    <h1>日本素食餐廳互動地圖（關西・沖繩・東京・北海道）</h1>
     <p class="header-sub">官方菜單／Tabelog／HappyCow／社群整理　點擊地圖或卡片查看照片、評分、營業時間與每人價位</p>
   </div>
   <div style="margin-left:auto; display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; align-items:center;">
@@ -318,6 +318,7 @@
   <button class="region-btn" onclick="filterRegion('kobe',this)">🔵 神戶</button>
   <button class="region-btn" onclick="filterRegion('okinawa',this)">🌺 沖繩</button>
   <button class="region-btn" onclick="filterRegion('tokyo',this)">🗼 東京</button>
+  <button class="region-btn" onclick="filterRegion('hokkaido',this)">❄️ 北海道</button>
 </div>
 
 <div id="filter-bar">
@@ -434,6 +435,24 @@
 <script>
 // ── Restaurant photos (from HappyCow CDN) ─────────────────────────────────
 const photos = {
+  // ── 北海道 ──
+  359: 'images/359.jpg',
+  360: 'images/360.jpg',
+  361: 'https://images.happycow.net/venues/500/14/27/hcmp142732_1253185.jpeg',
+  362: 'https://images.happycow.net/venues/500/44/15/hcmp44157_2786981.jpeg',
+  363: 'images/363.jpg',
+  364: 'images/364.jpg',
+  366: 'images/366.jpg',
+  367: 'images/367.jpg',
+  369: 'images/369.jpg',
+  370: 'https://images.happycow.net/venues/500/32/09/hcmp320901_2254903.jpeg',
+  371: 'https://images.happycow.net/venues/500/40/46/hcmp404672_2739142.jpeg',
+  372: 'https://images.happycow.net/venues/500/69/54/hcmp69547_742114.jpeg',
+  374: 'https://images.happycow.net/venues/500/20/15/hcmp201571_892297.jpeg',
+  375: 'images/375.jpg',
+  376: 'https://images.happycow.net/venues/500/99/71/hcmp99714_534883.jpeg',
+  377: 'https://images.happycow.net/venues/500/16/59/hcmp165937_1048582.jpeg',
+  379: 'https://images.happycow.net/venues/500/38/55/hcmp385508_2516562.jpeg',
   // ── 東京圈 ──
   300: 'images/300.jpg',
   301: 'images/301.jpg',
@@ -661,6 +680,31 @@ const photos = {
 
 // ── 每人大約價位（日圓，參考 Tabelog / Google / 官網菜單） ──────
 const PRICES = {
+  // ── 北海道 ──
+  359: '約 ¥700–1,000',
+  360: '午晚 ¥1,000–1,999',
+  361: '約 ¥1,000–1,500',
+  362: '晚套餐約 ¥5,000+',
+  363: '約 ¥1,200–1,800',
+  364: '約 ¥890–1,200',
+  365: '午 ¥990–1,680／夜 ¥2,500 起',
+  366: '午約 ¥2,000–3,000',
+  367: '約 ¥2,000 以下',
+  368: '午 ¥1,650 起',
+  369: '約 ¥1,000–1,800',
+  370: '實惠（約 ¥1,000）',
+  371: '約 ¥800–1,200',
+  372: '¥550–1,300',
+  373: '約 ¥150–300／串',
+  374: '¥1,200–1,800',
+  375: '約 ¥2,000',
+  376: '中價位',
+  377: '中價位',
+  378: '約 ¥1,000–1,500',
+  379: '約 ¥1,500',
+  380: '¥1,000–1,999',
+  381: '約 ¥900–1,300',
+  382: '約 ¥1,000',
   // ── 東京圈 ──
   300: '¥1,300–1,800',
   301: '午 ¥1,000–1,999／晚 ¥2,000–2,999',
@@ -6434,6 +6478,366 @@ const restaurants = [
     gmap:'https://www.google.com/maps/search/?api=1&query=35.2455,139.0545',
     ghours:'https://www.hakone-kappei.com/', hcUrl:'https://www.happycow.net/reviews/hakone-kappei-hakone-72626', phone:''
   },
+  {
+    id:359, rank:359, group:'social', region:'hokkaido',
+    name:'麵屋SASUKE 時計台店(vegan拉麵)', nameJa:'麺屋サスケ 時計台店',
+    type:'拉麵(蔬食友善・需指定vegan版)', tags:['social'],
+    area:'札幌・大通（時計台正下方）',
+    address:'札幌市中央区北1条西2-1 札幌時計ビルB1F',
+    lat:43.0617, lng:141.35216,
+    hours:'11:00-22:00；無休',
+    dishes:'ヴィーガンラーメン(Samurai Ramen UMAMI 植物性湯底,約¥680起)',
+    notes:'★本身是味噌拉麵葷店,導入授權植物性拉麵；點餐務必指定vegan版、不加叉燒/魚介★時計台正下方觀光動線超方便。',
+    flag:'❄️ 大通・葷店vegan拉麵',
+    hcStars:'—', gStars:'Vegewel 收錄',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.0617,141.35216',
+    ghours:'https://sasuke396.official.ec/', hcUrl:'https://tabelog.com/hokkaido/A0101/A010102/1049356/', phone:'+81-11-210-7333'
+  },
+  {
+    id:360, rank:360, group:'social', region:'hokkaido',
+    name:'JYOTI 印度料理', nameJa:'JYOTI ジョーティ',
+    type:'印度料理(蔬食友善・有vegan咖哩)', tags:['social'],
+    area:'札幌・狸小路（狸小路駅77m）',
+    address:'札幌市中央区南3条西4-16-1 若月スクエア7F',
+    lat:43.05718, lng:141.35032,
+    hours:'11:30-20:00(時有變動)；不定休',
+    dishes:'Vegan 蔬菜咖哩・豆類咖哩・印度甜點(用北海道野菜,不用化調)',
+    notes:'店主吃素、可做全vegan/蛋奶素；含paneer/優格菜蛋奶素可吃。印度料理不用柴魚,湯底風險低。',
+    flag:'❄️ 狸小路・印度素咖哩',
+    hcStars:'—', gStars:'Tabelog 3.23（21 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.05718,141.35032',
+    ghours:'https://chandama.jp/jyoti', hcUrl:'https://tabelog.com/hokkaido/A0101/A010103/1067443/', phone:'+81-11-596-0579'
+  },
+  {
+    id:361, rank:361, group:'social', region:'hokkaido',
+    name:'Beyond Age 湯咖哩', nameJa:'ビヨンドエイジ スープカレー',
+    type:'湯咖哩(蔬食友善・有明標vegan湯底)', tags:['social'],
+    area:'札幌・山鼻（南19条）',
+    address:'札幌市中央区南19条西7丁目2-17',
+    lat:43.03894, lng:141.34756,
+    hours:'11:00-15:00／17:00-21:30；週三晚休',
+    dishes:'ヴィーガンスープカレー(一般/椰奶vegan湯底)+菇/南瓜/牛蒡+薑黃飯,辣度可調',
+    notes:'★北海道湯咖哩湯底常含雞/豬骨,本店特別提供明標vegan湯底故安全★點餐複述要vegan base。現金限定。',
+    flag:'❄️ 山鼻・vegan湯咖哩',
+    hcStars:'—', gStars:'HappyCow 4.0（30 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.03894,141.34756',
+    ghours:'https://beyond-age.com/', hcUrl:'https://www.happycow.net/reviews/beyond-age-soup-curry-kita-22-jo-sapporo-142732', phone:'+81-11-252-7876'
+  },
+  {
+    id:362, rank:362, group:'social', region:'hokkaido',
+    name:'Salloga(旧いただき禅)', nameJa:'サロガ Salloga',
+    type:'純素日式養生 macrobiotic｜全素 Vegan', tags:['social'],
+    area:'札幌・円山（南2条西23）',
+    address:'札幌市中央区南2条西23丁目1-23 スタシオ23',
+    lat:43.05832, lng:141.33284,
+    hours:'週三〜日 11:30-17:00；週一二休；晚餐僅預約',
+    dishes:'味噌套餐・vegan壽司・大豆唐揚・南瓜沙拉・豆腐系甜點(自家菜園有機蔬菜)',
+    notes:'一人主廚、每晚僅接2組,強烈建議預約。全vegan無柴魚/肉湯疑慮。',
+    flag:'❄️ 円山・純素養生',
+    hcStars:'—', gStars:'HappyCow 5.0（39 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.05832,141.33284',
+    ghours:'https://itadakizen.com/sapporo', hcUrl:'https://www.happycow.net/reviews/salloga-sapporo-44157', phone:'+81-11-676-8436'
+  },
+  {
+    id:363, rank:363, group:'social', region:'hokkaido',
+    name:'Veggy Way ベジウェイ', nameJa:'ホリスティックビオカフェ ベジウェイ',
+    type:'東方素咖啡(無五葷)｜全素 Vegan', tags:['social'],
+    area:'札幌・円山公園（駅1號出口1分）',
+    address:'札幌市中央区大通西27丁目2-3 円山桂和West27 1F',
+    lat:43.0606, lng:141.32916,
+    hours:'11:30-18:00(餐LO17:00)；不定休',
+    dishes:'本日おまかせプレート・大豆肉テリヤキ/SOYカツバーガー・ベジフィッシュバーガー・椰香綠咖哩・vegan霜淇淋パフェ',
+    notes:'營養師主理,全植物性且不用五葷(オリエンタルベジ),蛋奶素非常安全。',
+    flag:'❄️ 円山公園・純素無五葷',
+    hcStars:'—', gStars:'Vegewel 收錄（札幌標竿）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.0606,141.32916',
+    ghours:'https://veggy-way.com/', hcUrl:'https://vegewel.com/ja/style/veggyway', phone:'+81-11-624-7632'
+  },
+  {
+    id:364, rank:364, group:'social', region:'hokkaido',
+    name:'福の樹(vegan番茄拉麵)', nameJa:'濃厚な味わいヌードル 福の樹',
+    type:'純素番茄拉麵｜全素 Vegan', tags:['social'],
+    area:'札幌・大通（西11丁目駅）',
+    address:'札幌市中央区南4条西10丁目1004-1 南四条ユニハウス1F',
+    lat:43.05604, lng:141.3448,
+    hours:'11:30-21:00；週一休',
+    dishes:'ベジトマトヌードル(整顆番茄3個)・禅パスタ・ベジカレートマトヌードル',
+    notes:'北海道拉麵陷阱替代選項——番茄基底、無動物性,部分報導稱不用五葷；無添加。',
+    flag:'❄️ 大通・純素番茄拉麵',
+    hcStars:'—', gStars:'Vegewel/Hachidory 收錄',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.05604,141.3448',
+    ghours:'https://vegewel.com/ja/restaurant/1522', hcUrl:'https://vegewel.com/ja/restaurant/1522', phone:'+81-11-511-3055'
+  },
+  {
+    id:365, rank:365, group:'social', region:'hokkaido',
+    name:'粋Laboratory 有機居酒屋', nameJa:'粋Laboratory',
+    type:'有機居酒屋(蔬食友善・點vegan菜)', tags:['social'],
+    area:'札幌・大通（大通駅近）',
+    address:'札幌市中央区大通(詳細番地待確認)',
+    lat:43.06, lng:141.35,
+    hours:'午餐時段+夜間；公休未載(建議先電洽)',
+    dishes:'大豆ミートの唐揚・酵素玄米+季節蔬菜咖哩・スーパーフードサラダプレート・五行ランチ・夜間おまかせ',
+    notes:'2010開業、macrobiotic、無化調,用北海道有機食材。葷素混合,點明vegan/veg菜,湯底請確認非柴魚/肉。番地/時間行前再確認。',
+    flag:'❄️ 大通・有機素食居酒屋',
+    hcStars:'—', gStars:'Vegewel 收錄',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.06,141.35',
+    ghours:'https://vegewel.com/ja/style/ikilaboratory', hcUrl:'https://vegewel.com/ja/style/ikilaboratory', phone:''
+  },
+  {
+    id:366, rank:366, group:'social', region:'hokkaido',
+    name:'Farm to Table TERRA', nameJa:'ファーム トゥ テーブル テラ',
+    type:'創新蔬食(蔬食友善・需指定vegan set)', tags:['social'],
+    area:'札幌・中島公園（駅徒步2分）',
+    address:'札幌市中央区南9条西2丁目2-10 ホテルマイステイズプレミア札幌パーク内',
+    lat:43.05034, lng:141.35216,
+    hours:'朝7:00-10:00／午11:30-14:00／晚18:00-22:00(LO21:00)',
+    dishes:'契約農家有機野菜料理；vegan版100%植物性(不用魚肉動物脂乳蛋蜜)',
+    notes:'室內glamping風。蛋奶素可選Lacto-ovo版(含蛋奶)或更嚴vegan版；預約時註明,避開柴魚高湯。',
+    flag:'❄️ 中島公園・農場蔬食',
+    hcStars:'—', gStars:'Tabelog/一休 收錄',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.05034,141.35216',
+    ghours:'https://h220400.gorp.jp/', hcUrl:'https://tabelog.com/hokkaido/A0101/A010104/1022365/', phone:'+81-11-512-3456'
+  },
+  {
+    id:367, rank:367, group:'social', region:'hokkaido',
+    name:'青い空、流れる雲', nameJa:'青い空、流れる雲',
+    type:'蔬食咖啡(蔬食友善・確認高湯)', tags:['social'],
+    area:'札幌・円山（裏参道）',
+    address:'札幌市中央区南1条西22-1-7 裏参道ルーム22 1F',
+    lat:43.05946, lng:141.33376,
+    hours:'10:30咖啡／12:00-17:00午餐+咖啡／18:00-晚餐僅預約；無休',
+    dishes:'青い空ベジごはん(有機蔬菜定食)等',
+    notes:'開業18年隱藏名店、半地下大窗。以蔬食為主、蛋奶素友善；點餐確認高湯是否用昆布(非柴魚)。',
+    flag:'❄️ 円山・有機蔬食定食',
+    hcStars:'—', gStars:'食べログ/poroco 收錄',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.05946,141.33376',
+    ghours:'https://tabelog.com/hokkaido/A0101/A010105/1005996/', hcUrl:'https://tabelog.com/hokkaido/A0101/A010105/1005996/', phone:''
+  },
+  {
+    id:368, rank:368, group:'social', region:'hokkaido',
+    name:'日本料理 まるやまかわなか', nameJa:'日本料理 まるやまかわなか',
+    type:'日本料理(蔬食友善・需預約指定精進無柴魚)', tags:['social'],
+    area:'札幌・円山公園（駅4號出口即到）',
+    address:'札幌市中央区南1条西25丁目2-22 パケットB1F',
+    lat:43.05946, lng:141.331,
+    hours:'午/晚(見官網)；建議預約',
+    dishes:'八彩弁当(惣菜+野菜寿司+椀+炊合+甘味+咖啡)；預約制野菜づくしコース',
+    notes:'米其林收錄卻平價。★日本料理高湯常含柴魚,欲全素/蛋奶素務必事前預約註明vegan/veg、不要かつおだし,改昆布高湯★。',
+    flag:'❄️ 円山・米其林蔬食便當',
+    hcStars:'—', gStars:'米其林收錄',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.05946,141.331',
+    ghours:'https://vegewel.com/ja/style/maruyamakawanaka', hcUrl:'https://vegewel.com/ja/style/maruyamakawanaka', phone:''
+  },
+  {
+    id:369, rank:369, group:'social', region:'hokkaido',
+    name:'からだにいいかふぇ e’cafe', nameJa:'からだにいいかふぇ e’cafe',
+    type:'純素無麩自然食咖啡｜全素 Vegan', tags:['social'],
+    area:'札幌站（JR札幌駅徒步2分）',
+    address:'札幌市北区北7条西5-6 ストークマンション札幌208',
+    lat:43.0683, lng:141.3494,
+    hours:'12:00-18:00；週一休',
+    dishes:'無麩質×vegan甜點・鹹派・披薩(生活習慣病預防取向)',
+    notes:'站前方便。以vegan/GF為主,蛋奶素可食;湯底風險低。行前建議電洽確認當日營業。',
+    flag:'❄️ 札幌站・純素無麩咖啡',
+    hcStars:'—', gStars:'Tabelog 收錄',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.0683,141.3494',
+    ghours:'https://tabelog.com/hokkaido/A0101/A010101/1052820/', hcUrl:'https://tabelog.com/hokkaido/A0101/A010101/1052820/', phone:'+81-11-769-0741'
+  },
+  {
+    id:370, rank:370, group:'social', region:'hokkaido',
+    name:'ラーメン高野槙 南郷店(vegan味噌)', nameJa:'ラーメン高野槙 南ごてん',
+    type:'拉麵(蔬食友善・有vegan味噌版)', tags:['social'],
+    area:'札幌・白石区（南郷18丁目駅,核心區外東側）',
+    address:'札幌市白石区栄通19丁目4-1',
+    lat:43.038, lng:141.418,
+    hours:'11:00-21:00；週三休',
+    dishes:'Vegan味噌拉麵(植物性湯底,售票機日英標示vegan)',
+    notes:'★北海道味噌拉麵通常＝豚骨+魚介+柴魚,本店難得提供動物性全無vegan味噌版,門口券売機明標★位置偏東(白石)。',
+    flag:'❄️ 白石・vegan味噌拉麵',
+    hcStars:'—', gStars:'HappyCow 4.0（13 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.038,141.418',
+    ghours:'https://takanotsu.me/', hcUrl:'https://www.happycow.net/reviews/ramen-takanotsume-nangoten-sapporo-320901', phone:'+81-11-827-7988'
+  },
+  {
+    id:371, rank:371, group:'social', region:'hokkaido',
+    name:'なかや(小樽純素蕎麥)', nameJa:'なかや',
+    type:'純素蕎麥麵專門｜全素 Vegan', tags:['social'],
+    area:'小樽・住之江',
+    address:'北海道小樽市住ノ江1-4-16',
+    lat:43.18437, lng:141.00356,
+    hours:'一〜日 10:30-16:00(現金限定)',
+    dishes:'100%植物性冷/溫蕎麥,餐後附蕎麥湯(湯底非魚介)',
+    notes:'HappyCow 標100%植物性故蛋奶素完全安心;老闆會些英文、有圖片菜單。離觀光區稍遠的隱藏名店。',
+    flag:'❄️ 小樽・純素蕎麥',
+    hcStars:'—', gStars:'HappyCow 5.0（15 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.18437,141.00356',
+    ghours:'https://www.happycow.net/reviews/nakaya-otaru-404672', hcUrl:'https://www.happycow.net/reviews/nakaya-otaru-404672', phone:'+81-134-25-2511'
+  },
+  {
+    id:372, rank:372, group:'social', region:'hokkaido',
+    name:'やぶ半(小樽蕎麥老舖)', nameJa:'やぶ半',
+    type:'蕎麥老舖(蔬食友善・點名昆布素高湯)', tags:['social'],
+    area:'小樽・稻穗（近運河）',
+    address:'北海道小樽市稲穂2-19-14',
+    lat:43.19655, lng:140.99587,
+    hours:'一三〜六 11:00-20:30(16-16:30休)；二/日不定休',
+    dishes:'可要求昆布系素湯底蕎麥・炸豆腐・烤豆腐(英文菜單有標素食)',
+    notes:'★務必點名要昆布素高湯,預設蕎麥沾汁多含柴魚★熱門建議預約。',
+    flag:'❄️ 小樽・蕎麥素選項',
+    hcStars:'—', gStars:'HappyCow 4.0（17 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.19655,140.99587',
+    ghours:'https://yabuhan.co.jp/', hcUrl:'https://www.happycow.net/reviews/yabuhan-otaru-69547', phone:'+81-134-33-1212'
+  },
+  {
+    id:373, rank:373, group:'social', region:'hokkaido',
+    name:'利尻屋みのや(小樽芋餅)', nameJa:'利尻屋みのや',
+    type:'街邊芋餅(蔬食友善・確認醬汁)', tags:['social'],
+    area:'小樽・堺町通（運河觀光主街）',
+    address:'北海道小樽市堺町一帶(堺町通多店舖)',
+    lat:43.1925, lng:141.006,
+    hours:'約 10:00-18:00(各店略異)',
+    dishes:'じゃがいも餅(糯米粉芋餅,本身純素)',
+    notes:'醬油照燒醬需確認無柴魚;適合散步小食、非正餐。堺町通實體存在,座標與醬料待現場確認。',
+    flag:'❄️ 小樽堺町・芋餅小食',
+    hcStars:'—', gStars:'觀光名物',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.1925,141.006',
+    ghours:'https://www.happycow.net/', hcUrl:'https://www.happycow.net/', phone:''
+  },
+  {
+    id:374, rank:374, group:'social', region:'hokkaido',
+    name:'Taom(函館純素午餐)', nameJa:'Taom',
+    type:'純素週間午餐盤(中亞/俄式)｜全素 Vegan', tags:['social'],
+    area:'函館・末廣町（灣區/元町電車道）',
+    address:'北海道函館市末広町9-9 1F',
+    lat:41.76496, lng:140.71632,
+    hours:'週五六 11:00-16:00；週六另 18:30-21:00(僅週五六營業)',
+    dishes:'每週更換午間定食(含味噌湯・飯・數樣蔬菜・甜點)・純素甜點・豆奶咖啡',
+    notes:'營業日極少(僅週五六),行程要卡準;空間小建議先問。',
+    flag:'❄️ 函館灣區・純素午餐盤',
+    hcStars:'—', gStars:'HappyCow 5.0（36 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=41.76496,140.71632',
+    ghours:'https://www.happycow.net/reviews/taom-hakodate-201571', hcUrl:'https://www.happycow.net/reviews/taom-hakodate-201571', phone:''
+  },
+  {
+    id:375, rank:375, group:'social', region:'hokkaido',
+    name:'野菜バー ミルヤ(函館)', nameJa:'野菜バー ミルヤ',
+    type:'純素蔬食居酒屋(需預約)｜全素 Vegan', tags:['social'],
+    area:'函館・豐川町（近朝市/灣區）',
+    address:'北海道函館市豊川町22-5',
+    lat:41.76694, lng:140.7203,
+    hours:'午餐僅週三四 12:00-14:30；酒吧 18:00-22:00；週日/假日休',
+    dishes:'全植物定食(炸大豆素肉/咖哩/餃子/照燒素肉,附飯沙拉漬物馬鈴薯泥炸蒟蒻)',
+    notes:'★需預約(可FB英文預訂)★門面極不起眼、無招牌、毛玻璃窗;有英文菜單。',
+    flag:'❄️ 函館・純素蔬食居酒屋',
+    hcStars:'—', gStars:'TripAdvisor/VegeMap 正評',
+    gmap:'https://www.google.com/maps/search/?api=1&query=41.76694,140.7203',
+    ghours:'https://www.facebook.com/yasaibarmiruya', hcUrl:'https://tabelog.com/hokkaido/A0105/A010501/1040219/', phone:'+81-70-2428-5635'
+  },
+  {
+    id:376, rank:376, group:'social', region:'hokkaido',
+    name:'なぼ Navo(富良野純素)', nameJa:'なぼ',
+    type:'純素無國籍和洋(僅晚間)｜全素 Vegan', tags:['social'],
+    area:'富良野・若葉町（近JR富良野站）',
+    address:'北海道富良野市若葉町10-8',
+    lat:43.33798, lng:142.39138,
+    hours:'一〜日 18:00-22:00(僅晚間)',
+    dishes:'豆腐炸排・照燒豆腐・烏龍麵・咖哩・餃子・炸菇・巧克力蛋糕・百匯',
+    notes:'2023-05起轉全素、2026-02仍好評;僅晚餐。',
+    flag:'❄️ 富良野・純素無國籍',
+    hcStars:'—', gStars:'HappyCow 5.0（18 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.33798,142.39138',
+    ghours:'https://navo-net.com/', hcUrl:'https://www.happycow.net/reviews/navo-furano-99714', phone:'+81-167-56-7993'
+  },
+  {
+    id:377, rank:377, group:'social', region:'hokkaido',
+    name:'Cafe ゴリヨウ(富良野農舍)', nameJa:'Cafe ゴリヨウ',
+    type:'蔬食咖啡古農舍(蔬食友善)', tags:['social'],
+    area:'富良野・上五領（市郊,需開車）',
+    address:'北海道富良野市上五領',
+    lat:43.358, lng:142.405,
+    hours:'一・四〜日 11:30-18:00',
+    dishes:'蘑菇燉飯・番茄咖哩・辣豆+甜點+咖啡(可請店家改vegan)',
+    notes:'蛋奶素可直接吃(含奶蛋料理);爵士樂古農舍氛圍佳;位置偏遠需交通工具。座標估算待校正。',
+    flag:'❄️ 富良野・古農舍蔬食咖啡',
+    hcStars:'—', gStars:'HappyCow 4.5（14 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.358,142.405',
+    ghours:'https://goryo.info/cafe', hcUrl:'https://www.happycow.net/reviews/cafe-goryo-furano-165937', phone:'+81-167-23-5139'
+  },
+  {
+    id:378, rank:378, group:'social', region:'hokkaido',
+    name:'Surya 印度尼泊爾料理(富良野)', nameJa:'Surya スーリヤ',
+    type:'印度尼泊爾(蔬食友善・確認咖哩無雞湯)', tags:['social'],
+    area:'富良野・本町（市區）',
+    address:'北海道富良野市本町6-27',
+    lat:43.34723, lng:142.38636,
+    hours:'一〜五 11:00-15:00/17:00-21:00；六日 11:00-21:00',
+    dishes:'綜合蔬菜咖哩・菠菜咖哩・dal豆咖哩・飯・naan・湯・沙拉',
+    notes:'印度素咖哩多奶素(含ghee/奶)蛋奶素可吃;★點餐請確認咖哩底無雞湯★naan通常含蛋奶。',
+    flag:'❄️ 富良野・印度素咖哩',
+    hcStars:'—', gStars:'HappyCow 4.0（3 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.34723,142.38636',
+    ghours:'https://www.happycow.net/reviews/surya-furano-363568', hcUrl:'https://www.happycow.net/reviews/surya-furano-363568', phone:'+81-167-56-7588'
+  },
+  {
+    id:379, rank:379, group:'social', region:'hokkaido',
+    name:'ハーブガーデン富良野', nameJa:'ハーブガーデン富良野',
+    type:'蔬菜火鍋自助(蔬食友善・確認湯底)', tags:['social'],
+    area:'富良野・西3線北（觀光農園,季節性）',
+    address:'北海道富良野市西3線北27号',
+    lat:43.36, lng:142.42,
+    hours:'一〜日 11:00-14:30',
+    dishes:'可自組蔬菜火鍋(buffet);2樓有咖哩飯(素)',
+    notes:'★火鍋湯底需確認非肉/魚介高湯★自助需預約;觀光農園附設、季節營業。',
+    flag:'❄️ 富良野・蔬菜火鍋自助',
+    hcStars:'—', gStars:'HappyCow 4.0（1 則,樣本少）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.36,142.42',
+    ghours:'https://www.yoshida-kanko.com/herbgarden', hcUrl:'https://www.happycow.net/reviews/herb-garden-furano-hokkaido-385508', phone:'+81-167-56-7152'
+  },
+  {
+    id:380, rank:380, group:'social', region:'hokkaido',
+    name:'VeganRamen めぐり(旭川純素拉麵)', nameJa:'VeganRamen めぐり',
+    type:'純素拉麵專門｜全素 Vegan', tags:['social'],
+    area:'旭川・4条通（市中心繁華街）',
+    address:'北海道旭川市4条通7丁目586-2 つつじプラザビル1F',
+    lat:43.7688, lng:142.3625,
+    hours:'20:00-翌4:00(五六至翌5:00)；週日休',
+    dishes:'全植物拉麵(鹽/醬油/辣味噌/激辛味噌)・抹茶拉麵・素餃子・迷你麻婆丼',
+    notes:'★完全避開豚骨/魚介,北海道拉麵陷阱在此免疫★深夜營業、一人經營稍慢;被評日本數一數二vegan拉麵。座標待精校。',
+    flag:'❄️ 旭川・純素拉麵',
+    hcStars:'—', gStars:'部落格/Wolt 多篇好評',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.7688,142.3625',
+    ghours:'https://wolt.com/', hcUrl:'https://www.hitosara.com/0031543891/', phone:'+81-166-22-2202'
+  },
+  {
+    id:381, rank:381, group:'social', region:'hokkaido',
+    name:'元祖旭川ラーメン いちくら', nameJa:'いちくら ICHIKURA',
+    type:'旭川拉麵(蔬食友善・需指定vegan版)', tags:['social'],
+    area:'旭川・3条通（市中心）',
+    address:'北海道旭川市3条通7丁目',
+    lat:43.7678, lng:142.362,
+    hours:'18:00-翌4:00(深夜)',
+    dishes:'另備vegan拉麵與vegan餃子(oriental vegan對應)',
+    notes:'★葷拉麵店另設素選項,務必指定vegan版、確認非共用豚骨湯底★。',
+    flag:'❄️ 旭川・葷店vegan拉麵',
+    hcStars:'—', gStars:'HappyCow 收錄',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.7678,142.362',
+    ghours:'https://www.happycow.net/reviews/ichikura-raman-asahikawa-124112', hcUrl:'https://www.happycow.net/reviews/ichikura-raman-asahikawa-124112', phone:''
+  },
+  {
+    id:382, rank:382, group:'social', region:'hokkaido',
+    name:'Cafe Konii(旭川)', nameJa:'Cafe Konii',
+    type:'植物性咖啡(蔬食友善)', tags:['social'],
+    area:'旭川・忠和5条（市郊,需交通）',
+    address:'北海道旭川市忠和5条1-24',
+    lat:43.752, lng:142.32,
+    hours:'11:00-18:00；週二休',
+    dishes:'plant-based餐點・無乳替代品(蛋奶素可食範圍廣)',
+    notes:'市郊需交通;fooddiversity收錄。細節建議去前確認。',
+    flag:'❄️ 旭川・植物性咖啡',
+    hcStars:'—', gStars:'fooddiversity 收錄',
+    gmap:'https://www.google.com/maps/search/?api=1&query=43.752,142.32',
+    ghours:'https://fooddiversity.today/en/article_170564', hcUrl:'https://fooddiversity.today/en/article_170564', phone:''
+  },
 ];
 
 // ── Map init ───────────────────────────────────────────────────────────────
@@ -6501,6 +6905,7 @@ function checkedDate(id, region) {
   if (region === 'okinawa') return '2026-07-27'; // 沖繩全區新增查證
   if (region === 'kobe') return '2026-07-27';    // 神戶全區新增查證
   if (region === 'tokyo') return '2026-07-27';   // 東京圈全區新增查證
+  if (region === 'hokkaido') return '2026-07-28'; // 北海道全區新增查證
   if (id >= 212) return '2026-07-23';            // HappyCow/abillion 盤點補漏
   if (id >= 210) return '2026-07-19';            // 新世界 恵美須屋 出發前查證
   if (id >= 152) return '2026-07-14';            // 車站/百貨/街邊新批
