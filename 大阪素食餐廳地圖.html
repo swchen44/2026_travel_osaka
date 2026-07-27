@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌿 日本素食餐廳地圖（大阪・京都・奈良・沖繩）</title>
+<title>🌿 日本素食餐廳地圖（關西・沖繩）</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -290,7 +290,7 @@
 <header>
   <div style="font-size:2rem;">🌿</div>
   <div>
-    <h1>日本素食餐廳互動地圖（大阪・京都・奈良・沖繩）</h1>
+    <h1>日本素食餐廳互動地圖（關西・沖繩）</h1>
     <p class="header-sub">官方菜單／Tabelog／HappyCow／社群整理　點擊地圖或卡片查看照片、評分、營業時間與每人價位</p>
   </div>
   <div style="margin-left:auto; display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; align-items:center;">
@@ -315,6 +315,7 @@
   <button class="region-btn" onclick="filterRegion('osaka',this)">🟠 大阪</button>
   <button class="region-btn" onclick="filterRegion('kyoto',this)">🟣 京都</button>
   <button class="region-btn" onclick="filterRegion('nara',this)">🟢 奈良</button>
+  <button class="region-btn" onclick="filterRegion('kobe',this)">🔵 神戶</button>
   <button class="region-btn" onclick="filterRegion('okinawa',this)">🌺 沖繩</button>
 </div>
 
@@ -432,6 +433,18 @@
 <script>
 // ── Restaurant photos (from HappyCow CDN) ─────────────────────────────────
 const photos = {
+  // ── 神戶 ──
+  288: 'images/288.jpg',
+  289: 'images/289.jpg',
+  290: 'images/290.jpg',
+  291: 'images/291.jpg',
+  292: 'images/292.jpg',
+  293: 'images/293.jpg',
+  294: 'images/294.jpg',
+  295: 'images/295.jpg',
+  297: 'images/297.jpg',
+  298: 'images/298.jpg',
+  299: 'images/299.jpg',
   // ── 沖繩（那霸+本島）──
   253: 'https://images.happycow.net/venues/500/36/26/hcmp36263_3432091.jpeg',
   254: 'https://images.happycow.net/venues/500/23/23/hcmp232392_1520678.jpeg',
@@ -596,6 +609,19 @@ const photos = {
 
 // ── 每人大約價位（日圓，參考 Tabelog / Google / 官網菜單） ──────
 const PRICES = {
+  // ── 神戶 ──
+  288: '午 ¥1,000–1,999',
+  289: '午 ¥1,000–1,999',
+  290: '¥1,000–1,999',
+  291: '午 ¥1,000–1,999',
+  292: '午 ¥1,000–1,999',
+  293: '約 ¥1,000／份',
+  294: '晚 ¥2,000–3,999',
+  295: '午 ¥1,000–1,999',
+  296: '午 ¥1,000 前後（吃到飽）',
+  297: '¥1,000–1,999',
+  298: '午 ¥1,100',
+  299: '午 ¥1,000–1,999',
   // ── 沖繩（那霸+本島）──
   253: '午間套餐約 ¥2,800–3,800',
   254: '單品 ¥1,100–1,460／人均約 ¥3,000',
@@ -5231,6 +5257,186 @@ const restaurants = [
     gmap:'https://www.google.com/maps/search/?api=1&query=26.25570,127.71270',
     ghours:'https://place.line.me/businesses/57866564', hcUrl:'https://place.line.me/businesses/57866564', phone:'+81-98-955-6844'
   },
+  {
+    id:288, rank:288, group:'social', region:'kobe',
+    name:'Modernark モダナーク（元町蔬食）', nameJa:'モダナークファームカフェ modernark pharm cafe',
+    type:'綠意老宅蔬食咖啡（蔬食友善）', tags:['social'],
+    area:'神戶・元町（トアロード）',
+    address:'兵庫県神戸市中央区北長狭通3-11-15 神戸通商ビル1F',
+    lat:34.69075, lng:135.18930,
+    hours:'一〜四日 11:30-19:00(L.O.18:00)／五六假前 -20:00；基本無休',
+    dishes:'蔬菜午餐拼盤・咖哩・司康・有機茶',
+    notes:'以植物性為主但非100%純素→確認拼盤是否含蛋奶(蛋奶素皆可)。綠意盎然老宅、元町人氣店。JR元町站北步行4分。',
+    flag:'🔵 元町・綠意蔬食咖啡',
+    hcStars:'—', gStars:'Tabelog 3.47（247 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.69075,135.18930',
+    ghours:'https://tabelog.com/hyogo/A2801/A280102/28000311/', hcUrl:'https://tabelog.com/hyogo/A2801/A280102/28000311/', phone:'+81-78-391-3060'
+  },
+  {
+    id:289, rank:289, group:'social', region:'kobe',
+    name:'Vegan Cafe Thallo タロ（純素GF）', nameJa:'Vegan Cafe Thallo ヴィーガンカフェ タロ',
+    type:'純素定食・無麩甜點｜全素 Vegan', tags:['social'],
+    area:'神戶・元町（北長狭通）',
+    address:'兵庫県神戸市中央区北長狭通4-7-12 オーシャンズコート1F',
+    lat:34.69010, lng:135.18730,
+    hours:'約11:30-17:00；公休日各來源不一(週三或週一三四)，務必電話確認',
+    dishes:'純素定食拼盤・兒童餐・無麩甜點',
+    notes:'無動物性・無小麥粉・無白砂糖、gluten-free，全素故無柴魚疑慮。營業時間版本衝突→建議電話預約。JR元町站步行1分。',
+    flag:'🔵 元町・純素無麩定食',
+    hcStars:'—', gStars:'Tabelog 3.08（26 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.69010,135.18730',
+    ghours:'http://thallo.jp/', hcUrl:'https://tabelog.com/hyogo/A2801/A280102/28049120/', phone:'+81-78-599-9652'
+  },
+  {
+    id:290, rank:290, group:'social', region:'kobe',
+    name:'greenery グリーナリー（純素果昔）', nameJa:'greenery グリーナリー',
+    type:'純素果昔・巴西莓碗・甜點｜全素 Vegan', tags:['social'],
+    area:'神戶・乙仲通（みなと元町）',
+    address:'兵庫県神戸市中央区海岸通4-5-6',
+    lat:34.68610, lng:135.18420,
+    hours:'10:00-17:00；週四公休',
+    dishes:'藝術漸層果昔・Açaí 巴西莓碗・純素司康',
+    notes:'全植物、無添加/無着色/無糖，柴魚無虞。以飲品/甜點為主、非正餐店。地鐵海岸線みなと元町站步行2分。',
+    flag:'🔵 乙仲通・純素果昔',
+    hcStars:'—', gStars:'Tabelog 3.33（71 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68610,135.18420',
+    ghours:'https://greenerykobe-jpn.com/', hcUrl:'https://tabelog.com/hyogo/A2801/A280102/28060382/', phone:''
+  },
+  {
+    id:291, rank:291, group:'social', region:'kobe',
+    name:'やさい食堂 堀江座（蔬菜咖哩）', nameJa:'やさい食堂 堀江座',
+    type:'蔬菜重ね煮咖哩・發酵定食｜全素 Vegan對應', tags:['social'],
+    area:'神戶・西元町（元町通6丁目）',
+    address:'兵庫県神戸市中央区元町通6-3-3',
+    lat:34.68690, lng:135.18150,
+    hours:'一〜六假日 11:30-18:30 頃；週日公休',
+    dishes:'蔬菜咖哩・玄米飯・味噌湯・發酵定食(可外帶)',
+    notes:'★味噌湯/高湯務必確認為昆布・精進だし(避免柴魚)★店標榜 vegan/veg/無麩對應，風險低仍建議一句確認。西元町站步行4分。',
+    flag:'🔵 西元町・蔬菜咖哩定食',
+    hcStars:'—', gStars:'Tabelog 3.13（38 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68690,135.18150',
+    ghours:'https://horieza.com/', hcUrl:'https://tabelog.com/hyogo/A2801/A280102/28035445/', phone:'+81-80-7041-5711'
+  },
+  {
+    id:292, rank:292, group:'social', region:'kobe',
+    name:'YIDAKI CAFE イダキ（旧居留地純素）', nameJa:'YIDAKI CAFE イダキカフェ',
+    type:'純素拼盤・自製甜點｜全素 Vegan', tags:['social'],
+    area:'神戶・元町（旧居留地・大丸前側）',
+    address:'兵庫県神戸市中央区三宮町3-6-6 大栄ビル2F',
+    lat:34.68970, lng:135.18870,
+    hours:'11:00-20:00(L.O.19:00)；週四公休',
+    dishes:'招牌純素拼盤(主菜+玄米+沙拉+湯,每月換菜約¥950)・蔬菜三明治拼盤・自製純素甜點・有機花草茶',
+    notes:'植物性/gluten-free/有機為主，全素故無柴魚疑慮。澳洲風明亮空間。JR元町站步行3分、阪急神戸三宮站約10分。',
+    flag:'🔵 旧居留地・純素拼盤',
+    hcStars:'—', gStars:'Tabelog 3.47（約 221 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68970,135.18870',
+    ghours:'https://tabelog.com/hyogo/A2801/A280102/28037785/', hcUrl:'https://tabelog.com/hyogo/A2801/A280102/28037785/', phone:'+81-78-335-0520'
+  },
+  {
+    id:293, rank:293, group:'social', region:'kobe',
+    name:'ベジバーガー元町バロム（純素漢堡）', nameJa:'ベジバーガー元町バロム',
+    type:'純素漢堡(外帶專門)｜全素 Vegan・無五葷', tags:['social'],
+    area:'神戶・元町（三宮町3丁目）',
+    address:'兵庫県神戸市中央区三宮町3-5-5',
+    lat:34.68950, lng:135.18860,
+    hours:'10:00-16:00；週四公休',
+    dishes:'ラタトゥイユ/照燒菇/辣豆 三款純素漢堡・杯飯・無麩甜點',
+    notes:'100%植物性、無肉魚蛋乳蜂蜜白糖五葷(蛋奶素當然可)。★外帶專門、無內用座位★JR元町站步行2分。2023/6開幕。',
+    flag:'🔵 元町・純素漢堡(外帶)',
+    hcStars:'—', gStars:'Tabelog 現存頁（Vegewel 收錄）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68950,135.18860',
+    ghours:'', hcUrl:'https://tabelog.com/hyogo/A2801/A280102/28068721/', phone:''
+  },
+  {
+    id:294, rank:294, group:'social', region:'kobe',
+    name:'THE CASTLE（三宮・純素塔可餐酒館）', nameJa:'THE CASTLE ザキャッスル',
+    type:'夜間餐酒館(蔬食友善・需指定vegan塔可)', tags:['social'],
+    area:'神戶・三宮（中山手通1丁目）',
+    address:'兵庫県神戸市中央区中山手通1-1-9 ゴールドウッズ三宮ビル3F',
+    lat:34.69600, lng:135.19260,
+    hours:'18:30-翌2:00；週一・週日公休',
+    dishes:'純素塔可 vegan tacos',
+    notes:'★夜間營業的餐酒館(bar)、非日間素食餐廳★點餐須指定 vegan 品項、確認餅皮/內餡無肉高湯。三宮站步行1分。',
+    flag:'🔵 三宮・純素塔可(夜)',
+    hcStars:'—', gStars:'Tabelog 現存頁（Vegewel 收錄）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.69600,135.19260',
+    ghours:'https://tabelog.com/hyogo/A2801/A280101/28054231/', hcUrl:'https://tabelog.com/hyogo/A2801/A280101/28054231/', phone:'+81-78-381-6964'
+  },
+  {
+    id:295, rank:295, group:'social', region:'kobe',
+    name:'Mother Moon Cafe ミント神戸店', nameJa:'マザームーンカフェ ミント神戸店',
+    type:'Farm to Table 咖啡(蔬食友善・僅指定vegan拼盤)', tags:['social'],
+    area:'神戶・三宮（ミント神戸6F・車站直結）',
+    address:'兵庫県神戸市中央区雲井通7-1-1 ミント神戸6F',
+    lat:34.69530, lng:135.19720,
+    hours:'依 ミント神戸 商場約 11:00-22:00',
+    dishes:'ワンプレートランチ的 vegan deli 拼盤(店家標示不含動物性)；其他菜單多為葷',
+    notes:'★只有指定的 vegan 拼盤安心，其餘品項含肉/魚，甜點需確認吉利丁★連鎖咖啡(1993神戶創業)。JR/各線三宮站直結、交通極便。',
+    flag:'🔵 三宮・vegan拼盤咖啡',
+    hcStars:'—', gStars:'Tabelog 3.20（本店 290 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.69530,135.19720',
+    ghours:'https://www.mothermoon.co.jp/', hcUrl:'https://tabelog.com/hyogo/A2801/A280101/28053039/', phone:''
+  },
+  {
+    id:296, rank:296, group:'social', region:'kobe',
+    name:'クスム KUSUM（北野印度素食）', nameJa:'クスム本場家庭料理',
+    type:'北印度家庭料理・素咖哩吃到飽(蔬食友善・需指定素食)', tags:['social'],
+    area:'神戶・北野（山本通・ハンター坂）',
+    address:'兵庫県神戸市中央区山本通2-12-21 異人プラザ203',
+    lat:34.69950, lng:135.18930,
+    hours:'11:30-14:30、17:30-20:00；週一公休',
+    dishes:'蔬菜咖哩吃到飽(約¥1,000)・印度家常菜、可指定素食',
+    notes:'印度料理通常不用柴魚、風險低。★確認咖哩非以肉高湯打底、避開含肉品項★奶油/乳製品蛋奶素可吃。近北野異人館、觀光動線好。三宮站西北步行10分。',
+    flag:'🔵 北野・印度素咖哩吃到飽',
+    hcStars:'—', gStars:'Retty/Tabelog 正評（蔬食常客）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.69950,135.18930',
+    ghours:'', hcUrl:'https://retty.me/area/PRE28/ARE98/SUB9904/100000804740/', phone:'+81-78-221-0229'
+  },
+  {
+    id:297, rank:297, group:'social', region:'kobe',
+    name:'元祖ぎょうざ苑（南京町・野菜餃子）', nameJa:'元祖ぎょうざ苑',
+    type:'味噌だれ餃子老店(蔬食友善・需指定野菜餃子)', tags:['social'],
+    area:'神戶・南京町（中華街・栄町通）',
+    address:'兵庫県神戸市中央区栄町通2-8-11',
+    lat:34.68830, lng:135.18680,
+    hours:'11:45-15:00、17:00-20:30(L.O.)；週一公休(假日營業翌日補休)',
+    dishes:'野菜餃子(蔬菜植物製,vegetarian/vegan對応)・無蒜蔬菜餃子；沾味噌だれ',
+    notes:'★一般煎餃/招牌多含豬肉，務必指定「野菜餃子」★確認沾醬與煎製無肉。南京町地標店、觀光便利、全席禁菸38席。',
+    flag:'🔵 南京町・野菜餃子',
+    hcStars:'—', gStars:'Tabelog 現存頁（南京町名店）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.68830,135.18680',
+    ghours:'https://ganso-gyozaen.jp/', hcUrl:'https://ganso-gyozaen.jp/', phone:''
+  },
+  {
+    id:298, rank:298, group:'social', region:'kobe',
+    name:'古民家 Cafe Slow Life（有馬近郊純素）', nameJa:'古民家 Cafe Slow Life カフェスローライフ',
+    type:'130年古民家玄米蔬食/マクロビ｜全素 Vegan對應', tags:['social'],
+    area:'神戶・北區唐櫃（有馬溫泉近郊）',
+    address:'兵庫県神戸市北区有野町唐櫃521',
+    lat:34.77900, lng:135.24300,
+    hours:'11:00-16:00，僅週一・二・每月第4個週日營業',
+    dishes:'純素午餐(¥1,100每週換)・酪梨春捲・玄米・蔬菜滿滿味噌湯・蔬菜咖哩・自家烘焙有機咖啡',
+    notes:'全素、柴魚無虞。★營業日極少(一週僅兩天+一個週日)，去前務必電話預約★六甲北側/有馬溫泉近郊，需開車或轉乘。座標概估。',
+    flag:'🔵 唐櫃・古民家純素午餐',
+    hcStars:'—', gStars:'Tabelog 現存頁（Vegewel/IG 活躍）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.77900,135.24300',
+    ghours:'https://tabelog.com/hyogo/A2801/A280112/28026950/', hcUrl:'https://tabelog.com/hyogo/A2801/A280112/28026950/', phone:'+81-90-4499-2926'
+  },
+  {
+    id:299, rank:299, group:'social', region:'kobe',
+    name:'cafe りもねん（須磨・蔬食佛陀碗）', nameJa:'cafe りもねん',
+    type:'地產蔬食 Buddha bowl(蔬食友善・有plant-based菜單)', tags:['social'],
+    area:'神戶・須磨（須磨海岸・須磨浦公園近）',
+    address:'兵庫県神戸市須磨区須磨浦通6-6-10',
+    lat:34.63700, lng:135.12100,
+    hours:'三四五日 11:30-17:00；六 -20:00(L.O.19:00)；月火公休',
+    dishes:'蔬菜滿滿 Buddha bowl・自製檸檬水・純素午餐',
+    notes:'地產地消低農藥蔬果、有 plant-based/vegan 專門菜。★確認湯品/醬底無柴魚★JR・山陽須磨站西行步行10分、近須磨海岸。座標概估。',
+    flag:'🔵 須磨・蔬食佛陀碗',
+    hcStars:'—', gStars:'Retty/ぐるなび 正評（2024 報導）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=34.63700,135.12100',
+    ghours:'https://caferimonen.com/', hcUrl:'https://caferimonen.com/', phone:'+81-78-733-0708'
+  },
 ];
 
 // ── Map init ───────────────────────────────────────────────────────────────
@@ -5296,6 +5502,7 @@ function checkedDate(id, region) {
   if (region === 'nara') return '2026-07-14';   // 奈良全區出發前重新核實
   if (region === 'kyoto') return '2026-07-14';  // 京都全區出發前重新核實
   if (region === 'okinawa') return '2026-07-27'; // 沖繩全區新增查證
+  if (region === 'kobe') return '2026-07-27';    // 神戶全區新增查證
   if (id >= 212) return '2026-07-23';            // HappyCow/abillion 盤點補漏
   if (id >= 210) return '2026-07-19';            // 新世界 恵美須屋 出發前查證
   if (id >= 152) return '2026-07-14';            // 車站/百貨/街邊新批

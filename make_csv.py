@@ -25,6 +25,8 @@ def checked(i, region=''):
         return '2026-07-14'  # 京都全區出發前重新核實
     if region == 'okinawa':
         return '2026-07-27'  # 沖繩全區新增查證
+    if region == 'kobe':
+        return '2026-07-27'  # 神戶全區新增查證
     if i >= 212:
         return '2026-07-23'  # HappyCow/abillion 盤點補漏
     if i >= 210:
@@ -35,7 +37,7 @@ def checked(i, region=''):
         return '2026-07-12'
     return '2026-06-28' if i <= 25 else '2026-06-29' if i <= 37 else '2026-06-30' if i <= 51 else '2026-07-03'
 
-regionmap = {'': '大阪', 'osaka': '大阪', 'kyoto': '京都', 'nara': '奈良', 'okinawa': '沖繩'}
+regionmap = {'': '大阪', 'osaka': '大阪', 'kyoto': '京都', 'nara': '奈良', 'okinawa': '沖繩', 'kobe': '神戶'}
 
 arr = re.search(r'const restaurants = \[(.*?)\n\];', js, re.S).group(1)
 starts = [(m.start(), int(m.group(1))) for m in re.finditer(r'\bid:(\d+),\s*rank:', arr)]
