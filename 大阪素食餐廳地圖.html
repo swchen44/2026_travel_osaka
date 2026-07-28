@@ -57,6 +57,11 @@
   .veg-badge { display:inline-block; font-size:0.68rem; font-weight:800; border-radius:6px; padding:1px 7px; margin-left:6px; vertical-align:middle; white-space:nowrap; }
   .vb-ok  { background:#e8f5e9; color:#2e7d32; }
   .vb-ask { background:#fff3e0; color:#e65100; }
+  .vb-closed { background:#616161; color:#fff; }
+  /* 軟下架：已歇業卡片灰底、名稱刪除線，仍可讀（存查用） */
+  .card-closed { opacity:0.72; background:#f5f5f5; }
+  .card-closed .card-name { color:#757575; text-decoration:line-through; text-decoration-color:#bdbdbd; }
+  .card-closed .card-photo { filter:grayscale(1); }
   .card-src { font-size:0.7rem; color:#999; margin-top:2px; }
 
   /* 手機篩選浮動鈕 + 覆蓋層 */
@@ -339,6 +344,7 @@
   <button class="filter-btn" onclick="filterCards('chain',this)">🍜 連鎖備案</button>
   <button class="filter-btn" onclick="filterCards('takeout',this)">🥡 外帶/外送</button>
   <button class="filter-btn" onclick="filterCards('latenite',this)">🌙 深夜</button>
+  <button class="filter-btn" onclick="filterCards('closed',this)">⛔ 已歇業</button>
 </div>
 
 <div id="nearby-bar">
@@ -8191,12 +8197,24 @@ const iconOther= makeIcon('#78909C');
 const iconHotel= makeIcon('#8E24AA');
 const iconSocial=makeIcon('#E91E63');
 const iconChain =makeIcon('#FB8C00');
+const iconClosed=makeIcon('#9E9E9E'); // 已歇業：灰色
+
+// ── 軟下架：已歇業/已不提供素食的店（留庫＋網頁存查，但排除出 CSV/Google My Maps）──
+// 用法：確認歇業後在此加一條 `id: 'YYYY-MM'`（我們查證歇業的年月）。效果：
+//   卡片灰底並標「⛔ 已歇業（YYYY-MM 查證）」、marker 轉灰、預設隱藏、只在「⛔ 已歇業」篩選出現；
+//   make_csv.py 會自動把它排除（Google My Maps 不顯示）。目的：展現「我們有查、資料比較新」。
+// ★必須定義在下方 restaurants.forEach(建 marker) 之前，否則 isClosed 會踩到 const TDZ★
+const CLOSED = {
+  // 範例： 999: '2026-08',
+};
+function isClosed(r) { return !!CLOSED[r.id]; }
+function closedBadge(r) { return isClosed(r) ? `<span class="veg-badge vb-closed">⛔ 已歇業（${CLOSED[r.id]} 查證）</span>` : ''; }
 
 let markers = {};
 let selectedId = null;
 
 restaurants.forEach(r => {
-  const icon = r.group==='top10' ? iconTop : r.group==='user' ? iconUser : r.group==='hotel' ? iconHotel : r.group==='social' ? iconSocial : r.group==='chain' ? iconChain : iconOther;
+  const icon = isClosed(r) ? iconClosed : r.group==='top10' ? iconTop : r.group==='user' ? iconUser : r.group==='hotel' ? iconHotel : r.group==='social' ? iconSocial : r.group==='chain' ? iconChain : iconOther;
   const m = L.marker([r.lat, r.lng], { icon, title: r.name }).addTo(map);
   const popup = L.popup({ maxWidth: 260 }).setContent(`
     <div class="popup-inner">
@@ -8300,10 +8318,10 @@ function gmapPlace(r) {
 function buildCards(list) {
   // Remove old cards
   sidebar.querySelectorAll('.card').forEach(el => el.remove());
-  countLabel.textContent = `顯示 ${list.length} / ${restaurants.length} 家`;
+  countLabel.textContent = `顯示 ${list.length} / ${restaurants.filter(r=>!isClosed(r)).length} 家`;
   list.forEach(r => {
     const card = document.createElement('div');
-    card.className = 'card';
+    card.className = 'card' + (isClosed(r) ? ' card-closed' : '');
     card.id = `card-${r.id}`;
     const rankClass = r.group==='top10' ? 'rank-top' : r.group==='user' ? 'rank-user' : r.group==='hotel' ? 'rank-hotel' : r.group==='social' ? 'rank-social' : r.group==='chain' ? 'rank-chain' : 'rank-other';
     const photoUrl = photos[r.id];
@@ -8312,7 +8330,7 @@ function buildCards(list) {
         ${photoUrl ? `<img class="card-photo" src="${photoUrl}" alt="${r.name}" loading="lazy" onerror="this.style.display='none'">` : ''}
         <div class="card-body">
           <div class="card-top">
-            <div class="card-name">${r.name} ${vegBadge(r)}</div>
+            <div class="card-name">${r.name} ${closedBadge(r)}${vegBadge(r)}</div>
             <div class="rank-badge ${rankClass}">${r.rank}</div>
           </div>
           <div class="card-type">${r.type}</div>
@@ -8364,7 +8382,7 @@ function selectCard(id, panMap) {
   const embed = `https://maps.google.com/maps?q=${encodeURIComponent(r.name+' Osaka')}&t=m&z=16&output=embed&iwloc=near`;
   document.getElementById('dp-iframe').src = embed;
   document.getElementById('dp-info').innerHTML = `
-    <div class="dp-title">#${r.rank} ${r.name} ${vegBadge(r)}</div>
+    <div class="dp-title">#${r.rank} ${r.name} ${closedBadge(r)}${vegBadge(r)}</div>
     <div class="dp-row"><strong>地址：</strong>${r.address}</div>
     <div class="dp-row"><strong>地區：</strong>${r.area}</div>
     <div class="dp-row"><strong>類型：</strong>${r.type}</div>
@@ -8409,6 +8427,11 @@ function getFiltered() {
   return restaurants.filter(r => {
     const reg = r.region || 'osaka';
     const matchRegion = activeRegion === 'all' || reg === activeRegion;
+    const matchSearch = !searchVal || r.name.toLowerCase().includes(searchVal) ||
+      r.nameJa.includes(searchVal) || r.area.includes(searchVal) || r.dishes.includes(searchVal);
+    // 軟下架：「⛔ 已歇業」篩選只顯示已歇業；其餘篩選一律隱藏已歇業（存查但不干擾規劃）
+    if (activeFilter === 'closed') return matchRegion && matchSearch && isClosed(r);
+    if (isClosed(r)) return false;
     const matchFilter =
       activeFilter === 'all'     ? true :
       activeFilter === 'top10'   ? r.group === 'top10' :
@@ -8418,8 +8441,6 @@ function getFiltered() {
       activeFilter === 'chain'   ? r.group === 'chain' :
       activeFilter === 'depa'    ? ((r.id >= 90 && r.id <= 126) || r.id === 32 || r.id === 34 || (r.id >= 164 && r.id <= 172) || [186,192,193,194].includes(r.id)) :
       r.tags.includes(activeFilter);
-    const matchSearch = !searchVal || r.name.toLowerCase().includes(searchVal) ||
-      r.nameJa.includes(searchVal) || r.area.includes(searchVal) || r.dishes.includes(searchVal);
     return matchRegion && matchFilter && matchSearch;
   });
 }
@@ -8606,9 +8627,12 @@ if (window.innerWidth <= 768) {
 
 // ── Init ───────────────────────────────────────────────────────────────────
 buildCards(restaurants);
-countLabel.textContent = `顯示 ${restaurants.length} / ${restaurants.length} 家`;
-const totalBadge = document.getElementById('total-badge');
-if (totalBadge) totalBadge.textContent = `共 ${restaurants.length} 家`;
+{
+  const act = restaurants.filter(r=>!isClosed(r)).length, cl = restaurants.length - act;
+  countLabel.textContent = `顯示 ${act} / ${act} 家`;
+  const totalBadge = document.getElementById('total-badge');
+  if (totalBadge) totalBadge.textContent = cl ? `共 ${act} 家（另 ${cl} 家已歇業存查）` : `共 ${act} 家`;
+}
 fitToList(restaurants);  // 初始框住整個關西（大阪・京都・奈良）
 
 // Add legend to map

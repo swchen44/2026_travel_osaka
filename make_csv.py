@@ -12,6 +12,10 @@ js = re.findall(r'<script>(.*?)</script>', html, re.S)[-1]
 pblock = re.search(r'const PRICES = \{(.*?)\n\};', js, re.S).group(1)
 prices = {int(k): v for k, v in re.findall(r"(\d+)\s*:\s*'([^']*)'", pblock)}
 
+# 軟下架：已歇業店排除出 CSV（Google My Maps 不顯示，但網頁仍保留存查）
+cblock = re.search(r'const CLOSED = \{(.*?)\n\};', js, re.S)
+closed_ids = {int(k) for k, _ in re.findall(r"(\d+)\s*:\s*'([^']*)'", cblock.group(1))} if cblock else set()
+
 CHECK_OVERRIDE = {32: '2026-07-12'}  # 個別重新查證過的店家
 SHINSAIBASHI_RECHECK = {3, 4, 8, 12, 30, 34, 52, 98, 99, 100, 101, 102, 103, 104, 105, 143, 144, 146}  # 心齋橋一帶出發前 2026-07-14 重新核實
 def checked(i, region=''):
@@ -57,6 +61,8 @@ arr = re.search(r'const restaurants = \[(.*?)\n\];', js, re.S).group(1)
 starts = [(m.start(), int(m.group(1))) for m in re.finditer(r'\bid:(\d+),\s*rank:', arr)]
 rows = []
 for idx, (pos, rid) in enumerate(starts):
+    if rid in closed_ids:
+        continue  # 已歇業：不寫進 CSV（Google My Maps 不顯示）
     end = starts[idx + 1][0] if idx + 1 < len(starts) else len(arr)
     b = arr[pos:end]
     def g(field):
