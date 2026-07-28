@@ -35,6 +35,12 @@ def checked(i, region=''):
         return '2026-07-28'  # 九州全區新增查證
     if region == 'chubu':
         return '2026-07-28'  # 中部全區新增查證
+    if region == 'hiroshima':
+        return '2026-07-29'  # 廣島全區新增查證
+    if region == 'tohoku':
+        return '2026-07-29'  # 東北全區新增查證
+    if region == 'shikoku':
+        return '2026-07-29'  # 四國全區新增查證
     if i >= 212:
         return '2026-07-23'  # HappyCow/abillion 盤點補漏
     if i >= 210:
@@ -45,7 +51,7 @@ def checked(i, region=''):
         return '2026-07-12'
     return '2026-06-28' if i <= 25 else '2026-06-29' if i <= 37 else '2026-06-30' if i <= 51 else '2026-07-03'
 
-regionmap = {'': '大阪', 'osaka': '大阪', 'kyoto': '京都', 'nara': '奈良', 'okinawa': '沖繩', 'kobe': '神戶', 'tokyo': '東京', 'hokkaido': '北海道', 'kyushu': '九州', 'chubu': '中部'}
+regionmap = {'': '大阪', 'osaka': '大阪', 'kyoto': '京都', 'nara': '奈良', 'okinawa': '沖繩', 'kobe': '神戶', 'tokyo': '東京', 'hokkaido': '北海道', 'kyushu': '九州', 'chubu': '中部', 'hiroshima': '廣島', 'tohoku': '東北', 'shikoku': '四國'}
 
 arr = re.search(r'const restaurants = \[(.*?)\n\];', js, re.S).group(1)
 starts = [(m.start(), int(m.group(1))) for m in re.finditer(r'\bid:(\d+),\s*rank:', arr)]
