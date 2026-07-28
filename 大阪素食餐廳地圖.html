@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌿 日本素食餐廳地圖（關西・沖繩・東京・北海道・九州）</title>
+<title>🌿 日本素食餐廳地圖（關西・沖繩・東京・北海道・九州・中部）</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -290,7 +290,7 @@
 <header>
   <div style="font-size:2rem;">🌿</div>
   <div>
-    <h1>日本素食餐廳互動地圖（關西・沖繩・東京・北海道・九州）</h1>
+    <h1>日本素食餐廳互動地圖（關西・沖繩・東京・北海道・九州・中部）</h1>
     <p class="header-sub">官方菜單／Tabelog／HappyCow／社群整理　點擊地圖或卡片查看照片、評分、營業時間與每人價位</p>
   </div>
   <div style="margin-left:auto; display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; align-items:center;">
@@ -320,6 +320,7 @@
   <button class="region-btn" onclick="filterRegion('tokyo',this)">🗼 東京</button>
   <button class="region-btn" onclick="filterRegion('hokkaido',this)">❄️ 北海道</button>
   <button class="region-btn" onclick="filterRegion('kyushu',this)">♨️ 九州</button>
+  <button class="region-btn" onclick="filterRegion('chubu',this)">⛰️ 中部</button>
 </div>
 
 <div id="filter-bar">
@@ -436,6 +437,16 @@
 <script>
 // ── Restaurant photos (from HappyCow CDN) ─────────────────────────────────
 const photos = {
+  // ── 中部(名古屋) ──
+  410: 'https://images.happycow.net/venues/500/33/49/hcmp334902_1962807.jpeg',
+  411: 'https://images.happycow.net/venues/500/10/96/hcmp109648_1092488.jpeg',
+  413: 'images/413.jpg',
+  414: 'images/414.jpg',
+  416: 'images/416.jpg',
+  417: 'https://images.happycow.net/venues/500/40/48/hcmp404850_2740986.jpeg',
+  418: 'images/418.jpg',
+  419: 'images/419.jpg',
+  420: 'images/420.jpg',
   // ── 九州 ──
   383: 'https://images.happycow.net/venues/500/20/26/hcmp202690_917717.jpeg',
   384: 'https://images.happycow.net/venues/500/22/40/hcmp224016_1908133.jpeg',
@@ -701,6 +712,19 @@ const photos = {
 
 // ── 每人大約價位（日圓，參考 Tabelog / Google / 官網菜單） ──────
 const PRICES = {
+  // ── 中部(名古屋) ──
+  410: '午約 ¥1,000–1,500',
+  411: '午約 ¥1,500–2,000／晚套餐 ¥3,300',
+  412: '約 ¥600–1,500',
+  413: '約 ¥999–1,200',
+  414: '午 ¥1,000–1,999',
+  415: '約 ¥1,000–1,800',
+  416: '¥1,000–2,999',
+  417: '約 ¥1,000–3,000',
+  418: '午約 ¥1,000–1,500',
+  419: '約 ¥1,200–2,000',
+  420: '約 ¥1,000–2,000',
+  421: '約 ¥1,000–2,000',
   // ── 九州 ──
   383: '約 ¥1,500',
   384: '中價位',
@@ -7292,6 +7316,186 @@ const restaurants = [
     gmap:'https://www.google.com/maps/search/?api=1&query=33.519,130.516',
     ghours:'https://www.dazaifu-kusanoie.com/', hcUrl:'https://www.dazaifu-kusanoie.com/', phone:'+81-92-516-3650'
   },
+  {
+    id:410, rank:410, group:'social', region:'chubu',
+    name:'TORAYA VEGETIGER(純素亞洲創作)', nameJa:'オヤサイキッチン TORAYA VEGETIGER SECOND-ROOM',
+    type:'亞洲創作(咖哩/泰式/墨西哥)｜全素 Vegan', tags:['social'],
+    area:'名古屋・新栄（中区）',
+    address:'名古屋市中区新栄3-14-23',
+    lat:35.16687, lng:136.92381,
+    hours:'一四〜日 12:00-15:00、17:00-21:00(五六晚至22:00)；週二三休',
+    dishes:'タイガープレート咖哩(10種蔬菜醬)・泰式豆腐炸雞・叻沙・波隆那義大利麵・自製純素冰淇淋',
+    notes:'100%純素、無小麥無添加,可做無蔥蒜版;蛋奶素完全適用。名古屋少數穩定全素餐廳、有Uber Eats。',
+    flag:'⛰️ 新栄・純素亞洲創作',
+    hcStars:'—', gStars:'HappyCow 5.0（45 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.16687,136.92381',
+    ghours:'https://www.happycow.net/reviews/vegetiger-japan-nagoya-334902', hcUrl:'https://www.happycow.net/reviews/vegetiger-japan-nagoya-334902', phone:'+81-50-3635-8831'
+  },
+  {
+    id:411, rank:411, group:'social', region:'chubu',
+    name:'Grains(純素和食マクロビ)', nameJa:'Grains グレインズ',
+    type:'和食・マクロビ・有機｜全素 Vegan', tags:['social'],
+    area:'名古屋・名駅（西区）',
+    address:'名古屋市西区名駅2-24-14',
+    lat:35.17686, lng:136.88225,
+    hours:'三〜五 11:00-15:00、17:00-21:00；每月第2・4週六;週日〜二休;晚餐需預約',
+    dishes:'おから蒟蒻の植物肉料理・蒲燒うなぎ風ひつまぶし・牛丼風丼・純素甜點',
+    notes:'用日本傳統雜穀的全素餐;座位少,晚餐建議FB事先聯繫。可吃全素版名古屋名物ひつまぶし。',
+    flag:'⛰️ 名駅・純素和食マクロビ',
+    hcStars:'—', gStars:'HappyCow 5.0（74 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.17686,136.88225',
+    ghours:'https://www.happycow.net/reviews/grains-nagoya-109648', hcUrl:'https://www.happycow.net/reviews/grains-nagoya-109648', phone:'+81-52-720-6616'
+  },
+  {
+    id:412, rank:412, group:'social', region:'chubu',
+    name:'「こ」VEGAN CAFE', nameJa:'「こ」VEGAN CAFE',
+    type:'純素咖啡・甜點｜全素 Vegan', tags:['social'],
+    area:'名古屋・栄（中区,近大須観音）',
+    address:'名古屋市中区栄1-31-30 パルナス栄',
+    lat:35.16303, lng:136.89265,
+    hours:'10:00-17:00；週二三休',
+    dishes:'精品咖啡・豆乳拿鐵・松葉汁・巧克力蛋糕・水果蛋糕・松葉餅乾',
+    notes:'全素咖啡館、靜謐空間;以飲品甜點為主(非正餐)。最貼近大須/栄、行程間歇腳。',
+    flag:'⛰️ 栄・純素咖啡',
+    hcStars:'—', gStars:'官方直營',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.16303,136.89265',
+    ghours:'https://ko-vegancafe.jp/', hcUrl:'https://ko-vegancafe.jp/', phone:'+81-568-90-8889'
+  },
+  {
+    id:413, rank:413, group:'social', region:'chubu',
+    name:'vegefirst(蔬菜便當)', nameJa:'野菜のおべんとう vegefirst ベジファースト',
+    type:'蔬菜便當・自然食｜全素 Vegan', tags:['social'],
+    area:'名古屋・丸の内（中区,近名古屋城）',
+    address:'名古屋市中区丸の内3-1-34 堤ビル2F',
+    lat:35.17701, lng:136.90156,
+    hours:'平日約 11:00-16:00；週六日/假日休',
+    dishes:'每日全蔬菜午餐拼盤・酵素玄米おにぎり便當',
+    notes:'料理教室經營;座位少(約7席)、主打外帶便當。蛋奶素適用可事先詢問客製。',
+    flag:'⛰️ 丸の内・純素蔬菜便當',
+    hcStars:'—', gStars:'Tabelog 3.02',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.17701,136.90156',
+    ghours:'https://vegefirst-obento.com/', hcUrl:'https://tabelog.com/aichi/A2301/A230109/23056779/', phone:'+81-52-232-1831'
+  },
+  {
+    id:414, rank:414, group:'social', region:'chubu',
+    name:'pupu kitchen(玄米菜食)', nameJa:'オーガニックカフェ pupu kitchen',
+    type:'自然食・玄米菜食マクロビ｜全素 Vegan', tags:['social'],
+    area:'名古屋・浅間町（西区,近名古屋城）',
+    address:'名古屋市西区城西2-15-13',
+    lat:35.18616, lng:136.89354,
+    hours:'二〜六 10:00-15:30(午餐11:30-14:00)；週日一休',
+    dishes:'每日マクロビ午間拼盤(玄米+當季蔬菜)；附設自然食品店可買純素食材',
+    notes:'開業近27年、日本ベジタリアンアワード企業賞。全素/蛋奶素皆適用。',
+    flag:'⛰️ 浅間町・純素玄米菜食',
+    hcStars:'—', gStars:'Tabelog 3.21（42 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.18616,136.89354',
+    ghours:'https://heal-ai.com/pupu/', hcUrl:'https://tabelog.com/aichi/A2301/A230109/23033065/', phone:'+81-52-602-5930'
+  },
+  {
+    id:415, rank:415, group:'social', region:'chubu',
+    name:'VEGI KITCHEN GUGU(無麩質)', nameJa:'VEGI KITCHEN GUGU ベジキッチングーグー',
+    type:'咖哩/和食/烘焙(全品無麩質)｜全素 Vegan', tags:['social'],
+    area:'名古屋・本山（千種区,近覚王山）',
+    address:'名古屋市千種区猫洞通3-11 メゾン猫洞1F',
+    lat:35.16774, lng:136.96843,
+    hours:'日〜四 11:00-22:00、五六 -23:00(午餐11:00-14:30)；週四休',
+    dishes:'蔬菜與豆類咖哩・大豆ナゲット・米粉麵包・純素甜點(店主自種蔬菜)',
+    notes:'100%植物性且無麩質,Japan Vegan Awards入圍。連奶蛋也不用(更嚴格全素)。店後2車位。',
+    flag:'⛰️ 本山・純素無麩質',
+    hcStars:'—', gStars:'Vegewel/Retty 登錄',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.16774,136.96843',
+    ghours:'https://www.facebook.com/vegigugu/', hcUrl:'https://vegewel.com/ja/restaurant/1564', phone:'+81-80-9839-3632'
+  },
+  {
+    id:416, rank:416, group:'social', region:'chubu',
+    name:'旬菜カフェ おてあて(マクロビ)', nameJa:'旬菜カフェ おてあて',
+    type:'マクロビオティック｜全素 Vegan', tags:['social'],
+    area:'名古屋・東山公園（千種区,近覚王山）',
+    address:'名古屋市千種区新池町4-95',
+    lat:35.16079, lng:136.97623,
+    hours:'午餐約 11:00-14:30,之後甜點飲品；週一休(出發前務必再確認)',
+    dishes:'純素午間定食・甜點・飲品(不用動物性/蛋/乳/白糖/蜂蜜)',
+    notes:'正統マクロビ,店主為望診專家。全素不用蛋奶(比蛋奶素更嚴格)。另有飛驒市新店計畫,本店營業請致電確認。',
+    flag:'⛰️ 東山・純素マクロビ定食',
+    hcStars:'—', gStars:'Tabelog 3.12（25 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.16079,136.97623',
+    ghours:'https://tabelog.com/aichi/A2301/A230111/23064532/', hcUrl:'https://tabelog.com/aichi/A2301/A230111/23064532/', phone:'+81-52-782-0138'
+  },
+  {
+    id:417, rank:417, group:'social', region:'chubu',
+    name:'草宗庵 Sojuan(湯葉豆腐割烹)', nameJa:'Sojuan 草宗庵',
+    type:'湯葉・豆腐割烹(蔬食友善・確認柴魚高湯)', tags:['social'],
+    area:'名古屋・栄1丁目（中区,近伏見/大須）',
+    address:'名古屋市中区栄1-4-9',
+    lat:35.16789, lng:136.89602,
+    hours:'一〜六 11:30-14:30、17:30-23:00；週日休',
+    dishes:'揚げ出し豆腐・味噌田樂豆腐・湯葉刺身・豆腐可樂餅・そば・豆漿蔬菜鍋(獨立英文素菜單30+項)',
+    notes:'葷店,店員懂vegan、備英文素菜單;★部分含蛋(蛋奶素OK)或魚だし,點前務必確認高湯是否柴魚★',
+    flag:'⛰️ 栄・湯葉豆腐割烹',
+    hcStars:'—', gStars:'HappyCow 4.0（16 則）',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.16789,136.89602',
+    ghours:'https://www.happycow.net/reviews/sojuan-nagoya-404850', hcUrl:'https://www.happycow.net/reviews/sojuan-nagoya-404850', phone:'+81-52-222-8655'
+  },
+  {
+    id:418, rank:418, group:'social', region:'chubu',
+    name:'彩膳中華 杏ZU(薬膳中華)', nameJa:'彩膳中華 杏ZU あんず',
+    type:'薬膳中華(蔬食友善・有vegan菜單)', tags:['social'],
+    area:'名古屋・丸の内（中区,近伏見）',
+    address:'名古屋市中区丸の内1-11-28 田中屋ビル101',
+    lat:35.17392, lng:136.89365,
+    hours:'午 11:30-14:00、晚 17:30-21:00(公休電話確認)',
+    dishes:'ヴィーガン担担麺・大豆肉油淋鶏/黒酢豚(可改素)・薬膳套餐(無化調不用白糖)',
+    notes:'葷店但主打薬膳、有明確vegan對應;國際薬膳調理師掌廚。蛋奶素適用、客製前告知。',
+    flag:'⛰️ 丸の内・薬膳中華vegan',
+    hcStars:'—', gStars:'Tabelog 3.20',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.17392,136.89365',
+    ghours:'http://anzu-yakuzen.sakura.ne.jp/', hcUrl:'https://tabelog.com/aichi/A2301/A230101/23043475/', phone:'+81-52-201-2700'
+  },
+  {
+    id:419, rank:419, group:'social', region:'chubu',
+    name:'味噌煮込うどん 山本屋 大久手店', nameJa:'味噌煮込みうどん 山本屋 大久手店',
+    type:'名古屋名物味噌煮込うどん(蔬食友善・需預約素高湯)', tags:['social'],
+    area:'名古屋・大久手（千種区,近今池）',
+    address:'名古屋市千種区大久手町5-9-2',
+    lat:35.16149, lng:136.93642,
+    hours:'11:00-21:00(LO20:00)；週一休(遇假營業翌休)',
+    dishes:'味噌煮込みうどん(可素對應)・湯葉トッピング(食の多様性對應)',
+    notes:'★名古屋名物陷阱店——一般味噌煮込湯底含柴魚+肉,務必事先預約並指定素/vegan版昆布高湯★麵含蛋無妨。',
+    flag:'⛰️ 大久手・味噌煮込うどん素對應',
+    hcStars:'—', gStars:'Tabelog 3.56',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.16149,136.93642',
+    ghours:'https://a-yamamotoya.co.jp/', hcUrl:'https://tabelog.com/aichi/A2301/A230106/23015873/', phone:'+81-52-733-7413'
+  },
+  {
+    id:420, rank:420, group:'social', region:'chubu',
+    name:'Bio Terrace(CBD & VEGAN)', nameJa:'Bio Terrace with CBD & VEGAN',
+    type:'蔬菜午餐/咖哩(蔬食友善・彈性純素)', tags:['social'],
+    area:'名古屋・丸の内（中区）',
+    address:'名古屋市中区丸の内3-15-5 RS丸の内3丁目ビル3F',
+    lat:35.17521, lng:136.90329,
+    hours:'以午餐為主(詳細時段/公休電話確認)',
+    dishes:'蔬菜滿載午餐・咖哩・義大利麵(多為植物性)',
+    notes:'2022開業的彈性純素餐廳;蛋奶素適用。點餐前確認個別品項有無魚/肉高湯。',
+    flag:'⛰️ 丸の内・蔬菜午餐',
+    hcStars:'—', gStars:'Tabelog 3.22',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.17521,136.90329',
+    ghours:'https://tabelog.com/aichi/A2301/A230103/23079614/', hcUrl:'https://tabelog.com/aichi/A2301/A230103/23079614/', phone:''
+  },
+  {
+    id:421, rank:421, group:'social', region:'chubu',
+    name:'Live & Lounge Vio(夜間マクロビ)', nameJa:'Live & Lounge Vio',
+    type:'マクロビ自然食×Live(蔬食友善・夜間)', tags:['social'],
+    area:'名古屋・新栄（中区,近栄）',
+    address:'名古屋市中区新栄2-1-9 flexビルB2',
+    lat:35.16939, lng:136.9205,
+    hours:'平日日 18:00-翌2:00、五六 20:00-翌5:00(活動時變動)；週一二休',
+    dishes:'蔬菜・玄米中心的マクロビ料理(平日供餐)',
+    notes:'★夜間營業的Live House/Lounge,平日提供マクロビ自然食(多為植物性)★店內禁菸;夜間素食/居酒屋替代,供餐時段請先聯繫確認。',
+    flag:'⛰️ 新栄・夜間マクロビ×Live',
+    hcStars:'—', gStars:'—',
+    gmap:'https://www.google.com/maps/search/?api=1&query=35.16939,136.9205',
+    ghours:'https://liveloungevio.com/', hcUrl:'https://liveloungevio.com/', phone:'+81-52-737-7739'
+  },
 ];
 
 // ── Map init ───────────────────────────────────────────────────────────────
@@ -7361,6 +7565,7 @@ function checkedDate(id, region) {
   if (region === 'tokyo') return '2026-07-27';   // 東京圈全區新增查證
   if (region === 'hokkaido') return '2026-07-28'; // 北海道全區新增查證
   if (region === 'kyushu') return '2026-07-28';  // 九州全區新增查證
+  if (region === 'chubu') return '2026-07-28';   // 中部全區新增查證
   if (id >= 212) return '2026-07-23';            // HappyCow/abillion 盤點補漏
   if (id >= 210) return '2026-07-19';            // 新世界 恵美須屋 出發前查證
   if (id >= 152) return '2026-07-14';            // 車站/百貨/街邊新批
