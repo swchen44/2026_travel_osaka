@@ -311,4 +311,52 @@ Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
 
 ---
 
+## 10. 上線後的維護（增量更新 / 下架）— 省 token 心法
+
+核心：**貴的 LLM 只花在「真的有變」的店，其餘用便宜的 curl/grep 過濾**。維護成本跟「變動量」成正比，不是跟「總店數」成正比。
+
+### 10.1 三層架構
+| 層 | 做什麼 | 成本 | 工具 |
+|---|---|---|---|
+| **Tier 0 便宜掃描** | 掃 Tabelog/官網頁與照片連結，找疑似歇業/移轉/死圖，只吐異常 | ~0（純 curl） | `maintenance_scan.py` |
+| **Tier 1 LLM 確認** | 只把 Tier 0 的旗標丟給小 agent 確認、建議動作 | 極小（只碰旗標） | Agent |
+| **Tier 2 增量複查** | 依複查日期最舊優先，輪掃一個小區重查 hours/price/狀態 | 固定一小塊/次 | Agent + 更新 `CHECKED` |
+
+### 10.2 `maintenance_scan.py`（下架/死圖偵測，零 LLM）
+```bash
+python3 maintenance_scan.py --region shikoku      # 建議：一次一小區
+python3 maintenance_scan.py --ids 253,254
+python3 maintenance_scan.py --all                 # 全掃(慢,內建限速)
+python3 maintenance_scan.py --region kyushu --happycow   # 額外查HappyCow頁(易被限流,小批)
+python3 maintenance_scan.py --region tokyo --photos-only  # 只驗照片死連
+```
+- 偵測：Tabelog `<title>【閉店】/【移転】`、`掲載を保留`；官網 HTTP 404/410/000(DNS失效)；HappyCow "permanently closed"；照片熱連非200 / 本地圖不存在。
+- 輸出：`maintenance_candidates.tsv`（只有異常），供人工/Tier 1 確認。
+- **⚠️ 預設跳過 HappyCow 頁**（密集 curl 主站會被 Unusual Traffic 擋，見 §3.1）；要查用 `--happycow` 小批。
+
+### 10.3 排程建議（`3` 由使用者自行 cron）
+- **下架掃描**：每週全庫 or 每天一區（幾乎 0 成本）。
+- **增量複查**：每天/每週一個小區，依 `CHECKED` 最舊優先（12 區 → 12 天一輪）。
+- LLM 只在「掃出異常」或「輪到某小區複查」時才動。
+
+### 10.4 逐店複查日期側表 `CHECKED`（§4.6 已接）
+```js
+const CHECKED = { 253: '2026-08-15', ... };  // 重查某店就加/更新一條，最優先於區間規則
+```
+- 未列的店 fallback 到區間規則，仍有日期 → `effectiveDate=CHECKED[id]||checkedDate(id,region)`，可排序找最舊。
+- **改 HTML `CHECKED` 要連動 make_csv（已自動解析同名側表）**；**註解裡別寫 `數字:'日期'` 樣式**（make_csv 已用 `_nocomment()` 去註解防呆，但仍以 `<id>` 佔位為宜）。
+
+### 10.5 軟下架機制（歇業但保留存查）
+確認歇業後，在 HTML 的 `CLOSED` 側表加一條 `id:'YYYY-MM'`（查證歇業年月），即自動：
+- 卡片灰底＋刪除線＋標「⛔ 已歇業（YYYY-MM 查證）」、marker 轉灰；
+- 預設從所有篩選隱藏，只在「⛔ 已歇業」篩選出現；家數變「共 N 家（另 M 家已歇業存查）」；
+- `make_csv.py` 自動把它**排除出 CSV**（Google My Maps 不顯示）。
+- 目的：展現「我們有查、資料比較新」。**比直接刪好**：留歷史、id 不亂、不用動 `restaurants[]`。
+- **★關鍵坑**：`CLOSED`/`CHECKED`/`isClosed`/`closedBadge` **必須定義在 `restaurants.forEach`(建 marker) 之前**，否則 marker 迴圈呼叫 `isClosed` 會踩 `const` TDZ（`Cannot access 'CLOSED' before initialization`）→ 整個 script 中斷、全頁壞掉。改完務必 `node --check` **並**瀏覽器看 console 有無 exception。
+
+> 真的要「硬刪」某店：刪 `restaurants[]` 物件、留空號（新店永遠續編最大 id），`photos`/`PRICES`/`CHECKED` 同 id 孤兒無妨。但**優先用軟下架**。
+
+---
+
 *相關記憶：`kansai-vegetarian-map`（資料結構細節）、`japan-expansion-roadmap`（全日本擴充進度與各 region 狀態）、`browser-fb-group-access`（用 Chrome 讀 FB 社團）。*
+*相關工具：`maintenance_scan.py`（下架/死圖偵測）。*
