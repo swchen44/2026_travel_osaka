@@ -12,13 +12,22 @@ js = re.findall(r'<script>(.*?)</script>', html, re.S)[-1]
 pblock = re.search(r'const PRICES = \{(.*?)\n\};', js, re.S).group(1)
 prices = {int(k): v for k, v in re.findall(r"(\d+)\s*:\s*'([^']*)'", pblock)}
 
+def _nocomment(s):
+    return re.sub(r'//[^\n]*', '', s)  # 去掉 // 註解，避免範例被誤當條目
+
 # 軟下架：已歇業店排除出 CSV（Google My Maps 不顯示，但網頁仍保留存查）
 cblock = re.search(r'const CLOSED = \{(.*?)\n\};', js, re.S)
-closed_ids = {int(k) for k, _ in re.findall(r"(\d+)\s*:\s*'([^']*)'", cblock.group(1))} if cblock else set()
+closed_ids = {int(k) for k, _ in re.findall(r"(\d+)\s*:\s*'([^']*)'", _nocomment(cblock.group(1)))} if cblock else set()
+
+# 逐店複查日期側表（與 HTML checkedDate 一致，最優先）
+chblock = re.search(r'const CHECKED = \{(.*?)\n\};', js, re.S)
+checked_map = {int(k): v for k, v in re.findall(r"(\d+)\s*:\s*'([^']*)'", _nocomment(chblock.group(1)))} if chblock else {}
 
 CHECK_OVERRIDE = {32: '2026-07-12'}  # 個別重新查證過的店家
 SHINSAIBASHI_RECHECK = {3, 4, 8, 12, 30, 34, 52, 98, 99, 100, 101, 102, 103, 104, 105, 143, 144, 146}  # 心齋橋一帶出發前 2026-07-14 重新核實
 def checked(i, region=''):
+    if i in checked_map:
+        return checked_map[i]   # 逐店複查覆蓋（最優先，與 HTML CHECKED 一致）
     if i in SHINSAIBASHI_RECHECK:
         return '2026-07-14'  # 心齋橋一帶出發前重新核實
     if i in CHECK_OVERRIDE:

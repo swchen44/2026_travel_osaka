@@ -8205,7 +8205,7 @@ const iconClosed=makeIcon('#9E9E9E'); // 已歇業：灰色
 //   make_csv.py 會自動把它排除（Google My Maps 不顯示）。目的：展現「我們有查、資料比較新」。
 // ★必須定義在下方 restaurants.forEach(建 marker) 之前，否則 isClosed 會踩到 const TDZ★
 const CLOSED = {
-  // 範例： 999: '2026-08',
+  // 範例（取消註解、改真 id 與查證年月）： <id> : "2026-08"
 };
 function isClosed(r) { return !!CLOSED[r.id]; }
 function closedBadge(r) { return isClosed(r) ? `<span class="veg-badge vb-closed">⛔ 已歇業（${CLOSED[r.id]} 查證）</span>` : ''; }
@@ -8246,7 +8246,15 @@ const countLabel = document.getElementById('count-label');
 // CHECK_OVERRIDE：個別重新查證過的店家，覆蓋批次日期
 const CHECK_OVERRIDE = { 32: '2026-07-12' }; // 高島屋難波：素食選項重新查證(07-12)
 const SHINSAIBASHI_RECHECK = new Set([3,4,8,12,30,34,52,98,99,100,101,102,103,104,105,143,144,146]); // 心齋橋一帶出發前 2026-07-14 重新核實
+// ── 逐店複查日期側表（增量維護用）──
+// 每次重新查證某店，就在此加/更新 `id: 'YYYY-MM-DD'`（優先於下面的區間規則）。
+// 沒列的店 fallback 到區間規則，仍有日期可比較 → 排序找「最舊的先複查」用
+//   effectiveDate(id) = CHECKED[id] || checkedDate(id, region)
+const CHECKED = {
+  // 範例（取消註解、改真 id 與日期）： <id> : "2026-08-15"
+};
 function checkedDate(id, region) {
+  if (CHECKED[id]) return CHECKED[id];                   // 逐店複查覆蓋（最優先）
   if (SHINSAIBASHI_RECHECK.has(id)) return '2026-07-14'; // 心齋橋一帶出發前重新核實
   if (CHECK_OVERRIDE[id]) return CHECK_OVERRIDE[id];
   if (region === 'nara') return '2026-07-14';   // 奈良全區出發前重新核實
